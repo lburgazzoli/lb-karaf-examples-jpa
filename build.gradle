@@ -1,0 +1,33 @@
+subprojects {
+
+    apply plugin: 'java'
+    //apply plugin: 'groovy'
+
+    //group = 'bt'
+    //sourceCompatibility = 1.6
+
+    repositories {
+        maven { url 'http://repo.springsource.org/release' }
+        maven { url 'http://repo1.maven.org/maven2' }
+        maven { url 'http://repo2.maven.org/maven2' }
+        maven { url 'http://repository.jboss.org/nexus/content/repositories/releases' }
+        maven { url 'http://download.eclipse.org/rt/eclipselink/maven.repo' }
+        maven { url 'ttp://download.oracle.com/maven' }
+    }
+
+    dependencies {
+        compile 'org.slf4j:slf4j-api:1.7.2'
+        compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
+        compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'
+        compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.1'
+        compile 'org.osgi:core:4.3.0'
+        compile 'org.osgi:org.osgi.compendium:4.3.0'
+        compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
+        compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1'
+        compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'
+        compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
+        compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.0'
+    }
+}
+
+

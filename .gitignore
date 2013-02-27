@@ -1,12 +1,17 @@
+.DS_Store
+
 *.class
 *.jar
 *.war
 *.ear
 *.iml
+*.iws
 
-/classes
-/build
-/build-gradle
-/.idea
-/.gradle
+.idea/
+.gradle/
+classes/
+build/
+build-gradle/
+log/
+target/
 
