@@ -21,8 +21,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
     /**
      * c-tor
      */
-    public EclipseLinkSessionLogger()
-    {
+    public EclipseLinkSessionLogger() {
         this(1);
     }
 
@@ -31,9 +30,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
      *
      * @param level
      */
-    public EclipseLinkSessionLogger(
-        int level)
-    {
+    public EclipseLinkSessionLogger(int level) {
         setLevel(1);
     }
 
@@ -41,9 +38,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
      *
      */
     @Override
-    public void log(
-        SessionLogEntry sle)
-    {
+    public void log(SessionLogEntry sle) {
         Logger lg  = getLogger(sle);
         String msg = getMessage(sle);
 
@@ -66,9 +61,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
      * @param sle
      * @return
      */
-    private String getMessage(
-        SessionLogEntry sle)
-    {
+    private String getMessage(SessionLogEntry sle) {
         StringBuilder msg = new StringBuilder();
         //msg.append(getSupplementDetailString(sle))
         msg.append(formatMessage(sle));
@@ -81,9 +74,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
      * @param sle
      * @return
      */
-    private Logger getLogger(
-        SessionLogEntry sle)
-    {
+    private Logger getLogger(SessionLogEntry sle) {
         String ns = sle.getNameSpace();
         if(StringUtils.isNotBlank(ns)) {
             ns = ns.toUpperCase();
