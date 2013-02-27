@@ -23,8 +23,7 @@ limitations under the License.
 
     <bean id="data_service"
           class="lb.examples.karaf.jpa.eclipselink.data.DataService">
-        <jpa:context unitname="DATAPU" property="entityManager"/>
-        <tx:transaction method="*" value="Required"/>
+        <jpa:unit unitname="DATAPU" property="entityManagerFactory"/>
     </bean>
 
     <service ref="data_service"
@@ -36,6 +35,11 @@ limitations under the License.
     </service>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+        <command name="item/add">
+            <action class="lb.examples.karaf.jpa.eclipselink.cmd.ItemAddCommand">
+                <property name="dataService" ref="data_service"/>
+            </action>
+        </command>
         <command name="item/list">
             <action class="lb.examples.karaf.jpa.eclipselink.cmd.ItemListCommand">
                 <property name="dataService" ref="data_service"/>

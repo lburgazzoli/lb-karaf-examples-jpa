@@ -14,6 +14,13 @@
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+    <manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
+        Bundle-Name: Karaf Examples :: JPA :: Provider :: EclipseLlink
+        Bundle-SymbolicName: karaf.examples.eclipselink.provider
+        Bundle-Version: 1.0.0.SNAPSHOT
+        DynamicImport-Package: *
+    </manifest>
+
     <bean id = "eclipselink_provider"
           class = "org.eclipse.persistence.jpa.PersistenceProvider"
           scope = "prototype"/>

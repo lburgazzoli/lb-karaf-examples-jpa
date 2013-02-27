@@ -28,3 +28,15 @@ Install bundles:
 Install the example bundle:
 
     karaf@root> install -s mvn:karaf-examples/jpa-eclipselink/1.0-SNAPSHOT
+
+
+TEST
+--------------------------------------------------------------------------------
+
+    karaf@root> item:add name1 descr1
+    karaf@root> item:add name2 descr2
+    karaf@root> item:
+    item:add     item:list
+    karaf@root> item:list
+    name1, descr1
+    name2, descr2
