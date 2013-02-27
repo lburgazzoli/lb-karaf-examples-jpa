@@ -27,7 +27,7 @@ Install bundles:
 
 Install the example bundle:
 
-    karaf@root> install -s mvn:karaf-examples/jpa-eclipselink/1.0-SNAPSHOT
+    karaf@root> install -s mvn:karaf-examples/jpa-eclipselink/1.0.0.SNAPSHOT
 
 
 TEST
