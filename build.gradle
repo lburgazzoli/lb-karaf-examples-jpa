@@ -16,6 +16,7 @@ subprojects {
     }
 
     dependencies {
+        compile 'org.apache.commons:commons-lang3:3.1'
         compile 'org.slf4j:slf4j-api:1.7.2'
         compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
         compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'

@@ -18,7 +18,10 @@ jar {
             'Bundle-Description'     : '',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Name'            : 'Karaf Examples :: JPA :: EclipseLink',
-            'Bundle-Version'         : version
+            'Bundle-Version'         : version,
+            'JPA-PersistenceUnits'   : 'DATAPU',
+            'Meta-Persistence'       : 'META-INF/persistence.xml',
+            'DynamicImport-Package'  : '*'
         )
     }
 }
