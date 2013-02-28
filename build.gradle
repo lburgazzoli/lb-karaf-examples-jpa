@@ -23,6 +23,7 @@ subprojects {
         compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.1'
         compile 'org.osgi:core:4.3.0'
         compile 'org.osgi:org.osgi.compendium:4.3.0'
+        compile 'com.google.guava:guava:13.0'
         compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
         compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1'
         compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'

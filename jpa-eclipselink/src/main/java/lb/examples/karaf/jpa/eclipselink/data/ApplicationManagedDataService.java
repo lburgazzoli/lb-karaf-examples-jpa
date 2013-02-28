@@ -1,5 +1,7 @@
 package lb.examples.karaf.jpa.eclipselink.data;
 
+import com.google.common.collect.Lists;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Collection;
@@ -7,10 +9,10 @@ import java.util.Collection;
 /**
  *
  */
-public class DataService implements IDataService {
+public class ApplicationManagedDataService implements IDataService {
     private EntityManagerFactory emf;
 
-    public DataService() {
+    public ApplicationManagedDataService() {
         this.emf = null;
     }
 
@@ -20,10 +22,14 @@ public class DataService implements IDataService {
 
     @Override
     public Collection<Item> getAll() {
-        EntityManager    em = emf.createEntityManager();
-        Collection<Item> ret = em.createQuery("select i from Item i", Item.class).getResultList();
+        EntityManager    em  = emf.createEntityManager();
+        Collection<Item> ret = Lists.newArrayList();
 
-        em.close();
+        try {
+            em.createQuery("select i from Item i", Item.class).getResultList();
+        } finally {
+            em.close();
+        }
 
         return ret;
     }
@@ -31,8 +37,10 @@ public class DataService implements IDataService {
     @Override
     public void add(Item item) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(item);
-        em.getTransaction().commit();
+        try {
+            em.persist(item);
+        } finally {
+            em.getTransaction().commit();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package lb.examples.karaf.jpa.eclipselink.cmd;
 
-import lb.examples.karaf.jpa.eclipselink.data.DataService;
+import lb.examples.karaf.jpa.eclipselink.data.ApplicationManagedDataService;
 import lb.examples.karaf.jpa.eclipselink.data.Item;
 import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Argument;
@@ -28,15 +28,15 @@ public class ItemAddCommand implements Action {
         multiValued = false)
     String description;
 
-    private DataService dataService;
+    private ApplicationManagedDataService m_applicationManagedDataService;
 
-    public void setDataService(DataService dataService) {
-        this.dataService = dataService;
+    public void setApplicationManagedDataService(ApplicationManagedDataService applicationManagedDataService) {
+        this.m_applicationManagedDataService = applicationManagedDataService;
     }
 
     @Override
     public Object execute(CommandSession session) throws Exception {
-        dataService.add(new Item(name,description));
+        m_applicationManagedDataService.add(new Item(name,description));
         return null;
     }
 }

@@ -21,28 +21,28 @@ limitations under the License.
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
-    <bean id="data_service"
-          class="lb.examples.karaf.jpa.eclipselink.data.DataService">
+    <bean id="app_managed_data_service"
+          class="lb.examples.karaf.jpa.eclipselink.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATAPU" property="entityManagerFactory"/>
     </bean>
 
-    <service ref="data_service"
+    <service ref="app_managed_data_service"
              interface="lb.examples.karaf.jpa.eclipselink.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
-                   value="eclipselink/data_service"/>
+                   value="eclipselink/app_managed_data_service"/>
         </service-properties>
     </service>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
         <command name="item/add">
             <action class="lb.examples.karaf.jpa.eclipselink.cmd.ItemAddCommand">
-                <property name="dataService" ref="data_service"/>
+                <property name="applicationManagedDataService" ref="app_managed_data_service"/>
             </action>
         </command>
         <command name="item/list">
             <action class="lb.examples.karaf.jpa.eclipselink.cmd.ItemListCommand">
-                <property name="dataService" ref="data_service"/>
+                <property name="applicationManagedDataService" ref="app_managed_data_service"/>
             </action>
         </command>
     </command-bundle>
