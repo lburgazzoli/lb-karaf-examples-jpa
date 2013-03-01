@@ -45,6 +45,7 @@ limitations under the License.
                 name ="eclipselink.session-event-listener"
                 value="lb.examples.karaf.jpa.eclipselink.EclipseLinkSessionEventListener"/>
 
+            <property name="eclipselink.weaving"                    value="true"/>
             <property name="eclipselink.ddl-generation"             value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
 
