@@ -19,6 +19,7 @@
         Bundle-SymbolicName: karaf.examples.eclipselink.provider
         Bundle-Version: 1.0.0.SNAPSHOT
         DynamicImport-Package: *
+        Require-Bundle: org.eclipse.persistence.core,org.eclipse.persistence.jpa
     </manifest>
 
     <bean id = "eclipselink_provider"
@@ -28,6 +29,8 @@
     <service ref="eclipselink_provider" interface="javax.persistence.spi.PersistenceProvider">
         <service-properties>
             <entry key  ="javax.persistence.provider"
+                   value="org.eclipse.persistence.jpa.PersistenceProvider"/>
+            <entry key  ="javax.persistence.PersistenceProvider"
                    value="org.eclipse.persistence.jpa.PersistenceProvider"/>
             <entry key  ="osgi.jndi.service.name"
                    value="eclipselink/pesistence_provider"/>
