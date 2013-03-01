@@ -1,0 +1,29 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'karaf-examples'
+
+jar {
+    baseName = 'jpa-openjpa'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , '*'
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : '',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: OpenJPA',
+            'Bundle-Version'         : version,
+            'JPA-PersistenceUnits'   : 'DATAPU',
+            'Meta-Persistence'       : 'META-INF/persistence.xml',
+            'DynamicImport-Package'  : '*'
+        )
+    }
+}
+
+

@@ -1,4 +1,4 @@
-package lb.examples.karaf.jpa.eclipselink.data;
+package lb.examples.karaf.jpa.openjpa.data;
 
 import org.apache.commons.lang3.StringUtils;
 

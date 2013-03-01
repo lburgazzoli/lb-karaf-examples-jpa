@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    First install the HSQLDB driver using:
+    karaf@root> install -s mvn:org.hsqldb/hsqldb/2.2.9
+
+    Then copy this file to the deploy folder
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
+        Bundle-Name: Karaf Examples :: JPA :: DataSource
+        Bundle-SymbolicName: karaf.examples.datasource
+        Bundle-Version: 1.0.0.SNAPSHOT
+        DynamicImport-Package: *
+    </manifest>
+
+    <bean id="data_source" class="org.hsqldb.jdbc.JDBCDataSource">
+        <property name="url"      value="jdbc:hsqldb:mem:data"/>
+        <property name="user"     value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <service interface="javax.sql.DataSource" ref="data_source">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="jdbc/DS"/>
+        </service-properties>
+    </service>
+
+</blueprint>
