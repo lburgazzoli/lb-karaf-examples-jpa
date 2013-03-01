@@ -26,7 +26,7 @@ public class ApplicationManagedDataService implements IDataService {
         Collection<Item> ret = Lists.newArrayList();
 
         try {
-            em.createQuery("select i from Item i", Item.class).getResultList();
+            ret = em.createQuery("select i from Item i", Item.class).getResultList();
         } finally {
             em.close();
         }
@@ -38,9 +38,17 @@ public class ApplicationManagedDataService implements IDataService {
     public void add(Item item) {
         EntityManager em = emf.createEntityManager();
         try {
+            em.getTransaction().begin();
             em.persist(item);
-        } finally {
             em.getTransaction().commit();
+        } catch(Exception e) {
+            if(em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
+            System.out.println("Exception: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 }

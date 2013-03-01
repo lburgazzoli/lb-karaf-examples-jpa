@@ -1,5 +1,6 @@
 package lb.examples.karaf.jpa.eclipselink;
 
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.persistence.logging.AbstractSessionLog;
 import org.eclipse.persistence.logging.SessionLog;
@@ -7,7 +8,6 @@ import org.eclipse.persistence.logging.SessionLogEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Map;
 public class EclipseLinkSessionLogger extends AbstractSessionLog implements SessionLog
 {
     private static final Logger LOGGER  = LoggerFactory.getLogger("ECLIPSELINK");
-    private static final Map<String,Logger> LOGGERS = new HashMap<String,Logger>();
+    private static final Map<String,Logger> LOGGERS = Maps.newHashMap();
 
     /**
      * c-tor
