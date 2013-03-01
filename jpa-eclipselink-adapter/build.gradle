@@ -1,0 +1,27 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'karaf-examples'
+
+jar {
+    baseName = 'jpa-eclipselink-adapter'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , '*'
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: JPA :: EclipseLink :: Adapter',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: EclipseLink :: Adapter',
+            'Bundle-Version'         : version,
+            'Bundle-Activator'       : 'lb.examples.karaf.jpa.eclipselink.adapter.Activator'
+        )
+    }
+}
+
+

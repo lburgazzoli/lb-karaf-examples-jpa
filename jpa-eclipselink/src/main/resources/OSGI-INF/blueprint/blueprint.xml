@@ -34,7 +34,7 @@ limitations under the License.
         </service-properties>
     </service>
 
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/add">
             <action class="lb.examples.karaf.jpa.eclipselink.cmd.ItemAddCommand">
                 <property name="applicationManagedDataService" ref="app_managed_data_service"/>
