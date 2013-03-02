@@ -37,8 +37,8 @@ jar {
 
         attributes(
             'Bundle-Description'     : 'Karaf Examples :: JPA :: EclipseLink',
-            'Bundle-SymbolicName'    : project.name,
             'Bundle-Name'            : 'Karaf Examples :: JPA :: EclipseLink',
+            'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
             'JPA-PersistenceUnits'   : 'DATAPU',
             'Meta-Persistence'       : 'META-INF/persistence.xml',
