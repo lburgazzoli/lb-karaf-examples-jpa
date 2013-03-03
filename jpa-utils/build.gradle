@@ -1,0 +1,34 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'karaf-examples'
+
+project.ext {
+    bundleInportPackages = [
+            'org.apache.felix.service.command',
+            'org.apache.felix.gogo.commands',
+            'org.apache.karaf.shell.console',
+            '*'
+    ]
+}
+jar {
+    baseName = 'jpa-utils'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: JPA :: Utils',
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: Utils',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Version'         : version,
+        )
+    }
+}
+
+
