@@ -1,4 +1,4 @@
-package lb.examples.karaf.jpa.utils;
+package lb.examples.karaf.jpa.utils.cmd;
 
 import java.util.ArrayList;
 import java.util.Arrays;

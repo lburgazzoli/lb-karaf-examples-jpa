@@ -1,45 +1,31 @@
 package lb.examples.karaf.jpa.utils.cmd;
 
-import lb.examples.karaf.jpa.utils.ShellTable;
+import lb.examples.karaf.jpa.utils.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 /**
  *
  */
 @Command(scope = "jpa", name = "provider-list", description = "List JPA Providers")
-public class JpaProviderList extends OsgiCommandSupport {
-    private BundleContext bundleContext;
+public class JpaProviderList extends AbstractTabularCommand {
 
-    public void setBundleContext(BundleContext bundleContext) {
-        this.bundleContext = bundleContext;
+
+    public JpaProviderList() {
+        super("BundleID","BundleName","PersistenceProvider");
     }
 
     @Override
-    public Object doExecute() throws Exception {
-        ShellTable table = new ShellTable("BundleID","BundleName","PersistenceProvider");
-
-        for(Bundle bundle : bundleContext.getBundles()) {
-            ServiceReference[] srs = bundle.getRegisteredServices();
-            if(srs != null) {
-                for(ServiceReference sr : srs) {
-                    String providerClass = (String)sr.getProperty("javax.persistence.provider");
-                    if(StringUtils.isNotBlank(providerClass)) {
-                        table.addRow(
-                            bundle.getBundleId(),
-                            bundle.getSymbolicName(),
-                            providerClass);
-                    }
-                }
+    public void doExecuteCommand() throws Exception {
+        for(ServiceReference sr : getServiceReferences(Constants.JPA_PP_CLASS)) {
+            String providerClass = (String)sr.getProperty(Constants.JPA_PP_SVCP);
+            if(StringUtils.isNotBlank(providerClass)) {
+                addRow(
+                    sr.getBundle().getBundleId(),
+                    sr.getBundle().getSymbolicName(),
+                    providerClass);
             }
         }
-
-        table.print();
-
-        return null;
     }
 }
