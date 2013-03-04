@@ -13,7 +13,7 @@ project.ext {
     ]
 }
 jar {
-    baseName = 'jpa-hibenrate'
+    baseName = 'jpa-hibernate'
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
