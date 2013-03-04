@@ -23,7 +23,7 @@ limitations under the License.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="2.0">
 
-    <persistence-unit name="DATAPU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="DATA_HIBERNATE" transaction-type="RESOURCE_LOCAL">
         <!--
             Unfortunately Hibernate does not export the persistence provider class
             but the Activator class as it extends the HibernatePersistenceProvider:
@@ -39,6 +39,7 @@ limitations under the License.
         <class>lb.examples.karaf.jpa.hibernate.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
+            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>

@@ -23,7 +23,7 @@ limitations under the License.
 
     <bean id="app_managed_data_service"
           class="lb.examples.karaf.jpa.hibernate.data.ApplicationManagedDataService">
-        <jpa:unit unitname="DATAPU" property="entityManagerFactory"/>
+        <jpa:unit unitname="DATA_HIBERNATE" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
