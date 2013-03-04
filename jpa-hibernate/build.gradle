@@ -6,10 +6,10 @@ group    = 'karaf-examples'
 
 project.ext {
     bundleInportPackages = [
-            'org.apache.felix.service.command',
-            'org.apache.felix.gogo.commands',
-            'org.apache.karaf.shell.console',
-            '*'
+        'org.apache.felix.service.command',
+        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.console',
+        '*'
     ]
 }
 jar {
@@ -27,7 +27,7 @@ jar {
             'Bundle-Name'            : 'Karaf Examples :: JPA :: Hibernate',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
-            'JPA-PersistenceUnits'   : 'DATAPU',
+            'JPA-PersistenceUnits'   : 'DATA_HIBERNATE',
             'Meta-Persistence'       : 'META-INF/persistence.xml'
         )
     }
