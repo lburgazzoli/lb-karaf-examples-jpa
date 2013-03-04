@@ -25,6 +25,11 @@ limitations under the License.
                 <property name="bundleContext" ref="blueprintBundleContext"/>
             </action>
         </command>
+        <command name="jpa/datasource-list">
+            <action class="lb.examples.karaf.jpa.utils.cmd.JpaDataSourceList">
+                <property name="bundleContext" ref="blueprintBundleContext"/>
+            </action>
+        </command>
     </command-bundle>
 
 </blueprint>

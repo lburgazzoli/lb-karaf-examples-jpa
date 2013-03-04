@@ -20,7 +20,8 @@ package lb.examples.karaf.jpa.utils;
  *
  */
 public class Constants {
-    public static final String JPA_PP_CLASS = "javax.persistence.spi.PersistenceProvider";
-    public static final String JPA_PP_SVCP  = "javax.persistence.provider";
+    public static final String JPA_PP_CLASS      = "javax.persistence.spi.PersistenceProvider";
+    public static final String JPA_PP_SVCP       = "javax.persistence.provider";
+    public static final String JPA_JNDI_DS_SVCP  = "osgi.jndi.service.name";
 
 }

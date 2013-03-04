@@ -16,4 +16,13 @@ Install the example bundle:
 TEST
 --------------------------------------------------------------------------------
 
+    karaf@root> jpa:datasource-list
+    BundleID | BundleName                | JNDI
+    ----------------------------------------------
+    178      | karaf.examples.datasource | jdbc/DS
+    
     karaf@root> jpa:provider-list
+    BundleID | BundleName         | PersistenceProvider
+    --------------------------------------------------------------------------------------
+    138      | org.apache.openjpa | org.apache.openjpa.persistence.PersistenceProviderImpl
+    198      | org.hibernate.osgi | org.hibernate.osgi.HibernateBundleActivator
