@@ -18,7 +18,7 @@ Install Karaf's enterprise features:
 Install bundles:
 
     install -s mvn:com.fasterxml/classmate/0.5.4
-    install -s mvn:javax.servlet/javax.servlet-api/3.0.1
+    install -s mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0
     install -s mvn:org.apache.geronimo.specs/geronimo-validation_1.0_spec/1.1
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2
