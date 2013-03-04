@@ -31,9 +31,9 @@ Install bundles:
     install -s mvn:org.jboss.logging/jboss-logging/3.1.0.GA
 
     install -s wrap:mvn:http://snapshots.jboss.org/maven2\!org.hibernate.common/hibernate-commons-annotations/4.0.1-SNAPSHOT
-    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-core/4.3.0-SNAPSHOT
-    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-entitymanager/4.3.0-SNAPSHOT
-    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-osgi/4.3.0-SNAPSHOT
+    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-core/4.2.0.CR2
+    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-entitymanager/4.2.0.CR2
+    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-osgi/4.2.0.CR2
 
 Install the example bundle:
     cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
