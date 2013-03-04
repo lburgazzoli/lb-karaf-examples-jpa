@@ -16,7 +16,8 @@ Install Karaf's enterprise features:
 
 
 Install bundles:
-
+    karaf@root> install -s mvn:org.hsqldb/hsqldb/2.2.9
+    install -s mvn:org.hsqldb/hsqldb/2.2.9
     install -s mvn:com.fasterxml/classmate/0.5.4
     install -s mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0
     install -s mvn:org.apache.geronimo.specs/geronimo-validation_1.0_spec/1.1
