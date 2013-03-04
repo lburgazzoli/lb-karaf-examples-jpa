@@ -14,15 +14,27 @@
         DynamicImport-Package: *
     </manifest>
 
-    <bean id="data_source" class="org.hsqldb.jdbc.JDBCDataSource">
+    <bean id="data_source_hsql" class="org.hsqldb.jdbc.JDBCDataSource">
         <property name="url"      value="jdbc:hsqldb:mem:data"/>
         <property name="user"     value="sa"/>
         <property name="password" value=""/>
     </bean>
 
-    <service interface="javax.sql.DataSource" ref="data_source">
+    <service interface="javax.sql.DataSource" ref="data_source_hsql">
         <service-properties>
             <entry key="osgi.jndi.service.name" value="jdbc/DS"/>
+        </service-properties>
+    </service>
+
+    <bean id="data_source_h2" class="org.h2.jdbcx.JdbcDataSource">
+        <property name="URL" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE"/>
+        <property name="user" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <service interface="javax.sql.DataSource" ref="data_source_h2">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="jdbc/H2"/>
         </service-properties>
     </service>
 

@@ -20,7 +20,7 @@ TEST
     BundleID | BundleName                | JNDI
     ----------------------------------------------
     178      | karaf.examples.datasource | jdbc/DS
-    
+
     karaf@root> jpa:provider-list
     BundleID | BundleName         | PersistenceProvider
     --------------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ Install bundles:
     karaf@root> install -s mvn:http://download.eclipse.org/rt/eclipselink/maven.repo\!org.eclipse.persistence/org.eclipse.persistence.jpa/2.4.1
 
 Install the example bundle:
-    cp hotdeploy/jpa-datasource-hsql.xml $KARAF_HOME/deploy
+    cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
 
     karaf@root> install -s mvn:karaf-examples/jpa-eclipselink-adapter/1.0.0.SNAPSHOT
     karaf@root> install -s mvn:karaf-examples/jpa-eclipselink/1.0.0.SNAPSHOT

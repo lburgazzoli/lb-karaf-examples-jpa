@@ -28,7 +28,7 @@ Install bundles:
     karaf@root> install -s mvn:org.apache.openjpa/openjpa/2.2.1
 
 Install the example bundle:
-    cp hotdeploy/jpa-datasource-hsql.xml $KARAF_HOME/deploy
+    cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
 
     karaf@root> install -s mvn:karaf-examples/jpa-openjpa/1.0.0.SNAPSHOT
 
