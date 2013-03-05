@@ -10,9 +10,9 @@ INSTALLATION
 
 Install Karaf's enterprise features:
 
-    karaf@root> features:install transaction
-    karaf@root> features:install jndi
-    karaf@root> features:install jpa
+    features:install transaction
+    features:install jndi
+    features:install jpa
 
 
 Install bundles:
@@ -38,7 +38,7 @@ Install bundles:
 Install the example bundle:
     cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
 
-    karaf@root> install -s mvn:karaf-examples/jpa-hibenrate/1.0.0.SNAPSHOT
+    install -s mvn:karaf-examples/jpa-hibernate/1.0.0.SNAPSHOT
 
 
 TEST
