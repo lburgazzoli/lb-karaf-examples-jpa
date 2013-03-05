@@ -23,8 +23,8 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: CM :: InMemory PersistenceManager',
-            'Bundle-Name'            : 'Karaf Examples :: CM :: InMemory PersistenceManager',
+            'Bundle-Description'     : 'Karaf Examples :: CM :: PersistenceManager :: InMemory',
+            'Bundle-Name'            : 'Karaf Examples :: CM :: PersistenceManager :: InMemory',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
         )
