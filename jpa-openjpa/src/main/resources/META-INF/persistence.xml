@@ -23,12 +23,36 @@ limitations under the License.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="2.0">
 
-    <persistence-unit name="DATAPU" transaction-type="c">
+    <!-- ******************************************************************* -->
+    <!-- RESOURCE_LOCAL                                                      -->
+    <!-- ******************************************************************* -->
+
+    <persistence-unit name="OPENJPA_PU_NON_JTA" transaction-type="RESOURCE_LOCAL">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
         <class>lb.examples.karaf.jpa.openjpa.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
          <validation-mode>NONE</validation-mode>
+        <properties>
+            <!--<property name="openjpa.Log"                         value="DefaultLevel=TRACE"/>-->
+            <property name="openjpa.Log"                         value="slf4j"/>
+            <property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=true"/>
+            <property name="openjpa.RuntimeUnenhancedClasses"    value="supported"/>
+            <property name="openjpa.jdbc.SynchronizeMappings"    value="buildSchema"/>
+            <property name="openjpa.jdbc.DBDictionary"           value="hsql"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- ******************************************************************* -->
+    <!-- JTA                                                                 -->
+    <!-- ******************************************************************* -->
+
+    <persistence-unit name="OPENJPA_PU_JTA" transaction-type="JTA">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</jta-data-source>
+        <class>lb.examples.karaf.jpa.openjpa.data.Item</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <validation-mode>NONE</validation-mode>
         <properties>
             <!--<property name="openjpa.Log"                         value="DefaultLevel=TRACE"/>-->
             <property name="openjpa.Log"                         value="slf4j"/>

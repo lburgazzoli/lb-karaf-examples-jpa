@@ -16,7 +16,7 @@
  */
 package lb.examples.karaf.jpa.openjpa.cmd;
 
-import lb.examples.karaf.jpa.openjpa.data.ApplicationManagedDataService;
+import lb.examples.karaf.jpa.openjpa.data.IDataService;
 import lb.examples.karaf.jpa.openjpa.data.Item;
 import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
@@ -25,17 +25,17 @@ import org.apache.felix.service.command.CommandSession;
 /**
  *
  */
-@Command(scope = "item", name = "list", description = "Lists all items")
-public class ItemListCommand implements Action {
-    private ApplicationManagedDataService m_applicationManagedDataService;
+@Command(scope = "item", name = "am-list", description = "Lists all items (AM)")
+public class CMItemListCommand implements Action {
+    private IDataService m_dataService;
 
-    public void setApplicationManagedDataService(ApplicationManagedDataService applicationManagedDataService) {
-        this.m_applicationManagedDataService = applicationManagedDataService;
+    public void setDataService(IDataService dataService) {
+        m_dataService = dataService;
     }
 
     @Override
     public Object execute(CommandSession session) throws Exception {
-        for (Item item : m_applicationManagedDataService.getAll()) {
+        for (Item item : m_dataService.getAll()) {
             System.out.println(item.getName() + ", " + item.getDescription());
         }
 
