@@ -20,14 +20,16 @@ limitations under the License.
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <bean id="inmemory_persistence_manager"
-          class="lb.examples.karaf.cm.HazelcastPersistenceManager">
+          class="lb.examples.karaf.cm.HazelcastPersistenceManager"
+          init-method="init"
+          destroy-method="destroy">
     </bean>
 
     <service ref="inmemory_persistence_manager"
              interface="org.apache.felix.cm.PersistenceManager">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
-                   value="lb/inmemory_persistence_manager"/>
+                   value="lb/hazelcast_persistence_manager"/>
         </service-properties>
     </service>
 

@@ -17,7 +17,6 @@
 package lb.examples.karaf.cm;
 
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.cm.PersistenceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,15 +39,20 @@ public class InMemoryPersistenceManager implements PersistenceManager {
 
     public InMemoryPersistenceManager() {
         m_data = Maps.newHashMap();
-        m_data.put("lb.examples.karaf",new HashMap<Object,Object>());
-        m_data.put("lb.examples.karaf.jpa",new HashMap<Object,Object>());
-        m_data.put("lb.examples.karaf.data",new HashMap<Object,Object>());
+        m_data.put("lb.examples.karaf",new HashMap<Object,Object>() {{
+            put("key_1_1","val_1_1");
+            put("key_1_2","val_1_2");
+        }});
+        m_data.put("lb.examples.karaf.jpa",new HashMap<Object,Object>() {{
+            put("key_2_1","val_2_1");
+            put("key_2_2","val_2_2");
+        }});
     }
 
     @Override
     public boolean exists(String pid) {
-        LOGGER.debug("exists {} ({})",pid,StringUtils.startsWith(pid,"lb.examples.karaf"));
-        return StringUtils.startsWith(pid, "lb.examples.karaf");
+        LOGGER.debug("exists {} ({})",pid,m_data.containsKey(pid));
+        return m_data.containsKey(pid);
     }
 
     @Override
@@ -58,13 +62,7 @@ public class InMemoryPersistenceManager implements PersistenceManager {
             m_data.put(pid,new HashMap<Object,Object>());
         }
 
-        Map<Object,Object> ht = m_data.get(pid);
-        Hashtable<Object,Object> dt = new Hashtable<Object,Object>(ht);
-
-        LOGGER.debug("load {}, {}",pid,dt.size());
-        LOGGER.debug("....");
-
-        return dt;
+        return new Hashtable<Object,Object>(m_data.get(pid));
     }
 
     @Override
