@@ -14,23 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.openjpa.cmd;
+package lb.examples.karaf.jpa.eclipselink.cmd;
 
-import lb.examples.karaf.jpa.openjpa.data.Item;
+import lb.examples.karaf.jpa.eclipselink.data.Item;
+import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 
 /**
  *
  */
-@Command(scope = "item", name = "openjpa-am-list", description = "Lists all items (AM)")
-public class AMItemListCommand extends AbstractItemCommand {
+@Command(scope = "item", name = "eclipselink-cm-add", description = "Add and item (CM)")
+public class CMItemAddCommand extends AbstractItemCommand {
+    @Argument(index=0,required=true,multiValued=false,name="Name",description="Item Name")
+    String name;
+
+    @Argument(index=1,required=true,multiValued=false,name="Description",description="Item Description")
+    String description;
 
     @Override
     public Object doExecute() throws Exception {
-        for (Item item : getDataService().getAll()) {
-            System.out.println(item.getName() + ", " + item.getDescription());
-        }
-
+        getDataService().add(new Item(name, description));
         return null;
     }
 }

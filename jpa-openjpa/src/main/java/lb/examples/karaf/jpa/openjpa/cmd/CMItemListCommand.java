@@ -16,26 +16,18 @@
  */
 package lb.examples.karaf.jpa.openjpa.cmd;
 
-import lb.examples.karaf.jpa.openjpa.data.IDataService;
 import lb.examples.karaf.jpa.openjpa.data.Item;
-import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.service.command.CommandSession;
 
 /**
  *
  */
-@Command(scope = "item", name = "am-list", description = "Lists all items (AM)")
-public class CMItemListCommand implements Action {
-    private IDataService m_dataService;
-
-    public void setDataService(IDataService dataService) {
-        m_dataService = dataService;
-    }
+@Command(scope = "item", name = "openjpa-cm-list", description = "Lists all items (CM)")
+public class CMItemListCommand extends AbstractItemCommand {
 
     @Override
-    public Object execute(CommandSession session) throws Exception {
-        for (Item item : m_dataService.getAll()) {
+    public Object doExecute() throws Exception {
+        for (Item item : getDataService().getAll()) {
             System.out.println(item.getName() + ", " + item.getDescription());
         }
 

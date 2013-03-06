@@ -36,8 +36,10 @@ Install the example bundle:
 TEST
 --------------------------------------------------------------------------------
 
-    item:am-add name1 descr1
-    item:am-add name2 descr2
-    item:list
-    name1, descr1
-    name2, descr2
+    item:openjpa-am-add name1 descr1
+    item:openjpa-am-add name2 descr2
+    item:openjpa-am-list
+
+    item:openjpa-cm-add name3 descr4
+    item:openjpa-cm-add name4 descr5
+    item:openjpa-cm-list

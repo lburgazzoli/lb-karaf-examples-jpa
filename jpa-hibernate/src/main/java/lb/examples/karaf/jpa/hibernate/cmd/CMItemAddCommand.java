@@ -14,31 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.eclipselink.cmd;
+package lb.examples.karaf.jpa.hibernate.cmd;
 
-import lb.examples.karaf.jpa.eclipselink.data.ApplicationManagedDataService;
-import lb.examples.karaf.jpa.eclipselink.data.Item;
-import org.apache.felix.gogo.commands.Action;
+import lb.examples.karaf.jpa.hibernate.data.Item;
+import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.service.command.CommandSession;
 
 /**
  *
  */
-@Command(scope = "item", name = "list", description = "Lists all items")
-public class ItemListCommand implements Action {
-    private ApplicationManagedDataService m_applicationManagedDataService;
+@Command(scope = "item", name = "hibernate-cm-add", description = "Add and item (CM)")
+public class CMItemAddCommand extends AbstractItemCommand {
+    @Argument(index=0,required=true,multiValued=false,name="Name",description="Item Name")
+    String name;
 
-    public void setApplicationManagedDataService(ApplicationManagedDataService applicationManagedDataService) {
-        this.m_applicationManagedDataService = applicationManagedDataService;
-    }
+    @Argument(index=1,required=true,multiValued=false,name="Description",description="Item Description")
+    String description;
 
     @Override
-    public Object execute(CommandSession session) throws Exception {
-        for (Item item : m_applicationManagedDataService.getAll()) {
-            System.out.println(item.getName() + ", " + item.getDescription());
-        }
-
+    public Object doExecute() throws Exception {
+        getDataService().add(new Item(name, description));
         return null;
     }
 }

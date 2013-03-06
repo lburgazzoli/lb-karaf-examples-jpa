@@ -14,16 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.openjpa.cmd;
+package lb.examples.karaf.jpa.hibernate.cmd;
 
-import lb.examples.karaf.jpa.openjpa.data.Item;
+import lb.examples.karaf.jpa.hibernate.data.Item;
 import org.apache.felix.gogo.commands.Command;
 
 /**
  *
  */
-@Command(scope = "item", name = "openjpa-am-list", description = "Lists all items (AM)")
-public class AMItemListCommand extends AbstractItemCommand {
+@Command(scope = "item", name = "hibernate-cm-list", description = "Lists all items (CM)")
+public class CMItemListCommand extends AbstractItemCommand {
 
     @Override
     public Object doExecute() throws Exception {

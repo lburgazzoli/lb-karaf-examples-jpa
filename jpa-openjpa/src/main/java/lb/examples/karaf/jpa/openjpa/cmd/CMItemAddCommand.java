@@ -16,43 +16,24 @@
  */
 package lb.examples.karaf.jpa.openjpa.cmd;
 
-import lb.examples.karaf.jpa.openjpa.data.IDataService;
 import lb.examples.karaf.jpa.openjpa.data.Item;
-import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.service.command.CommandSession;
 
 /**
  *
  */
-@Command(scope = "item", name = "cm-add", description = "Add and item (AM)")
-public class CMItemAddCommand implements Action {
-    @Argument(
-        index       = 0,
-        name        = "Name",
-        required    = true,
-        description = "Item Name",
-        multiValued = false)
+@Command(scope = "item", name = "openjpa-cm-add", description = "Add and item (CM)")
+public class CMItemAddCommand extends AbstractItemCommand {
+    @Argument(index=0,required=true,multiValued=false,name="Name",description="Item Name")
     String name;
 
-    @Argument(
-        index       = 1,
-        name        = "Description",
-        required    = true,
-        description = "Item Description",
-        multiValued = false)
+    @Argument(index=1,required=true,multiValued=false,name="Description",description="Item Description")
     String description;
 
-    private IDataService m_dataService;
-
-    public void setDataService(IDataService dataService) {
-        m_dataService = dataService;
-    }
-
     @Override
-    public Object execute(CommandSession session) throws Exception {
-        m_dataService.add(new Item(name,description));
+    public Object doExecute() throws Exception {
+        getDataService().add(new Item(name,description));
         return null;
     }
 }

@@ -44,8 +44,6 @@ Install the example bundle:
 TEST
 --------------------------------------------------------------------------------
 
-    karaf@root> item:add name1 descr1
-    karaf@root> item:add name2 descr2
-    karaf@root> item:list
-    name1, descr1
-    name2, descr2
+    item:hibernate-am-add name1 descr1
+    item:hibernate-am-add name2 descr2
+    item:hibernate-am-list

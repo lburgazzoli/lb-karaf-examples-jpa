@@ -35,14 +35,14 @@ limitations under the License.
     </service>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="item/add">
-            <action class="lb.examples.karaf.jpa.hibernate.cmd.ItemAddCommand">
-                <property name="applicationManagedDataService" ref="app_managed_data_service"/>
+        <command name="item/hibernate-am-add">
+            <action class="lb.examples.karaf.jpa.hibernate.cmd.AMItemAddCommand">
+                <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
-        <command name="item/list">
-            <action class="lb.examples.karaf.jpa.hibernate.cmd.ItemListCommand">
-                <property name="applicationManagedDataService" ref="app_managed_data_service"/>
+        <command name="item/hibernate-am-list">
+            <action class="lb.examples.karaf.jpa.hibernate.cmd.AMItemListCommand">
+                <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
     </command-bundle>

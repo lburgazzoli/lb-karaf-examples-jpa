@@ -14,15 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.openjpa.cmd;
+package lb.examples.karaf.jpa.eclipselink.cmd;
 
-import lb.examples.karaf.jpa.openjpa.data.Item;
+import lb.examples.karaf.jpa.eclipselink.data.Item;
 import org.apache.felix.gogo.commands.Command;
 
 /**
  *
  */
-@Command(scope = "item", name = "openjpa-am-list", description = "Lists all items (AM)")
+@Command(scope = "item", name = "eclipselink-am-list", description = "Lists all items (AM)")
 public class AMItemListCommand extends AbstractItemCommand {
 
     @Override

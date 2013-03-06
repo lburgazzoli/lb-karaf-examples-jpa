@@ -61,22 +61,22 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="item/am-add">
+        <command name="item/openjpa-am-add">
             <action class="lb.examples.karaf.jpa.openjpa.cmd.AMItemAddCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
-        <command name="item/am-list">
+        <command name="item/openjpa-am-list">
             <action class="lb.examples.karaf.jpa.openjpa.cmd.AMItemListCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
-        <command name="item/cm-add">
+        <command name="item/openjpa-cm-add">
             <action class="lb.examples.karaf.jpa.openjpa.cmd.CMItemAddCommand">
                 <property name="dataService" ref="con_managed_data_service"/>
             </action>
         </command>
-        <command name="item/cm-list">
+        <command name="item/openjpa-cm-list">
             <action class="lb.examples.karaf.jpa.openjpa.cmd.CMItemListCommand">
                 <property name="dataService" ref="con_managed_data_service"/>
             </action>

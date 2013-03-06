@@ -36,8 +36,6 @@ Install the example bundle:
 TEST
 --------------------------------------------------------------------------------
 
-    item:add name1 descr1
-    item:add name2 descr2
-    item:list
-    name1, descr1
-    name2, descr2
+    item:eclipselink-am-add name1 descr1
+    item:eclipselink-am-add name2 descr2
+    item:eclipselink-am-list
