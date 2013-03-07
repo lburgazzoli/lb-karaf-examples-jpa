@@ -16,6 +16,7 @@
  */
 package lb.examples.karaf.cm;
 
+import com.google.common.collect.Maps;
 import com.hazelcast.client.ClientConfig;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.core.EntryEvent;
@@ -24,6 +25,7 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.cm.PersistenceManager;
+import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,17 +34,18 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 /**
  *
  */
-public class HazelcastPersistenceManager implements PersistenceManager, EntryListener<String,Hashtable> {
+public class HazelcastPersistenceManager implements PersistenceManager, EntryListener<String,String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HazelcastPersistenceManager.class);
 
     private HazelcastInstance m_client;
-    private IMap<String,Hashtable> m_data;
+    private IMap<String,String> m_data;
 
     /**
      * c-tor
@@ -66,10 +69,8 @@ public class HazelcastPersistenceManager implements PersistenceManager, EntryLis
 
         m_client = HazelcastClient.newHazelcastClient(config);
 
-
         m_data = m_client.getMap("karaf-cm");
         m_data.addEntryListener(this,true);
-
         m_data.put("lb.examples.karaf.cm.hz1",newWithPid("lb.examples.karaf.cm.hz1"));
         m_data.put("lb.examples.karaf.cm.hz2",newWithPid("lb.examples.karaf.cm.hz2"));
     }
@@ -100,7 +101,8 @@ public class HazelcastPersistenceManager implements PersistenceManager, EntryLis
         Hashtable result = new Hashtable();
         LOGGER.debug("load {}",pid);
         if(m_data.containsKey(pid)) {
-            result = new Hashtable(m_data);
+            Map<String,Object> data = (Map<String,Object>)JSONValue.parse(m_data.get(pid));
+            result = new Hashtable(data);
         }
         return result;
     }
@@ -109,9 +111,10 @@ public class HazelcastPersistenceManager implements PersistenceManager, EntryLis
     public Enumeration getDictionaries() throws IOException {
         LOGGER.debug("getDictionaries");
         Vector<Dictionary> values = new Vector<Dictionary>();
-        Collection<Hashtable> dataValue = m_data.values();
-        for(Hashtable info : dataValue) {
-            values.add(new Hashtable(info));
+        Collection<String> dataValue = m_data.values();
+        for(String info : dataValue) {
+            Map<String,Object> data = (Map<String,Object>)JSONValue.parse(info);
+            values.add(new Hashtable(data));
         }
 
         return values.elements();
@@ -119,17 +122,22 @@ public class HazelcastPersistenceManager implements PersistenceManager, EntryLis
 
     @Override
     public void store(String pid, Dictionary properties) throws IOException {
-        LOGGER.debug("store {}",pid);
-        if(StringUtils.startsWith(pid,"lb.examples.karaf")) {
-            Hashtable data = new Hashtable();
+        LOGGER.debug("store {}/<{}>",pid,properties);
 
+        if(StringUtils.startsWith(pid,"lb.examples.karaf")) {
+            Map<String,Object> data = Maps.newHashMap();
             Enumeration it = properties.keys();
             while(it.hasMoreElements()) {
                 String key = (String)it.nextElement();
-                data.put(key,data.get(key));
+                data.put(key,properties.get(key));
+                LOGGER.debug("store <{}|{}>",key,properties.get(key));
             }
 
-            m_data.put(pid, data);
+            if(!data.isEmpty()) {
+                String json = JSONValue.toJSONString(data);
+                LOGGER.debug("store {} => {}",pid,json);
+                m_data.put(pid,json);
+            }
         }
     }
 
@@ -146,19 +154,19 @@ public class HazelcastPersistenceManager implements PersistenceManager, EntryLis
     //
 
     @Override
-    public void entryAdded(EntryEvent<String, Hashtable> event) {
+    public void entryAdded(EntryEvent<String, String> event) {
     }
 
     @Override
-    public void entryRemoved(EntryEvent<String, Hashtable> event) {
+    public void entryRemoved(EntryEvent<String, String> event) {
     }
 
     @Override
-    public void entryUpdated(EntryEvent<String, Hashtable> event) {
+    public void entryUpdated(EntryEvent<String, String> event) {
     }
 
     @Override
-    public void entryEvicted(EntryEvent<String, Hashtable> event) {
+    public void entryEvicted(EntryEvent<String, String> event) {
     }
 
     //
@@ -170,10 +178,10 @@ public class HazelcastPersistenceManager implements PersistenceManager, EntryLis
      * @param pid
      * @return
      */
-    public static Hashtable newWithPid(String pid) {
-        Hashtable data = new Hashtable();
+    public static String newWithPid(String pid) {
+        Map<String,Object> data = Maps.newHashMap();
         data.put("service.pid", pid);
 
-        return data;
+        return JSONValue.toJSONString(data);
     }
 }

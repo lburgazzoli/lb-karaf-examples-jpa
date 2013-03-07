@@ -26,7 +26,7 @@ jar {
             'Bundle-Description'     : 'Karaf Examples :: CM :: PersistenceManager :: Hazelcast',
             'Bundle-Name'            : 'Karaf Examples :: CM :: PersistenceManager :: Hazelcast',
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
+            'Bundle-Version'         : version
         )
     }
 }

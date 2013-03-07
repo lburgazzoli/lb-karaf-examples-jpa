@@ -32,6 +32,7 @@ subprojects {
         compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.0'
         compile 'com.hazelcast:hazelcast-client:2.5'
+        compile 'com.googlecode.json-simple:json-simple:1.1.1'
     }
 }
 
