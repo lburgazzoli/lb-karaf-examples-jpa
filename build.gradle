@@ -22,9 +22,6 @@ subprojects {
     dependencies {
         compile 'org.apache.commons:commons-lang3:3.1'
         compile 'org.slf4j:slf4j-api:1.7.2'
-        compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
-        compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'
-        compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.1'
         compile 'org.osgi:core:4.3.0'
         compile 'org.osgi:org.osgi.compendium:4.3.0'
         compile 'com.google.guava:guava:13.0'
@@ -36,10 +33,6 @@ subprojects {
         compile 'com.hazelcast:hazelcast-client:2.5'
         compile 'com.googlecode.json-simple:json-simple:1.1.1'
         compile 'org.mongodb:mongo-java-driver:2.10.1'
-        compile 'org.datanucleus:datanucleus-core:3.1.4'
-        compile 'org.datanucleus:datanucleus-api-jpa:3.1.4'
-        compile 'org.datanucleus:datanucleus-rdbms:3.1.4'
-        compile 'org.datanucleus:datanucleus-mongodb:3.1.3'
     }
 }
 

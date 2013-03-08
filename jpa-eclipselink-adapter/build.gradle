@@ -4,6 +4,12 @@ apply plugin: 'maven'
 version  = '1.0.0.SNAPSHOT'
 group    = 'karaf-examples'
 
+dependencies {
+    compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.1'
+}
+
 jar {
     baseName = 'jpa-eclipselink-adapter'
 
