@@ -21,7 +21,6 @@ limitations under the License.
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
-    <!--
     <bean id="app_managed_data_service"
           class="lb.examples.karaf.jpa.datanucleus.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATA_DATANUCLEUS" property="entityManagerFactory"/>
@@ -47,6 +46,5 @@ limitations under the License.
             </action>
         </command>
     </command-bundle>
-    -->
 
 </blueprint>
