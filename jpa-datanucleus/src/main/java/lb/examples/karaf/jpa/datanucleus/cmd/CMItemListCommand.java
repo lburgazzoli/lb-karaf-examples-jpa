@@ -14,22 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.hibernate.cmd;
+package lb.examples.karaf.jpa.datanucleus.cmd;
 
-import lb.examples.karaf.jpa.hibernate.data.IDataService;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
+import lb.examples.karaf.jpa.datanucleus.data.Item;
+import org.apache.felix.gogo.commands.Command;
 
 /**
  *
  */
-public abstract class AbstractItemCommand extends OsgiCommandSupport {
-    private IDataService m_dataService;
+@Command(scope = "item", name = "datanucleus-cm-list", description = "Lists all items (CM)")
+public class CMItemListCommand extends AbstractItemCommand {
 
-    public void setDataService(IDataService dataService) {
-        m_dataService = dataService;
-    }
+    @Override
+    public Object doExecute() throws Exception {
+        for (Item item : getDataService().getAll()) {
+            System.out.println(item.getName() + ", " + item.getDescription());
+        }
 
-    public IDataService getDataService() {
-        return m_dataService;
+        return null;
     }
 }

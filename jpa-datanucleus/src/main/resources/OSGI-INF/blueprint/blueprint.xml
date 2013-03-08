@@ -21,30 +21,32 @@ limitations under the License.
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
+    <!--
     <bean id="app_managed_data_service"
-          class="lb.examples.karaf.jpa.hibernate.data.ApplicationManagedDataService">
-        <jpa:unit unitname="DATA_HIBERNATE" property="entityManagerFactory"/>
+          class="lb.examples.karaf.jpa.datanucleus.data.ApplicationManagedDataService">
+        <jpa:unit unitname="DATA_DATANUCLEUS" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
-             interface="lb.examples.karaf.jpa.hibernate.data.IDataService">
+             interface="lb.examples.karaf.jpa.datanucleus.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
-                   value="hibernate/app_managed_data_service"/>
+                   value="datanucleus/app_managed_data_service"/>
         </service-properties>
     </service>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="item/hibernate-am-add">
-            <action class="lb.examples.karaf.jpa.hibernate.cmd.AMItemAddCommand">
+        <command name="item/datanucleus-am-add">
+            <action class="lb.examples.karaf.jpa.datanucleus.cmd.AMItemAddCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
-        <command name="item/hibernate-am-list">
-            <action class="lb.examples.karaf.jpa.hibernate.cmd.AMItemListCommand">
+        <command name="item/datanucleus-am-list">
+            <action class="lb.examples.karaf.jpa.datanucleus.cmd.AMItemListCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
     </command-bundle>
+    -->
 
 </blueprint>

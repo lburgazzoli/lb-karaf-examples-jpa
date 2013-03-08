@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.hibernate.cmd;
+package lb.examples.karaf.jpa.datanucleus.cmd;
 
-import lb.examples.karaf.jpa.hibernate.data.IDataService;
+import lb.examples.karaf.jpa.datanucleus.data.IDataService;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
 /**

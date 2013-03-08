@@ -14,22 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.hibernate.cmd;
+package lb.examples.karaf.jpa.datanucleus.data;
 
-import lb.examples.karaf.jpa.hibernate.data.IDataService;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
+import java.util.Collection;
 
 /**
  *
  */
-public abstract class AbstractItemCommand extends OsgiCommandSupport {
-    private IDataService m_dataService;
+public interface IDataService {
+    /**
+     *
+     * @return
+     */
+    Collection<Item> getAll();
 
-    public void setDataService(IDataService dataService) {
-        m_dataService = dataService;
-    }
-
-    public IDataService getDataService() {
-        return m_dataService;
-    }
+    /**
+     *
+      * @param item
+     */
+    void add(Item item);
 }

@@ -34,7 +34,7 @@ limitations under the License.
              interface="lb.examples.karaf.jpa.openjpa.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
-                   value="eclipselink/app_managed_data_service"/>
+                   value="openjpa/app_managed_data_service"/>
         </service-properties>
     </service>
 
@@ -52,7 +52,7 @@ limitations under the License.
              interface="lb.examples.karaf.jpa.openjpa.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
-                   value="eclipselink/con_managed_data_service"/>
+                   value="openjpa/con_managed_data_service"/>
         </service-properties>
     </service>
 
