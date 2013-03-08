@@ -15,6 +15,7 @@ project.ext {
 }
 
 dependencies {
+    compile 'javax.jdo:jdo-api:3.0.1'
     compile 'org.datanucleus:datanucleus-core:3.1.4'
     compile 'org.datanucleus:datanucleus-enhancer:3.1.1'
     compile 'org.datanucleus:datanucleus-cache:3.1.1'
@@ -40,9 +41,9 @@ jar {
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
             'JPA-PersistenceUnits'   : 'DATA_DATANUCLEUS',
-            'Meta-Persistence'       : 'META-INF/persistence.xml'
+            'Meta-Persistence'       : 'META-INF/persistence.xml',
+            'DynamicImport-Package'  : '*'
         )
     }
 }
-
 
