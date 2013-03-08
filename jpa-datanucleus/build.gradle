@@ -24,7 +24,30 @@ dependencies {
     compile 'org.datanucleus:datanucleus-api-jdo:3.2.0-m4'
 }
 
+task enhance << {
+    println '>> enhance - begin'
+
+    ant.taskdef( 
+        name      : 'datanucleusenhancer',
+        classpath : project.runtimeClasspath.asPath,
+        classname : 'org.datanucleus.enhancer.EnhancerTask'
+    )
+
+    ant.datanucleusenhancer(
+        classpath   : project.runtimeClasspath.asPath,
+        verbose     : true,
+        failonerror : true) {
+        fileset( dir : "$buildDir/classes/main" ) {
+            filename( name : "lb/examples/karaf/jpa/datanucleus/data/Item.class" )
+        }
+    }
+
+    println '>> enhance - end'
+}
+
 jar {
+    it.dependsOn enhance
+
     baseName = 'jpa-datanucleus'
 
     manifest {
