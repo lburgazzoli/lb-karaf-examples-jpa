@@ -23,18 +23,21 @@ limitations under the License.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="2.0">
 
-    <persistence-unit name="DATA_DATANUCLEUS" transaction-type="RESOURCE_LOCAL">
-        <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
-        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
-        <class>lb.examples.karaf.jpa.datanucleus.data.Item</class>
+    <persistence-unit name="DATA_KUNDERA" transaction-type="RESOURCE_LOCAL">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>lb.examples.karaf.jpa.lb.examples.karaf.jpa.kundera.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="datanucleus.autoCreateSchema"
-                      value="true"/>
-            <property name="datanucleus.query.sql.allowAll"
-                      value="true"/>
-            <property name="datanucleus.plugin.pluginRegistryClassName"
-                      value="org.datanucleaus.plugin.OSGiPluginRegistry"/>
+            <property name="kundera.nodes"
+                      value="localhost"/>
+            <property name="kundera.port"
+                      value="9160"/>
+            <property name="kundera.keyspace"
+                      value="KunderaExamples"/>
+            <property name="kundera.dialect"
+                      value="mongo"/>
+            <property name="kundera.client.lookup.class"
+                      value="com.impetus.client.cassandra.pelops.PelopsClientFactory" />
         </properties>
     </persistence-unit>
 
