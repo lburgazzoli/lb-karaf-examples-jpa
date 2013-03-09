@@ -16,7 +16,6 @@ subprojects {
         maven { url 'http://snapshots.jboss.org/maven2/' }
         maven { url 'http://download.oracle.com/maven' }
         maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-        maven { url 'http://www.kundera.org/downloads/maven2' }
     }
 
     dependencies {

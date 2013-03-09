@@ -1,0 +1,44 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'karaf-examples'
+
+project.ext {
+    bundleInportPackages = [
+        'org.apache.felix.service.command',
+        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.console',
+        '*'
+    ]
+}
+
+dependencies {
+    compile project(':jpa-kundera-adapter')
+    compile 'org.mongodb:mongo-java-driver:2.10.1'
+    compile 'com.impetus.core:kundera-core:2.4'
+    compile 'com.impetus.client:kundera-mongo:2.4'
+}
+
+jar {
+    baseName = 'jpa-kundera'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: JPA :: Kundera',
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: Kundera',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Version'         : version,
+            'JPA-PersistenceUnits'   : 'DATA_KUNDERA',
+            'Meta-Persistence'       : 'META-INF/persistence.xml',
+            'DynamicImport-Package'  : '*'
+        )
+    }
+}
+

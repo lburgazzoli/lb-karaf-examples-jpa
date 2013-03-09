@@ -5,7 +5,6 @@ version  = '1.0.0.SNAPSHOT'
 group    = 'karaf-examples'
 
 dependencies {
-    compile project(':jpa-kundera-adapter')
     compile 'org.mongodb:mongo-java-driver:2.10.1'
     compile 'com.impetus.core:kundera-core:2.4'
     compile 'com.impetus.client:kundera-mongo:2.4'
@@ -13,7 +12,7 @@ dependencies {
 
 jar {
     baseName = 'jpa-kundera-adapter'
-
+    
     manifest {
         classesDir = new File("$buildDir/classes/main")
         classpath  = project.runtimeClasspath
