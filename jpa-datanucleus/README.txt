@@ -34,3 +34,12 @@ TEST
     item:hibernate-am-add name1 descr1
     item:hibernate-am-add name2 descr2
     item:hibernate-am-list
+
+NOTES
+--------------------------------------------------------------------------------
+
+Bear in mind that you need to start datanucleus bundle after the the Arie JPA
+Container bundle (org.apache.aries.jpa.container) and enable DunamicImport on:
+- datanucleus-api-jdo
+- datanucleus-api-jpa
+

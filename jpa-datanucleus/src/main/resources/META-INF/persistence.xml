@@ -29,12 +29,12 @@ limitations under the License.
         <class>lb.examples.karaf.jpa.datanucleus.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="datanucleus.autoCreateSchema"
-                      value="true"/>
-            <property name="datanucleus.query.sql.allowAll"
-                      value="true"/>
-            <property name="datanucleus.plugin.pluginRegistryClassName"
-                      value="org.datanucleaus.plugin.OSGiPluginRegistry"/>
+            <property name  = "datanucleus.autoCreateSchema"
+                      value = "true"/>
+            <property name  = "datanucleus.query.sql.allowAll"
+                      value = "true"/>
+            <property name  = "datanucleus.plugin.pluginRegistryClassName"
+                      value = "org.datanucleus.plugin.OSGiPluginRegistry"/>
         </properties>
     </persistence-unit>
 

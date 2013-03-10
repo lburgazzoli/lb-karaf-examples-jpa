@@ -32,7 +32,7 @@ limitations under the License.
     <bean id="datanucleus_app_managed_data_service"
           class="lb.examples.karaf.jpa.datanucleus.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATA_DATANUCLEUS" property="entityManagerFactory"/>
-        <property name="entityManagerFactory" ref="datanucleus_emf"/>
+        <!--<property name="entityManagerFactory" ref="datanucleus_emf"/>-->
     </bean>
 
     <service ref="datanucleus_app_managed_data_service"

@@ -58,8 +58,8 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: JPA :: Datanucleus',
-            'Bundle-Name'            : 'Karaf Examples :: JPA :: Datanucleus',
+            'Bundle-Description'     : 'Karaf Examples :: JPA :: DataNucleus',
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: DataNucleus',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
             'JPA-PersistenceUnits'   : 'DATA_DATANUCLEUS',
