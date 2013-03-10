@@ -35,15 +35,15 @@ limitations under the License.
          <validation-mode>NONE</validation-mode>
         <properties>
             <!--<property name="openjpa.Log"                         value="DefaultLevel=TRACE"/>-->
-            <property name="openjpa.Log"                         value="slf4j"/>
+            <property name="openjpa.Log"                         value="slf4j"/
             <property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=true"/>
             <property name="openjpa.RuntimeUnenhancedClasses"    value="supported"/>
             <property name="openjpa.jdbc.SynchronizeMappings"    value="buildSchema"/>
             <property name="openjpa.jdbc.DBDictionary"           value="hsql"/>
         </properties>
-    </persistence-unit>
+</persistence-unit>
 
-    <!-- ******************************************************************* -->
+<!-- ******************************************************************* -->
     <!-- JTA                                                                 -->
     <!-- ******************************************************************* -->
 

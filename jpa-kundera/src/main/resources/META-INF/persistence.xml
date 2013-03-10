@@ -25,19 +25,19 @@ limitations under the License.
 
     <persistence-unit name="DATA_KUNDERA" transaction-type="RESOURCE_LOCAL">
         <provider>com.impetus.kundera.KunderaPersistence</provider>
-        <class>lb.examples.karaf.jpa.lb.examples.karaf.jpa.kundera.data.Item</class>
+        <class>lb.examples.karaf.jpa.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="kundera.nodes"
                       value="localhost"/>
             <property name="kundera.port"
-                      value="9160"/>
+                      value="27017"/>
             <property name="kundera.keyspace"
-                      value="KunderaExamples"/>
+                      value="jpa_kundera"/>
             <property name="kundera.dialect"
-                      value="mongo"/>
+                      value="mongodb"/>
             <property name="kundera.client.lookup.class"
-                      value="com.impetus.client.cassandra.pelops.PelopsClientFactory" />
+                      value="com.impetus.client.mongodb.MongoDBClientFactory" />
         </properties>
     </persistence-unit>
 

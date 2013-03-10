@@ -12,6 +12,11 @@ project.ext {
             '*'
     ]
 }
+
+dependencies {
+    compile 'org.apache.openjpa:openjpa:2.2.1'
+}
+
 jar {
     baseName = 'jpa-openjpa'
 
