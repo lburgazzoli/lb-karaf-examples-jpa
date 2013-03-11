@@ -17,7 +17,21 @@ dependencies {
     compile 'org.apache.openjpa:openjpa:2.2.1'
 }
 
+
+task enhance << {
+    ant.taskdef(
+        name      : 'openjpaenhancer',
+        classpath : project.runtimeClasspath.asPath,
+        classname : 'org.apache.openjpa.ant.PCEnhancerTask'
+    )
+
+    ant.openjpaenhancer(
+        classpath : project.runtimeClasspath.asPath)
+}
+
 jar {
+    it.dependsOn enhance
+
     baseName = 'jpa-openjpa'
 
     manifest {
