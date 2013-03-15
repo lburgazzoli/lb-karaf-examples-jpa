@@ -20,7 +20,6 @@ subprojects {
         maven { url 'https://repository.atlassian.com/maven2' }
         maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
         maven { url 'https://github.com/s7/mvnrepo/raw/master' }
-
     }
 
     dependencies {

@@ -11,3 +11,5 @@ include "jpa-kundera-adapter"
 include "cm-inmemory"
 include "cm-hazelcast"
 
+include "nosql-cassandra"
+
