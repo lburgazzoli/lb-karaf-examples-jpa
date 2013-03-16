@@ -38,6 +38,8 @@ Install bundles:
 Install the example bundle:
     cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
 
+    install -s mvn:karaf-examples/jpa-utils/1.0.0.SNAPSHOT
+    install -s mvn:karaf-examples/jpa-commons/1.0.0.SNAPSHOT
     install -s mvn:karaf-examples/jpa-hibernate/1.0.0.SNAPSHOT
 
 

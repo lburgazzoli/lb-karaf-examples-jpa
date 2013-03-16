@@ -1,5 +1,7 @@
 
 include "jpa-utils"
+include "jpa-commons"
+
 include "jpa-eclipselink"
 include "jpa-eclipselink-adapter"
 include "jpa-openjpa"

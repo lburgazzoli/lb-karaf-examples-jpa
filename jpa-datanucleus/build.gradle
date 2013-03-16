@@ -15,6 +15,7 @@ project.ext {
 }
 
 dependencies {
+    compile project(':jpa-commons')
     compile 'javax.jdo:jdo-api:3.0.1'
     compile 'org.datanucleus:datanucleus-core:3.2.0-release'
     compile 'org.datanucleus:datanucleus-rdbms:3.2.0-release'
@@ -37,7 +38,7 @@ task enhance << {
         verbose     : true,
         failonerror : true) {
         fileset( dir : "$buildDir/classes/main" ) {
-            filename( name : "lb/examples/karaf/jpa/datanucleus/data/Item.class" )
+            filename( name : "lb/examples/karaf/jpa/datanucleus/lb.examples.karaf.jpa.commons.data/Item.class" )
         }
     }
 

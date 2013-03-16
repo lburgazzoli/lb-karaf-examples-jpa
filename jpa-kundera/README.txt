@@ -19,6 +19,8 @@ Install bundles:
 
 Install the example bundle:
 
+    install -s mvn:karaf-examples/jpa-utils/1.0.0.SNAPSHOT
+    install -s mvn:karaf-examples/jpa-commons/1.0.0.SNAPSHOT
     install -s mvn:karaf-examples/jpa-kundera/1.0.0.SNAPSHOT
 
 

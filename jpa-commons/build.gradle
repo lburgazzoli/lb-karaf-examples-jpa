@@ -9,18 +9,15 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
-        'org.hibernate.proxy',
-        'javassist.util.proxy',
         '*'
     ]
 }
 
 dependencies {
-    compile project(':jpa-commons')
 }
 
 jar {
-    baseName = 'jpa-hibernate'
+    baseName = 'jpa-commons'
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
@@ -30,14 +27,11 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: JPA :: Hibernate',
-            'Bundle-Name'            : 'Karaf Examples :: JPA :: Hibernate',
+            'Bundle-Description'     : 'Karaf Examples :: JPA :: Commons',
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: Commons',
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
-            'JPA-PersistenceUnits'   : 'DATA_HIBERNATE',
-            'Meta-Persistence'       : 'META-INF/persistence.xml'
+            'Bundle-Version'         : version
         )
     }
 }
-
 

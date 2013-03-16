@@ -1,6 +1,7 @@
 package lb.examples.karaf.nosql.cassandra;
 
 import org.apache.cassandra.thrift.ConsistencyLevel;
+import org.apache.commons.beanutils.BeanUtils;
 import org.scale7.cassandra.pelops.Bytes;
 import org.scale7.cassandra.pelops.Cluster;
 import org.scale7.cassandra.pelops.Mutator;

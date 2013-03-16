@@ -22,6 +22,7 @@ project.ext {
 }
 
 dependencies {
+    compile project(':jpa-commons')
     compile project(':jpa-eclipselink-adapter')
     compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
     compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'

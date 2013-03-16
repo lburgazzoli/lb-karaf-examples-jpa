@@ -14,6 +14,7 @@ project.ext {
 }
 
 dependencies {
+    compile project(':jpa-commons')
     compile project(':jpa-kundera-adapter')
     compile 'org.mongodb:mongo-java-driver:2.10.1'
     compile 'com.impetus.core:kundera-core:2.4'

@@ -17,6 +17,7 @@
 package lb.examples.karaf.jpa.openjpa.data;
 
 import com.google.common.collect.Lists;
+import lb.examples.karaf.jpa.commons.data.IDataService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,7 +26,7 @@ import java.util.Collection;
 /**
  *
  */
-public class ApplicationManagedDataService implements IDataService {
+public class ApplicationManagedDataService implements IDataService<Item> {
     private EntityManagerFactory emf;
 
     public ApplicationManagedDataService() {

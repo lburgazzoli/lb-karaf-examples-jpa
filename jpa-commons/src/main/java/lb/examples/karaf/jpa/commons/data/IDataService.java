@@ -14,23 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.jpa.openjpa.data;
+package lb.examples.karaf.jpa.commons.data;
 
 import java.util.Collection;
 
 /**
  *
  */
-public interface IDataService {
+public interface IDataService<T> {
     /**
      *
      * @return
      */
-    Collection<Item> getAll();
+    Collection<T> getAll();
 
     /**
      *
       * @param item
      */
-    void add(Item item);
+    void add(T item);
 }

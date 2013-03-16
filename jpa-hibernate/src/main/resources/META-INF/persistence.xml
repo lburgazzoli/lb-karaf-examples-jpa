@@ -35,8 +35,8 @@ limitations under the License.
             jira      : https://hibernate.onjira.com/browse/HHH-8046
         -->
         <provider>org.hibernate.osgi.HibernateBundleActivator</provider>
-        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
-        <class>lb.examples.karaf.jpa.hibernate.data.Item</class>
+        <non-jta-lb.examples.karaf.jpa.commons.data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-lb.examples.karaf.jpa.commons.data-source>
+        <class>lb.examples.karaf.jpa.hibernate.lb.examples.karaf.jpa.commons.lb.examples.karaf.jpa.commons.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

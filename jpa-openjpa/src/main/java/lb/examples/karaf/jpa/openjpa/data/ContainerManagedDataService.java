@@ -16,13 +16,15 @@
  */
 package lb.examples.karaf.jpa.openjpa.data;
 
+import lb.examples.karaf.jpa.commons.data.IDataService;
+
 import javax.persistence.EntityManager;
 import java.util.Collection;
 
 /**
  *
  */
-public class ContainerManagedDataService implements IDataService {
+public class ContainerManagedDataService implements IDataService<Item> {
     private EntityManager em;
 
     public ContainerManagedDataService() {
