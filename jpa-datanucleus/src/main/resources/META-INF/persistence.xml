@@ -25,8 +25,8 @@ limitations under the License.
 
     <persistence-unit name="DATA_DATANUCLEUS" transaction-type="RESOURCE_LOCAL">
         <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
-        <non-jta-lb.examples.karaf.jpa.commons.data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-lb.examples.karaf.jpa.commons.data-source>
-        <class>lb.examples.karaf.jpa.datanucleus.lb.examples.karaf.jpa.commons.lb.examples.karaf.jpa.commons.data.Item</class>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
+        <class>lb.examples.karaf.jpa.datanucleus.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name  = "datanucleus.autoCreateSchema"

@@ -27,8 +27,8 @@ limitations under the License.
 
     <persistence-unit name="OPENJPA_PU_NON_JTA" transaction-type="RESOURCE_LOCAL">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-        <non-jta-lb.examples.karaf.jpa.commons.data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-lb.examples.karaf.jpa.commons.data-source>
-        <class>lb.examples.karaf.jpa.openjpa.lb.examples.karaf.jpa.commons.lb.examples.karaf.jpa.commons.data.Item</class>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
+        <class>lb.examples.karaf.jpa.openjpa.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <!--<property name="openjpa.Log"                         value="DefaultLevel=TRACE"/>-->
@@ -46,8 +46,8 @@ limitations under the License.
 
     <persistence-unit name="OPENJPA_PU_JTA" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-        <jta-lb.examples.karaf.jpa.commons.data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</jta-lb.examples.karaf.jpa.commons.data-source>
-        <class>lb.examples.karaf.jpa.openjpa.lb.examples.karaf.jpa.commons.lb.examples.karaf.jpa.commons.data.Item</class>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
+        <class>lb.examples.karaf.jpa.openjpa.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <!--<property name="openjpa.Log"                         value="DefaultLevel=TRACE"/>-->

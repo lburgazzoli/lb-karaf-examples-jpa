@@ -16,20 +16,21 @@
  */
 package lb.examples.karaf.jpa.kundera.cmd;
 
-import lb.examples.karaf.jpa.kundera.data.IDataService;
+import lb.examples.karaf.jpa.commons.data.IDataService;
+import lb.examples.karaf.jpa.kundera.data.Item;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
 /**
  *
  */
 public abstract class AbstractItemCommand extends OsgiCommandSupport {
-    private IDataService m_dataService;
+    private IDataService<Item> m_dataService;
 
-    public void setDataService(IDataService dataService) {
+    public void setDataService(IDataService<Item> dataService) {
         m_dataService = dataService;
     }
 
-    public IDataService getDataService() {
+    public IDataService<Item> getDataService() {
         return m_dataService;
     }
 }

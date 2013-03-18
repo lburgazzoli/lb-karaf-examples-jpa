@@ -4,6 +4,16 @@ apply plugin: 'maven'
 version  = '1.0.0.SNAPSHOT'
 group    = 'karaf-examples'
 
+project.ext {
+    requireBundle = [
+        'org.eclipse.persistence.asm',
+        'org.eclipse.persistence.antlr',
+        ' org.eclipse.persistence.core',
+        ' org.eclipse.persistence.jpa',
+        ' org.eclipse.persistence.jpa.jpql'
+    ]
+}
+
 dependencies {
     compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
     compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'
@@ -25,9 +35,8 @@ jar {
             'Bundle-Name'            : 'Karaf Examples :: JPA :: EclipseLink :: Adapter',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
-            'Bundle-Activator'       : 'lb.examples.karaf.jpa.eclipselink.adapter.Activator'
+            'Bundle-Activator'       : 'lb.examples.karaf.jpa.eclipselink.adapter.Activator',
+            'Require-Bundle'         : requireBundle.join(',')
         )
     }
 }
-
-

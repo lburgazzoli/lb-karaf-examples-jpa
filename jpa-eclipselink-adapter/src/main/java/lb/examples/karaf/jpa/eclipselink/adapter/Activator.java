@@ -19,16 +19,25 @@ package lb.examples.karaf.jpa.eclipselink.adapter;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Hashtable;
 
 /**
  *
  */
-public class Activator  implements BundleActivator {
+public class Activator implements BundleActivator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Activator.class);
 
     private static BundleContext context = null;
     private static ServiceRegistration serviceReg = null;
+
+    /**
+     * c-tor
+     */
+    public Activator() {
+    }
 
     @Override
     public void start(BundleContext context) throws Exception {
@@ -37,13 +46,13 @@ public class Activator  implements BundleActivator {
         Hashtable<String,String> props = new Hashtable<String, String>();
         props.put(
             "javax.persistence.provider",
-            "org.eclipse.persistence.jpa.PersistenceProvider");
+            org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
         props.put(
             "javax.persistence.spi.PersistenceProvider",
-            "org.eclipse.persistence.jpa.PersistenceProvider");
+            org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
         props.put(
             "javax.persistence.PersistenceProvider",
-            "org.eclipse.persistence.jpa.PersistenceProvider");
+            org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
 
         serviceReg = context.registerService(
             "javax.persistence.spi.PersistenceProvider",

@@ -22,12 +22,12 @@ limitations under the License.
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
     <bean id="app_managed_data_service"
-          class="lb.examples.karaf.jpa.kundera.lb.examples.karaf.jpa.commons.data.ApplicationManagedDataService">
+          class="lb.examples.karaf.jpa.kundera.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATA_KUNDERA" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
-             interface="lb.examples.karaf.jpa.kundera.lb.examples.karaf.jpa.commons.data.IDataService">
+             interface="lb.examples.karaf.jpa.commons.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
                    value="kundera/app_managed_data_service"/>
