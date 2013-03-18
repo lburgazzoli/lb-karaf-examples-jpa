@@ -1,0 +1,39 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'karaf-examples'
+
+project.ext {
+    bundleInportPackages = [
+        'org.apache.felix.service.command',
+        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.console',
+        '*'
+    ]
+}
+
+dependencies {
+    compile 'org.apache.zookeeper:zookeeper:3.4.5'
+}
+
+jar {
+    baseName = 'zookeper'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: CM :: ZooKeper',
+            'Bundle-Name'            : 'Karaf Examples :: CM :: ZooKeper',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Version'         : version
+        )
+    }
+}
+
+
