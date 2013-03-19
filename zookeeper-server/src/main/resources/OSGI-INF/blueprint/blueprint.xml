@@ -19,4 +19,22 @@ limitations under the License.
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <bean id="ZK_SERVICE"
+          class="lb.examples.karaf.zookeeper.ZKService">
+        <argument value="zk.service"/>
+    </bean>
+
+    <service ref="ZK_SERVICE">
+        <interfaces>
+            <value>org.osgi.service.cm.ManagedService</value>
+        </interfaces>
+        <service-properties>
+            <entry key="service.pid" value="zk.service"/>
+        </service-properties>
+    </service>
+
 </blueprint>
