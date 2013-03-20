@@ -26,7 +26,7 @@ import java.util.Properties;
 /**
  *
  */
-public class ZKService extends OSGiManagedService {
+public class ZKService extends OSGiManagedService implements IZKService {
 
     private IZKServer m_server;
 

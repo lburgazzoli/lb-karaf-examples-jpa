@@ -9,6 +9,7 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
+        '!org.apache.zookeeper.server.quorum.flexible',
         '*'
     ]
 }
@@ -28,8 +29,8 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: CM :: ZooKeper',
-            'Bundle-Name'            : 'Karaf Examples :: CM :: ZooKeper',
+            'Bundle-Description'     : 'Karaf Examples :: ZooKeper :: Server',
+            'Bundle-Name'            : 'Karaf Examples :: ZooKeper :: Server',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version
         )
