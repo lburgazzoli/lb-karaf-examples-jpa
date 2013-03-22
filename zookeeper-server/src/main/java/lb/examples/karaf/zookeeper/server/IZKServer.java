@@ -1,4 +1,4 @@
-package lb.examples.karaf.zookeeper;
+package lb.examples.karaf.zookeeper.server.cmd;
 
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
 

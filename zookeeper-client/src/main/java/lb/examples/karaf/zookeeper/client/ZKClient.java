@@ -14,57 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.zookeeper;
+package lb.examples.karaf.zookeeper.client;
 
+import com.netflix.curator.framework.CuratorFramework;
+import com.netflix.curator.framework.CuratorFrameworkFactory;
 import lb.examples.karaf.OSGiManagedService;
-import lb.examples.karaf.zookeeper.impl.ZooKeeperClusteredServer;
-import lb.examples.karaf.zookeeper.impl.ZooKeeperStandaloneServer;
-import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
 
 import java.util.Properties;
 
 /**
  *
  */
-public class ZKService extends OSGiManagedService implements IZKService {
-
-    private IZKServer m_server;
+public class ZKClient extends OSGiManagedService implements IZKClient {
+    private CuratorFramework m_frameworK;
 
     /**
      * c-tor
      *
      * @param pid
      */
-    public ZKService(String pid) {
+    public ZKClient(String pid) {
         super(pid);
 
-        m_server = null;
+        m_frameworK = null;
     }
 
     @Override
     protected void doCreate(Properties properties) throws Exception {
-        if(properties != null && m_server == null) {
-            QuorumPeerConfig config = new QuorumPeerConfig();
-            config.parseProperties(properties);
-            if(!config.getServers().isEmpty()) {
-                ZKUtils.createIdFile(properties);
-
-                m_server = new ZooKeeperClusteredServer();
-                m_server.init(config);
-                m_server.start();
-            } else {
-                m_server = new ZooKeeperStandaloneServer();
-                m_server.init(config);
-                m_server.start();
-            }
+        if(properties != null) {
+            m_frameworK = CuratorFrameworkFactory.builder().build();
         }
     }
 
     @Override
     protected void doDestroy(Properties properties) throws Exception {
-        if(properties != null && m_server != null) {
-            m_server.destroy();
-            m_server = null;
+        if(properties != null) {
         }
     }
 }
+

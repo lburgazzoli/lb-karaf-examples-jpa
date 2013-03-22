@@ -9,11 +9,19 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
+        '!org.apache.zookeeper.server.quorum.flexible',
         '*'
     ]
 }
+
+dependencies {
+    compile project(':osgi-commons')
+    compile 'com.netflix.curator:curator-client:1.3.3'
+    compile 'com.netflix.curator:curator-framework:1.3.3'
+}
+
 jar {
-    baseName = 'cm-inmemory-pm'
+    baseName = 'zookeeper-client'
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
@@ -23,10 +31,10 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: CM :: PersistenceManager :: InMemory',
-            'Bundle-Name'            : 'Karaf Examples :: CM :: PersistenceManager :: InMemory',
+            'Bundle-Description'     : 'Karaf Examples :: ZooKeper :: Client',
+            'Bundle-Name'            : 'Karaf Examples :: ZooKeper :: Client',
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
+            'Bundle-Version'         : version
         )
     }
 }

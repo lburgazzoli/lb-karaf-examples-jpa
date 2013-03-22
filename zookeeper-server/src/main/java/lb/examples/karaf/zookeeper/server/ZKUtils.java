@@ -1,4 +1,4 @@
-package lb.examples.karaf.zookeeper;
+package lb.examples.karaf.zookeeper.server.cmd;
 
 import java.io.File;
 import java.io.FileOutputStream;

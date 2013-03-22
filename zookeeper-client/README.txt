@@ -1,4 +1,5 @@
-UILD
+
+BUILD
 --------------------------------------------------------------------------------
 
 gradle clean install
@@ -7,6 +8,10 @@ gradle clean install
 INSTALLATION
 --------------------------------------------------------------------------------
 
-Install the example bundle:
+Install bundles:
+    install wrap:mvn:com.netflix.curator/curator-client/1.3.3
+    install wrap:mvn:com.netflix.curator/curator-framework/1.3.3
 
-    install -s mvn:karaf-examples/cm-inmemory-pm/1.0.0.SNAPSHOT
+Install the example bundle:
+    install -s mvn:karaf-examples/zookeeper-client/1.0.0.SNAPSHOT
+

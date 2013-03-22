@@ -1,4 +1,4 @@
-package lb.examples.karaf.zookeeper.cmd;
+package lb.examples.karaf.zookeeper.server.cmd;
 
 import lb.examples.karaf.zookeeper.IZKService;
 import org.apache.karaf.shell.console.OsgiCommandSupport;

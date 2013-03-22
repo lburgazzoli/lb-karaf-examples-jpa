@@ -24,7 +24,7 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <bean id="ZK_SERVICE"
-          class="lb.examples.karaf.zookeeper.ZKService">
+          class="lb.examples.karaf.zookeeper.server.cmd.ZKService">
         <argument value="zk.service"/>
     </bean>
 

@@ -1,4 +1,4 @@
-package lb.examples.karaf.zookeeper.impl;
+package lb.examples.karaf.zookeeper.server.impl;
 
 import lb.examples.karaf.zookeeper.IZKServer;
 import org.apache.zookeeper.server.NIOServerCnxnFactory;
