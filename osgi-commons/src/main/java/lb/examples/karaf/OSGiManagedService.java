@@ -82,19 +82,14 @@ public class OSGiManagedService implements OSGiServiceLifeCycle,ManagedService {
 
     /**
      *
-     * @param properties
+     * @param dictionary
      * @throws ConfigurationException
      */
     @Override
-    public void updated(Dictionary properties) throws ConfigurationException {
-        if(properties != null) {
+    public void updated(Dictionary dictionary) throws ConfigurationException {
+        if(dictionary != null) {
             try {
-                Properties props = new Properties();
-                for (Enumeration e = properties.keys(); e.hasMoreElements();) {
-                    Object key = e.nextElement();
-                    Object val = properties.get(key);
-                    props.put(ObjectUtils.toString(key),ObjectUtils.toString(val, StringUtils.EMPTY));
-                }
+                Properties props = getConfiguration(dictionary);
 
                 doDestroy(props);
                 doCreate(props);
@@ -130,29 +125,48 @@ public class OSGiManagedService implements OSGiServiceLifeCycle,ManagedService {
      */
     protected Properties getConfiguration() {
         ConfigurationAdmin ca = getConfigurationAdmin();
-        Properties cfg = null;
+        Properties props = null;
 
         if(ca != null) {
             try {
-                Configuration properties = ca.getConfiguration(m_pid);
-                if(properties != null) {
-                    Properties props = new Properties();
-                    for (Enumeration e = properties.getProperties().keys(); e.hasMoreElements();) {
-                        Object key = e.nextElement();
-                        Object val = properties.getProperties().get(key);
-                        props.put(ObjectUtils.toString(key),ObjectUtils.toString(val, StringUtils.EMPTY));
-                    }
+                Configuration configuration = ca.getConfiguration(m_pid);
+                if(configuration != null) {
+                    props = getConfiguration(configuration.getProperties());
                 }
             } catch(Exception e) {
                 LOGGER.warn("Exception",e);
             }
         }
 
-        if(cfg == null) {
+        if(props == null) {
             LOGGER.warn("No configuration for {}",m_pid);
         }
 
-        return cfg;
+        return props;
+    }
+
+    /**
+     *
+     * @param dictionary
+     * @return
+     */
+    protected Properties getConfiguration(Dictionary dictionary) {
+        Properties props = null;
+
+        if(dictionary != null) {
+            Properties cfg = new Properties();
+            for (Enumeration e = props.keys(); e.hasMoreElements();) {
+                Object key = e.nextElement();
+                Object val = dictionary.get(key);
+                props.put(ObjectUtils.toString(key),ObjectUtils.toString(val, StringUtils.EMPTY));
+            }
+        }
+
+        if(props == null) {
+            LOGGER.warn("No configuration for {}",m_pid);
+        }
+
+        return props;
     }
 
     /**

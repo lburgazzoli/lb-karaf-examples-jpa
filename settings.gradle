@@ -1,4 +1,6 @@
 
+include "osgi-commons"
+
 include "jpa-utils"
 include "jpa-commons"
 

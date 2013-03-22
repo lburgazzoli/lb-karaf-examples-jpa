@@ -9,18 +9,16 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
-        '!org.apache.zookeeper.server.quorum.flexible',
         '*'
     ]
 }
 
 dependencies {
-    compile project(':osgi-commons')
     compile 'org.apache.zookeeper:zookeeper:3.4.5'
 }
 
 jar {
-    baseName = 'zookeeper-server'
+    baseName = 'osgi-commons'
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
@@ -30,8 +28,8 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: ZooKeper :: Server',
-            'Bundle-Name'            : 'Karaf Examples :: ZooKeper :: Server',
+            'Bundle-Description'     : 'Karaf Examples :: OSGi :: Commons',
+            'Bundle-Name'            : 'Karaf Examples :: OSGi :: Commons',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version
         )
