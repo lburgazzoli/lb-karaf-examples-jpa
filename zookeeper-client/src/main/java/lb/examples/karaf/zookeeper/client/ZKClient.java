@@ -72,7 +72,7 @@ public class ZKClient implements IZKClient {
      *
      * @param connectStrin
      */
-    public void setConenctString(String connectStrin) {
+    public void setConnectString(String connectStrin) {
         m_builder.connectString(connectStrin);
     }
 

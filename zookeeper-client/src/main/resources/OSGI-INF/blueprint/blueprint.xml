@@ -26,12 +26,13 @@ limitations under the License.
 
     <cm:property-placeholder persistent-id="zk.client" update-strategy="reload" >
         <cm:default-properties>
-            <cm:property name="connection.string"  value="localhost:2181"/>
-            <cm:property name="connection.timeout" value="1000"/>
-            <cm:property name="session.timeout"    value="1000"/>
-            <cm:property name="session.timeout"    value="1000"/>
-            <cm:property name="reconnect.sleep"    value="1000"/>
-            <cm:property name="reconnect.retries"  value="3"/>
+            <cm:property name="connection.string"    value="localhost:2181"/>
+            <cm:property name="connection.timeout"   value="1000"/>
+            <cm:property name="session.timeout"      value="1000"/>
+            <cm:property name="session.timeout"      value="1000"/>
+            <cm:property name="reconnect.sleep.base" value="1000"/>
+            <cm:property name="reconnect.sleep.max"  value="10000"/>
+            <cm:property name="reconnect.retries"    value="5"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -41,37 +42,41 @@ limitations under the License.
 
     <bean id="ZK_RECONNECT_POLICY"
           class="com.netflix.curator.retry.ExponentialBackoffRetry">
-        <argument value="${reconnect.sleep}"/>
+        <argument value="${reconnect.sleep.base}"/>
         <argument value="${reconnect.retries}"/>
+        <argument value="${reconnect.sleep.max}"/>
     </bean>
 
     <bean id="ZK_CLIENT"
           class="lb.examples.karaf.zookeeper.client.ZKClient"
           init-method="init"
           destroy-method="destroy">
-        <property name="sonenctString" value="${connection.string}"/>
+        <property name="connectString"       value="${connection.string}"/>
         <property name="connectionTimeoutMs" value="${connection.timeout}"/>
-        <property name="sessionTimeoutMs" value="${session.timeout}"/>
-        <property name="retryPolicy" ref="ZK_RECONNECT_POLICY"/>
+        <property name="sessionTimeoutMs"    value="${session.timeout}"/>
+        <property name="retryPolicy"         ref="ZK_RECONNECT_POLICY"/>
     </bean>
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <service ref="ZK_CLIENT">
         <interfaces>
             <value>lb.examples.karaf.zookeeper.client.IZKClient</value>
         </interfaces>
         <service-properties>
-            <!--<entry key="service.pid" value="zk.client"/>-->
+            <entry key="service.pid" value="zk.client"/>
         </service-properties>
     </service>
+    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="zk/node-create">
             <action class="lb.examples.karaf.zookeeper.client.cmd.ZKCreate">
@@ -84,5 +89,6 @@ limitations under the License.
             </action>
         </command>
     </command-bundle>
+    -->
 
 </blueprint>

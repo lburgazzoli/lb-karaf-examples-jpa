@@ -89,8 +89,10 @@ public class ZooKeeperClusteredServer implements IZKServer {
 
     @Override
     public void destroy() throws Exception {
+        LOGGER.debug("destroying ...");
         m_server.shutdown();
         m_server.join();
+        LOGGER.debug("... destroyed");
     }
 
     @Override
