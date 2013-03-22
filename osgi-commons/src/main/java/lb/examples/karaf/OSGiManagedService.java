@@ -94,7 +94,7 @@ public class OSGiManagedService implements OSGiServiceLifeCycle,ManagedService {
                 doDestroy(props);
                 doCreate(props);
             } catch(Exception e) {
-                throw new ConfigurationException("",e.getMessage(),e);
+                throw new ConfigurationException("Updated",e.getMessage(),e);
             }
         }
     }
@@ -154,11 +154,16 @@ public class OSGiManagedService implements OSGiServiceLifeCycle,ManagedService {
         Properties props = null;
 
         if(dictionary != null) {
-            Properties cfg = new Properties();
-            for (Enumeration e = props.keys(); e.hasMoreElements();) {
-                Object key = e.nextElement();
-                Object val = dictionary.get(key);
-                props.put(ObjectUtils.toString(key),ObjectUtils.toString(val, StringUtils.EMPTY));
+            LOGGER.debug("getConfiguration, dictionary={}",dictionary);
+            Enumeration keys = dictionary.keys();
+            if(keys != null) {
+                LOGGER.debug("getConfiguration, keys={}",dictionary);
+                props = new Properties();
+                while (keys.hasMoreElements()) {
+                    Object key = keys.nextElement();
+                    Object val = dictionary.get(key);
+                    props.put(ObjectUtils.toString(key),ObjectUtils.toString(val, StringUtils.EMPTY));
+                }
             }
         }
 

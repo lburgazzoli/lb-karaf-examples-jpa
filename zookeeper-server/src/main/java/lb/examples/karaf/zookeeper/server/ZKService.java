@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lb.examples.karaf.zookeeper.server.cmd;
+package lb.examples.karaf.zookeeper.server;
 
 import lb.examples.karaf.OSGiManagedService;
 import lb.examples.karaf.zookeeper.server.impl.ZooKeeperClusteredServer;
