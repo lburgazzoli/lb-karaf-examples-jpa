@@ -17,24 +17,72 @@ limitations under the License.
 -->
 <blueprint default-activation="eager"
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id="ZK_CLIENT"
-          class="lb.examples.karaf.zookeeper.client.ZKClient">
-        <argument value="zk.service"/>
+    <cm:property-placeholder persistent-id="zk.client" update-strategy="reload" >
+        <cm:default-properties>
+            <cm:property name="connection.string"  value="localhost:2181"/>
+            <cm:property name="connection.timeout" value="1000"/>
+            <cm:property name="session.timeout"    value="1000"/>
+            <cm:property name="session.timeout"    value="1000"/>
+            <cm:property name="reconnect.sleep"    value="1000"/>
+            <cm:property name="reconnect.retries"  value="3"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <bean id="ZK_RECONNECT_POLICY"
+          class="com.netflix.curator.retry.ExponentialBackoffRetry">
+        <argument value="${reconnect.sleep}"/>
+        <argument value="${reconnect.retries}"/>
     </bean>
+
+    <bean id="ZK_CLIENT"
+          class="lb.examples.karaf.zookeeper.client.ZKClient"
+          init-method="init"
+          destroy-method="destroy">
+        <property name="sonenctString" value="${connection.string}"/>
+        <property name="connectionTimeoutMs" value="${connection.timeout}"/>
+        <property name="sessionTimeoutMs" value="${session.timeout}"/>
+        <property name="retryPolicy" ref="ZK_RECONNECT_POLICY"/>
+    </bean>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
 
     <service ref="ZK_CLIENT">
         <interfaces>
-            <value>org.osgi.service.cm.ManagedService</value>
+            <value>lb.examples.karaf.zookeeper.client.IZKClient</value>
         </interfaces>
         <service-properties>
-            <entry key="service.pid" value="zk.service"/>
+            <!--<entry key="service.pid" value="zk.client"/>-->
         </service-properties>
     </service>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="zk/node-create">
+            <action class="lb.examples.karaf.zookeeper.client.cmd.ZKCreate">
+                <property name="service" ref="ZK_CLIENT"/>
+            </action>
+        </command>
+        <command name="zk/node-list">
+            <action class="lb.examples.karaf.zookeeper.client.cmd.ZKList">
+                <property name="service" ref="ZK_CLIENT"/>
+            </action>
+        </command>
+    </command-bundle>
 
 </blueprint>
