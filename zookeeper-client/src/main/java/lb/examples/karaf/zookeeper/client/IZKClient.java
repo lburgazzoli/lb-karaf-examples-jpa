@@ -33,4 +33,20 @@ public interface IZKClient extends OSGiServiceLifeCycle {
      * @return
      */
     public List<String> list(String path) throws Exception;
+
+    /**
+     *
+     * @param path
+     * @param recursive
+     * @return
+     */
+    public List<String> list(String path,boolean recursive) throws Exception;
+
+    /**
+     *
+     * @param path
+     * @return
+     * @throws Exception
+     */
+    public byte[] data(String path) throws Exception;
 }

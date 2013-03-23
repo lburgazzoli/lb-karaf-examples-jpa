@@ -16,7 +16,7 @@ Install the example bundle:
         initLimit  = 10
         tickTime   = 2000
         clientPort = 2181
-        dataDir    = /home/c300125/tmp/apache-karaf-2.3.0-jpa/data/zookeeper
+        dataDir    = ${karad.data}/zookeeper
         syncLimit  = 5
     > $KARAF_HOME/etc/zk.service.cfg
 

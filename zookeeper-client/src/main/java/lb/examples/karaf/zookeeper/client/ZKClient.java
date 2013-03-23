@@ -17,9 +17,7 @@
 package lb.examples.karaf.zookeeper.client;
 
 import com.google.common.collect.Lists;
-import com.netflix.curator.RetryPolicy;
 import com.netflix.curator.framework.CuratorFramework;
-import com.netflix.curator.framework.CuratorFrameworkFactory;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -30,10 +28,9 @@ import java.util.List;
 /**
  *
  */
-public class ZKClient implements IZKClient {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ZKClient.class);
+public class ZKClient extends ZKClientBuilder implements IZKClient {
+    private static final List<String> EMPTY_LIST_STRING = Lists.newArrayList();
 
-    private CuratorFrameworkFactory.Builder m_builder;
     private CuratorFramework m_framework;
 
     /**
@@ -41,7 +38,6 @@ public class ZKClient implements IZKClient {
      */
     public ZKClient() {
         m_framework = null;
-        m_builder = CuratorFrameworkFactory.builder();
     }
 
     /**
@@ -54,7 +50,8 @@ public class ZKClient implements IZKClient {
             m_framework = null;
         }
 
-        m_framework = m_builder.build();
+        m_framework = build();
+        m_framework.start();
     }
 
     /**
@@ -68,41 +65,13 @@ public class ZKClient implements IZKClient {
         }
     }
 
-    /**
-     *
-     * @param connectStrin
-     */
-    public void setConnectString(String connectStrin) {
-        m_builder.connectString(connectStrin);
-    }
-
-    /**
-     *
-     * @param retryPolicy
-     */
-    public void setRetryPolicy(RetryPolicy retryPolicy) {
-        m_builder.retryPolicy(retryPolicy);
-    }
-
-    /**
-     *
-     * @param connectionTimeoutMs
-     */
-    public void setConnectionTimeoutMs(int connectionTimeoutMs) {
-        m_builder.connectionTimeoutMs(connectionTimeoutMs);
-    }
-
-    /**
-     *
-     * @param sessionTimeoutMs
-     */
-    public void setSessionTimeoutMs(int sessionTimeoutMs) {
-        m_builder.sessionTimeoutMs(sessionTimeoutMs);
-    }
+    // *************************************************************************
+    // IZKClient
+    // *************************************************************************
 
     @Override
     public void create(String path) throws Exception {
-        create(path,null);
+        create(path, null);
     }
 
     @Override
@@ -123,11 +92,25 @@ public class ZKClient implements IZKClient {
 
     @Override
     public List<String> list(String path) throws Exception {
+        return list(path,false);
+    }
+
+    @Override
+    public List<String> list(String path,boolean recursive) throws Exception {
         if(m_framework != null && StringUtils.isNotBlank(path)) {
             return m_framework.getChildren().forPath(path);
         }
 
-        return Lists.newArrayList();
+        return EMPTY_LIST_STRING;
+    }
+
+    @Override
+    public byte[] data(String path) throws Exception {
+        if(m_framework != null && StringUtils.isNotBlank(path))  {
+            return m_framework.getData().forPath(path);
+        }
+
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 }
 

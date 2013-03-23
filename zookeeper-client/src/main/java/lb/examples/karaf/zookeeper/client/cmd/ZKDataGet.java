@@ -8,16 +8,14 @@ import org.apache.felix.gogo.commands.Command;
 /**
  *
  */
-@Command(scope="zk", name="node-list", description="Get Childrens")
-public class ZKList extends AbstractServiceCommand<IZKClient> {
+@Command(scope="zk", name="node-data-get", description="Get Data")
+public class ZKDataGet extends AbstractServiceCommand<IZKClient> {
 
     @Argument(index=0, required=true, multiValued=false, name="Path")
     String path;
 
     @Override
     protected void doExecute(IZKClient service) throws Exception {
-        for(String item : service.list(path)) {
-            System.out.println("> " + item);
-        }
+        System.out.println("<" + service.data(path) + ">");
     }
 }

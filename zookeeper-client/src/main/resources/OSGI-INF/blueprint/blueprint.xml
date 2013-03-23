@@ -57,11 +57,15 @@ limitations under the License.
         <property name="retryPolicy"         ref="ZK_RECONNECT_POLICY"/>
     </bean>
 
+    <bean id="ZK_PATH_COMPLETER"
+          class="lb.examples.karaf.zookeeper.client.cmd.ZKPathCompleter">
+        <property name="client" ref="ZK_CLIENT"/>
+    </bean>
+
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <!--
     <service ref="ZK_CLIENT">
         <interfaces>
             <value>lb.examples.karaf.zookeeper.client.IZKClient</value>
@@ -70,13 +74,11 @@ limitations under the License.
             <entry key="service.pid" value="zk.client"/>
         </service-properties>
     </service>
-    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <!--
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="zk/node-create">
             <action class="lb.examples.karaf.zookeeper.client.cmd.ZKCreate">
@@ -87,8 +89,15 @@ limitations under the License.
             <action class="lb.examples.karaf.zookeeper.client.cmd.ZKList">
                 <property name="service" ref="ZK_CLIENT"/>
             </action>
+            <completers>
+                <ref component-id="ZK_PATH_COMPLETER"/>
+            </completers>
+        </command>
+        <command name="zk/node-data-get">
+            <action class="lb.examples.karaf.zookeeper.client.cmd.ZKDataGet">
+                <property name="service" ref="ZK_CLIENT"/>
+            </action>
         </command>
     </command-bundle>
-    -->
 
 </blueprint>
