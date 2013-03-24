@@ -1,6 +1,7 @@
 package lb.examples.karaf.zookeeper.client.cmd;
 
 import lb.examples.karaf.zookeeper.client.IZKClient;
+import lb.examples.karaf.zookeeper.client.ZKPath;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.karaf.shell.console.Completer;
 import org.apache.karaf.shell.console.completer.StringsCompleter;
@@ -26,18 +27,27 @@ public class ZKPathCompleter implements Completer {
         StringsCompleter delegate = new StringsCompleter();
         String path = null;
 
-        int index = buffer != null ? buffer.lastIndexOf('/') : -1;
+        int index = buffer != null ? buffer.lastIndexOf(ZKPath.SEPARATOR) : -1;
         if(index <= 0) {
-            path = "/";
+            path = ZKPath.SEPARATOR;
         } else {
-            path = buffer.substring(0,index - 1);
+            path = buffer.substring(0,index);
+
+            if(!StringUtils.startsWith(path, ZKPath.SEPARATOR)) {
+                path = ZKPath.SEPARATOR + path;
+            }
         }
 
         if(StringUtils.isNotBlank(path)) {
-            LOGGER.debug("Search : " + path);
             try {
                 for(String item : m_client.list(path)) {
-                    delegate.getStrings().add("/" + item);
+                    if(StringUtils.equals(path,ZKPath.SEPARATOR)) {
+                        delegate.getStrings().add(ZKPath.SEPARATOR + item);
+                    } else if(StringUtils.endsWith(path,ZKPath.SEPARATOR)) {
+                        delegate.getStrings().add(path + item);
+                    } else {
+                        delegate.getStrings().add(path + ZKPath.SEPARATOR + item);
+                    }
                 }
             } catch(Exception e) {
                 LOGGER.warn("Exception",e);

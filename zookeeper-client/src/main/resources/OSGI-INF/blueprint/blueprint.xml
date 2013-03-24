@@ -84,6 +84,9 @@ limitations under the License.
             <action class="lb.examples.karaf.zookeeper.client.cmd.ZKCreate">
                 <property name="service" ref="ZK_CLIENT"/>
             </action>
+            <completers>
+                <ref component-id="ZK_PATH_COMPLETER"/>
+            </completers>
         </command>
         <command name="zk/node-list">
             <action class="lb.examples.karaf.zookeeper.client.cmd.ZKList">
@@ -97,6 +100,9 @@ limitations under the License.
             <action class="lb.examples.karaf.zookeeper.client.cmd.ZKDataGet">
                 <property name="service" ref="ZK_CLIENT"/>
             </action>
+            <completers>
+                <ref component-id="ZK_PATH_COMPLETER"/>
+            </completers>
         </command>
     </command-bundle>
 
