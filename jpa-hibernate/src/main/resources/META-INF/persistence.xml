@@ -25,16 +25,14 @@ limitations under the License.
 
     <persistence-unit name="DATA_HIBERNATE" transaction-type="RESOURCE_LOCAL">
         <!--
-            Unfortunately Hibernate does not export the persistence provider class
-            but the Activator class as it extends the HibernatePersistenceProvider:
-            org.hibernate.jpa.HibernatePersistenceProvider
+            Unfortunately Hibernate OSGi 4.2.0.Final does not export the new persistence provider 
+            class org.hibernate.jpa.HibernatePersistenceProvider but org.hibernate.ejb.HibernatePersistence 
 
             Reference:
-            repository: https://github.com/hibernate/hibernate-orm/b
+            repository: https://github.com/hibernate/hibernate-orm/
             file      : hibernate-osgi/src/main/java/org/hibernate/osgi/HibernateBundleActivator.java
-            jira      : https://hibernate.onjira.com/browse/HHH-8046
         -->
-        <provider>org.hibernate.osgi.HibernateBundleActivator</provider>
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
         <class>lb.examples.karaf.jpa.hibernate.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
