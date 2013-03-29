@@ -21,6 +21,10 @@ limitations under the License.
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
+    <!-- ******************************************************************* -->
+    <!-- ApplicationManaged                                                  -->
+    <!-- ******************************************************************* -->
+
     <bean id="app_managed_data_service"
           class="lb.examples.karaf.jpa.hibernate.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATA_HIBERNATE" property="entityManagerFactory"/>
@@ -34,6 +38,28 @@ limitations under the License.
         </service-properties>
     </service>
 
+    <!-- ******************************************************************* -->
+    <!-- ContainerManaged                                                    -->
+    <!-- ******************************************************************* -->
+
+    <bean id="con_managed_data_service"
+          class="lb.examples.karaf.jpa.hibernate.data.ContainerManagedDataService">
+        <jpa:context unitname="DATA_HIBERNATE_JTA" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+
+    <service ref="con_managed_data_service"
+             interface="lb.examples.karaf.jpa.commons.data.IDataService">
+        <service-properties>
+            <entry key  ="osgi.jndi.service.name"
+                   value="hibernate/con_managed_data_service"/>
+        </service-properties>
+    </service>
+
+    <!-- ******************************************************************* -->
+    <!-- COMMANDS                                                            -->
+    <!-- ******************************************************************* -->
+
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/hibernate-am-add">
             <action class="lb.examples.karaf.jpa.hibernate.cmd.AMItemAddCommand">
@@ -43,6 +69,16 @@ limitations under the License.
         <command name="item/hibernate-am-list">
             <action class="lb.examples.karaf.jpa.hibernate.cmd.AMItemListCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
+            </action>
+        </command>
+        <command name="item/hibernate-cm-add">
+            <action class="lb.examples.karaf.jpa.hibernate.cmd.CMItemAddCommand">
+                <property name="dataService" ref="con_managed_data_service"/>
+            </action>
+        </command>
+        <command name="item/hibernate-cm-list">
+            <action class="lb.examples.karaf.jpa.hibernate.cmd.CMItemListCommand">
+                <property name="dataService" ref="con_managed_data_service"/>
             </action>
         </command>
     </command-bundle>
