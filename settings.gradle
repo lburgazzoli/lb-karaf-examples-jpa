@@ -11,8 +11,8 @@ include "jpa-hibernate"
 include "jpa-datanucleus"
 include "jpa-kundera"
 include "jpa-kundera-adapter"
-
-include "cm-hazelcast"
+include "jpa-batoojpa"
+include "jpa-batoojpa-adapter"
 
 include "zookeeper-server"
 include "zookeeper-client"

@@ -5,42 +5,45 @@ version  = '1.0.0.SNAPSHOT'
 group    = 'karaf-examples'
 
 project.ext {
+
     bundleInportPackages = [
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
         '*'
     ]
+
+    bundleExportPackages = [
+        '*'
+    ]
 }
 
 dependencies {
     compile project(':jpa-commons')
-    compile project(':jpa-kundera-adapter')
-
-    compile 'org.mongodb:mongo-java-driver:2.11.1'
-    compile 'com.impetus.core:kundera-core:2.5'
-    compile 'com.impetus.client:kundera-mongo:2.5'
+    compile project(':jpa-batoojpa-adapter')
+    compile 'org.batoo.jpa:batoo-jpa:2.0.1.0-RTM'
 }
 
 jar {
-    baseName = 'jpa-kundera'
+    baseName = 'jpa-batoojpa'
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
         classpath  = project.runtimeClasspath
 
         instruction 'Import-Package' , bundleInportPackages.join(',')
-        instruction 'Export-Package' , '*'
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: JPA :: Kundera',
-            'Bundle-Name'            : 'Karaf Examples :: JPA :: Kundera',
+            'Bundle-Description'     : 'Karaf Examples :: JPA :: BatooJPA',
+            'Bundle-Name'            : 'Karaf Examples :: JPA :: BatooJPA',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
-            'JPA-PersistenceUnits'   : 'DATA_KUNDERA',
+            'JPA-PersistenceUnits'   : 'DATAPU_BATOO',
             'Meta-Persistence'       : 'META-INF/persistence.xml',
-            'DynamicImport-Package'  : '*'
+            'DynamicImport-Package'  : 'org.batoo.*'
         )
     }
 }
+
 

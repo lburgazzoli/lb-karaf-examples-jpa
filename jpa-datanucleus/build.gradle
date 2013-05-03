@@ -25,8 +25,6 @@ dependencies {
 }
 
 task enhance << {
-    println '>> enhance - begin'
-
     ant.taskdef( 
         name      : 'datanucleusenhancer',
         classpath : project.runtimeClasspath.asPath,
@@ -41,8 +39,6 @@ task enhance << {
             filename( name : "lb/examples/karaf/jpa/datanucleus/lb.examples.karaf.jpa.commons.data/Item.class" )
         }
     }
-
-    println '>> enhance - end'
 }
 
 jar {

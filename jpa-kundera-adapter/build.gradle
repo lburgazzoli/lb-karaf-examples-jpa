@@ -5,9 +5,9 @@ version  = '1.0.0.SNAPSHOT'
 group    = 'karaf-examples'
 
 dependencies {
-    compile 'org.mongodb:mongo-java-driver:2.10.1'
-    compile 'com.impetus.core:kundera-core:2.4'
-    compile 'com.impetus.client:kundera-mongo:2.4'
+    compile 'org.mongodb:mongo-java-driver:2.11.1'
+    compile 'com.impetus.core:kundera-core:2.5'
+    compile 'com.impetus.client:kundera-mongo:2.5'
 }
 
 jar {
