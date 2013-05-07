@@ -12,7 +12,6 @@ include "jpa-datanucleus"
 include "jpa-kundera"
 include "jpa-kundera-adapter"
 include "jpa-batoojpa"
-include "jpa-batoojpa-adapter"
 
 include "zookeeper-server"
 include "zookeeper-client"
