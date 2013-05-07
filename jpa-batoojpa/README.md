@@ -24,6 +24,7 @@ gradle clean install
     install -s mvn:commons-dbutils/commons-dbutils/1.5
     install -s mvn:commons-io/commons-io/2.4
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr-runtime/3.4_2
+    install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.asm/3.3_2
     install -s wrap:mvn:org.jboss/jandex/1.1.0.Alpha1
     install -s wrap:mvn:org.jboss.as/jboss-as-jpa-spi/7.1.1.Final
 ```
