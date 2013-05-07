@@ -39,6 +39,8 @@ gradle clean install
     install -s mvn:karaf-examples/jpa-utils/1.0.0.SNAPSHOT
     install -s mvn:karaf-examples/jpa-commons/1.0.0.SNAPSHOT
     install -s mvn:karaf-examples/jpa-batoojap/1.0.0.SNAPSHOT
+
+    install -s mvn:org.batoo/batoo-jpa/2.0.1.0-SNAPSHOT
 ```
 
 
