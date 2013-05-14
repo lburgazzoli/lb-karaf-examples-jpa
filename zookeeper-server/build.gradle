@@ -2,7 +2,7 @@ apply plugin: 'osgi'
 apply plugin: 'maven'
 
 version  = '1.0.0.SNAPSHOT'
-group    = 'karaf-examples'
+group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
     bundleInportPackages = [

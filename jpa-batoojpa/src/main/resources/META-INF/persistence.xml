@@ -26,7 +26,7 @@ limitations under the License.
     <persistence-unit name="DATAPU_BATOO" transaction-type="RESOURCE_LOCAL">
         <provider>org.batoo.jpa.core.BatooPersistenceProvider</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
-        <class>lb.examples.karaf.jpa.batoo.data.Item</class>
+        <class>com.github.lburgazzoli.examples.karaf.jpa.batoo.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <validation-mode>NONE</validation-mode>
         <properties>

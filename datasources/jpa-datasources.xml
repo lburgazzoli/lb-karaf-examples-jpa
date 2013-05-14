@@ -15,7 +15,7 @@
     </manifest>
 
     <bean id="data_source_hsql" class="org.hsqldb.jdbc.JDBCDataSource">
-        <property name="url"      value="jdbc:hsqldb:mem:lb.examples.karaf.jpa.commons.data"/>
+        <property name="url"      value="jdbc:hsqldb:mem:com.github.lburgazzoli.examples.karaf.jpa.commons.data"/>
         <property name="user"     value="sa"/>
         <property name="password" value=""/>
     </bean>

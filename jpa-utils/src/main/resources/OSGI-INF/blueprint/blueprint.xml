@@ -21,12 +21,12 @@ limitations under the License.
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="jpa/provider-list">
-            <action class="lb.examples.karaf.jpa.utils.cmd.JpaProviderList">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.utils.cmd.JpaProviderList">
                 <property name="bundleContext" ref="blueprintBundleContext"/>
             </action>
         </command>
         <command name="jpa/datasource-list">
-            <action class="lb.examples.karaf.jpa.utils.cmd.JpaDataSourceList">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.utils.cmd.JpaDataSourceList">
                 <property name="bundleContext" ref="blueprintBundleContext"/>
             </action>
         </command>

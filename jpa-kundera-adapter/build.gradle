@@ -2,7 +2,7 @@ apply plugin: 'osgi'
 apply plugin: 'maven'
 
 version  = '1.0.0.SNAPSHOT'
-group    = 'karaf-examples'
+group    = 'com.github.lburgazzoli.examples.karaf'
 
 dependencies {
     compile 'org.mongodb:mongo-java-driver:2.11.1'
@@ -25,7 +25,7 @@ jar {
             'Bundle-Name'            : 'Karaf Examples :: JPA :: Kundera :: Adapter',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
-            'Bundle-Activator'       : 'lb.examples.karaf.jpa.kundera.adapter.Activator'
+            'Bundle-Activator'       : 'com.github.lburgazzoli.examples.karaf.jpa.kundera.adapter.Activator'
         )
     }
 }

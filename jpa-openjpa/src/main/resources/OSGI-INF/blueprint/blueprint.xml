@@ -26,12 +26,12 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <bean id="app_managed_data_service"
-          class="lb.examples.karaf.jpa.openjpa.data.ApplicationManagedDataService">
+          class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.data.ApplicationManagedDataService">
         <jpa:unit unitname="OPENJPA_PU_NON_JTA" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
-             interface="lb.examples.karaf.jpa.commons.data.IDataService">
+             interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
                    value="openjpa/app_managed_data_service"/>
@@ -43,13 +43,13 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <bean id="con_managed_data_service"
-          class="lb.examples.karaf.jpa.openjpa.data.ContainerManagedDataService">
+          class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.data.ContainerManagedDataService">
         <jpa:context unitname="OPENJPA_PU_JTA" property="entityManager"/>
         <tx:transaction method="*" value="Required"/>
     </bean>
 
     <service ref="con_managed_data_service"
-             interface="lb.examples.karaf.jpa.commons.data.IDataService">
+             interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
                    value="openjpa/con_managed_data_service"/>
@@ -62,22 +62,22 @@ limitations under the License.
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/openjpa-am-add">
-            <action class="lb.examples.karaf.jpa.openjpa.cmd.AMItemAddCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.cmd.AMItemAddCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
         <command name="item/openjpa-am-list">
-            <action class="lb.examples.karaf.jpa.openjpa.cmd.AMItemListCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.cmd.AMItemListCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
         <command name="item/openjpa-cm-add">
-            <action class="lb.examples.karaf.jpa.openjpa.cmd.CMItemAddCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.cmd.CMItemAddCommand">
                 <property name="dataService" ref="con_managed_data_service"/>
             </action>
         </command>
         <command name="item/openjpa-cm-list">
-            <action class="lb.examples.karaf.jpa.openjpa.cmd.CMItemListCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.cmd.CMItemListCommand">
                 <property name="dataService" ref="con_managed_data_service"/>
             </action>
         </command>

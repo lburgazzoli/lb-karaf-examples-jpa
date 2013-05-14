@@ -2,7 +2,7 @@ apply plugin: 'osgi'
 apply plugin: 'maven'
 
 version  = '1.0.0.SNAPSHOT'
-group    = 'karaf-examples'
+group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
     bundleInportPackages = [
@@ -36,7 +36,7 @@ task enhance << {
         verbose     : true,
         failonerror : true) {
         fileset( dir : "$buildDir/classes/main" ) {
-            filename( name : "lb/examples/karaf/jpa/datanucleus/lb.examples.karaf.jpa.commons.data/Item.class" )
+            filename( name : "lb/examples/karaf/jpa/datanucleus/com.github.lburgazzoli.examples.karaf.jpa.commons.data/Item.class" )
         }
     }
 }

@@ -1,0 +1,40 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'com.github.lburgazzoli.examples.karaf'
+
+project.ext {
+    bundleInportPackages = [
+        '*'
+    ]
+}
+
+dependencies {
+    compile project(':osgi-commons')
+    compile project(':axon-data')
+    compile project(':axon-engine')
+    compile 'org.axonframework:axon-core:2.0'
+    compile 'com.eaio.uuid:uuid:3.2'
+}
+
+jar {
+    baseName = 'axon-event-listener'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: Axon :: EventListener',
+            'Bundle-Name'            : 'Karaf Examples :: Axon :: EventListener',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Version'         : version
+        )
+    }
+}
+
+

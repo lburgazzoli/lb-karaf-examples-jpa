@@ -25,7 +25,7 @@ limitations under the License.
 
     <persistence-unit name="DATA_KUNDERA" transaction-type="RESOURCE_LOCAL">
         <provider>com.impetus.kundera.KunderaPersistence</provider>
-        <class>lb.examples.karaf.jpa.lb.examples.karaf.jpa.commons.data.Item</class>
+        <class>com.github.lburgazzoli.examples.karaf.jpa.com.github.lburgazzoli.examples.karaf.jpa.commons.data.Item</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="kundera.nodes"

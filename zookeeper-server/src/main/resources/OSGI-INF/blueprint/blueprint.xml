@@ -34,7 +34,7 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <bean id="ZK_SERVICE"
-          class="lb.examples.karaf.zookeeper.server.ZKService">
+          class="com.github.lburgazzoli.examples.karaf.zookeeper.server.ZKService">
         <argument value="zk.service"/>
         <property name="bundleContext" ref="blueprintBundleContext"/>
     </bean>

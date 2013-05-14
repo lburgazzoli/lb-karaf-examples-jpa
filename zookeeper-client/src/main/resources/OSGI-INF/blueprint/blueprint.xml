@@ -48,7 +48,7 @@ limitations under the License.
     </bean>
 
     <bean id="ZK_CLIENT"
-          class="lb.examples.karaf.zookeeper.client.ZKClient"
+          class="com.github.lburgazzoli.examples.karaf.zookeeper.client.ZKClient"
           init-method="init"
           destroy-method="destroy">
         <property name="connectString"       value="${connection.string}"/>
@@ -58,7 +58,7 @@ limitations under the License.
     </bean>
 
     <bean id="ZK_PATH_COMPLETER"
-          class="lb.examples.karaf.zookeeper.client.cmd.ZKPathCompleter">
+          class="com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd.ZKPathCompleter">
         <property name="client" ref="ZK_CLIENT"/>
     </bean>
 
@@ -68,7 +68,7 @@ limitations under the License.
 
     <service ref="ZK_CLIENT">
         <interfaces>
-            <value>lb.examples.karaf.zookeeper.client.IZKClient</value>
+            <value>com.github.lburgazzoli.examples.karaf.zookeeper.client.IZKClient</value>
         </interfaces>
         <service-properties>
             <entry key="service.pid" value="zk.client"/>
@@ -81,7 +81,7 @@ limitations under the License.
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="zk/node-create">
-            <action class="lb.examples.karaf.zookeeper.client.cmd.ZKCreate">
+            <action class="com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd.ZKCreate">
                 <property name="service" ref="ZK_CLIENT"/>
             </action>
             <completers>
@@ -89,7 +89,7 @@ limitations under the License.
             </completers>
         </command>
         <command name="zk/node-list">
-            <action class="lb.examples.karaf.zookeeper.client.cmd.ZKList">
+            <action class="com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd.ZKList">
                 <property name="service" ref="ZK_CLIENT"/>
             </action>
             <completers>
@@ -97,7 +97,7 @@ limitations under the License.
             </completers>
         </command>
         <command name="zk/node-data-get">
-            <action class="lb.examples.karaf.zookeeper.client.cmd.ZKDataGet">
+            <action class="com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd.ZKDataGet">
                 <property name="service" ref="ZK_CLIENT"/>
             </action>
             <completers>

@@ -22,12 +22,12 @@ limitations under the License.
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
     <bean id="app_managed_data_service"
-          class="lb.examples.karaf.jpa.kundera.data.ApplicationManagedDataService">
+          class="com.github.lburgazzoli.examples.karaf.jpa.kundera.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATA_KUNDERA" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
-             interface="lb.examples.karaf.jpa.commons.data.IDataService">
+             interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
                    value="kundera/app_managed_data_service"/>
@@ -36,12 +36,12 @@ limitations under the License.
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/kundera-am-add">
-            <action class="lb.examples.karaf.jpa.kundera.cmd.AMItemAddCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.kundera.cmd.AMItemAddCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
         <command name="item/kundera-am-list">
-            <action class="lb.examples.karaf.jpa.kundera.cmd.AMItemListCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.kundera.cmd.AMItemListCommand">
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>

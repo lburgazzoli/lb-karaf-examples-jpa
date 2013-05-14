@@ -23,20 +23,20 @@ limitations under the License.
 
     <!--
     <bean id="datanucleus_emf"
-          class="lb.examples.karaf.jpa.datanucleus.DataNucleusEntityManagerFactory"
+          class="com.github.lburgazzoli.examples.karaf.jpa.datanucleus.DataNucleusEntityManagerFactory"
           factory-method="createEntityManagerFactory">
         <argument value="DATA_DATANUCLEUS"/>
     </bean>
     -->
 
     <bean id="datanucleus_app_managed_data_service"
-          class="lb.examples.karaf.jpa.datanucleus.data.ApplicationManagedDataService">
+          class="com.github.lburgazzoli.examples.karaf.jpa.datanucleus.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATA_DATANUCLEUS" property="entityManagerFactory"/>
         <!--<property name="entityManagerFactory" ref="datanucleus_emf"/>-->
     </bean>
 
     <service ref="datanucleus_app_managed_data_service"
-             interface="lb.examples.karaf.jpa.commons.data.IDataService">
+             interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
         <service-properties>
             <entry key  ="osgi.jndi.service.name"
                    value="datanucleus/app_managed_data_service"/>
@@ -45,12 +45,12 @@ limitations under the License.
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/datanucleus-am-add">
-            <action class="lb.examples.karaf.jpa.datanucleus.cmd.AMItemAddCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.datanucleus.cmd.AMItemAddCommand">
                 <property name="dataService" ref="datanucleus_app_managed_data_service"/>
             </action>
         </command>
         <command name="item/datanucleus-am-list">
-            <action class="lb.examples.karaf.jpa.datanucleus.cmd.AMItemListCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.datanucleus.cmd.AMItemListCommand">
                 <property name="dataService" ref="datanucleus_app_managed_data_service"/>
             </action>
         </command>

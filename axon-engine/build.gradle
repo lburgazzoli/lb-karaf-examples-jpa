@@ -1,0 +1,44 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'com.github.lburgazzoli.examples.karaf'
+
+project.ext {
+    bundleInportPackages = [
+        'org.apache.felix.service.command',
+        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.console',
+        'org.axonframework.eventstore.fs',
+        'org.axonframework.eventhandling',
+        '*'
+    ]
+}
+
+dependencies {
+    compile project(':osgi-commons')
+    compile project(':axon-data')
+    compile 'org.axonframework:axon-core:2.0'
+    compile 'com.eaio.uuid:uuid:3.2'
+    compile 'com.thoughtworks.xstream:xstream:1.4.3'
+    compile 'com.googlecode.disruptor:disruptor:2.10.3'
+}
+
+jar {
+    baseName = 'axon-engine'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , '*'
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: Axon :: Engine',
+            'Bundle-Name'            : 'Karaf Examples :: Axon :: Engine',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Version'         : version
+        )
+    }
+}
