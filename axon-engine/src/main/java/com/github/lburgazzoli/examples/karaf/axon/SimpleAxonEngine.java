@@ -27,7 +27,10 @@ import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.EventListener;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +38,8 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class SimpleAxonEngine implements IAxonEngine {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleAxonEngine.class);
+
     private CommandBus m_commandBus;
     private CommandGateway m_commandGateway;
     private EventStore m_eventStore;
@@ -104,6 +109,14 @@ public class SimpleAxonEngine implements IAxonEngine {
 
     /**
      *
+     * @param commandGateway
+     */
+    public void setCommandGateway(CommandGateway commandGateway) {
+        m_commandGateway = commandGateway;
+    }
+
+    /**
+     *
      * @param commandBus
      */
     public void setCommandBus(CommandBus commandBus) {
@@ -126,14 +139,6 @@ public class SimpleAxonEngine implements IAxonEngine {
         m_eventStore = eventStore;
     }
 
-    /**
-     *
-     * @param commandGateway
-     */
-    public void setCommandGateway(CommandGateway commandGateway) {
-        m_commandGateway = commandGateway;
-    }
-
     // *************************************************************************
     //
     // *************************************************************************
@@ -142,7 +147,8 @@ public class SimpleAxonEngine implements IAxonEngine {
      *
      * @param eventListener
      */
-    public void bindEventListener(EventListener eventListener) {
+    public void bind(EventListener eventListener,Map properties) {
+        LOGGER.debug("<<<<  BIND  >>>> {},{}",eventListener,properties);
         if(m_eventListeners.add(eventListener)) {
             m_eventBus.subscribe(eventListener);
         }
@@ -152,7 +158,8 @@ public class SimpleAxonEngine implements IAxonEngine {
      *
      * @param eventListener
      */
-    public void unbindEventListener(EventListener eventListener) {
+    public void unbind(EventListener eventListener,Map properties) {
+        LOGGER.debug("<<<< UNBIND >>>> {},{}",eventListener,properties);
         if(eventListener != null) {
             m_eventBus.unsubscribe(eventListener);
         }

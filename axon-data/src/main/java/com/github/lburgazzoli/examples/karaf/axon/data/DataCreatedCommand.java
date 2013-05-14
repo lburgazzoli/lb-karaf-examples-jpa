@@ -18,10 +18,13 @@ package com.github.lburgazzoli.examples.karaf.axon.data;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class DataCreatedCommand {
+public class DataCreatedCommand implements Serializable {
+
     @TargetAggregateIdentifier
     private final String m_id;
     private final String m_text;

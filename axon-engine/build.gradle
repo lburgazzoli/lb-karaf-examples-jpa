@@ -11,6 +11,10 @@ project.ext {
         'org.apache.karaf.shell.console',
         'org.axonframework.eventstore.fs',
         'org.axonframework.eventhandling',
+        'javax.persistence',
+        'org.axonframework.common.jpa',
+        'org.axonframework.eventstore.jpa',
+        'org.axonframework.serializer.xml',
         '*'
     ]
 }
@@ -22,9 +26,25 @@ dependencies {
     compile 'com.eaio.uuid:uuid:3.2'
     compile 'com.thoughtworks.xstream:xstream:1.4.3'
     compile 'com.googlecode.disruptor:disruptor:2.10.3'
+    compile 'org.apache.openjpa:openjpa:2.2.2'
 }
 
+/*
+task enhance << {
+    ant.taskdef(
+        name      : 'openJpaEnhancer',
+        classpath : project.runtimeClasspath.asPath,
+        classname : 'org.apache.openjpa.ant.PCEnhancerTask'
+    )
+
+    ant.openJpaEnhancer(
+        classpath : project.runtimeClasspath.asPath)
+}
+*/
+
 jar {
+    //it.dependsOn enhance
+
     baseName = 'axon-engine'
 
     manifest {
@@ -38,7 +58,9 @@ jar {
             'Bundle-Description'     : 'Karaf Examples :: Axon :: Engine',
             'Bundle-Name'            : 'Karaf Examples :: Axon :: Engine',
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version
+            'Bundle-Version'         : version,
+            'JPA-PersistenceUnits'   : 'AXON_PU',
+            'Meta-Persistence'       : 'META-INF/persistence.xml'
         )
     }
 }

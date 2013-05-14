@@ -21,10 +21,13 @@ import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class DataItem extends AbstractAnnotatedAggregateRoot {
+public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializable {
+
     @AggregateIdentifier
     private String m_id;
     private String m_text;

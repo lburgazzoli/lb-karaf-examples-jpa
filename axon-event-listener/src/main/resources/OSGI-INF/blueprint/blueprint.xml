@@ -24,7 +24,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="axon.event.listener" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.examples.karaf.axon-event-listener" update-strategy="reload" >
         <cm:default-properties>
         </cm:default-properties>
     </cm:property-placeholder>
@@ -33,20 +33,8 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id    = "EVT_LISTENER_DATA_CREATED"
-          class = "com.github.lburgazzoli.examples.karaf.axon.listener.DataCreatedEventListener">
-    </bean>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <service ref="EVT_LISTENER_DATA_CREATED">
-        <interfaces>
-            <value>org.axonframework.eventhandling.EventListener</value>
-        </interfaces>
-        <service-properties>
-        </service-properties>
+    <service id="EVT_LISTENER_DATA_CREATED" interface="org.axonframework.eventhandling.EventListener">
+        <bean class="com.github.lburgazzoli.examples.karaf.axon.listener.DataCreatedEventListener" />
     </service>
 
 </blueprint>

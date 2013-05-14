@@ -14,33 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.data;
+package com.github.lburgazzoli.examples.karaf.axon;
 
-import java.io.Serializable;
+import org.axonframework.commandhandling.RollbackConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
-public class DataCreatedEvent implements Serializable {
+public class SimpleRollbackConfiguration implements RollbackConfiguration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleRollbackConfiguration.class);
 
-    private final String m_id;
-    private final String m_text;
-
-    /**
-     *
-     * @param id
-     * @param text
-     */
-    public DataCreatedEvent(final String id,final String text) {
-        m_id = id;
-        m_text = text;
-    }
-
-    public String getId() {
-        return m_id;
-    }
-
-    public String getText() {
-        return m_text;
+    @Override
+    public boolean rollBackOn(Throwable throwable) {
+        LOGGER.warn("<<<< rollBackOn >>>>",throwable);
+        return true;
     }
 }

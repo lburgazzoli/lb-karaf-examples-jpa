@@ -19,11 +19,14 @@ package com.github.lburgazzoli.examples.karaf.axon.listener;
 
 import org.axonframework.domain.EventMessage;
 import org.axonframework.eventhandling.EventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
 public abstract class AbstractEventListener<T> implements EventListener {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataCreatedEventListener.class);
 
     private final Class<T> m_type;
 
@@ -42,7 +45,7 @@ public abstract class AbstractEventListener<T> implements EventListener {
     @Override
     public void handle(EventMessage event) {
         if(m_type.equals(event.getPayloadType())) {
-            doHandle((T)event.getPayloadType());
+            doHandle(m_type.cast(event.getPayload()));
         }
     }
 

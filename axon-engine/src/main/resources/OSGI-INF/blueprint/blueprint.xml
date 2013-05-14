@@ -17,14 +17,16 @@ limitations under the License.
 -->
 <blueprint default-activation="eager"
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:cm  = "http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:jpa = "http://aries.apache.org/xmlns/jpa/v1.1.0"
+           xmlns:tx  = "http://aries.apache.org/xmlns/transactions/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="axon.engine" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.examples.karaf.axon-engine" update-strategy="reload" >
         <cm:default-properties>
             <cm:property name="event.store.path" value="./data/axon/eventstore"/>
         </cm:default-properties>
@@ -36,6 +38,9 @@ limitations under the License.
 
     <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
+        <property name="rollbackConfiguration">
+            <bean class="com.github.lburgazzoli.examples.karaf.axon.SimpleRollbackConfiguration"/>
+        </property>
     </bean>
 
     <bean id    = "AXON_CMD_GW"
@@ -47,6 +52,26 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <bean id    = "AXON_JPA_EMP"
+          class = "org.axonframework.common.jpa.ContainerManagedEntityManagerProvider">
+        <jpa:context property="entityManager" unitname="AXON_PU"/>
+    </bean>
+
+    <bean id    = "AXON_JPA_EVT_SERIALIZER"
+          class = "org.axonframework.serializer.xml.XStreamSerializer">
+    </bean>
+
+    <bean id    = "AXON_EVT_STORE"
+          class = "org.axonframework.eventstore.jpa.JpaEventStore">
+        <argument ref="AXON_JPA_EMP"/>
+        <argument ref="AXON_JPA_EVT_SERIALIZER"/>
+    </bean>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <!--
     <bean id    = "AXON_EVT_STORE"
           class = "org.axonframework.eventstore.fs.FileSystemEventStore">
         <argument>
@@ -59,6 +84,7 @@ limitations under the License.
             </bean>
         </argument>
     </bean>
+    -->
 
     <bean id    = "AXON_EVT_BUS"
           class = "org.axonframework.eventhandling.SimpleEventBus">
@@ -85,8 +111,8 @@ limitations under the License.
         availability = "optional">
         <reference-listener
             ref           = "AXON_ENGINE"
-            bind-method   = "bindEventListener"
-            unbind-method = "unbindEventListener">
+            bind-method   = "bind"
+            unbind-method = "unbind">
         </reference-listener>
     </reference-list>
 

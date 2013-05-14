@@ -24,7 +24,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="axon.data" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.examples.karaf.axon-data" update-strategy="reload" >
         <cm:default-properties>
         </cm:default-properties>
     </cm:property-placeholder>
