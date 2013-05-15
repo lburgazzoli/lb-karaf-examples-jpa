@@ -16,19 +16,24 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon;
 
-import org.axonframework.commandhandling.RollbackConfiguration;
+import org.axonframework.unitofwork.SpringTransactionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.jta.JtaTransactionManager;
+
+import javax.transaction.TransactionManager;
 
 /**
  *
  */
-public class SimpleRollbackConfiguration implements RollbackConfiguration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleRollbackConfiguration.class);
+public class SimpleTransactionManager extends SpringTransactionManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleTransactionManager.class);
 
-    @Override
-    public boolean rollBackOn(Throwable throwable) {
-        LOGGER.warn("<<<< rollBackOn >>>>",throwable);
-        return !(throwable instanceof Exception) || throwable instanceof RuntimeException;
+    /**
+     *
+     * @param txManager
+     */
+    public SimpleTransactionManager(TransactionManager txManager) {
+        super(new JtaTransactionManager(txManager));
     }
 }

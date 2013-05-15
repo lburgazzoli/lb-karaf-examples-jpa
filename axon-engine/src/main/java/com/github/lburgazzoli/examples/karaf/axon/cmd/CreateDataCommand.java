@@ -19,12 +19,17 @@ package com.github.lburgazzoli.examples.karaf.axon.cmd;
 import com.github.lburgazzoli.examples.karaf.axon.data.DataCreatedCommand;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
+import org.axonframework.commandhandling.CommandCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
 @Command(scope = "data", name = "create", description = "Create Data")
-public class CreateDataCommand extends AbstractCommand{
+public class CreateDataCommand extends AbstractCommand {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateDataCommand.class);
+
     @Argument(index=0,required=true,multiValued=false,name="Id",description="Id")
     String id;
 
@@ -34,7 +39,18 @@ public class CreateDataCommand extends AbstractCommand{
 
     @Override
     public Object doExecute() throws Exception {
-        getEngine().send(new DataCreatedCommand(id,text));
+        getEngine().send(new DataCreatedCommand(id,text),new CommandCallback<Object>() {
+            @Override
+            public void onSuccess(Object result) {
+                LOGGER.debug("onSuccess {}",result);
+            }
+            @Override
+            public void onFailure(Throwable cause) {
+                LOGGER.debug("onFailure => <{}> ",cause.getClass().getName());
+                LOGGER.debug("onFailure",cause);
+            }
+        });
+
         return null;
     }
 }

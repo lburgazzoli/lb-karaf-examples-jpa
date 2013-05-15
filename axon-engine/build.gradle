@@ -6,15 +6,17 @@ group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
     bundleInportPackages = [
+        'javax.persistence',
+        'javax.transaction',
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
         'org.axonframework.eventstore.fs',
         'org.axonframework.eventhandling',
-        'javax.persistence',
         'org.axonframework.common.jpa',
         'org.axonframework.eventstore.jpa',
         'org.axonframework.serializer.xml',
+        'org.springframework.transaction',
         '*'
     ]
 }
@@ -27,24 +29,17 @@ dependencies {
     compile 'com.thoughtworks.xstream:xstream:1.4.3'
     compile 'com.googlecode.disruptor:disruptor:2.10.3'
     compile 'org.apache.openjpa:openjpa:2.2.2'
+    compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.aopalliance:1.0_6'
+    compile 'org.springframework:org.springframework.core:3.2.2.RELEASE'
+    compile 'org.springframework:org.springframework.expression:3.2.2.RELEASE'
+    compile 'org.springframework:org.springframework.beans:3.2.2.RELEASE'
+    compile 'org.springframework:org.springframework.aop:3.2.2.RELEASE'
+    compile 'org.springframework:org.springframework.context:3.2.2.RELEASE'
+    compile 'org.springframework:org.springframework.context.support:3.2.2.RELEASE'
+    compile 'org.springframework:org.springframework.transaction:3.2.2.RELEASE'
 }
-
-/*
-task enhance << {
-    ant.taskdef(
-        name      : 'openJpaEnhancer',
-        classpath : project.runtimeClasspath.asPath,
-        classname : 'org.apache.openjpa.ant.PCEnhancerTask'
-    )
-
-    ant.openJpaEnhancer(
-        classpath : project.runtimeClasspath.asPath)
-}
-*/
 
 jar {
-    //it.dependsOn enhance
-
     baseName = 'axon-engine'
 
     manifest {
