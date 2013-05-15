@@ -17,6 +17,8 @@ project.ext {
         'org.axonframework.eventstore.jpa',
         'org.axonframework.serializer.xml',
         'org.springframework.transaction',
+        'org.hibernate.proxy',
+        'javassist.util.proxy',
         '*'
     ]
 }
@@ -24,11 +26,11 @@ project.ext {
 dependencies {
     compile project(':osgi-commons')
     compile project(':axon-data')
+    compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
     compile 'org.axonframework:axon-core:2.0'
     compile 'com.eaio.uuid:uuid:3.2'
     compile 'com.thoughtworks.xstream:xstream:1.4.3'
     compile 'com.googlecode.disruptor:disruptor:2.10.3'
-    compile 'org.apache.openjpa:openjpa:2.2.2'
     compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.aopalliance:1.0_6'
     compile 'org.springframework:org.springframework.core:3.2.2.RELEASE'
     compile 'org.springframework:org.springframework.expression:3.2.2.RELEASE'

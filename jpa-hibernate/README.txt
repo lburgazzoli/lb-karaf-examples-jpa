@@ -22,15 +22,16 @@ Install bundles:
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5
+    install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1
     install -s mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA
     install -s mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final
     install -s wrap:mvn:org.jboss/jandex/1.1.0.Alpha1
-    install -s mvn:org.jboss.logging/jboss-logging/3.1.0.GA
+    install -s mvn:org.jboss.logging/jboss-logging/3.1.3.GA
 
-    install -s wrap:mvn:http://snapshots.jboss.org/maven2\!org.hibernate.common/hibernate-commons-annotations/4.0.1-SNAPSHOT
-    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-core/4.2.1-SNAPSHOT
-    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-entitymanager/4.2.1-SNAPSHOT
-    install mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-osgi/4.2.1-SNAPSHOT
+    install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final
+    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-core/4.2.2-SNAPSHOT
+    install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-entitymanager/4.2.2-SNAPSHOT
+    install mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-osgi/4.2.2-SNAPSHOT
 
 Install the example bundle:
     cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
