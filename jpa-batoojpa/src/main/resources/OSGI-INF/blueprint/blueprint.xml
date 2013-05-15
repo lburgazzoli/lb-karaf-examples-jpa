@@ -21,6 +21,10 @@ limitations under the License.
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
+    <!-- ******************************************************************* -->
+    <!-- ApplicationManaged                                                    -->
+    <!-- ******************************************************************* -->
+
     <bean id="app_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.batoo.data.ApplicationManagedDataService">
         <jpa:unit unitname="DATAPU_BATOO" property="entityManagerFactory"/>
@@ -34,6 +38,30 @@ limitations under the License.
         </service-properties>
     </service>
 
+    <!-- ******************************************************************* -->
+    <!-- ContainerManaged                                                    -->
+    <!-- ******************************************************************* -->
+
+    <!--
+    <bean id="con_managed_data_service"
+          class="com.github.lburgazzoli.examples.karaf.jpa.batoo.data.ContainerManagedDataService">
+        <jpa:context unitname="DATAPU_BATOO_JTA" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+
+    <service ref="con_managed_data_service"
+             interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
+        <service-properties>
+            <entry key  ="osgi.jndi.service.name"
+                   value="openjpa/con_managed_data_service"/>
+        </service-properties>
+    </service>
+    -->
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/batoo-am-add">
             <action class="com.github.lburgazzoli.examples.karaf.jpa.batoo.cmd.AMItemAddCommand">
@@ -45,6 +73,18 @@ limitations under the License.
                 <property name="dataService" ref="app_managed_data_service"/>
             </action>
         </command>
+        <!--
+        <command name="item/batoo-cm-add">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.batoo.cmd.CMItemAddCommand">
+                <property name="dataService" ref="con_managed_data_service"/>
+            </action>
+        </command>
+        <command name="item/batoo-cm-list">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.batpp.cmd.CMItemListCommand">
+                <property name="dataService" ref="con_managed_data_service"/>
+            </action>
+        </command>
+        -->
     </command-bundle>
 
 </blueprint>

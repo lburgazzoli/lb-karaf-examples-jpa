@@ -23,6 +23,10 @@ limitations under the License.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="2.0">
 
+    <!-- ******************************************************************* -->
+    <!-- NON_JTA                                                            -->
+    <!-- ******************************************************************* -->
+
     <persistence-unit name="DATAPU_BATOO" transaction-type="RESOURCE_LOCAL">
         <provider>org.batoo.jpa.core.BatooPersistenceProvider</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
@@ -31,7 +35,20 @@ limitations under the License.
         <validation-mode>NONE</validation-mode>
         <properties>
             <property name="org.batoo.jpa.ddl" value="DROP"/>
+        </properties>
+    </persistence-unit>
 
+    <!-- ******************************************************************* -->
+    <!-- JTA                                                                 -->
+    <!-- ******************************************************************* -->
+
+    <persistence-unit name="DATAPU_BATOO_JTA" transaction-type="JTA">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
+        <class>com.github.lburgazzoli.examples.karaf.jpa.batoo.data.Item</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="org.batoo.jpa.ddl" value="DROP"/>
         </properties>
     </persistence-unit>
 
