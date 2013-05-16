@@ -28,7 +28,8 @@ limitations under the License.
 
     <cm:property-placeholder persistent-id="com.github.lburgazzoli.examples.karaf.axon-engine" update-strategy="reload" >
         <cm:default-properties>
-            <cm:property name="event.store.path" value="./data/axon/eventstore"/>
+            <cm:property name="event.store.path"  value="./data/axon/eventstore"/>
+            <cm:property name="classpath.bundles" value="axon-data,axon-engine,axon-event-listener"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -43,9 +44,41 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+
+    <bean id    = "AXON_CL"
+          class = "com.github.lburgazzoli.osgi.OSGiClassLoader">
+    </bean>
+
+    <bean id    = "AXON_CL_MANAGER"
+          class = "com.github.lburgazzoli.osgi.OSGiClassLoaderManager"
+          init-method="init"
+          destroy-method="destroy">
+        <argument ref="blueprintBundleContext"/>
+        <argument ref="AXON_CL"/>
+        <property name="eligibleBundleIds" value="${classpath.bundles}"/>
+    </bean>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <bean id    = "AXON_EVT_SERIALIZER"
+          class = "org.axonframework.serializer.xml.XStreamSerializer">
+        <argument>
+            <bean class = "com.thoughtworks.xstream.XStream">
+                <property name="classLoader" ref="AXON_CL"/>
+            </bean>
+        </argument>
+    </bean>
+
     <bean id    = "AXON_CMD_BUS_ROLLBACK_CFG"
           class = "com.github.lburgazzoli.examples.karaf.axon.SimpleRollbackConfiguration">
     </bean>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
 
     <bean id    = "AXON_CMD_BUS_TX_MANAGER"
           class = "com.github.lburgazzoli.examples.karaf.axon.SimpleTransactionManager">
@@ -55,7 +88,9 @@ limitations under the License.
     <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
         <property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>
+        <!--
         <property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>
+        -->
     </bean>
 
     <bean id    = "AXON_CMD_GW"
@@ -67,6 +102,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <bean id    = "AXON_JPA_EMP"
           class = "org.axonframework.common.jpa.ContainerManagedEntityManagerProvider">
         <jpa:context property="entityManager" unitname="AXON_PU"/>
@@ -81,25 +117,26 @@ limitations under the License.
         <argument ref="AXON_JPA_EMP"/>
         <argument ref="AXON_JPA_EVT_SERIALIZER"/>
     </bean>
+    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <!--
-    <bean id    = "AXON_EVT_STORE"
-          class = "org.axonframework.eventstore.fs.FileSystemEventStore">
+    <bean id    = "AXON_EVT_STORE_FS_RESOLVER"
+          class = "org.axonframework.eventstore.fs.SimpleEventFileResolver">
         <argument>
-            <bean class="org.axonframework.eventstore.fs.SimpleEventFileResolver">
-                <argument>
-                    <bean class="java.io.File">
-                        <argument value="${event.store.path}"/>
-                    </bean>
-                </argument>
+            <bean class="java.io.File">
+                <argument value="${event.store.path}"/>
             </bean>
         </argument>
     </bean>
-    -->
+
+    <bean id    = "AXON_EVT_STORE"
+          class = "org.axonframework.eventstore.fs.FileSystemEventStore">
+        <argument ref="AXON_EVT_SERIALIZER"/>
+        <argument ref="AXON_EVT_STORE_FS_RESOLVER"/>
+    </bean>
 
     <bean id    = "AXON_EVT_BUS"
           class = "org.axonframework.eventhandling.SimpleEventBus">

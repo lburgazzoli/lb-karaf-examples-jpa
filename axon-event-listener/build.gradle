@@ -14,8 +14,6 @@ dependencies {
     compile project(':osgi-commons')
     compile project(':axon-data')
     compile project(':axon-engine')
-    compile 'org.axonframework:axon-core:2.0'
-    compile 'com.eaio.uuid:uuid:3.2'
 }
 
 jar {

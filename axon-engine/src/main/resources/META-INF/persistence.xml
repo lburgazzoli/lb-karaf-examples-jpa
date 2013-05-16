@@ -26,21 +26,23 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <persistence-unit name="AXON_PU" transaction-type="JTA">
-        <!--<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>-->
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <!--
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        -->
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
         <class>org.axonframework.eventstore.jpa.DomainEventEntry</class>
         <class>org.axonframework.eventstore.jpa.SnapshotEventEntry</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <!--
             <property name="openjpa.Log"                         value="slf4j"/>
             <property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=true"/>
             <property name="openjpa.RuntimeUnenhancedClasses"    value="supported"/>
             <property name="openjpa.jdbc.SynchronizeMappings"    value="buildSchema"/>
             <property name="openjpa.jdbc.DBDictionary"           value="hsql"/>
-            -->
+            <!--
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            -->
         </properties>
     </persistence-unit>
 
