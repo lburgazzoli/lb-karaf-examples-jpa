@@ -16,7 +16,7 @@
  */
 package com.github.lburgazzoli.examples.karaf.zookeeper.server;
 
-import com.github.lburgazzoli.examples.karaf.OSGiManagedService;
+import com.github.lburgazzoli.osgi.OSGiManagedService;
 import com.github.lburgazzoli.examples.karaf.zookeeper.server.impl.ZooKeeperClusteredServer;
 import com.github.lburgazzoli.examples.karaf.zookeeper.server.impl.ZooKeeperStandaloneServer;
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig;

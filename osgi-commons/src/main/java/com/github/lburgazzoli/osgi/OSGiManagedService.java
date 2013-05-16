@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf;
+package com.github.lburgazzoli.osgi;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +34,7 @@ import java.util.Properties;
 /**
  *
  */
-public class OSGiManagedService implements OSGiServiceLifeCycle,ManagedService {
+public class OSGiManagedService implements IOSGiLifeCycle,ManagedService {
     public static final Logger LOGGER = LoggerFactory.getLogger(OSGiManagedService.class);
 
     private final String m_pid;

@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf;
+package com.github.lburgazzoli.osgi;
 
 /**
  *
  */
-public interface OSGiServiceLifeCycle {
+public interface IOSGiLifeCycle {
     /**
      *
      */

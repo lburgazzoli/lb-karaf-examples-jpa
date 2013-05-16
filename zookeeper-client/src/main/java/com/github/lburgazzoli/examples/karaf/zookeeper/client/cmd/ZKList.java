@@ -1,7 +1,7 @@
 package com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd;
 
-import com.github.lburgazzoli.examples.karaf.cmd.AbstractServiceCommand;
 import com.github.lburgazzoli.examples.karaf.zookeeper.client.IZKClient;
+import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 

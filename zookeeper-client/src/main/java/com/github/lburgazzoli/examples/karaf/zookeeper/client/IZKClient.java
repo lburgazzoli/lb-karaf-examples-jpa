@@ -1,13 +1,13 @@
 package com.github.lburgazzoli.examples.karaf.zookeeper.client;
 
-import com.github.lburgazzoli.examples.karaf.OSGiServiceLifeCycle;
+import com.github.lburgazzoli.osgi.IOSGiLifeCycle;
 
 import java.util.List;
 
 /**
  *
  */
-public interface IZKClient extends OSGiServiceLifeCycle {
+public interface IZKClient extends IOSGiLifeCycle {
 
     /**
      * @param path
