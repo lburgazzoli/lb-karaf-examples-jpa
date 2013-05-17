@@ -1,3 +1,6 @@
+[![Build Status](https://drone.io/github.com/lburgazzoli/lb-karaf-examples/status.png)](https://drone.io/github.com/lburgazzoli/lb-karaf-examples/latest)
+
+
 lb-karaf-examples
 =================
 
