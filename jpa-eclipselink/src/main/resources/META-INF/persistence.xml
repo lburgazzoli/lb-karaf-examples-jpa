@@ -43,7 +43,7 @@ limitations under the License.
                 value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
             <!--
             <property
-                name ="eclipselink.session-event-listener"
+                name ="eclipselink.session-event-services"
                 value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionEventListener"/>
             -->
 

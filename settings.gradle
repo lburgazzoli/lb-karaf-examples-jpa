@@ -16,6 +16,6 @@ include "jpa-batoojpa"
 include "zookeeper-server"
 include "zookeeper-client"
 
-include "axon-data"
+include "axon-commons"
 include "axon-engine"
-include "axon-event-listener"
+include "axon-model"

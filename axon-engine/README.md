@@ -47,8 +47,8 @@ gradle clean install
     install -s mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0
 
     install -s mvn:com.github.lburgazzoli.examples.karaf/osgi-commons/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli.examples.karaf/axon-data/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli.examples.karaf/axon-event-listener/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli.examples.karaf/axon-commons/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli.examples.karaf/axon-engine/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli.examples.karaf/axon-model/1.0.0.SNAPSHOT
 
 ```

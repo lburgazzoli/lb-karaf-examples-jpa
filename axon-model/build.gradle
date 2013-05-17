@@ -6,21 +6,10 @@ group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
     bundleInportPackages = [
-        'javax.persistence',
-        'javax.transaction',
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
-        'org.axonframework.eventstore.fs',
         'org.axonframework.eventhandling',
-        'org.axonframework.common.jpa',
-        'org.axonframework.eventstore.jpa',
-        'org.axonframework.serializer.xml',
-        'com.thoughtworks.xstream',
-        'org.hibernate.proxy;resolution:=optional',
-        'javassist.util.proxy;resolution:=optional',
-        'org.xmlpull.v1',
-        'com.github.lburgazzoli.osgi',
         '*'
     ]
 }
@@ -28,10 +17,11 @@ project.ext {
 dependencies {
     compile project(':osgi-commons')
     compile project(':axon-commons')
+    compile project(':axon-engine')
 }
 
 jar {
-    baseName = 'axon-engine'
+    baseName = 'axon-model'
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
@@ -41,12 +31,12 @@ jar {
         instruction 'Export-Package' , '*'
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: Axon :: Engine',
-            'Bundle-Name'            : 'Karaf Examples :: Axon :: Engine',
+            'Bundle-Description'     : 'Karaf Examples :: Axon :: Model',
+            'Bundle-Name'            : 'Karaf Examples :: Axon :: Model',
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
-            'JPA-PersistenceUnits'   : 'AXON_PU',
-            'Meta-Persistence'       : 'META-INF/persistence.xml'
+            'Bundle-Version'         : version
         )
     }
 }
+
+

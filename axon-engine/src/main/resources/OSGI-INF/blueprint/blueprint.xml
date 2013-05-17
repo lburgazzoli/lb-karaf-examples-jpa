@@ -15,21 +15,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<blueprint default-activation="eager"
-           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:cm  = "http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
            xmlns:jpa = "http://aries.apache.org/xmlns/jpa/v1.1.0"
-           xmlns:tx  = "http://aries.apache.org/xmlns/transactions/v1.0.0"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+           xmlns:tx  = "http://aries.apache.org/xmlns/transactions/v1.0.0">
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="com.github.lburgazzoli.examples.karaf.axon-engine" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.axon.engine" update-strategy="reload" >
         <cm:default-properties>
             <cm:property name="event.store.path"  value="./data/axon/eventstore"/>
-            <cm:property name="classpath.bundles" value="axon-data,axon-engine,axon-event-listener"/>
+            <cm:property name="classpath.bundles" value="axon-commons,axon-engine"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -163,10 +161,24 @@ limitations under the License.
         availability = "optional">
         <reference-listener
             ref           = "AXON_ENGINE"
-            bind-method   = "bind"
-            unbind-method = "unbind">
+            bind-method   = "bindEventListener"
+            unbind-method = "unbindEventListener">
         </reference-listener>
     </reference-list>
+
+    <!--
+    <reference-list
+            id           = "AXON_AGG_ROOT_PROVIDER"
+            interface    = "com.github.lburgazzoli.examples.karaf.axon.helper.IAggregateRootProvider"
+            member-type  = "service-object"
+            availability = "optional">
+        <reference-listener
+                ref           = "AXON_ENGINE"
+                bind-method   = "bindAggregateRootProvider"
+                unbind-method = "unbindAggregateRootProvider">
+        </reference-listener>
+    </reference-list>
+    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
@@ -181,17 +193,5 @@ limitations under the License.
             <entry key="osgi.jndi.service.name" value="axon.engine"/>
         </service-properties>
     </service>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="data/create">
-            <action class="com.github.lburgazzoli.examples.karaf.axon.cmd.CreateDataCommand">
-                <property name="engine" ref="AXON_ENGINE"/>
-            </action>
-        </command>
-    </command-bundle>
 
 </blueprint>

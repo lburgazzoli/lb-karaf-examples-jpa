@@ -16,13 +16,15 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon;
 
-import com.github.lburgazzoli.examples.karaf.axon.data.DataItem;
+import com.github.lburgazzoli.examples.karaf.axon.helper.AggregateRootHolder;
+import com.github.lburgazzoli.examples.karaf.axon.helper.IAggregateRootProvider;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.CommandCallback;
 import org.axonframework.commandhandling.annotation.AggregateAnnotationCommandHandler;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.common.Subscribable;
+import org.axonframework.domain.AggregateRoot;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.EventListener;
 import org.axonframework.eventsourcing.EventSourcingRepository;
@@ -45,9 +47,8 @@ public class SimpleAxonEngine implements IAxonEngine {
     private EventStore m_eventStore;
     private EventBus m_eventBus;
 
-    private EventSourcingRepository m_eventRepository;
-    private Subscribable m_commandSubscriptionHandler;
-    private Set<EventListener> m_eventListeners;
+    private final Set<EventListener> m_eventListeners;
+    private final Map<Class<?>,AggregateRootHolder> m_repositories;
 
     /**
 
@@ -58,9 +59,8 @@ public class SimpleAxonEngine implements IAxonEngine {
         m_commandGateway = null;
         m_eventStore = null;
         m_eventBus = null;
-        m_eventRepository = null;
-        m_commandSubscriptionHandler = null;
         m_eventListeners = Sets.newHashSet();
+        m_repositories = Maps.newConcurrentMap();
     }
 
     // *************************************************************************
@@ -71,36 +71,22 @@ public class SimpleAxonEngine implements IAxonEngine {
      *
      */
     public void init() {
-        if(m_eventRepository == null) {
-            m_eventRepository = new EventSourcingRepository(DataItem.class);
-            m_eventRepository.setEventStore(m_eventStore);
-            m_eventRepository.setEventBus(m_eventBus);
-        }
-
-        if(m_commandSubscriptionHandler == null) {
-            m_commandSubscriptionHandler =
-                AggregateAnnotationCommandHandler.subscribe(
-                    DataItem.class,
-                    m_eventRepository,
-                    m_commandBus);
-        }
     }
 
     /**
      *
      */
     public void destroy() {
-        if(m_commandSubscriptionHandler != null) {
-            m_commandSubscriptionHandler.unsubscribe();
-            m_commandSubscriptionHandler = null;
-        }
-
         for(EventListener listener : m_eventListeners) {
             m_eventBus.unsubscribe(listener);
         }
 
+        for(AggregateRootHolder holder : m_repositories.values()) {
+            holder.getHandler().unsubscribe();
+        }
+
         m_eventListeners.clear();
-        m_eventRepository = null;
+        m_repositories.clear();
     }
 
     // *************************************************************************
@@ -147,8 +133,8 @@ public class SimpleAxonEngine implements IAxonEngine {
      *
      * @param eventListener
      */
-    public void bind(EventListener eventListener,Map properties) {
-        LOGGER.debug("<<<<  BIND  >>>> {},{}",eventListener,properties);
+    public void bindEventListener(EventListener eventListener,Map properties) {
+        LOGGER.debug("<<<<  BIND  - EventListener >>>> {},{}",eventListener,properties);
         if(m_eventListeners.add(eventListener)) {
             m_eventBus.subscribe(eventListener);
         }
@@ -158,10 +144,52 @@ public class SimpleAxonEngine implements IAxonEngine {
      *
      * @param eventListener
      */
-    public void unbind(EventListener eventListener,Map properties) {
-        LOGGER.debug("<<<< UNBIND >>>> {},{}",eventListener,properties);
+    public void unbindEventListener(EventListener eventListener,Map properties) {
+        LOGGER.debug("<<<< UNBIND - EventListener >>>> {},{}",eventListener,properties);
         if(eventListener != null) {
             m_eventBus.unsubscribe(eventListener);
+        }
+    }
+
+    /**
+     *
+     * @param provider
+     * @param properties
+     */
+    public void bindAggregateRootProvider(IAggregateRootProvider provider,Map properties) {
+        LOGGER.debug("<<<<  BIND  - IAggregateRootProvider >>>> {},{}",
+            provider.getType(),properties);
+
+        Class<? extends AggregateRoot> type = provider.getType();
+
+        AggregateRootHolder holder = m_repositories.get(type);
+        if(holder != null) {
+            holder.getHandler().unsubscribe();
+            m_repositories.remove(type);
+        }
+
+        EventSourcingRepository repo = new EventSourcingRepository(type,m_eventStore);
+        repo.setEventBus(m_eventBus);
+
+        m_repositories.put(type,new AggregateRootHolder(
+            repo,
+            AggregateAnnotationCommandHandler.subscribe(type, repo, m_commandBus))
+        );
+    }
+
+    /**
+     *
+     * @param provider
+     * @param properties
+     */
+    public void unbindAggregateRootProvider(IAggregateRootProvider provider,Map properties) {
+        LOGGER.debug("<<<< UNBIND - IAggregateRootProvider >>>> {},{}",
+            provider.getType(),properties);
+
+        Class<? extends AggregateRoot> type = provider.getType();
+        AggregateRootHolder holder = m_repositories.get(type);
+        if(holder != null) {
+            holder.getHandler().unsubscribe();
         }
     }
 

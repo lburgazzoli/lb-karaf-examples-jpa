@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
-import org.osgi.framework.SynchronousBundleListener;
+import org.osgi.framework.BundleListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  *
  */
-public class OSGiClassLoaderManager implements IOSGiLifeCycle, SynchronousBundleListener {
+public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(OSGiClassLoaderManager.class);
 
     private final Set<String> m_bundleIds;
@@ -65,11 +65,11 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, SynchronousBundle
      */
     public void setEligibleBundleIds(String bundleIds) {
         m_bundleIds.clear();
-       for(String bundleId : StringUtils.split(bundleIds,",")) {
-           if(m_bundleIds.add(bundleId)) {
-            LOGGER.debug("EligibleBundleId : <{}>",bundleId);
-           }
-       }
+        for(String bundleId : StringUtils.split(bundleIds,",")) {
+            if(m_bundleIds.add(bundleId)) {
+                LOGGER.debug("EligibleBundleId : <{}>",bundleId);
+            }
+        }
     }
 
     /**
@@ -77,6 +77,7 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, SynchronousBundle
      */
     @Override
     public void init() {
+        LOGGER.debug("OSGiClassLoaderManager - init");
         m_bundleContext.addBundleListener(this);
 
         Bundle[] bundles = m_bundleContext.getBundles();
@@ -92,6 +93,7 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, SynchronousBundle
      */
     @Override
     public void destroy() {
+        LOGGER.debug("OSGiClassLoaderManager - destroy");
         m_bundleContext.removeBundleListener(this);
     }
 
@@ -101,17 +103,16 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, SynchronousBundle
      */
     @Override
     public void bundleChanged(BundleEvent event) {
+        LOGGER.debug("****** bundleChanged : <{}><{}>",event.getBundle().getSymbolicName(),event.getType());
         switch (event.getType()) {
-            case BundleEvent.STARTING:
             case BundleEvent.STARTED:
+            case BundleEvent.RESOLVED:
                 if(isBundleEligible(event.getBundle())) {
                     LOGGER.debug("bundleChanged (start): <{}>",event.getBundle().getSymbolicName());
                     m_classLoader.addBundle(event.getBundle());
                 }
                 break;
-            case BundleEvent.STOPPING:
             case BundleEvent.STOPPED:
-            case BundleEvent.RESOLVED:
             case BundleEvent.UNINSTALLED:
                 if(isBundleEligible(event.getBundle())) {
                     LOGGER.debug("bundleChanged (stop): <{}>",event.getBundle().getSymbolicName());
