@@ -77,7 +77,6 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
      */
     @Override
     public void init() {
-        LOGGER.debug("OSGiClassLoaderManager - init");
         m_bundleContext.addBundleListener(this);
 
         Bundle[] bundles = m_bundleContext.getBundles();
@@ -93,7 +92,6 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
      */
     @Override
     public void destroy() {
-        LOGGER.debug("OSGiClassLoaderManager - destroy");
         m_bundleContext.removeBundleListener(this);
     }
 
@@ -103,7 +101,6 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
      */
     @Override
     public void bundleChanged(BundleEvent event) {
-        LOGGER.debug("****** bundleChanged : <{}><{}>",event.getBundle().getSymbolicName(),event.getType());
         switch (event.getType()) {
             case BundleEvent.STARTED:
             case BundleEvent.RESOLVED:
