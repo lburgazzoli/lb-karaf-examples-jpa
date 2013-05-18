@@ -70,7 +70,7 @@ limitations under the License.
     </bean>
 
     <bean id    = "AXON_CMD_BUS_ROLLBACK_CFG"
-          class = "com.github.lburgazzoli.examples.karaf.axon.SimpleRollbackConfiguration">
+          class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleRollbackConfiguration">
     </bean>
 
     <!-- ******************************************************************* -->
@@ -79,7 +79,7 @@ limitations under the License.
 
 
     <bean id    = "AXON_CMD_BUS_TX_MANAGER"
-          class = "com.github.lburgazzoli.examples.karaf.axon.SimpleTransactionManager">
+          class = "com.github.lburgazzoli.examples.axon.helper.AxonJtaTransactionManager">
         <argument ref="osgiJtaTransactionManager"/>
     </bean>
 
@@ -92,7 +92,7 @@ limitations under the License.
     </bean>
 
     <bean id    = "AXON_CMD_GW"
-          class = "com.github.lburgazzoli.examples.karaf.axon.SimpleCommandGateway">
+          class = "com.github.lburgazzoli.examples.axon.helper.AxonCommandGateway">
         <argument ref="AXON_CMD_BUS"/>
     </bean>
 
@@ -145,7 +145,7 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <bean id="AXON_ENGINE"
-          class="com.github.lburgazzoli.examples.karaf.axon.SimpleAxonEngine"
+          class="com.github.lburgazzoli.examples.karaf.axon.engine.SimpleAxonEngine"
           init-method="init"
           destroy-method="destroy">
         <property name="commandBus"     ref="AXON_CMD_BUS"/>
@@ -154,39 +154,13 @@ limitations under the License.
         <property name="eventStore"     ref="AXON_EVT_STORE"/>
     </bean>
 
-    <reference-list
-        id           = "AXON_EVT_LISTENER_REFS"
-        interface    = "org.axonframework.eventhandling.EventListener"
-        member-type  = "service-object"
-        availability = "optional">
-        <reference-listener
-            ref           = "AXON_ENGINE"
-            bind-method   = "bindEventListener"
-            unbind-method = "unbindEventListener">
-        </reference-listener>
-    </reference-list>
-
-    <!--
-    <reference-list
-            id           = "AXON_AGG_ROOT_PROVIDER"
-            interface    = "com.github.lburgazzoli.examples.karaf.axon.helper.IAggregateRootProvider"
-            member-type  = "service-object"
-            availability = "optional">
-        <reference-listener
-                ref           = "AXON_ENGINE"
-                bind-method   = "bindAggregateRootProvider"
-                unbind-method = "unbindAggregateRootProvider">
-        </reference-listener>
-    </reference-list>
-    -->
-
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
     <service ref="AXON_ENGINE">
         <interfaces>
-            <value>com.github.lburgazzoli.examples.karaf.axon.IAxonEngine</value>
+            <value>com.github.lburgazzoli.examples.axon.IAxonEngine</value>
         </interfaces>
         <service-properties>
             <entry key="osgi.jndi.service.name" value="axon.engine"/>

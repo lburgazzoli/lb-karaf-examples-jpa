@@ -14,19 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.helper;
+package com.github.lburgazzoli.examples.axon.helper;
 
-import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.commandhandling.CommandMessage;
-import org.axonframework.unitofwork.UnitOfWork;
+
+import org.axonframework.domain.EventMessage;
+import org.axonframework.eventhandling.EventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  *
  */
-public abstract class AbstractCommandHandler<T> implements CommandHandler<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCommandHandler.class);
+public abstract class AbstractEventListener<T> implements EventListener {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEventListener.class);
 
     private final Class<T> m_type;
 
@@ -34,22 +34,24 @@ public abstract class AbstractCommandHandler<T> implements CommandHandler<T> {
      *
      * @param type
      */
-    public AbstractCommandHandler(Class<T> type) {
+    public AbstractEventListener(Class<T> type) {
         m_type = type;
     }
 
+    /**
+     *
+     * @param event
+     */
     @Override
-    public Object handle(CommandMessage<T> commandMessage, UnitOfWork unitOfWork) throws Throwable {
-        if(m_type.equals(commandMessage.getPayloadType())) {
-            return doHandle(m_type.cast(commandMessage.getPayload()));
+    public void handle(EventMessage event) {
+        if(m_type.equals(event.getPayloadType())) {
+            doHandle(m_type.cast(event.getPayload()));
         }
-
-        return null;
     }
 
     /**
      *
      * @param data
      */
-    protected abstract Object doHandle(T data) throws Throwable;
+    protected abstract void doHandle(T data);
 }

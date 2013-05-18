@@ -14,19 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model.services;
+package com.github.lburgazzoli.examples.axon.helper;
 
-import com.github.lburgazzoli.examples.karaf.axon.helper.IAggregateRootProvider;
-import com.github.lburgazzoli.examples.karaf.axon.model.DataItem;
-import org.axonframework.domain.AggregateRoot;
+import org.axonframework.unitofwork.SpringTransactionManager;
+import org.springframework.transaction.jta.JtaTransactionManager;
+
+import javax.transaction.TransactionManager;
 
 /**
  *
  */
-public class DataItemAggregateRootProvider implements IAggregateRootProvider {
-
-    @java.lang.Override
-    public java.lang.Class<? extends AggregateRoot> getType() {
-        return DataItem.class;
+public class AxonJtaTransactionManager extends SpringTransactionManager {
+    /**
+     *
+     * @param txManager
+     */
+    public AxonJtaTransactionManager(TransactionManager txManager) {
+        super(new JtaTransactionManager(txManager));
     }
 }

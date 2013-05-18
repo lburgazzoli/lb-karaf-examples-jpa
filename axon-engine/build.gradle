@@ -21,6 +21,8 @@ project.ext {
         'javassist.util.proxy;resolution:=optional',
         'org.xmlpull.v1',
         'com.github.lburgazzoli.osgi',
+        'com.github.lburgazzoli.examples.axon',
+        'com.github.lburgazzoli.examples.axon.helper',
         '*'
     ]
 }

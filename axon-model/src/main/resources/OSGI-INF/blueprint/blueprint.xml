@@ -32,23 +32,27 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <reference id        = "AXON_ENGINE"
-               interface = "com.github.lburgazzoli.examples.karaf.axon.IAxonEngine"/>
+               interface = "com.github.lburgazzoli.examples.axon.IAxonEngine"/>
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <service id="DATA_ITEM_EVT_LISTENER"
-             interface="org.axonframework.eventhandling.EventListener">
-        <bean class="com.github.lburgazzoli.examples.karaf.axon.model.services.DataItemCreatedEventListener"/>
-    </service>
+    <bean id             = "DATA_ITEM_SERVICE"
+          class          = "com.github.lburgazzoli.examples.karaf.axon.model.DataItemService"
+          init-method    = "init"
+          destroy-method = "destroy">
+        <argument ref="AXON_ENGINE"/>
+    </bean>
 
-    <!--
-    <service id="DATA_ITEM_AGGREGATE_PROVIDER"
-             interface="com.github.lburgazzoli.examples.karaf.axon.helper.IAggregateRootProvider">
-        <bean class="com.github.lburgazzoli.examples.karaf.axon.model.services.DataItemAggregateRootProvider"/>
+    <service ref="DATA_ITEM_SERVICE">
+        <interfaces>
+            <value>com.github.lburgazzoli.examples.axon.IAxonModelService</value>
+        </interfaces>
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="axon.model.service"/>
+        </service-properties>
     </service>
-    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
@@ -57,7 +61,7 @@ limitations under the License.
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="data/create">
             <action class="com.github.lburgazzoli.examples.karaf.axon.model.cmd.KarafCreateDataCommand">
-                <property name="engine" ref="AXON_ENGINE"/>
+                <property name="service" ref="AXON_ENGINE"/>
             </action>
         </command>
     </command-bundle>

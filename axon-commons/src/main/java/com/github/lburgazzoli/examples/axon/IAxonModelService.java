@@ -14,31 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model.services;
-
-import com.github.lburgazzoli.examples.karaf.axon.helper.AbstractEventListener;
-import com.github.lburgazzoli.examples.karaf.axon.model.DataCreatedEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.github.lburgazzoli.examples.axon;
 
 /**
  *
  */
-public class DataItemCreatedEventListener extends AbstractEventListener<DataCreatedEvent> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataItemCreatedEventListener.class);
-
-    /**
-     * c-tor
-     */
-    public DataItemCreatedEventListener() {
-        super(DataCreatedEvent.class);
-    }
-
-    @Override
-    protected void doHandle(DataCreatedEvent data) {
-        LOGGER.debug("Handle Event <{}> : id={}, text={}",
-        data.getClass().getName(),
-        data.getId(),
-        data.getText());
-    }
+public interface IAxonModelService {
 }

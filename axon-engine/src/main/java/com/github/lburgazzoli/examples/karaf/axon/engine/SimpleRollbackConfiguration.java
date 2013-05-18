@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon;
+package com.github.lburgazzoli.examples.karaf.axon.engine;
 
 import org.axonframework.commandhandling.RollbackConfiguration;
 import org.slf4j.Logger;

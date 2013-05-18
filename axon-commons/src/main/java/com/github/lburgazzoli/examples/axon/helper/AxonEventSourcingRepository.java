@@ -14,12 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon;
+package com.github.lburgazzoli.examples.axon.helper;
 
-import org.axonframework.commandhandling.gateway.CommandGateway;
+import com.github.lburgazzoli.examples.axon.IAxonEngine;
+import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
+import org.axonframework.eventsourcing.EventSourcingRepository;
 
 /**
  *
  */
-public interface IAxonEngine extends CommandGateway {
+public class AxonEventSourcingRepository<T extends EventSourcedAggregateRoot> extends EventSourcingRepository<T> {
+
+    /**
+     * c-tor
+     *
+     * @param aggregateType
+     * @param engine
+     */
+    public AxonEventSourcingRepository(final Class<T> aggregateType, final IAxonEngine engine) {
+        super(aggregateType,engine.getEventStore());
+        super.setEventBus(engine.getEventBus());
+    }
 }

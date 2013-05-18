@@ -16,7 +16,7 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon.model.cmd;
 
-import com.github.lburgazzoli.examples.karaf.axon.IAxonEngine;
+import com.github.lburgazzoli.examples.axon.IAxonEngine;
 import com.github.lburgazzoli.examples.karaf.axon.model.DataCreatedCommand;
 import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
 import org.apache.felix.gogo.commands.Argument;

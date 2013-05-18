@@ -14,43 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.helper;
+package com.github.lburgazzoli.examples.axon.helper;
 
-import org.axonframework.common.Subscribable;
-import org.axonframework.eventsourcing.EventSourcingRepository;
+import org.axonframework.commandhandling.CommandBus;
+import org.axonframework.commandhandling.gateway.DefaultCommandGateway;
 
 /**
  *
  */
-public class AggregateRootHolder {
-
-    private final EventSourcingRepository m_repository;
-    private final Subscribable m_handler;
+public class AxonCommandGateway extends DefaultCommandGateway {
 
     /**
      * c-tor
      *
-     * @param repository
-     * @param handler
+     * @param commandBus
      */
-    public AggregateRootHolder(EventSourcingRepository repository,Subscribable handler) {
-        m_repository = repository;
-        m_handler = handler;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public EventSourcingRepository getRepository() {
-        return m_repository;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Subscribable getHandler() {
-        return m_handler;
+    public AxonCommandGateway(CommandBus commandBus) {
+        super(commandBus);
     }
 }
