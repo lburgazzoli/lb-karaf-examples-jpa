@@ -18,6 +18,7 @@ package com.github.lburgazzoli.examples.karaf.axon.engine;
 
 import com.github.lburgazzoli.examples.axon.IAxonEngine;
 import com.github.lburgazzoli.examples.axon.helper.AxonEventSourcingRepository;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.axonframework.commandhandling.CommandBus;
@@ -31,9 +32,9 @@ import org.axonframework.eventhandling.annotation.AnnotationEventListenerAdapter
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -42,8 +43,6 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class SimpleAxonEngine implements IAxonEngine {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleAxonEngine.class);
-
     private CommandBus m_commandBus;
     private CommandGateway m_commandGateway;
     private EventStore m_eventStore;
@@ -51,7 +50,7 @@ public class SimpleAxonEngine implements IAxonEngine {
 
     private final Set<EventListener> m_eventListeners;
     private final Map<Object,Subscribable> m_eventHandlers;
-    private final Map<Class<? extends EventSourcedAggregateRoot>,AggregateSubscription> m_repositories;
+    private final Map<Class<? extends EventSourcedAggregateRoot>,AggregateSubscription> m_aggregates;
 
     /**
      * c-tor
@@ -63,7 +62,7 @@ public class SimpleAxonEngine implements IAxonEngine {
         m_eventBus = null;
         m_eventListeners = Sets.newHashSet();
         m_eventHandlers = Maps.newConcurrentMap();
-        m_repositories = Maps.newConcurrentMap();
+        m_aggregates = Maps.newConcurrentMap();
     }
 
     // *************************************************************************
@@ -87,10 +86,16 @@ public class SimpleAxonEngine implements IAxonEngine {
         m_eventListeners.clear();
 
         for(Subscribable subscription : m_eventHandlers.values()) {
-            subscription.unsubscribe();;
+            subscription.unsubscribe();
         }
 
         m_eventHandlers.clear();
+
+        for(AggregateSubscription subscription : m_aggregates.values()) {
+            subscription.handler.unsubscribe();
+        }
+
+        m_aggregates.clear();
     }
 
     // *************************************************************************
@@ -156,6 +161,21 @@ public class SimpleAxonEngine implements IAxonEngine {
         return m_commandBus;
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Collection<EventSourcingRepository<?>> getRepositories() {
+        List<EventSourcingRepository<?>> repositories = Lists.newArrayListWithCapacity(m_aggregates.size());
+        for(AggregateSubscription subscription : m_aggregates.values()) {
+            repositories.add(subscription.repository);
+        }
+
+        return repositories;
+    }
+
+
     // *************************************************************************
     //
     // *************************************************************************
@@ -168,7 +188,7 @@ public class SimpleAxonEngine implements IAxonEngine {
     public void addEventHandler(Object eventHandler) {
         if(!m_eventHandlers.containsKey(eventHandler)) {
             m_eventHandlers.put(
-                    eventHandler,
+                eventHandler,
                 AnnotationEventListenerAdapter.subscribe(eventHandler,m_eventBus));
         }
 
@@ -217,14 +237,12 @@ public class SimpleAxonEngine implements IAxonEngine {
 
         EventSourcingRepository eventRepository = new AxonEventSourcingRepository(aggregateType,this);
 
-        m_repositories.put(aggregateType,new AggregateSubscription(
+        m_aggregates.put(aggregateType,new AggregateSubscription(
             eventRepository,
             AggregateAnnotationCommandHandler.subscribe(
                 aggregateType,
                 eventRepository,
-                m_commandBus)
-            )
-        );
+                m_commandBus)));
     }
 
     /**
@@ -233,9 +251,9 @@ public class SimpleAxonEngine implements IAxonEngine {
      */
     @Override
     public void removeAggregateType(Class<? extends EventSourcedAggregateRoot> aggregateType) {
-        if(m_repositories.containsKey(aggregateType)) {
-            m_repositories.get(aggregateType).handler.unsubscribe();
-            m_repositories.remove(aggregateType);
+        if(m_aggregates.containsKey(aggregateType)) {
+            m_aggregates.get(aggregateType).handler.unsubscribe();
+            m_aggregates.remove(aggregateType);
         }
     }
 

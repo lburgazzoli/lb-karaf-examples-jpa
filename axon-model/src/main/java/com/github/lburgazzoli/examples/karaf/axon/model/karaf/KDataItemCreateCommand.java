@@ -14,23 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model.cmd;
+package com.github.lburgazzoli.examples.karaf.axon.model.karaf;
 
 import com.github.lburgazzoli.examples.axon.IAxonEngine;
-import com.github.lburgazzoli.examples.karaf.axon.model.DataCreatedCommand;
+import com.github.lburgazzoli.examples.axon.helper.CommandCallbackAdapter;
+import com.github.lburgazzoli.examples.karaf.axon.model.commands.DataItemCreateCommand;
 import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-import org.axonframework.commandhandling.CommandCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  *
  */
-@Command(scope = "data", name = "create", description = "Create Data")
-public class KarafCreateDataCommand extends AbstractServiceCommand<IAxonEngine> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KarafCreateDataCommand.class);
+@Command(scope = "axon", name = "dataitem-create", description = "Create DataItem")
+public class KDataItemCreateCommand extends AbstractServiceCommand<IAxonEngine> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KDataItemCreateCommand.class);
 
     @Argument(index=0,required=true,multiValued=false,name="Id",description="Id")
     String id;
@@ -41,11 +41,7 @@ public class KarafCreateDataCommand extends AbstractServiceCommand<IAxonEngine> 
 
     @Override
     public void doExecute(IAxonEngine engine) throws Exception {
-        engine.send(new DataCreatedCommand(id,text),new CommandCallback<Object>() {
-            @Override
-            public void onSuccess(Object result) {
-                LOGGER.debug("onSuccess {}",result);
-            }
+        engine.send(new DataItemCreateCommand(id,text),new CommandCallbackAdapter<Object>() {
             @Override
             public void onFailure(Throwable cause) {
                 LOGGER.debug("onFailure => <{}> ",cause.getClass().getName());

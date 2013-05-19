@@ -60,6 +60,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <bean id    = "AXON_EVT_SERIALIZER"
           class = "org.axonframework.serializer.xml.XStreamSerializer">
         <argument>
@@ -67,6 +68,12 @@ limitations under the License.
                 <property name="classLoader" ref="AXON_CL"/>
             </bean>
         </argument>
+    </bean>
+    -->
+
+    <bean id    = "AXON_EVT_SERIALIZER"
+          class = "com.github.lburgazzoli.examples.axon.serializer.JacksonSerializer">
+        <argument ref="AXON_CL"/>
     </bean>
 
     <bean id    = "AXON_CMD_BUS_ROLLBACK_CFG"
@@ -166,5 +173,17 @@ limitations under the License.
             <entry key="osgi.jndi.service.name" value="axon.engine"/>
         </service-properties>
     </service>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="axon/list-repos">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.cmd.ListRepositoriesCommand">
+                <property name="service" ref="AXON_ENGINE"/>
+            </action>
+        </command>
+    </command-bundle>
 
 </blueprint>

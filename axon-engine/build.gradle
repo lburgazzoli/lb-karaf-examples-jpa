@@ -23,6 +23,7 @@ project.ext {
         'com.github.lburgazzoli.osgi',
         'com.github.lburgazzoli.examples.axon',
         'com.github.lburgazzoli.examples.axon.helper',
+        'com.github.lburgazzoli.examples.axon.serializer',
         '*'
     ]
 }

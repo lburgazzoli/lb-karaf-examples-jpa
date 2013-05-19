@@ -14,28 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model;
+package com.github.lburgazzoli.examples.karaf.axon.model.events;
 
-import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+import org.axonframework.serializer.Revision;
 
 import java.io.Serializable;
 
 /**
  *
  */
-public class DataCreatedCommand implements Serializable {
+@Revision("1")
+public class DataItemCreatedEvent implements Serializable {
 
-    @TargetAggregateIdentifier
     private final String m_id;
     private final String m_text;
 
     /**
-     * c-tor
      *
      * @param id
      * @param text
      */
-    public DataCreatedCommand(String id,String text) {
+    public DataItemCreatedEvent(final String id, final String text) {
         m_id = id;
         m_text = text;
     }

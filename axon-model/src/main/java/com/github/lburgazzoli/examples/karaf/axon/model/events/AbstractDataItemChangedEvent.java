@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model;
-
-import java.io.Serializable;
+package com.github.lburgazzoli.examples.karaf.axon.model.events;
 
 /**
  *
  */
-public class DataCreatedEvent implements Serializable {
+public class AbstractDataItemChangedEvent {
 
     private final String m_id;
     private final String m_text;
@@ -31,7 +29,7 @@ public class DataCreatedEvent implements Serializable {
      * @param id
      * @param text
      */
-    public DataCreatedEvent(final String id,final String text) {
+    public AbstractDataItemChangedEvent(final String id, final String text) {
         m_id = id;
         m_text = text;
     }

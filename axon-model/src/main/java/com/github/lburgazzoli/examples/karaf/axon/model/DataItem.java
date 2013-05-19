@@ -16,16 +16,22 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon.model;
 
+import com.github.lburgazzoli.examples.karaf.axon.model.commands.DataItemCreateCommand;
+import com.github.lburgazzoli.examples.karaf.axon.model.commands.DataItemUpdateCommand;
+import com.github.lburgazzoli.examples.karaf.axon.model.events.DataItemCreatedEvent;
+import com.github.lburgazzoli.examples.karaf.axon.model.events.DataItemUpdatedEvent;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
+import org.axonframework.serializer.Revision;
 
 import java.io.Serializable;
 
 /**
  *
  */
+@Revision("1")
 public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializable {
 
     @AggregateIdentifier
@@ -36,7 +42,7 @@ public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializ
      * c-tor
      */
     public DataItem() {
-        m_id = null;
+        m_id  = null;
         m_text = null;
     }
 
@@ -46,13 +52,31 @@ public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializ
      * @param command
      */
     @CommandHandler
-    public DataItem(DataCreatedCommand command) {
-        apply(new DataCreatedEvent(command.getId(),command.getText()));
+    public DataItem(DataItemCreateCommand command) {
+        apply(new DataItemCreatedEvent(command.getId(),command.getText()));
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    @CommandHandler
+    public void handleDataItemUpdateCommand(DataItemUpdateCommand command) {
+        apply(new DataItemUpdatedEvent(command.getId(),command.getText()));
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    @EventHandler
+    protected void handleDataItemCreatedEvent(DataItemCreatedEvent event) {
+        m_id   = event.getId();
+        m_text = event.getText();
     }
 
     @EventHandler
-    protected void handle(DataCreatedEvent event) {
-        m_id = event.getId();
+    protected void handleDataItemUpdatedEvent(DataItemUpdatedEvent event) {
         m_text = event.getText();
     }
 }

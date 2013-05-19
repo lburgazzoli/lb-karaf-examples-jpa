@@ -35,6 +35,10 @@ gradle clean install
     install -s mvn:org.springframework/org.springframework.context/3.2.2.RELEASE
     install -s mvn:org.springframework/org.springframework.context.support/3.2.2.RELEASE
     install -s mvn:org.springframework/org.springframework.transaction/3.2.2.RELEASE
+    install -s mvn:com.fasterxml.jackson.core/jackson-core/2.2.1
+    install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.1
+    install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
+    install -s mvn:com.hazelcast/hazelcast-all/2.5
 
     #install -s mvn:org.apache.openjpa/openjpa/2.2.2
     #install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final

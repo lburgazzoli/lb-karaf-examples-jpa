@@ -59,8 +59,13 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="data/create">
-            <action class="com.github.lburgazzoli.examples.karaf.axon.model.cmd.KarafCreateDataCommand">
+        <command name="axon/dataitem-create">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.model.karaf.KDataItemCreateCommand">
+                <property name="service" ref="AXON_ENGINE"/>
+            </action>
+        </command>
+        <command name="axon/dataitem-update">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.model.karaf.KDataItemUpdateCommand">
                 <property name="service" ref="AXON_ENGINE"/>
             </action>
         </command>

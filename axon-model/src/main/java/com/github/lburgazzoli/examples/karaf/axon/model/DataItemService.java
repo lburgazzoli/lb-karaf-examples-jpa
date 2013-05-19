@@ -18,6 +18,8 @@ package com.github.lburgazzoli.examples.karaf.axon.model;
 
 import com.github.lburgazzoli.examples.axon.IAxonEngine;
 import com.github.lburgazzoli.examples.axon.IAxonModelService;
+import com.github.lburgazzoli.examples.karaf.axon.model.events.DataItemCreatedEvent;
+import com.github.lburgazzoli.examples.karaf.axon.model.events.DataItemUpdatedEvent;
 import com.github.lburgazzoli.osgi.IOSGiLifeCycle;
 import org.axonframework.common.Subscribable;
 import org.axonframework.eventhandling.annotation.EventHandler;
@@ -65,11 +67,19 @@ public class DataItemService implements IAxonModelService,IOSGiLifeCycle {
 
     private final class DataItemEventHandler {
         @EventHandler
-        public void handleDataCreatedEvent(DataCreatedEvent data) {
-            LOGGER.debug("HandleEvent <{}> : id={}, text={}",
+        public void handle(DataItemCreatedEvent data) {
+            LOGGER.debug("handleDataCreatedEvent <{}> : id={}, text={}",
                 data.getClass().getName(),
                 data.getId(),
                 data.getText());
+        }
+
+        @EventHandler
+        public void handle(DataItemUpdatedEvent data) {
+            LOGGER.debug("handleDataUpdatedEvent <{}> : id={}, text={}",
+                    data.getClass().getName(),
+                    data.getId(),
+                    data.getText());
         }
     }
 }

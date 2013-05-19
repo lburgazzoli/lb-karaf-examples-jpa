@@ -21,7 +21,11 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.EventListener;
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
+import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
+import org.axonframework.repository.Repository;
+
+import java.util.Collection;
 
 /**
  *
@@ -45,6 +49,12 @@ public interface IAxonEngine extends CommandGateway {
      * @return
      */
     public CommandBus getCommandBus();
+
+    /**
+     *
+     * @return
+     */
+    public Collection<EventSourcingRepository<?>> getRepositories();
 
     /**
      *
