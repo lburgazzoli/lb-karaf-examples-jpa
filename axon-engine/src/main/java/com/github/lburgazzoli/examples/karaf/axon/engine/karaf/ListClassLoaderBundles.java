@@ -14,32 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.engine.cmd;
+package com.github.lburgazzoli.examples.karaf.axon.engine.karaf;
 
-import com.github.lburgazzoli.examples.axon.IAxonEngine;
+import com.github.lburgazzoli.osgi.OSGiClassLoader;
 import com.github.lburgazzoli.osgi.karaf.cmd.AbstractTabularCommand;
 import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.google.common.collect.Lists;
 import org.apache.felix.gogo.commands.Command;
-import org.axonframework.eventsourcing.EventSourcingRepository;
+import org.osgi.framework.Bundle;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *
  */
-@Command(scope = "axon", name = "list-repos", description = "List repositories")
-public class ListRepositoriesCommand extends AbstractTabularCommand<IAxonEngine> {
+@Command(scope = "axon", name = "list-classloader-bundles", description = "List ClassLoader Bundles")
+public class ListClassLoaderBundles extends AbstractTabularCommand<OSGiClassLoader> {
     /**
      * c-tor
      */
-    public ListRepositoriesCommand() {
-        super("AGGREGATE_TYPE","REPO_CLASS");
+    public ListClassLoaderBundles() {
+        super("BundleId","SymbolicName");
         super.setMxColSize(64);
     }
 
     @Override
-    public void doExecute(IAxonEngine engine,ShellTable table) throws Exception {
-        for(EventSourcingRepository<?> repository : engine.getRepositories()) {
-            table.addRow(repository.getTypeIdentifier(),repository.getClass().getName());
+    public void doExecute(OSGiClassLoader engine,ShellTable table) throws Exception {
+        List<Bundle> bundles = Lists.newArrayList(engine.getBundles());
+        Collections.sort(bundles,new Comparator<Bundle>() {
+            @Override
+            public int compare(Bundle o1, Bundle o2) {
+                return o1.getSymbolicName().compareTo(o2.getSymbolicName());
+            }
+        });
+
+        for(Bundle bundle : bundles) {
+            table.addRow(bundle.getBundleId(),bundle.getSymbolicName());
         }
     }
 }

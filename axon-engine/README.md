@@ -21,8 +21,11 @@ gradle clean install
     install -s mvn:com.google.guava/guava/14.0.1
     install -s wrap:mvn:org.axonframework/axon-core/2.0.2
     install -s mvn:com.googlecode.disruptor/disruptor/2.10.3
+    install -s mvn:commons-lang/commons-lang/2.6
     install -s mvn:org.apache.commons/commons-lang3/3.1
     install -s mvn:commons-io/commons-io/2.4
+    install -s mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/1.2
+    install -s mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jsr303-api-1.0.0/2.2.0
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xmlpull/1.1.3.1_2
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xstream/1.4.4_2
@@ -38,7 +41,9 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-core/2.2.1
     install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.1
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
-    install -s mvn:com.hazelcast/hazelcast-all/2.5
+
+    #install -s mvn:com.hazelcast/hazelcast-all/2.5
+    install -s mvn:com.hazelcast/hazelcast-all/2.5.2-SNAPSHOT
 
     #install -s mvn:org.apache.openjpa/openjpa/2.2.2
     #install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final
@@ -51,6 +56,7 @@ gradle clean install
     install -s mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0
 
     install -s mvn:com.github.lburgazzoli.examples.karaf/osgi-commons/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli.examples.karaf/osgi-hazelcast/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli.examples.karaf/axon-commons/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli.examples.karaf/axon-engine/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli.examples.karaf/axon-model/1.0.0.SNAPSHOT

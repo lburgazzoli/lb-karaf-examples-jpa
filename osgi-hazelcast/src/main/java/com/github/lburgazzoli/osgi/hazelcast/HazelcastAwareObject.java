@@ -14,30 +14,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model.events;
+package com.github.lburgazzoli.osgi.hazelcast;
+
+import com.github.lburgazzoli.osgi.BundleContextAware;
+import com.hazelcast.core.IMap;
 
 /**
  *
  */
-public class AbstractDataItemChangedEvent {
-    private String m_id;
-    private String m_text;
+public class HazelcastAwareObject extends BundleContextAware {
+    private IHazelcastManager m_hazelcastManager;
 
     /**
      *
-     * @param id
-     * @param text
      */
-    public AbstractDataItemChangedEvent(final String id, final String text) {
-        m_id   = id;
-        m_text = text;
+    public HazelcastAwareObject() {
+        m_hazelcastManager = null;
     }
 
-    public String getId() {
-        return m_id;
+    /**
+     *
+     * @param hazelcastManager
+     */
+    public void setHazelcastManager(IHazelcastManager hazelcastManager) {
+        m_hazelcastManager = hazelcastManager;
     }
 
-    public String getText() {
-        return m_text;
+    /**
+     *
+     * @return
+     */
+    public IHazelcastManager getHazelcastManager() {
+        return m_hazelcastManager;
+    }
+
+    /**
+     *
+     * @param key
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    public <K,V> IMap<K,V> getHazelcastMap(String key) {
+        return m_hazelcastManager.getMap(key);
     }
 }

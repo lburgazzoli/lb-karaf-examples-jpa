@@ -67,7 +67,6 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
         m_bundleIds.clear();
         for(String bundleId : StringUtils.split(bundleIds,",")) {
             if(m_bundleIds.add(bundleId)) {
-                LOGGER.debug("EligibleBundleId : <{}>",bundleId);
             }
         }
     }
@@ -105,14 +104,12 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
             case BundleEvent.STARTED:
             case BundleEvent.RESOLVED:
                 if(isBundleEligible(event.getBundle())) {
-                    LOGGER.debug("bundleChanged (start): <{}>",event.getBundle().getSymbolicName());
                     m_classLoader.addBundle(event.getBundle());
                 }
                 break;
             case BundleEvent.STOPPED:
             case BundleEvent.UNINSTALLED:
                 if(isBundleEligible(event.getBundle())) {
-                    LOGGER.debug("bundleChanged (stop): <{}>",event.getBundle().getSymbolicName());
                     m_classLoader.removeBundle(event.getBundle());
                 }
                 break;

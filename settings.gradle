@@ -1,5 +1,6 @@
 
 include "osgi-commons"
+include "osgi-hazelcast"
 
 include "jpa-utils"
 include "jpa-commons"

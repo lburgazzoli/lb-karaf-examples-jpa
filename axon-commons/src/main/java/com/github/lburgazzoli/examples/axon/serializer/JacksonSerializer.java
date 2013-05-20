@@ -18,7 +18,6 @@ package com.github.lburgazzoli.examples.axon.serializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.axonframework.serializer.AnnotationRevisionResolver;
 import org.axonframework.serializer.ChainingConverterFactory;
 import org.axonframework.serializer.ContentTypeConverter;
@@ -33,8 +32,6 @@ import org.axonframework.serializer.SimpleSerializedType;
 import org.axonframework.serializer.UnknownSerializedTypeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.InputStream;
 
 /**
  *
@@ -90,19 +87,16 @@ public class JacksonSerializer implements Serializer {
     @SuppressWarnings({"unchecked"})
     @Override
     public <S, T> T deserialize(SerializedObject<S> serializedObject) {
-        T        data = null;
-        Class<?> type = null;
+        T data = null;
 
-        InputStream serializedData = convert(
-            serializedObject.getContentType(),
-            InputStream.class,
-            serializedObject.getData());
-
-        try {
-            type = m_classLoader.loadClass(serializedObject.getType().getName());
-            data = (T)m_objectMapper.readValue(serializedData,type);
-        } catch (Exception e) {
-            LOGGER.warn("An exception occurred writing deserialized data",e);
+        if(byte[].class == serializedObject.getContentType()) {
+            try {
+                data = (T)m_objectMapper.readValue(
+                    byte[].class.cast(serializedObject.getData()),
+                    classForType(serializedObject.getType()));
+            } catch (Exception e) {
+                LOGGER.warn("An exception occurred writing deserialized data",e);
+            }
         }
 
         return data;

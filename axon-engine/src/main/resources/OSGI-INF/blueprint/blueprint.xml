@@ -180,8 +180,18 @@ limitations under the License.
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="axon/list-repos">
-            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.cmd.ListRepositoriesCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListRepositoriesCommand">
                 <property name="service" ref="AXON_ENGINE"/>
+            </action>
+        </command>
+        <command name="axon/list-classloader-bundles">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListClassLoaderBundles">
+                <property name="service" ref="AXON_CL"/>
+            </action>
+        </command>
+        <command name="axon/list-loadedclasses-for-bundle">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListLoadedClassesForBundle">
+                <property name="service" ref="AXON_CL"/>
             </action>
         </command>
     </command-bundle>

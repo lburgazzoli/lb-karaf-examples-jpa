@@ -16,6 +16,8 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon.model.events;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.axonframework.serializer.Revision;
 
 import java.io.Serializable;
@@ -26,11 +28,23 @@ import java.io.Serializable;
 @Revision("1")
 public class DataItemUpdatedEvent extends AbstractDataItemChangedEvent implements Serializable {
     /**
+     * c-tor
      *
      * @param id
      * @param text
      */
-    public DataItemUpdatedEvent(final String id, final String text) {
+    public DataItemUpdatedEvent(String id,String text) {
         super(id,text);
+    }
+
+    // *************************************************************************
+    // Jackson
+    // *************************************************************************
+
+    @JsonCreator
+    public static DataItemUpdatedEvent create(
+        @JsonProperty("id")   String id,
+        @JsonProperty("text") String text) {
+        return new DataItemUpdatedEvent(id,text);
     }
 }

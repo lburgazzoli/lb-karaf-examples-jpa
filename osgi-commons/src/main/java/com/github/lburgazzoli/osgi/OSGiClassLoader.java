@@ -18,13 +18,16 @@ package com.github.lburgazzoli.osgi;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -37,15 +40,49 @@ public class OSGiClassLoader extends ClassLoader {
     private final ConcurrentMap<String,Class<?>> m_classes;
     private final ConcurrentMap<String,URL> m_resources;
     private final List<ClassLoader> m_classLoaders;
+    private final ConcurrentMap<String,Set<Class<?>>> m_class4bundle;
 
     /**
      * c-tor
      */
     public OSGiClassLoader() {
-        m_bundles = Maps.newConcurrentMap();
-        m_classes = Maps.newConcurrentMap();
-        m_resources = Maps.newConcurrentMap();
+        m_bundles      = Maps.newConcurrentMap();
+        m_classes      = Maps.newConcurrentMap();
+        m_resources    = Maps.newConcurrentMap();
         m_classLoaders = Lists.newArrayList();
+        m_class4bundle = Maps.newConcurrentMap();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Collection<Bundle> getBundles() {
+        return m_bundles.values();
+    }
+
+    /**
+     *
+     * @param bundle
+     * @return
+     */
+    public Set<Class<?>> getClassesForBundle(Bundle bundle) {
+        return getClassesForBundle(bundle.getSymbolicName());
+    }
+
+    /**
+     *
+     * @param bundleSymbolicName
+     * @return
+     */
+    public Set<Class<?>> getClassesForBundle(String bundleSymbolicName) {
+        Set<Class<?>> classes = m_class4bundle.get(bundleSymbolicName);
+        if(classes == null) {
+            classes = Sets.newHashSet();
+            m_class4bundle.put(bundleSymbolicName,classes);
+        }
+
+        return classes;
     }
 
     /**
@@ -56,7 +93,6 @@ public class OSGiClassLoader extends ClassLoader {
         LOGGER.debug("addBundle: {}",bundle.getSymbolicName());
 
         m_bundles.put(bundle.getBundleId(), bundle);
-        m_classes.clear();
     }
 
     /**
@@ -66,8 +102,12 @@ public class OSGiClassLoader extends ClassLoader {
     public void removeBundle(Bundle bundle) {
         LOGGER.debug("removeBundle: {}",bundle.getSymbolicName());
 
+        for(Class<?> type : m_class4bundle.get(bundle.getSymbolicName())) {
+            m_classes.remove(type.getName());
+        }
+
+        m_class4bundle.remove(bundle.getSymbolicName());
         m_bundles.remove(bundle.getBundleId());
-        m_classes.clear();
     }
 
     /**
@@ -110,9 +150,9 @@ public class OSGiClassLoader extends ClassLoader {
             for(Map.Entry<Long,Bundle> entry : m_bundles.entrySet()) {
                 try {
                     clazz = entry.getValue().loadClass(name);
-                    m_classes.put(name, clazz);
 
-                    LOGGER.debug("Found class : {} => {}",name,entry.getValue().getSymbolicName());
+                    m_classes.put(name, clazz);
+                    getClassesForBundle(entry.getValue()).add(clazz);
 
                     return clazz;
                 } catch(ClassNotFoundException e) {

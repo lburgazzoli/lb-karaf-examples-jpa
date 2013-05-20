@@ -1,0 +1,43 @@
+apply plugin: 'osgi'
+apply plugin: 'maven'
+
+version  = '1.0.0.SNAPSHOT'
+group    = 'com.github.lburgazzoli.examples.karaf'
+
+project.ext {
+    bundleInportPackages = [
+        'org.apache.felix.service.command',
+        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.console',
+        '*'
+    ]
+
+    bundleExportPackages = [
+        "com.gihub.lburgazzoli.*;version=${version}"
+    ]
+}
+
+dependencies {
+    compile project(':osgi-commons')
+}
+
+jar {
+    baseName = 'osgi-hazelcast'
+
+    manifest {
+        classesDir = new File("$buildDir/classes/main")
+        classpath  = project.runtimeClasspath
+
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , bundleExportPackages.join(',')
+
+        attributes(
+            'Bundle-Description'     : 'Karaf Examples :: Hazelcast',
+            'Bundle-Name'            : 'Karaf Examples :: Hazelcast',
+            'Bundle-SymbolicName'    : project.name,
+            'Bundle-Version'         : version,
+        )
+    }
+}
+
+

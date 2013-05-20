@@ -16,6 +16,8 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon.model.events;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.axonframework.serializer.Revision;
 
 import java.io.Serializable;
@@ -34,8 +36,8 @@ public class DataItemCreatedEvent implements Serializable {
      * @param id
      * @param text
      */
-    public DataItemCreatedEvent(final String id, final String text) {
-        m_id = id;
+    public DataItemCreatedEvent(String id,String text) {
+        m_id   = id;
         m_text = text;
     }
 
@@ -45,5 +47,16 @@ public class DataItemCreatedEvent implements Serializable {
 
     public String getText() {
         return m_text;
+    }
+
+    // *************************************************************************
+    // Jackson
+    // *************************************************************************
+
+    @JsonCreator
+    public static DataItemCreatedEvent create(
+        @JsonProperty("id")   String id,
+        @JsonProperty("text") String text) {
+        return new DataItemCreatedEvent(id,text);
     }
 }
