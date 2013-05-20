@@ -41,6 +41,7 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-core/2.2.1
     install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.1
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
+    install -s mvn:de.undercouch/bson4jackson/2.2.0
 
     #install -s mvn:com.hazelcast/hazelcast-all/2.5
     install -s mvn:com.hazelcast/hazelcast-all/2.5.2-SNAPSHOT

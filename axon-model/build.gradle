@@ -12,6 +12,10 @@ project.ext {
         'org.axonframework.eventhandling',
         '*'
     ]
+
+    bundleExportPackages = [
+        '*'
+    ]
 }
 
 dependencies {
@@ -28,7 +32,7 @@ jar {
         classpath  = project.runtimeClasspath
 
         instruction 'Import-Package' , bundleInportPackages.join(',')
-        instruction 'Export-Package' , '*'
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
             'Bundle-Description'     : 'Karaf Examples :: Axon :: Model',

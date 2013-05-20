@@ -31,7 +31,6 @@ import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.InetAddress;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -68,12 +67,13 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     public void init() {
         if(m_instance == null) {
-            LOGGER.debug("Instance initializing");
+            LOGGER.debug("Initialize Instance");
 
             m_instance = Hazelcast.newHazelcastInstance(m_config);
             m_instance.addInstanceListener(this);
 
-            LOGGER.debug("Instance initialized : {}", m_instance);
+            LOGGER.debug("New Instance created     : {}", m_instance);
+            LOGGER.debug("New Instance ClassLoader : {}", m_instance.getConfig().getClassLoader());
 
             m_active.set(true);
         }
@@ -101,8 +101,8 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
     }
 
     @Override
-    public InetAddress getLocalAddress() {
-        return m_instance.getCluster().getLocalMember().getInetSocketAddress().getAddress();
+    public ClassLoader getClassloader() {
+        return m_instance.getConfig().getClassLoader();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
      */
     @Override
     public void instanceCreated(InstanceEvent event) {
-        LOGGER.debug("instanceCreated : {}",event.getInstance().getId());
+        LOGGER.debug("Hazelcast Instance Created : {}",event.getInstance().getId());
     }
 
     /**
@@ -142,6 +142,6 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
      */
     @Override
     public void instanceDestroyed(InstanceEvent event) {
-        LOGGER.debug("instanceDestroyed : {}",event.getInstance().getId());
+        LOGGER.debug("Hazelcast Instance Destroyed : {}",event.getInstance().getId());
     }
 }

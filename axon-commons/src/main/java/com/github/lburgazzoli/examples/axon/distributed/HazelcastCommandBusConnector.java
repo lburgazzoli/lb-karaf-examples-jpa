@@ -16,7 +16,7 @@
  */
 package com.github.lburgazzoli.examples.axon.distributed;
 
-import com.hazelcast.core.HazelcastInstance;
+import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import org.axonframework.commandhandling.CommandCallback;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.CommandMessage;
@@ -27,15 +27,15 @@ import org.axonframework.commandhandling.distributed.CommandBusConnector;
  */
 public class HazelcastCommandBusConnector implements CommandBusConnector {
 
-    private final HazelcastInstance m_hazelcastInstance;
+    private final IHazelcastManager m_hazelcastManager;
 
     /**
      * c-tor
      *
-     * @param hazelcastInstance
+     * @param hazelcastManager
      */
-    public HazelcastCommandBusConnector(HazelcastInstance hazelcastInstance) {
-        m_hazelcastInstance = hazelcastInstance;
+    public HazelcastCommandBusConnector(IHazelcastManager hazelcastManager) {
+        m_hazelcastManager = hazelcastManager;
     }
 
     // *************************************************************************

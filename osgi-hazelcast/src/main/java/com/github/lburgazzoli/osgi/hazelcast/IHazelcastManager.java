@@ -22,8 +22,6 @@ import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.ITopic;
 
-import java.net.InetAddress;
-
 /**
  *
  */
@@ -38,7 +36,7 @@ public interface IHazelcastManager  {
      *
      * @return
      */
-    public InetAddress getLocalAddress();
+    public ClassLoader getClassloader();
 
     /**
      *

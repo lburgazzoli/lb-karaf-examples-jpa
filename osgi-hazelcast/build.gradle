@@ -13,7 +13,7 @@ project.ext {
     ]
 
     bundleExportPackages = [
-        "com.gihub.lburgazzoli.*;version=${version}"
+            "*"
     ]
 }
 
@@ -32,8 +32,8 @@ jar {
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: Hazelcast',
-            'Bundle-Name'            : 'Karaf Examples :: Hazelcast',
+            'Bundle-Description'     : 'Karaf Examples :: OSGi :: Hazelcast',
+            'Bundle-Name'            : 'Karaf Examples :: OSGi :: Hazelcast',
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
         )

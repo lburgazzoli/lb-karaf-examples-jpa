@@ -11,6 +11,10 @@ project.ext {
         'org.apache.karaf.shell.console',
         '*'
     ]
+
+    bundleExportPackages = [
+            "*"
+    ]
 }
 
 dependencies {
@@ -25,7 +29,7 @@ jar {
         classpath  = project.runtimeClasspath
 
         instruction 'Import-Package' , bundleInportPackages.join(',')
-        instruction 'Export-Package' , '*'
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
             'Bundle-Description'     : 'Karaf Examples :: OSGi :: Commons',

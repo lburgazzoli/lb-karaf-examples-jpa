@@ -102,13 +102,11 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
     public void bundleChanged(BundleEvent event) {
         switch (event.getType()) {
             case BundleEvent.STARTED:
-            case BundleEvent.RESOLVED:
                 if(isBundleEligible(event.getBundle())) {
                     m_classLoader.addBundle(event.getBundle());
                 }
                 break;
             case BundleEvent.STOPPED:
-            case BundleEvent.UNINSTALLED:
                 if(isBundleEligible(event.getBundle())) {
                     m_classLoader.removeBundle(event.getBundle());
                 }

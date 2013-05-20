@@ -48,4 +48,14 @@ public class Utils {
         return (Collection<T>) collection;
     }
 
+    /**
+     *
+     * @param classLoader
+     * @return
+     */
+    public static ClassLoader swapContextClassLoader(ClassLoader classLoader) {
+        ClassLoader oldClassLoader =  Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(classLoader);
+        return oldClassLoader;
+    }
 }

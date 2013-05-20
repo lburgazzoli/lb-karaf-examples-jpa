@@ -8,10 +8,15 @@ project.ext {
     bundleInportPackages = [
         '*'
     ]
+
+    bundleExportPackages = [
+        '*'
+    ]
 }
 
 dependencies {
     compile project(':osgi-commons')
+    compile project(':osgi-hazelcast')
     compile 'org.ow2.asm:asm:4.1'
     compile 'org.axonframework:axon-core:2.0.2'
     compile 'org.axonframework:axon-distributed-commandbus:2.0.2'
@@ -31,7 +36,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.2.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.2.1'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.1'
-
+    compile 'de.undercouch:bson4jackson:2.2.0'
 }
 
 jar {
@@ -42,7 +47,7 @@ jar {
         classpath  = project.runtimeClasspath
 
         instruction 'Import-Package' , bundleInportPackages.join(',')
-        instruction 'Export-Package' , '*'
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
             'Bundle-Description'     : 'Karaf Examples :: Axon :: Commons',

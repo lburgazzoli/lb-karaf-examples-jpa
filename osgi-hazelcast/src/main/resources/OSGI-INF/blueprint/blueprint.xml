@@ -45,7 +45,6 @@
           destroy-method="destroy">
         <argument ref="blueprintBundleContext"/>
         <argument ref="HZ_CL"/>
-        <property name="eligibleBundleIds" value="${classpath.bundles}"/>
     </bean>
 
     <bean id    = "HZ_CONFIG"

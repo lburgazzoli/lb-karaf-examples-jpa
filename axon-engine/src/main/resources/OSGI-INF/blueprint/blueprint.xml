@@ -38,6 +38,9 @@ limitations under the License.
     <reference id        = "osgiJtaTransactionManager"
                interface = "javax.transaction.TransactionManager"/>
 
+    <reference id        = "HZ_MANAGER"
+               interface = "com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager"/>
+
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
@@ -128,6 +131,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <bean id    = "AXON_EVT_STORE_FS_RESOLVER"
           class = "org.axonframework.eventstore.fs.SimpleEventFileResolver">
         <argument>
@@ -141,6 +145,12 @@ limitations under the License.
           class = "org.axonframework.eventstore.fs.FileSystemEventStore">
         <argument ref="AXON_EVT_SERIALIZER"/>
         <argument ref="AXON_EVT_STORE_FS_RESOLVER"/>
+    </bean>
+    -->
+
+    <bean id    = "AXON_EVT_STORE"
+          class = "com.github.lburgazzoli.examples.axon.store.HazelcastEventStore">
+        <argument ref="HZ_MANAGER"/>
     </bean>
 
     <bean id    = "AXON_EVT_BUS"

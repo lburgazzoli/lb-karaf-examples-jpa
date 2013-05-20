@@ -21,9 +21,15 @@ project.ext {
         'javassist.util.proxy;resolution:=optional',
         'org.xmlpull.v1',
         'com.github.lburgazzoli.osgi',
+        'com.github.lburgazzoli.osgi.hazelcast',
         'com.github.lburgazzoli.examples.axon',
         'com.github.lburgazzoli.examples.axon.helper',
         'com.github.lburgazzoli.examples.axon.serializer',
+        'com.github.lburgazzoli.examples.axon.store',
+        '*'
+    ]
+
+    bundleExportPackages = [
         '*'
     ]
 }
@@ -41,7 +47,7 @@ jar {
         classpath  = project.runtimeClasspath
 
         instruction 'Import-Package' , bundleInportPackages.join(',')
-        instruction 'Export-Package' , '*'
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
             'Bundle-Description'     : 'Karaf Examples :: Axon :: Engine',

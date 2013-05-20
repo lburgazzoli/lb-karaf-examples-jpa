@@ -102,8 +102,10 @@ public class OSGiClassLoader extends ClassLoader {
     public void removeBundle(Bundle bundle) {
         LOGGER.debug("removeBundle: {}",bundle.getSymbolicName());
 
-        for(Class<?> type : m_class4bundle.get(bundle.getSymbolicName())) {
-            m_classes.remove(type.getName());
+        if(m_class4bundle.containsKey(bundle.getSymbolicName())) {
+            for(Class<?> type : m_class4bundle.get(bundle.getSymbolicName())) {
+                m_classes.remove(type.getName());
+            }
         }
 
         m_class4bundle.remove(bundle.getSymbolicName());
@@ -153,6 +155,9 @@ public class OSGiClassLoader extends ClassLoader {
 
                     m_classes.put(name, clazz);
                     getClassesForBundle(entry.getValue()).add(clazz);
+
+                    LOGGER.debug("Found class {} on bundle {}, cache-it",
+                        name,entry.getValue().getSymbolicName());
 
                     return clazz;
                 } catch(ClassNotFoundException e) {
