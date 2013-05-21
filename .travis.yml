@@ -1,0 +1,10 @@
+language: 
+  - java
+
+script: 
+  - ./gradlew clean
+  - ./gradlew jar
+
+jdk:
+  - oraclejdk7
+
