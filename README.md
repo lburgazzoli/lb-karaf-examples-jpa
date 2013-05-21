@@ -1,4 +1,4 @@
-[![Build Status](https://drone.io/github.com/lburgazzoli/lb-karaf-examples/status.png)](https://drone.io/github.com/lburgazzoli/lb-karaf-examples/latest)
+[![Build Status](https://travis-ci.org/lburgazzoli/lb-karaf-examples.png?branch=master)](https://travis-ci.org/lburgazzoli/lb-karaf-examples)
 
 
 lb-karaf-examples
