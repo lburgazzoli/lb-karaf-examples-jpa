@@ -27,6 +27,13 @@ import java.io.Serializable;
  */
 @Revision("1")
 public class DataItemUpdatedEvent extends AbstractDataItemChangedEvent implements Serializable {
+
+    /**
+     * c-tor
+     */
+    public DataItemUpdatedEvent() {
+    }
+
     /**
      * c-tor
      *

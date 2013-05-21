@@ -20,6 +20,7 @@ project.ext {
         'org.hibernate.proxy;resolution:=optional',
         'javassist.util.proxy;resolution:=optional',
         'org.xmlpull.v1',
+        'com.hazelcast.config',
         'com.github.lburgazzoli.osgi',
         'com.github.lburgazzoli.osgi.hazelcast',
         'com.github.lburgazzoli.examples.axon',
@@ -36,6 +37,7 @@ project.ext {
 
 dependencies {
     compile project(':osgi-commons')
+    compile project(':osgi-hazelcast')
     compile project(':axon-commons')
 }
 

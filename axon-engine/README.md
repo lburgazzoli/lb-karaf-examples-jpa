@@ -19,7 +19,6 @@ gradle clean install
     install -s mvn:joda-time/joda-time/2.2
     install -s wrap:mvn:com.eaio.uuid/uuid/3.2
     install -s mvn:com.google.guava/guava/14.0.1
-    install -s wrap:mvn:org.axonframework/axon-core/2.0.2
     install -s mvn:com.googlecode.disruptor/disruptor/2.10.3
     install -s mvn:commons-lang/commons-lang/2.6
     install -s mvn:org.apache.commons/commons-lang3/3.1
@@ -42,6 +41,7 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.1
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
     install -s mvn:de.undercouch/bson4jackson/2.2.0
+    install -s wrap:mvn:org.axonframework/axon-core/2.0.2
 
     #install -s mvn:com.hazelcast/hazelcast-all/2.5
     install -s mvn:com.hazelcast/hazelcast-all/2.5.2-SNAPSHOT

@@ -28,8 +28,17 @@ import java.io.Serializable;
 @Revision("1")
 public class DataItemCreatedEvent implements Serializable {
 
-    private final String m_id;
-    private final String m_text;
+    private String m_id;
+    private String m_text;
+
+
+    /**
+     * c-tor
+     */
+    public DataItemCreatedEvent() {
+        m_id = null;
+        m_text = null;
+    }
 
     /**
      *
@@ -41,8 +50,16 @@ public class DataItemCreatedEvent implements Serializable {
         m_text = text;
     }
 
+    public void setId(String id) {
+        m_id = id;
+    }
+
     public String getId() {
         return m_id;
+    }
+
+    public void setText(String text) {
+        m_text = text;
     }
 
     public String getText() {

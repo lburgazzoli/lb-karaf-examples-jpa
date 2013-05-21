@@ -17,7 +17,6 @@
 package com.github.lburgazzoli.osgi.hazelcast;
 
 import com.github.lburgazzoli.osgi.BundleContextAware;
-import com.github.lburgazzoli.osgi.OSGiClassLoader;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -44,6 +43,17 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
     private HazelcastInstance m_instance;
     private Config m_config;
     private AtomicBoolean m_active;
+    private ClassLoader m_classLoader;
+
+    /**
+     * c-tor
+     *
+     * @param bundleContext
+     * @param config
+     */
+    public HazelcastManager(BundleContext bundleContext,Config config) {
+        this(bundleContext,config,Thread.currentThread().getContextClassLoader());
+    }
 
     /**
      * c-tor
@@ -52,13 +62,12 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
      * @param config
      * @param classLoader
      */
-    public HazelcastManager(BundleContext bundleContext,Config config,OSGiClassLoader classLoader) {
+    public HazelcastManager(BundleContext bundleContext,Config config,ClassLoader classLoader) {
         super(bundleContext);
 
         m_active = new AtomicBoolean(false);
-
         m_config = config;
-        m_config.setClassLoader(classLoader);
+        m_classLoader = classLoader;
     }
 
     // *************************************************************************

@@ -18,25 +18,24 @@ package com.github.lburgazzoli.examples.axon.store;
 
 import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
-import com.hazelcast.core.IList;
-import org.apache.commons.lang3.CharEncoding;
+import com.google.common.collect.Maps;
 import org.axonframework.domain.DomainEventMessage;
 import org.axonframework.domain.DomainEventStream;
 import org.axonframework.domain.SimpleDomainEventStream;
-import org.axonframework.eventstore.EventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  *
  */
-public class HazelcastEventStore implements EventStore {
+public class HazelcastEventStore implements IHazelcastEventStore {
     private static final Logger LOGGER = LoggerFactory.getLogger(HazelcastEventStore.class);
 
     private final IHazelcastManager m_hazelcastManager;
+    private final Map<String,HazelcastDomainEventStore> m_domainEventStore;
 
     /**
      * c-tor
@@ -45,68 +44,77 @@ public class HazelcastEventStore implements EventStore {
      */
     public HazelcastEventStore(IHazelcastManager hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
+        m_domainEventStore = Maps.newHashMap();
     }
 
     // *************************************************************************
-    //
+    // IHazelcastEventStore
+    // *************************************************************************
+
+    @Override
+    public HazelcastDomainEventStore getDomainEventStore(String eventStoreId) {
+        return m_domainEventStore.get(eventStoreId);
+    }
+
+    @Override
+    public Collection<HazelcastDomainEventStore> getDomainEventStores() {
+        return m_domainEventStore.values();
+    }
+
+    // *************************************************************************
+    // EventStore
     // *************************************************************************
 
     @Override
     public void appendEvents(String type, DomainEventStream events) {
-        IList<DomainEventMessage> eventStore = null;
+        int size = 0;
+
+        String listId = null;
+        HazelcastDomainEventStore hdes = null;
+
         while(events.hasNext()) {
             DomainEventMessage dem = events.next();
-            if(dem.getSequenceNumber() == 0) {
-                eventStore = m_hazelcastManager.getList(
-                    getListIdentifier(type,dem.getAggregateIdentifier()));
+            if(size == 0) {
+                listId = HazelcastStorageUtils.getStorageIdentifier(type, dem);
+                hdes = m_domainEventStore.get(listId);
+
+                if(hdes == null) {
+                    hdes = new HazelcastDomainEventStore(
+                        type,dem.getAggregateIdentifier().toString(),m_hazelcastManager);
+
+                    m_domainEventStore.put(hdes.getStorageId(),hdes);
+                }
             }
 
-            if(eventStore != null) {
-                eventStore.add(dem);
+            if(hdes != null) {
+                hdes.add(dem);
+                size++;
             }
         }
+
+
+        LOGGER.debug("appendEvents: type={}, nbStoredEvents={}, eventStoreSize={}",
+            type,size,(hdes != null) ? hdes.getStorageSize() : 0);
     }
 
     @Override
     public DomainEventStream readEvents(String type, Object identifier) {
-        IList<DomainEventMessage> eventStore =
-            m_hazelcastManager.getList(getListIdentifier(type, identifier));
+        String listId = HazelcastStorageUtils.getStorageIdentifier(type,identifier.toString());
+        HazelcastDomainEventStore hdes = m_domainEventStore.get(listId);
 
-        // Workaround for HZ serialization issues
-        ClassLoader classLoader = Utils.swapContextClassLoader(m_hazelcastManager.getClassloader());
-        SimpleDomainEventStream sdes = new SimpleDomainEventStream(eventStore);
-        Utils.swapContextClassLoader(classLoader);
+        if(hdes != null) {
+            // Workaround for HZ serialization issues
+            ClassLoader classLoader =
+                Utils.swapContextClassLoader(m_hazelcastManager.getClassloader());
 
-        return sdes;
-    }
+            DomainEventStream des = hdes.getEventStream();
+            Utils.swapContextClassLoader(classLoader);
 
-    // *************************************************************************
-    //
-    // *************************************************************************
+            LOGGER.debug("readEvents: type={}, nbStoredEvents={}",type,hdes.getStorageSize());
 
-    /**
-     *
-     * @param type
-     * @param identifier
-     * @return
-     */
-    private String getListIdentifier(String type,Object identifier) {
-        return String.format("%s_%s",
-            type,
-            safeIdentifier(identifier));
-    }
-
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    private String safeIdentifier(Object id) {
-        try {
-            return URLEncoder.encode(id.toString(),CharEncoding.UTF_8);
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException("System doesnt support UTF-8?", e);
+            return des;
         }
+
+        return new SimpleDomainEventStream();
     }
 }

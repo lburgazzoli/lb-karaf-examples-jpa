@@ -25,52 +25,7 @@
 
     <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hazelcast" update-strategy="reload" >
         <cm:default-properties>
-            <cm:property name  = "hz.config"
-                         value = "./etc/com.github.lburgazzoli.karaf.hazelcast.xml"/>
         </cm:default-properties>
     </cm:property-placeholder>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-
-    <bean id    = "HZ_CL"
-          class = "com.github.lburgazzoli.osgi.OSGiClassLoader">
-    </bean>
-
-    <bean id    = "HZ_CL_MANAGER"
-          class = "com.github.lburgazzoli.osgi.OSGiClassLoaderManager"
-          init-method="init"
-          destroy-method="destroy">
-        <argument ref="blueprintBundleContext"/>
-        <argument ref="HZ_CL"/>
-    </bean>
-
-    <bean id    = "HZ_CONFIG"
-          class = "com.hazelcast.config.FileSystemXmlConfig"
-          scope = "singleton">
-        <argument value = "${hz.config}"/>
-    </bean>
-
-    <bean id             = "HZ_MANAGER"
-          class          = "com.github.lburgazzoli.osgi.hazelcast.HazelcastManager"
-          init-method    = "init"
-          destroy-method = "destroy"
-          scope          = "singleton">
-        <argument ref = "blueprintBundleContext"/>
-        <argument ref = "HZ_CONFIG"/>
-        <argument ref = "HZ_CL"/>
-    </bean>
-
-    <service ref="HZ_MANAGER">
-        <interfaces>
-            <value>com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager</value>
-        </interfaces>
-        <service-properties>
-            <entry key   = "osgi.jndi.service.name"
-                   value = "hz-manager"/>
-        </service-properties>
-    </service>
 
 </blueprint>

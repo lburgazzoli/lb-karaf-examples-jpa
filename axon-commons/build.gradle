@@ -6,6 +6,7 @@ group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
     bundleInportPackages = [
+        'org.axonframework.commandhandling.distributed;resolution:=optional',
         '*'
     ]
 

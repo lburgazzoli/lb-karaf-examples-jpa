@@ -26,8 +26,12 @@ limitations under the License.
 
     <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.axon.engine" update-strategy="reload" >
         <cm:default-properties>
-            <cm:property name="event.store.path"  value="./data/axon/eventstore"/>
-            <cm:property name="classpath.bundles" value="axon-commons,axon-engine"/>
+            <cm:property name  = "event.store.path"
+                         value = "./data/axon/eventstore"/>
+            <cm:property name  = "classpath.bundles"
+                         value = "axon-commons,axon-engine"/>
+            <cm:property name  = "hz.config"
+                         value = "./etc/com.github.lburgazzoli.karaf.axon.engine.hazelcast.xml"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -38,13 +42,9 @@ limitations under the License.
     <reference id        = "osgiJtaTransactionManager"
                interface = "javax.transaction.TransactionManager"/>
 
-    <reference id        = "HZ_MANAGER"
-               interface = "com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager"/>
-
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
-
 
     <bean id    = "AXON_CL"
           class = "com.github.lburgazzoli.osgi.OSGiClassLoader">
@@ -58,6 +58,37 @@ limitations under the License.
         <argument ref="AXON_CL"/>
         <property name="eligibleBundleIds" value="${classpath.bundles}"/>
     </bean>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <bean id    = "HZ_CONFIG"
+          class = "com.github.lburgazzoli.osgi.hazelcast.HazelcastConfig"
+          scope = "singleton">
+        <argument value = "${hz.config}"/>
+        <argument ref   = "AXON_CL"/>
+    </bean>
+
+    <bean id             = "HZ_MANAGER"
+          class          = "com.github.lburgazzoli.osgi.hazelcast.HazelcastManager"
+          init-method    = "init"
+          destroy-method = "destroy"
+          scope          = "singleton">
+        <argument ref = "blueprintBundleContext"/>
+        <argument ref = "HZ_CONFIG"/>
+    </bean>
+
+    <service ref="HZ_MANAGER">
+        <interfaces>
+            <value>com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager</value>
+        </interfaces>
+        <service-properties>
+            <entry key   = "osgi.jndi.service.name"
+                   value = "hz-manager"/>
+        </service-properties>
+    </service>
+
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
@@ -202,6 +233,16 @@ limitations under the License.
         <command name="axon/list-loadedclasses-for-bundle">
             <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListLoadedClassesForBundle">
                 <property name="service" ref="AXON_CL"/>
+            </action>
+        </command>
+        <command name="axon/hz-storage-info">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.HazelcastStorageInfo">
+                <property name="service" ref="AXON_EVT_STORE"/>
+            </action>
+        </command>
+        <command name="axon/hz-storage-browse">
+            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.HazelcastStorageBrowse">
+                <property name="service" ref="AXON_EVT_STORE"/>
             </action>
         </command>
     </command-bundle>

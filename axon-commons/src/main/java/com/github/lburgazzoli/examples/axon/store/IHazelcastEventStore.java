@@ -14,46 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.axon.model.events;
+package com.github.lburgazzoli.examples.axon.store;
+
+import org.axonframework.eventstore.EventStore;
+
+import java.util.Collection;
 
 /**
  *
  */
-public class AbstractDataItemChangedEvent {
-    private String m_id;
-    private String m_text;
+public interface IHazelcastEventStore extends EventStore {
 
     /**
      *
+     * @param eventStoreId
+     * @return
      */
-    public AbstractDataItemChangedEvent() {
-        m_id = null;
-        m_text = null;
-    }
+    public HazelcastDomainEventStore getDomainEventStore(String eventStoreId);
 
     /**
      *
-     * @param id
-     * @param text
+     * @return
      */
-    public AbstractDataItemChangedEvent(String id,String text) {
-        m_id   = id;
-        m_text = text;
-    }
-
-    public void setId(String id) {
-        m_id = id;
-    }
-
-    public String getId() {
-        return m_id;
-    }
-
-    public void setText(String text) {
-        m_text = text;
-    }
-
-    public String getText() {
-        return m_text;
-    }
+    public Collection<HazelcastDomainEventStore> getDomainEventStores();
 }
