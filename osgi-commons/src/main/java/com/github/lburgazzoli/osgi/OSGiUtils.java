@@ -58,6 +58,7 @@ public class OSGiUtils {
      * @param pid
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static Dictionary<String,Object> getProperties(ConfigurationAdmin configAdmin,String pid) {
         Dictionary<String, Object> properties = new Hashtable<String, Object>();
         try {

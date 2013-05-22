@@ -1,10 +1,13 @@
 subprojects {
 
     apply plugin: 'java'
-    //apply plugin: 'groovy'
+    apply plugin: 'osgi'
+    apply plugin: 'maven'
 
-    //group = 'bt'
-    //sourceCompatibility = 1.6
+    version  = '1.0.0-SNAPSHOT'
+    group    = 'com.github.lburgazzoli.examples.karaf'
+
+    ext.prefix   = 'karaf-examples'
 
     repositories {
         maven { url 'http://repo1.maven.org/maven2' }
@@ -40,6 +43,10 @@ subprojects {
         compile 'com.googlecode.json-simple:json-simple:1.1.1'
         compile 'org.mongodb:mongo-java-driver:2.10.1'
     }
+
+    //[compileJava, compileTestJava]*.options*.compilerArgs = [
+    //    "-Xlint:unchecked"
+    //]
 }
 
 task wrapper(type: Wrapper) {

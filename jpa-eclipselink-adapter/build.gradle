@@ -1,10 +1,13 @@
-apply plugin: 'osgi'
-apply plugin: 'maven'
-
-version  = '1.0.0.SNAPSHOT'
-group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
+    bundleInportPackages = [
+        '*'
+    ]
+
+    bundleExportPackages = [
+        "*"
+    ]
+
     requireBundle = [
         'org.eclipse.persistence.asm',
         'org.eclipse.persistence.antlr',
@@ -21,21 +24,23 @@ dependencies {
 }
 
 jar {
-    baseName = 'jpa-eclipselink-adapter'
+    baseName = project.name
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
         classpath  = project.runtimeClasspath
 
-        instruction 'Import-Package' , '*'
-        instruction 'Export-Package' , '*'
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: JPA :: EclipseLink :: Adapter',
-            'Bundle-Name'            : 'Karaf Examples :: JPA :: EclipseLink :: Adapter',
+            'Bundle-Description'     : "${project.prefix} :: ${project.name}",
+            'Bundle-Name'            : "${project.prefix} :: ${project.name}",
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
+            'Bundle-Version'         : project.version,
             'Bundle-Activator'       : 'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.Activator',
+            'Implementation-Title'   : "${project.prefix}-${project.name}-${project.version}",
+            'Implementation-Version' : project.version,
             'Require-Bundle'         : requireBundle.join(',')
         )
     }

@@ -1,10 +1,5 @@
-apply plugin: 'osgi'
-apply plugin: 'maven'
 
-version  = '1.0.0.SNAPSHOT'
-group    = 'com.github.lburgazzoli.examples.karaf'
-
-project.ext {
+project.ext {    
     bundleInportPackages = [
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
@@ -25,7 +20,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'axon-model'
+    baseName = project.name
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
@@ -35,12 +30,12 @@ jar {
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: Axon :: Model',
-            'Bundle-Name'            : 'Karaf Examples :: Axon :: Model',
+            'Bundle-Description'     : "${project.prefix} :: ${project.name}",
+            'Bundle-Name'            : "${project.prefix} :: ${project.name}",
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version
+            'Bundle-Version'         : project.version,
+            'Implementation-Title'   : "${project.prefix}-${project.name}-${project.version}",
+            'Implementation-Version' : project.version
         )
     }
 }
-
-

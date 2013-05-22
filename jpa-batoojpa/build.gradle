@@ -1,11 +1,5 @@
-apply plugin: 'osgi'
-apply plugin: 'maven'
-
-version  = '1.0.0.SNAPSHOT'
-group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
-
     bundleInportPackages = [
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
@@ -24,7 +18,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'jpa-batoojpa'
+    baseName = project.name
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
@@ -34,15 +28,16 @@ jar {
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: JPA :: BatooJPA',
-            'Bundle-Name'            : 'Karaf Examples :: JPA :: BatooJPA',
+            'Bundle-Description'     : "${project.prefix} :: ${project.name}",
+            'Bundle-Name'            : "${project.prefix} :: ${project.name}",
             'Bundle-SymbolicName'    : project.name,
             'Bundle-Version'         : version,
+            'Implementation-Title'   : "${project.prefix}-${project.name}-${project.version}",
+            'Implementation-Version' : version,
             'JPA-PersistenceUnits'   : 'DATAPU_BATOO',
             'Meta-Persistence'       : 'META-INF/persistence.xml',
             'DynamicImport-Package'  : 'org.batoo.*'
         )
     }
 }
-
 

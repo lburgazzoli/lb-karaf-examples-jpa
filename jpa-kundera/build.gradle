@@ -1,8 +1,3 @@
-apply plugin: 'osgi'
-apply plugin: 'maven'
-
-version  = '1.0.0.SNAPSHOT'
-group    = 'com.github.lburgazzoli.examples.karaf'
 
 project.ext {
     bundleInportPackages = [
@@ -10,6 +5,10 @@ project.ext {
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
         '*'
+    ]
+
+    bundleExportPackages = [
+        "*"
     ]
 }
 
@@ -23,24 +22,25 @@ dependencies {
 }
 
 jar {
-    baseName = 'jpa-kundera'
+    baseName = project.name
 
     manifest {
         classesDir = new File("$buildDir/classes/main")
         classpath  = project.runtimeClasspath
 
         instruction 'Import-Package' , bundleInportPackages.join(',')
-        instruction 'Export-Package' , '*'
+        instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes(
-            'Bundle-Description'     : 'Karaf Examples :: JPA :: Kundera',
-            'Bundle-Name'            : 'Karaf Examples :: JPA :: Kundera',
+            'Bundle-Description'     : "${project.prefix} :: ${project.name}",
+            'Bundle-Name'            : "${project.prefix} :: ${project.name}",
             'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
+            'Bundle-Version'         : project.version,
+            'Implementation-Title'   : "${project.prefix}-${project.name}-${project.version}",
+            'Implementation-Version' : project.version,
             'JPA-PersistenceUnits'   : 'DATA_KUNDERA',
             'Meta-Persistence'       : 'META-INF/persistence.xml',
             'DynamicImport-Package'  : '*'
         )
     }
 }
-
