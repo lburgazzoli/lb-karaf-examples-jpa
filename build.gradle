@@ -1,11 +1,16 @@
+
+// *****************************************************************************
+//
+// *****************************************************************************
+
 subprojects {
 
     apply plugin: 'java'
     apply plugin: 'osgi'
     apply plugin: 'maven'
 
-    version  = '1.0.0-SNAPSHOT'
-    group    = 'com.github.lburgazzoli.examples.karaf'
+    version  = '1.0.0.SNAPSHOT'
+    group    = 'com.github.lburgazzoli'
 
     ext.prefix   = 'karaf-examples'
 
@@ -47,7 +52,26 @@ subprojects {
     //[compileJava, compileTestJava]*.options*.compilerArgs = [
     //    "-Xlint:unchecked"
     //]
+
+    jar {
+        baseName = "${project.prefix}-${project.name}"
+
+        manifest.attributes['Bundle-Description'     ] = "${project.prefix} :: ${project.name}"
+        manifest.attributes['Bundle-Name'            ] = "${project.prefix} :: ${project.name}"
+        manifest.attributes['Bundle-SymbolicName'    ] = "${project.prefix}-${project.name}"
+        manifest.attributes['Bundle-Version'         ] = project.version
+        manifest.attributes['Implementation-Title'   ] = "${project.prefix}-${project.name}-${project.version}"
+        manifest.attributes['Implementation-Version' ] = project.version
+        manifest.attributes['Implementation-Vendor'  ] = 'lb'
+
+        manifest.classesDir = new File("$buildDir/classes/main")
+        manifest.classpath  = project.runtimeClasspath
+    }
 }
+
+// *****************************************************************************
+//
+// *****************************************************************************
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.6'

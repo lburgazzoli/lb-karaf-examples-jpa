@@ -18,26 +18,13 @@ dependencies {
 }
 
 jar {
-    baseName = project.name
-
     manifest {
-        classesDir = new File("$buildDir/classes/main")
-        classpath  = project.runtimeClasspath
-
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
-        attributes(
-            'Bundle-Description'     : "${project.prefix} :: ${project.name}",
-            'Bundle-Name'            : "${project.prefix} :: ${project.name}",
-            'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : version,
-            'Implementation-Title'   : "${project.prefix}-${project.name}-${project.version}",
-            'Implementation-Version' : version,
-            'JPA-PersistenceUnits'   : 'DATAPU_BATOO',
-            'Meta-Persistence'       : 'META-INF/persistence.xml',
-            'DynamicImport-Package'  : 'org.batoo.*'
-        )
+        attributes['JPA-PersistenceUnits'  ] = 'DATAPU_BATOO'
+        attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
+        attributes['DynamicImport-Package' ] = 'org.batoo.*'
     }
 }
 

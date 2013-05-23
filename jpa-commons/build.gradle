@@ -16,22 +16,8 @@ dependencies {
 }
 
 jar {
-    baseName = project.name
-
     manifest {
-        classesDir = new File("$buildDir/classes/main")
-        classpath  = project.runtimeClasspath
-
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
-
-        attributes(
-            'Bundle-Description'     : "${project.prefix} :: ${project.name}",
-            'Bundle-Name'            : "${project.prefix} :: ${project.name}",
-            'Bundle-SymbolicName'    : project.name,
-            'Bundle-Version'         : project.version,
-            'Implementation-Title'   : "${project.prefix}-${project.name}-${project.version}",
-            'Implementation-Version' : project.version
-        )
     }
 }
