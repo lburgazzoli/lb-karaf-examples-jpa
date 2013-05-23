@@ -18,12 +18,15 @@ package com.github.lburgazzoli.examples.axon.store;
 
 import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
+import com.google.common.collect.Lists;
 import com.hazelcast.core.IList;
 import org.axonframework.domain.DomainEventMessage;
 import org.axonframework.domain.DomainEventStream;
 import org.axonframework.domain.SimpleDomainEventStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  *
@@ -35,7 +38,7 @@ public class HazelcastDomainEventStore {
     private final String m_aggregateId;
     private final String m_storageId;
     private final IHazelcastManager m_hazelcastManager;
-    private final IList<DomainEventMessage> m_storage;
+    private final IList<HazelcastDomainEventMessage> m_storage;
 
     /**
      *
@@ -87,7 +90,7 @@ public class HazelcastDomainEventStore {
      *
      * @return
      */
-    public IList<DomainEventMessage> getStorage() {
+    public IList<HazelcastDomainEventMessage> getStorage() {
         return m_storage;
     }
 
@@ -104,7 +107,7 @@ public class HazelcastDomainEventStore {
      * @param message
      */
     public void add(DomainEventMessage message) {
-        m_storage.add(message);
+        m_storage.add(new HazelcastDomainEventMessage(message));
     }
 
     /**
@@ -116,6 +119,9 @@ public class HazelcastDomainEventStore {
         ClassLoader cl = Utils.swapContextClassLoader(getClassLoader());
 
         try {
+            List<DomainEventMessage> messages =
+                Lists.newArrayListWithCapacity(m_storage.size());
+
             des = new SimpleDomainEventStream(m_storage);
         } finally {
             Utils.swapContextClassLoader(cl);

@@ -32,6 +32,7 @@ public class DataItemUpdatedEvent extends AbstractDataItemChangedEvent implement
      * c-tor
      */
     public DataItemUpdatedEvent() {
+        super();
     }
 
     /**

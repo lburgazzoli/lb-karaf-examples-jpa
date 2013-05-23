@@ -37,12 +37,13 @@ public class HazelcastStorageBrowse extends AbstractTabularCommand<IHazelcastEve
      * c-tor
      */
     public HazelcastStorageBrowse() {
-        super("Timestamp","SequenceNumber","PayloadType","Payload");
+        super("Timestamp","SequenceNumber","Payload");
         super.setMxColSize(512);
     }
 
     @Override
     public void doExecute(IHazelcastEventStore storage,ShellTable table) throws Exception {
+
 
         HazelcastDomainEventStore eventStore = storage.getDomainEventStore(storageId);
         if(eventStore != null) {
@@ -51,12 +52,11 @@ public class HazelcastStorageBrowse extends AbstractTabularCommand<IHazelcastEve
                 Utils.swapContextClassLoader(eventStore.getClassLoader());
 
             try {
-                for(DomainEventMessage message : eventStore.getStorage()) {
+                for(DomainEventMessage data : eventStore.getStorage()) {
                     table.addRow(
-                        message.getTimestamp(),
-                        message.getSequenceNumber(),
-                        message.getPayloadType().getName(),
-                        message.getPayload().toString());
+                        data.getTimestamp(),
+                        data.getSequenceNumber(),
+                        data.getPayload().toString());
                 }
             } finally {
                 Utils.swapContextClassLoader(cl);

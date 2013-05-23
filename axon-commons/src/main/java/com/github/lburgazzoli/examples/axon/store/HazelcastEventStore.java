@@ -17,6 +17,7 @@
 package com.github.lburgazzoli.examples.axon.store;
 
 import com.github.lburgazzoli.Utils;
+import com.github.lburgazzoli.examples.axon.serializer.JacksonObjectMapper;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import com.google.common.collect.Maps;
 import org.axonframework.domain.DomainEventMessage;
@@ -36,6 +37,7 @@ public class HazelcastEventStore implements IHazelcastEventStore {
 
     private final IHazelcastManager m_hazelcastManager;
     private final Map<String,HazelcastDomainEventStore> m_domainEventStore;
+    private final JacksonObjectMapper m_objectMapper;
 
     /**
      * c-tor
@@ -45,6 +47,7 @@ public class HazelcastEventStore implements IHazelcastEventStore {
     public HazelcastEventStore(IHazelcastManager hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
         m_domainEventStore = Maps.newHashMap();
+        m_objectMapper = new JacksonObjectMapper();
     }
 
     // *************************************************************************
@@ -87,11 +90,11 @@ public class HazelcastEventStore implements IHazelcastEventStore {
             }
 
             if(hdes != null) {
+                LOGGER.debug("Add : <{}>",dem.getPayload().toString());
                 hdes.add(dem);
                 size++;
             }
         }
-
 
         LOGGER.debug("appendEvents: type={}, nbStoredEvents={}, eventStoreSize={}",
             type,size,(hdes != null) ? hdes.getStorageSize() : 0);

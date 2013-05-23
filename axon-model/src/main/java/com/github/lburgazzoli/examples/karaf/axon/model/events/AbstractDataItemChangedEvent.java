@@ -16,10 +16,14 @@
  */
 package com.github.lburgazzoli.examples.karaf.axon.model.events;
 
+import com.google.common.base.Objects;
+
+import java.io.Serializable;
+
 /**
  *
  */
-public class AbstractDataItemChangedEvent {
+public class AbstractDataItemChangedEvent implements Serializable {
     private String m_id;
     private String m_text;
 
@@ -55,5 +59,17 @@ public class AbstractDataItemChangedEvent {
 
     public String getText() {
         return m_text;
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+            .add("id"  ,getId())
+            .add("text",getText())
+            .toString();
     }
 }

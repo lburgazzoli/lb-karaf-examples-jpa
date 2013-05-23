@@ -18,6 +18,7 @@ package com.github.lburgazzoli.examples.karaf.axon.model.events;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
 import org.axonframework.serializer.Revision;
 
 import java.io.Serializable;
@@ -64,6 +65,18 @@ public class DataItemCreatedEvent implements Serializable {
 
     public String getText() {
         return m_text;
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+            .add("id"  ,getId())
+            .add("text",getText())
+            .toString();
     }
 
     // *************************************************************************
