@@ -14,6 +14,7 @@ project.ext {
         'com.thoughtworks.xstream',
         'org.hibernate.proxy;resolution:=optional',
         'javassist.util.proxy;resolution:=optional',
+        'net.sf.jsr107cache;resolution:=optional',
         'org.xmlpull.v1',
         'com.hazelcast.config',
         'com.github.lburgazzoli.osgi',

@@ -127,9 +127,7 @@ limitations under the License.
     <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
         <property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>
-        <!--
-        <property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>
-        -->
+        <!--<property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>-->
     </bean>
 
     <bean id    = "AXON_CMD_GW"
@@ -187,6 +185,14 @@ limitations under the License.
     <bean id    = "AXON_EVT_BUS"
           class = "org.axonframework.eventhandling.SimpleEventBus">
     </bean>
+
+    <!--
+    <bean id    = "AXON_CMD_BUS"
+          class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleDisruptorCommandBus">
+        <argument ref="AXON_EVT_STORE"/>
+        <argument ref="AXON_EVT_BUS"/>
+    </bean>
+    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
