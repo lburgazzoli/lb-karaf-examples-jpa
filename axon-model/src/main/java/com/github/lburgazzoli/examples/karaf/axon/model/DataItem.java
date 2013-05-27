@@ -25,6 +25,8 @@ import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 import org.axonframework.serializer.Revision;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 
@@ -33,6 +35,7 @@ import java.io.Serializable;
  */
 @Revision("1")
 public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataItem.class);
 
     @AggregateIdentifier
     private String m_id;
@@ -71,12 +74,18 @@ public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializ
 
     @EventHandler
     protected void handleDataItemCreatedEvent(DataItemCreatedEvent event) {
+        LOGGER.debug(">>>> handleDataItemCreatedEvent : {}/{}/{},{}",
+            this,m_id,event.getId(),event.getText());
+
         m_id   = event.getId();
         m_text = event.getText();
     }
 
     @EventHandler
-    protected void handleDataItemUpdatedEvent(DataItemUpdatedEvent event) {
+    protected void handleDataItemUpdateCommand(DataItemUpdatedEvent event) {
+        LOGGER.debug(">>>> handleDataItemUpdateCommand : {}/{}/{}/{}",
+            this,m_id,event.getId(),event.getText());
+
         m_text = event.getText();
     }
 }
