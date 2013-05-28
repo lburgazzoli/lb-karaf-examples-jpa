@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter;
 
-import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -49,15 +48,15 @@ public class Activator implements BundleActivator {
             "javax.persistence.provider",
             org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
         props.put(
-            "javax.persistence.spi.PersistenceProvider",
+            javax.persistence.spi.PersistenceProvider.class.getName(),
             org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
         props.put(
             "javax.persistence.PersistenceProvider",
             org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
 
         serviceReg = context.registerService(
-            "javax.persistence.spi.PersistenceProvider",
-            (PersistenceProvider)new EclipseLinkOSGiPersistenceProvider(),
+            javax.persistence.spi.PersistenceProvider.class.getName(),
+            new org.eclipse.persistence.jpa.PersistenceProvider(),
             props);
     }
 

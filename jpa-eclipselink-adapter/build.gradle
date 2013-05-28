@@ -11,9 +11,9 @@ project.ext {
     requireBundle = [
         'org.eclipse.persistence.asm',
         'org.eclipse.persistence.antlr',
-        ' org.eclipse.persistence.core',
-        ' org.eclipse.persistence.jpa',
-        ' org.eclipse.persistence.jpa.jpql'
+        'org.eclipse.persistence.core',
+        'org.eclipse.persistence.jpa',
+        'org.eclipse.persistence.jpa.jpql'
     ]
 }
 

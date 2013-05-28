@@ -26,6 +26,7 @@
         </service-properties>
     </service>
 
+    <!--
     <bean id="data_source_h2" class="org.h2.jdbcx.JdbcDataSource">
         <property name="URL" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE"/>
         <property name="user" value="sa"/>
@@ -37,5 +38,6 @@
             <entry key="osgi.jndi.service.name" value="jdbc/H2"/>
         </service-properties>
     </service>
+    -->
 
 </blueprint>
