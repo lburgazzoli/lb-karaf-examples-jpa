@@ -23,6 +23,7 @@ project.ext {
         'com.github.lburgazzoli.examples.axon.helper',
         'com.github.lburgazzoli.examples.axon.serializer',
         'com.github.lburgazzoli.examples.axon.store',
+        'com.github.lburgazzoli.examples.axon.cache',
         '*'
     ]
 

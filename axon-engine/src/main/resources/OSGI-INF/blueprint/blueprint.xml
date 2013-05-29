@@ -105,6 +105,12 @@ limitations under the License.
     </bean>
     -->
 
+
+    <bean id    = "AXON_CACHE_MANAGER"
+          class = "com.github.lburgazzoli.examples.axon.cache.HazelcastCacheManager">
+        <argument ref="HZ_MANAGER"/>
+    </bean>
+
     <bean id    = "AXON_EVT_SERIALIZER"
           class = "com.github.lburgazzoli.examples.axon.serializer.JacksonSerializer">
         <argument ref="AXON_CL"/>
@@ -206,6 +212,7 @@ limitations under the License.
         <property name="commandGateway" ref="AXON_CMD_GW"/>
         <property name="eventBus"       ref="AXON_EVT_BUS"/>
         <property name="eventStore"     ref="AXON_EVT_STORE"/>
+        <property name="cacheManager"   ref="AXON_CACHE_MANAGER"/>
     </bean>
 
     <!-- ******************************************************************* -->

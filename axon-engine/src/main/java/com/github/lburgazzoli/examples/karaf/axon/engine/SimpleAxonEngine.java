@@ -17,6 +17,8 @@
 package com.github.lburgazzoli.examples.karaf.axon.engine;
 
 import com.github.lburgazzoli.examples.axon.IAxonEngine;
+import com.github.lburgazzoli.examples.axon.cache.ICacheManager;
+import com.github.lburgazzoli.examples.axon.helper.AxonCachingEventSourcingRepository;
 import com.github.lburgazzoli.examples.axon.helper.AxonEventSourcingRepository;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -32,6 +34,8 @@ import org.axonframework.eventhandling.annotation.AnnotationEventListenerAdapter
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.List;
@@ -43,10 +47,13 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class SimpleAxonEngine implements IAxonEngine {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleAxonEngine.class);
+
     private CommandBus m_commandBus;
     private CommandGateway m_commandGateway;
     private EventStore m_eventStore;
     private EventBus m_eventBus;
+    private ICacheManager m_cacheManager;
 
     private final Set<EventListener> m_eventListeners;
     private final Map<Object,Subscribable> m_eventHandlers;
@@ -60,6 +67,7 @@ public class SimpleAxonEngine implements IAxonEngine {
         m_commandGateway = null;
         m_eventStore = null;
         m_eventBus = null;
+        m_cacheManager = null;
         m_eventListeners = Sets.newHashSet();
         m_eventHandlers = Maps.newConcurrentMap();
         m_aggregates = Maps.newConcurrentMap();
@@ -101,6 +109,14 @@ public class SimpleAxonEngine implements IAxonEngine {
     // *************************************************************************
     //
     // *************************************************************************
+
+    /**
+     *
+     * @param cacheManager
+     */
+    public void setCacheManager(ICacheManager cacheManager) {
+        m_cacheManager = cacheManager;
+    }
 
     /**
      *
@@ -235,7 +251,12 @@ public class SimpleAxonEngine implements IAxonEngine {
     public void addAggregateType(Class<? extends EventSourcedAggregateRoot> aggregateType) {
         removeAggregateType(aggregateType);
 
-        EventSourcingRepository eventRepository = new AxonEventSourcingRepository(aggregateType,this);
+        EventSourcingRepository eventRepository = null;
+        if(m_cacheManager == null) {
+            eventRepository = new AxonEventSourcingRepository(aggregateType,this);
+        } else {
+            eventRepository = new AxonCachingEventSourcingRepository(aggregateType,this,m_cacheManager);
+        }
 
         m_aggregates.put(aggregateType,new AggregateSubscription(
             eventRepository,
