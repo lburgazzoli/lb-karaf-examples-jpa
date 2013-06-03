@@ -43,8 +43,7 @@ gradle clean install
     install -s mvn:de.undercouch/bson4jackson/2.2.0
     install -s wrap:mvn:org.axonframework/axon-core/2.0.2
 
-    #install -s mvn:com.hazelcast/hazelcast-all/2.5
-    install -s mvn:com.hazelcast/hazelcast-all/2.5.2-SNAPSHOT
+    install -s mvn:com.hazelcast/hazelcast-all/2.6
 
     #install -s mvn:org.apache.openjpa/openjpa/2.2.2
     #install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final
@@ -52,9 +51,8 @@ gradle clean install
     #install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-core/4.2.2-SNAPSHOT
     #install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-entitymanager/4.2.2-SNAPSHOT
     #install -s mvn:http://snapshots.jboss.org/maven2\!org.hibernate/hibernate-osgi/4.2.2-SNAPSHOT
-
-    install -s mvn:org.apache.aries/org.apache.aries.util/1.1.0
-    install -s mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0
+    #install -s mvn:org.apache.aries/org.apache.aries.util/1.1.0
+    #install -s mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0
 
     install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-commons/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-hazelcast/1.0.0.SNAPSHOT

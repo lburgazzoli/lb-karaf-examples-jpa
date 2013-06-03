@@ -79,13 +79,17 @@ public class HazelcastEventStore implements IHazelcastEventStore {
             DomainEventMessage dem = events.next();
             if(size == 0) {
                 listId = HazelcastStorageUtils.getStorageIdentifier(type, dem);
-                hdes = m_domainEventStore.get(listId);
+                hdes   = m_domainEventStore.get(listId);
 
                 if(hdes == null) {
                     hdes = new HazelcastDomainEventStore(
                         type,dem.getAggregateIdentifier().toString(),m_hazelcastManager);
 
                     m_domainEventStore.put(hdes.getStorageId(),hdes);
+                }
+
+                if(dem.getSequenceNumber() == 0) {
+                    hdes.clear();
                 }
             }
 

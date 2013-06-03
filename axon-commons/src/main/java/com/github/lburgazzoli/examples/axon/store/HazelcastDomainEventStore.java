@@ -56,6 +56,13 @@ public class HazelcastDomainEventStore {
 
     /**
      *
+     */
+    public void clear() {
+        m_storage.clear();
+    }
+
+    /**
+     *
      * @return
      */
     public ClassLoader getClassLoader() {
