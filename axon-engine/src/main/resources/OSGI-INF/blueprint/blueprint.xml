@@ -107,7 +107,7 @@ limitations under the License.
 
 
     <bean id    = "AXON_CACHE_MANAGER"
-          class = "com.github.lburgazzoli.examples.axon.cache.HazelcastCacheManager">
+          class = "com.github.lburgazzoli.examples.axon.hazelcast.cache.HazelcastCacheManager">
         <argument ref="HZ_MANAGER"/>
     </bean>
 
@@ -184,7 +184,7 @@ limitations under the License.
     -->
 
     <bean id    = "AXON_EVT_STORE"
-          class = "com.github.lburgazzoli.examples.axon.store.HazelcastEventStore">
+          class = "com.github.lburgazzoli.examples.axon.hazelcast.store.HazelcastEventStore">
         <argument ref="HZ_MANAGER"/>
     </bean>
 

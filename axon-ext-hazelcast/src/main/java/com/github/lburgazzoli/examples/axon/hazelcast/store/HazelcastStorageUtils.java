@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.store;
+package com.github.lburgazzoli.examples.axon.hazelcast.store;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.axonframework.domain.DomainEventMessage;

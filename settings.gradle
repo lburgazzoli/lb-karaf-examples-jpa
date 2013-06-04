@@ -18,6 +18,7 @@ include "zookeeper-server"
 include "zookeeper-client"
 
 include "axon-commons"
+include "axon-ext-hazelcast"
 include "axon-engine"
 include "axon-model"
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.store;
+package com.github.lburgazzoli.examples.axon.hazelcast.store;
 
 import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
@@ -51,14 +51,19 @@ public class HazelcastDomainEventStore {
         m_aggregateId = aggregateId;
         m_storageId = HazelcastStorageUtils.getStorageIdentifier(m_aggregateType, m_aggregateId);
         m_hazelcastManager = hazelcastManager;
-        m_storage = m_hazelcastManager.getInstance().getList(m_storageId);
+        m_storage = m_hazelcastManager.getList(m_storageId);
     }
 
     /**
      *
      */
     public void clear() {
-        m_storage.clear();
+        ClassLoader cl = Utils.swapContextClassLoader(getClassLoader());
+        try {
+            m_storage.clear();
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
     }
 
     /**

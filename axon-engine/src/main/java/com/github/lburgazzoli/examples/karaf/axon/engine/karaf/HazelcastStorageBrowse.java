@@ -17,8 +17,8 @@
 package com.github.lburgazzoli.examples.karaf.axon.engine.karaf;
 
 import com.github.lburgazzoli.Utils;
-import com.github.lburgazzoli.examples.axon.store.HazelcastDomainEventStore;
-import com.github.lburgazzoli.examples.axon.store.IHazelcastEventStore;
+import com.github.lburgazzoli.examples.axon.hazelcast.store.HazelcastDomainEventStore;
+import com.github.lburgazzoli.examples.axon.hazelcast.store.IHazelcastEventStore;
 import com.github.lburgazzoli.osgi.karaf.cmd.AbstractTabularCommand;
 import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
 import org.apache.felix.gogo.commands.Argument;

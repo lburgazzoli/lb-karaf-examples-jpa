@@ -14,27 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.store;
+package com.github.lburgazzoli.examples.axon.hazelcast.cache;
 
-import org.axonframework.eventstore.EventStore;
-
-import java.util.Collection;
+import com.github.lburgazzoli.examples.axon.cache.ICacheManager;
+import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
+import net.sf.jsr107cache.Cache;
+import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
 
 /**
  *
  */
-public interface IHazelcastEventStore extends EventStore {
+public class HazelcastCacheManager implements ICacheManager {
+    private final IHazelcastManager m_hazelcastManager;
 
     /**
      *
-     * @param eventStoreId
-     * @return
+     * @param hazelcastManager
      */
-    public HazelcastDomainEventStore getDomainEventStore(String eventStoreId);
+    public HazelcastCacheManager(IHazelcastManager hazelcastManager) {
+        m_hazelcastManager = hazelcastManager;
+    }
 
-    /**
-     *
-     * @return
-     */
-    public Collection<HazelcastDomainEventStore> getDomainEventStores();
+    @Override
+    public Cache getCache(Class<? extends EventSourcedAggregateRoot> aggregateType) {
+        return new HazelcastCache(
+            m_hazelcastManager,
+            "axon-cache-<" + aggregateType.getName() + ">");
+    }
 }

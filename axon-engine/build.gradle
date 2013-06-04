@@ -22,8 +22,9 @@ project.ext {
         'com.github.lburgazzoli.examples.axon',
         'com.github.lburgazzoli.examples.axon.helper',
         'com.github.lburgazzoli.examples.axon.serializer',
-        'com.github.lburgazzoli.examples.axon.store',
-        'com.github.lburgazzoli.examples.axon.cache',
+        'com.github.lburgazzoli.examples.axon.hazelcast.store;resolution:=optional',
+        'com.github.lburgazzoli.examples.axon.hazelcast.cache;resolution:=optional',
+        'com.github.lburgazzoli.examples.axon.hazelcast.distributed;resolution:=optional',
         '*'
     ]
 
@@ -36,6 +37,7 @@ dependencies {
     compile project(':osgi-commons')
     compile project(':osgi-hazelcast')
     compile project(':axon-commons')
+    compile project(':axon-ext-hazelcast')
 }
 
 jar {

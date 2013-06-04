@@ -16,6 +16,7 @@
  */
 package com.github.lburgazzoli.osgi.hazelcast;
 
+import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.osgi.BundleContextAware;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
@@ -116,12 +117,30 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     @Override
     public <K,V> IMap<K,V> getMap(String mapName) {
-        return m_instance.getMap(mapName);
+        ClassLoader cl = Utils.swapContextClassLoader(getClassloader());
+        IMap<K,V> rv = null;
+
+        try {
+            rv = m_instance.getMap(mapName);
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
+
+        return  rv;
     }
 
     @Override
     public <T> IList<T> getList(String listName) {
-        return m_instance.getList(listName);
+        ClassLoader cl = Utils.swapContextClassLoader(getClassloader());
+        IList<T> rv = null;
+
+        try {
+            rv = m_instance.getList(listName);
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
+
+        return  rv;
     }
 
     @Override
@@ -130,8 +149,17 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
     }
 
     @Override
-    public <E> ITopic<E> getTopic(String topicName) {
-        return m_instance.getTopic(topicName);
+    public <T> ITopic<T> getTopic(String topicName) {
+        ClassLoader cl = Utils.swapContextClassLoader(getClassloader());
+        ITopic<T> rv = null;
+
+        try {
+            rv = m_instance.getTopic(topicName);
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
+
+        return  rv;
     }
 
     // *************************************************************************

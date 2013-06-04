@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.store;
+package com.github.lburgazzoli.examples.axon.hazelcast.store;
 
 import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.examples.axon.serializer.JacksonObjectMapper;

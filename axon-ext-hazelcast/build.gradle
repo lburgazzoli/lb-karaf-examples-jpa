@@ -1,0 +1,24 @@
+
+project.ext {
+    bundleInportPackages = [
+        'org.axonframework.commandhandling.distributed;resolution:=optional',
+        '*'
+    ]
+
+    bundleExportPackages = [
+        '*'
+    ]
+}
+
+dependencies {
+    compile project(':osgi-commons')
+    compile project(':osgi-hazelcast')
+    compile project(':axon-commons')
+}
+
+jar {
+    manifest {
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , bundleExportPackages.join(',')
+    }
+}

@@ -14,9 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.cache;
+package com.github.lburgazzoli.examples.axon.hazelcast.cache;
 
 import com.github.lburgazzoli.Utils;
+import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import com.google.common.collect.Sets;
 import com.hazelcast.core.IMap;
 import net.sf.jsr107cache.Cache;
@@ -44,15 +45,15 @@ public class HazelcastCache implements Cache {
     /**
      * c-tor
      *
-     * @param classLoader
-     * @param cache
+     * @param cacheManager
+     * @param cacheName
      */
-    public HazelcastCache(ClassLoader classLoader, IMap<Object,Object> cache) {
-        m_classLoader = classLoader;
-        m_cache = cache;
+    public HazelcastCache(IHazelcastManager cacheManager,String cacheName) {
+        m_classLoader = cacheManager.getClassloader();
+        m_cache = cacheManager.getMap(cacheName);
 
-        LOGGER.debug("{} - ClassLoader {}",cache.getName(),m_classLoader);
-        LOGGER.debug("{} - Cache       {}",cache.getName(),m_cache);
+        LOGGER.debug("{} - ClassLoader {}",m_cache.getName(),m_classLoader);
+        LOGGER.debug("{} - Cache       {}",m_cache.getName(),m_cache);
     }
 
     @Override
@@ -153,12 +154,25 @@ public class HazelcastCache implements Cache {
 
     @Override
     public Object remove(Object key) {
-        return m_cache.remove(key);
+        ClassLoader cl = Utils.swapContextClassLoader(m_classLoader);
+        Object obj = null;
+        try {
+            obj = m_cache.remove(key);
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
+
+        return obj;
     }
 
     @Override
     public void clear() {
-        m_cache.clear();
+        ClassLoader cl = Utils.swapContextClassLoader(m_classLoader);
+        try {
+            m_cache.clear();
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
     }
 
     @Override

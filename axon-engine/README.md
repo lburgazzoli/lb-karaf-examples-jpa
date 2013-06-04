@@ -57,6 +57,7 @@ gradle clean install
     install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-commons/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-hazelcast/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-commons/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-axon-ext-hazelcast/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-engine/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-model/1.0.0.SNAPSHOT
 

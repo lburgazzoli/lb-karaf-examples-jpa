@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.distributed;
+package com.github.lburgazzoli.examples.axon.hazelcast.distributed;
 
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import org.axonframework.commandhandling.CommandCallback;
