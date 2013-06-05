@@ -42,6 +42,7 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
     install -s mvn:de.undercouch/bson4jackson/2.2.0
     install -s wrap:mvn:org.axonframework/axon-core/2.0.2
+    install -s wrap:mvn:net.sf.jsr107cache/jsr107cache/1.1
 
     install -s mvn:com.hazelcast/hazelcast-all/2.6
 

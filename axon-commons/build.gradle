@@ -2,6 +2,9 @@
 project.ext {
     bundleInportPackages = [
         'org.axonframework.commandhandling.distributed;resolution:=optional',
+        'org.springframework.transaction;resolution:=optional',
+        'org.springframework.transaction.jta;resolution:=optional',
+        'com.fasterxml.jackson.*;resolution:=optional',
         '*'
     ]
 
@@ -31,6 +34,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.2.1'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.1'
     compile 'de.undercouch:bson4jackson:2.2.0'
+    compile 'net.sf.jsr107cache:jsr107cache:1.1'
 }
 
 jar {

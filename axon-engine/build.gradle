@@ -1,8 +1,8 @@
 
 project.ext {
     bundleInportPackages = [
-        'javax.persistence',
-        'javax.transaction',
+        'javax.persistence;resolution:=optional',
+        'javax.transaction;resolution:=optional',
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
@@ -11,12 +11,15 @@ project.ext {
         'org.axonframework.common.jpa',
         'org.axonframework.eventstore.jpa',
         'org.axonframework.serializer.xml',
-        'com.thoughtworks.xstream',
+        'com.thoughtworks.xstream;resolution:=optional',
         'org.hibernate.proxy;resolution:=optional',
         'javassist.util.proxy;resolution:=optional',
         'net.sf.jsr107cache;resolution:=optional',
-        'org.xmlpull.v1',
+        'org.xmlpull.v1;resolution:=optional',
         'com.hazelcast.config',
+        'org.springframework.transaction;resolution:=optional',
+        'org.springframework.transaction.jta;resolution:=optional',
+        'com.lmax.disruptor;resolution:=optional',
         'com.github.lburgazzoli.osgi',
         'com.github.lburgazzoli.osgi.hazelcast',
         'com.github.lburgazzoli.examples.axon',

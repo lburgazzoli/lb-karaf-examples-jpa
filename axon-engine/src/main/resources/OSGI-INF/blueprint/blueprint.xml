@@ -39,8 +39,10 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <reference id        = "osgiJtaTransactionManager"
                interface = "javax.transaction.TransactionManager"/>
+    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
@@ -125,10 +127,12 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
 
+    <!--
     <bean id    = "AXON_CMD_BUS_TX_MANAGER"
           class = "com.github.lburgazzoli.examples.axon.helper.AxonJtaTransactionManager">
         <argument ref="osgiJtaTransactionManager"/>
     </bean>
+    -->
 
     <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
