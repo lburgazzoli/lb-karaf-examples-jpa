@@ -20,7 +20,9 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
+import com.hazelcast.core.IQueue;
 import com.hazelcast.core.ITopic;
+import com.hazelcast.core.MultiMap;
 
 /**
  *
@@ -40,6 +42,12 @@ public interface IHazelcastManager  {
 
     /**
      *
+     * @return
+     */
+    public String getId();
+
+    /**
+     *
      * @param mapName
      * @param <K>
      * @param <V>
@@ -49,11 +57,28 @@ public interface IHazelcastManager  {
 
     /**
      *
+     * @param mapName
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    public <K,V> MultiMap<K,V> getMultiMap(String mapName);
+
+    /**
+     *
      * @param listName
      * @param <T>
      * @return
      */
     public <T> IList<T> getList(String listName);
+
+    /**
+     *
+     * @param queueName
+     * @param <T>
+     * @return
+     */
+    public <T> IQueue<T> getQueue(String queueName);
 
     /**
      *

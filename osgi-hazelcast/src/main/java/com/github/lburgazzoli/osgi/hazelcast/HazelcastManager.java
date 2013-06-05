@@ -24,9 +24,11 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
+import com.hazelcast.core.IQueue;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.InstanceEvent;
 import com.hazelcast.core.InstanceListener;
+import com.hazelcast.core.MultiMap;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,6 +107,14 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
     // IHazelcastManager
     // *************************************************************************
 
+    /**
+     *
+     * @return
+     */
+    public String getId() {
+        return m_instance.getCluster().getLocalMember().getUuid();
+    }
+
     @Override
     public HazelcastInstance getInstance() {
         return m_instance;
@@ -130,12 +140,39 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
     }
 
     @Override
+    public <K,V> MultiMap<K,V> getMultiMap(String mapName) {
+        ClassLoader cl = Utils.swapContextClassLoader(getClassloader());
+        MultiMap<K,V> rv = null;
+
+        try {
+            rv = m_instance.getMultiMap(mapName);
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
+
+        return  rv;
+    }
+
+    @Override
     public <T> IList<T> getList(String listName) {
         ClassLoader cl = Utils.swapContextClassLoader(getClassloader());
         IList<T> rv = null;
 
         try {
             rv = m_instance.getList(listName);
+        } finally {
+            Utils.swapContextClassLoader(cl);
+        }
+
+        return  rv;
+    }
+
+    public <T> IQueue<T> getQueue(String queueName) {
+        ClassLoader cl = Utils.swapContextClassLoader(getClassloader());
+        IQueue<T> rv = null;
+
+        try {
+            rv = m_instance.getQueue(queueName);
         } finally {
             Utils.swapContextClassLoader(cl);
         }
