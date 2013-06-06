@@ -25,7 +25,6 @@ import java.util.Map;
 /**
  *
  */
-
 public class HazelcastDomainEventMessage<T> implements DomainEventMessage<T> {
 
     private long m_sequenceNumber;
@@ -137,7 +136,6 @@ public class HazelcastDomainEventMessage<T> implements DomainEventMessage<T> {
 
     @Override
     public DomainEventMessage withMetaData(Map<String, ?> metaData) {
-
         HazelcastDomainEventMessage dem = new HazelcastDomainEventMessage(this);
         dem.setMetaData(new MetaData(metaData));
 

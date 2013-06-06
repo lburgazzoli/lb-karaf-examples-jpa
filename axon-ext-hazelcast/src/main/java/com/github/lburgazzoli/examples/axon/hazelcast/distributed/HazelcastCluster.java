@@ -34,38 +34,31 @@ import java.util.concurrent.BlockingDeque;
 public class HazelcastCluster {
     private final static Logger LOGEGR = LoggerFactory.getLogger(HazelcastCluster.class);
 
-    private final static String REG_CMD_HANDLERS    = "reg.cmd.handlers";
-    private final static String ATTR_LOAD_FACTOR    = "load.factor";
-    private final static String ATTR_HZ_CLUSTER_ID  = "hz.cluster.id";
-    private final static String ATTR_CONNECTOR_ID   = "conenctor.id";
+    private final static String REG_CMD_HANDLERS      = "reg.cmd.handlers";
+    private final static String REG_CMD_DESTINATIONS  = "reg.cmd.destinations";
+    private final static String REG_NODES             = "reg.nodes";
+    private final static String ATTR_LOAD_FACTOR      = "load.factor";
+    private final static String ATTR_HZ_CLUSTER_ID    = "hz.cluster.id";
+    private final static String ATTR_CONNECTOR_ID     = "conenctor.id";
 
     private final IHazelcastManager m_hazelcastManager;
-    private final String m_clusterName;
     private final Map<String,Map<String,Object>> m_clusterRegistry;
+    private final Map<String,String> m_cmdDestinations;
 
     /**
      * c-tor
      *
      * @param hazelcastManager
-     * @param clusterName
      */
-    public HazelcastCluster(IHazelcastManager hazelcastManager,String clusterName) {
+    public HazelcastCluster(IHazelcastManager hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
-        m_clusterName = clusterName;
-        m_clusterRegistry = m_hazelcastManager.getMap(clusterName);
+        m_clusterRegistry  = m_hazelcastManager.getMap(REG_NODES);
+        m_cmdDestinations  = m_hazelcastManager.getMap(REG_CMD_DESTINATIONS);
     }
 
     // *************************************************************************
     //
     // *************************************************************************
-
-    /**
-     *
-     * @return
-     */
-    public String getClusterName() {
-        return m_clusterName;
-    }
 
     /**
      *
@@ -152,5 +145,21 @@ public class HazelcastCluster {
      */
     public void send(String destination,CommandMessage<?> command) throws InterruptedException {
         m_hazelcastManager.getQueue(destination).put(command);
+    }
+
+    /**
+     *
+     * @param routingKey
+     * @param command
+     * @return
+     */
+    public String getCommandDestination(String routingKey, CommandMessage<?> command) {
+        String destination = m_cmdDestinations.get(routingKey);
+        if(StringUtils.isBlank(destination)) {
+            destination = getHandlerForCommand(command);
+            m_cmdDestinations.put(routingKey,destination);
+        }
+
+        return destination;
     }
 }

@@ -16,9 +16,7 @@
  */
 package com.github.lburgazzoli.examples.axon.hazelcast.distributed;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import org.apache.commons.lang3.StringUtils;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.CommandCallback;
 import org.axonframework.commandhandling.CommandHandler;
@@ -27,7 +25,6 @@ import org.axonframework.commandhandling.distributed.CommandBusConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +43,6 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
     private String m_nodeId;
     private Integer m_loadFactor;
     private HazelcastCommandListener m_queueListener;
-    private final Map<String,String> m_destinatiopns;
 
     /**
      * c-tor
@@ -58,7 +54,6 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
         m_hazelcastCluster = hazelcastCluster;
         m_localSegment = localSegment;
         m_supportedCommands = Sets.newCopyOnWriteArraySet();
-        m_destinatiopns = Maps.newHashMap();
         m_nodeId = null;
         m_loadFactor = -1;
         m_queueListener = null;
@@ -89,7 +84,7 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
      */
     public void connect() {
         BlockingDeque<?> queue = m_hazelcastCluster.join(m_nodeId,m_loadFactor);
-        if(queue != null) {
+        if(queue != null && m_queueListener == null) {
             m_queueListener = new HazelcastCommandListener(queue);
             m_queueListener.run();
         }
@@ -101,6 +96,13 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
     public void disconenct() {
         if(m_hazelcastCluster != null) {
             m_queueListener.shutdown();
+            try {
+                m_queueListener.join(1000 * 5);
+            } catch (InterruptedException e) {
+                LOGGER.warn("Exception",e);
+            } finally {
+                m_queueListener = null;
+            }
         }
 
         m_hazelcastCluster.leave(m_nodeId);
@@ -117,11 +119,7 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
 
     @Override
     public <R> void send(String routingKey, CommandMessage<?> command, CommandCallback<R> callback) throws Exception {
-        String destination = m_destinatiopns.get(routingKey);
-        if(StringUtils.isBlank(destination)) {
-            destination = m_hazelcastCluster.getHandlerForCommand(command);
-            m_destinatiopns.put(routingKey,destination);
-        }
+        String destination = m_hazelcastCluster.getCommandDestination(routingKey, command);
 
         try {
             m_hazelcastCluster.send(destination,command);
