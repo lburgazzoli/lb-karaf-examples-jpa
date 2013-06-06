@@ -121,11 +121,9 @@ limitations under the License.
     <bean id    = "AXON_CMD_BUS_ROLLBACK_CFG"
           class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleRollbackConfiguration">
     </bean>
-
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
-
 
     <!--
     <bean id    = "AXON_CMD_BUS_TX_MANAGER"
@@ -134,9 +132,28 @@ limitations under the License.
     </bean>
     -->
 
-    <bean id    = "AXON_CMD_BUS"
+    <bean id    = "AXON_LOCAL_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
         <property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>
+        <!--<property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>-->
+    </bean>
+
+    <bean id    = "AXON_CLUSTER"
+          class = "com.github.lburgazzoli.examples.axon.hazelcast.distributed.HazelcastCluster">
+        <argument ref="HZ_MANAGER"/>
+    </bean>
+
+    <bean id    = "AXON_CONNECTOR"
+          class = "com.github.lburgazzoli.examples.axon.hazelcast.distributed.HazelcastCommandBusConnector">
+        <argument ref="AXON_CLUSTER"/>
+        <argument ref="AXON_LOCAL_CMD_BUS"/>
+    </bean>
+
+
+    <bean id    = "AXON_CMD_BUS"
+          class = "org.axonframework.commandhandling.distributed.DistributedCommandBus">
+        <argument ref="AXON_CONNECTOR"/>
+        <!--<property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>-->
         <!--<property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>-->
     </bean>
 
@@ -236,6 +253,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
+    <!--
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="axon/list-repos">
             <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListRepositoriesCommand">
@@ -263,5 +281,6 @@ limitations under the License.
             </action>
         </command>
     </command-bundle>
+    -->
 
 </blueprint>

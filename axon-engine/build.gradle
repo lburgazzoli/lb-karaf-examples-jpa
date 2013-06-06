@@ -25,9 +25,7 @@ project.ext {
         'com.github.lburgazzoli.examples.axon',
         'com.github.lburgazzoli.examples.axon.helper',
         'com.github.lburgazzoli.examples.axon.serializer',
-        'com.github.lburgazzoli.examples.axon.hazelcast.store;resolution:=optional',
-        'com.github.lburgazzoli.examples.axon.hazelcast.cache;resolution:=optional',
-        'com.github.lburgazzoli.examples.axon.hazelcast.distributed;resolution:=optional',
+        'com.github.lburgazzoli.examples.axon.hazelcast.*;resolution:=optional',
         '*'
     ]
 
