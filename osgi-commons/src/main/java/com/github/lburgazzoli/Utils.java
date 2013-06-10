@@ -55,7 +55,11 @@ public class Utils {
      */
     public static ClassLoader swapContextClassLoader(ClassLoader classLoader) {
         ClassLoader oldClassLoader =  Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader(classLoader);
+
+        if(classLoader != null) {
+            Thread.currentThread().setContextClassLoader(classLoader);
+        }
+
         return oldClassLoader;
     }
 }

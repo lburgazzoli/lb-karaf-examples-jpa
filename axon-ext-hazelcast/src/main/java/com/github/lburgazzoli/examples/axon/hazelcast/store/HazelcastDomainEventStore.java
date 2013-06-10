@@ -58,8 +58,9 @@ public class HazelcastDomainEventStore {
      *
      */
     public void clear() {
-        ClassLoader cl = Utils.swapContextClassLoader(getClassLoader());
+        ClassLoader cl = null;
         try {
+            cl = Utils.swapContextClassLoader(getClassLoader());
             m_storage.clear();
         } finally {
             Utils.swapContextClassLoader(cl);
@@ -128,9 +129,11 @@ public class HazelcastDomainEventStore {
      */
     public DomainEventStream getEventStream() {
         DomainEventStream des = null;
-        ClassLoader cl = Utils.swapContextClassLoader(getClassLoader());
+        ClassLoader cl = null;
 
         try {
+            cl = Utils.swapContextClassLoader(getClassLoader());
+
             List<DomainEventMessage> messages =
                 Lists.newArrayListWithCapacity(m_storage.size());
 
