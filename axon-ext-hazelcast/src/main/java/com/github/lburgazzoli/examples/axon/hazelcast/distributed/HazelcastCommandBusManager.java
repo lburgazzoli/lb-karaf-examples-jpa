@@ -31,13 +31,12 @@ import java.util.concurrent.BlockingDeque;
 /**
  *
  */
-public class HazelcastCluster {
-    private final static Logger LOGEGR = LoggerFactory.getLogger(HazelcastCluster.class);
+public class HazelcastCommandBusManager {
+    private final static Logger LOGEGR = LoggerFactory.getLogger(HazelcastCommandBusManager.class);
 
     private final static String REG_CMD_HANDLERS      = "reg.cmd.handlers";
     private final static String REG_CMD_DESTINATIONS  = "reg.cmd.destinations";
     private final static String REG_NODES             = "reg.nodes";
-    private final static String ATTR_LOAD_FACTOR      = "load.factor";
     private final static String ATTR_HZ_CLUSTER_ID    = "hz.cluster.id";
     private final static String ATTR_CONNECTOR_ID     = "conenctor.id";
 
@@ -50,7 +49,7 @@ public class HazelcastCluster {
      *
      * @param hazelcastManager
      */
-    public HazelcastCluster(IHazelcastManager hazelcastManager) {
+    public HazelcastCommandBusManager(IHazelcastManager hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
         m_clusterRegistry  = m_hazelcastManager.getMap(REG_NODES);
         m_cmdDestinations  = m_hazelcastManager.getMap(REG_CMD_DESTINATIONS);
@@ -62,22 +61,12 @@ public class HazelcastCluster {
 
     /**
      *
-     * @return
-     */
-    public IHazelcastManager getHazelcastManager() {
-        return m_hazelcastManager;
-    }
-
-    /**
-     *
      * @param id
-     * @param loadFactor
      */
-    public BlockingDeque<?> join(final String id,final int loadFactor) {
+    public BlockingDeque<?> join(final String id) {
         if(StringUtils.isNotBlank(id)) {
             if(!m_clusterRegistry.containsKey(id)) {
                 m_clusterRegistry.put(id,new HashMap<String,Object>() {{
-                    put(ATTR_LOAD_FACTOR  ,loadFactor);
                     put(ATTR_HZ_CLUSTER_ID,m_hazelcastManager.getId());
                     put(ATTR_CONNECTOR_ID ,id);
                 }});
@@ -157,7 +146,13 @@ public class HazelcastCluster {
         String destination = m_cmdDestinations.get(routingKey);
         if(StringUtils.isBlank(destination)) {
             destination = getHandlerForCommand(command);
-            m_cmdDestinations.put(routingKey,destination);
+            if(m_clusterRegistry.containsKey(destination)) {
+                m_cmdDestinations.put(routingKey,destination);
+            }
+        }
+
+        if(!m_clusterRegistry.containsKey(destination)) {
+            destination = null;
         }
 
         return destination;

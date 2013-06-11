@@ -46,7 +46,7 @@ subprojects {
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.0'
         compile 'com.hazelcast:hazelcast-client:2.6'
         compile 'com.googlecode.json-simple:json-simple:1.1.1'
-        compile 'org.mongodb:mongo-java-driver:2.10.1'
+        compile 'org.mongodb:mongo-java-driver:2.11.1'
         compile 'com.esotericsoftware.kryo:kryo:2.21'
     }
 

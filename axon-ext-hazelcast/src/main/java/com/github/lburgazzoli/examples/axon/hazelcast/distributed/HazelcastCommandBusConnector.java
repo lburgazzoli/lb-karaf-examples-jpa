@@ -37,25 +37,23 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HazelcastCommandBusConnector.class);
 
-    private final HazelcastCluster m_hazelcastCluster;
+    private final HazelcastCommandBusManager m_manager;
     private final CommandBus m_localSegment;
     private final Set<String> m_supportedCommands;
     private String m_nodeId;
-    private Integer m_loadFactor;
     private HazelcastCommandListener m_queueListener;
 
     /**
      * c-tor
      *
-     * @param hazelcastCluster
+     * @param manager
      * @param localSegment
      */
-    public HazelcastCommandBusConnector(HazelcastCluster hazelcastCluster,CommandBus localSegment) {
-        m_hazelcastCluster = hazelcastCluster;
+    public HazelcastCommandBusConnector(HazelcastCommandBusManager manager,CommandBus localSegment) {
+        m_manager = manager;
         m_localSegment = localSegment;
         m_supportedCommands = Sets.newCopyOnWriteArraySet();
         m_nodeId = null;
-        m_loadFactor = -1;
         m_queueListener = null;
     }
 
@@ -73,17 +71,9 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
 
     /**
      *
-     * @param loadFactor
-     */
-    public void setLoadFactor(int loadFactor) {
-        m_loadFactor = loadFactor;
-    }
-
-    /**
-     *
      */
     public void connect() {
-        BlockingDeque<?> queue = m_hazelcastCluster.join(m_nodeId,m_loadFactor);
+        BlockingDeque<?> queue = m_manager.join(m_nodeId);
         if(queue != null && m_queueListener == null) {
             m_queueListener = new HazelcastCommandListener(queue);
             m_queueListener.run();
@@ -94,7 +84,7 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
      *
      */
     public void disconenct() {
-        if(m_hazelcastCluster != null) {
+        if(m_manager != null) {
             m_queueListener.shutdown();
             try {
                 m_queueListener.join(1000 * 5);
@@ -105,7 +95,7 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
             }
         }
 
-        m_hazelcastCluster.leave(m_nodeId);
+        m_manager.leave(m_nodeId);
     }
 
     // *************************************************************************
@@ -119,10 +109,10 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
 
     @Override
     public <R> void send(String routingKey, CommandMessage<?> command, CommandCallback<R> callback) throws Exception {
-        String destination = m_hazelcastCluster.getCommandDestination(routingKey, command);
+        String destination = m_manager.getCommandDestination(routingKey, command);
 
         try {
-            m_hazelcastCluster.send(destination,command);
+            m_manager.send(destination, command);
             if(callback != null) {
                 //TODO: do something
             }
@@ -136,7 +126,7 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
     public <C> void subscribe(String commandName, CommandHandler<? super C> handler) {
         m_localSegment.subscribe(commandName, handler);
         if (m_supportedCommands.add(commandName)) {
-            m_hazelcastCluster.registerCommandHandler(commandName,m_nodeId);
+            m_manager.registerCommandHandler(commandName, m_nodeId);
         }
     }
 
@@ -144,7 +134,7 @@ public class HazelcastCommandBusConnector implements CommandBusConnector {
     public <C> boolean unsubscribe(String commandName, CommandHandler<? super C> handler) {
         if (m_localSegment.unsubscribe(commandName, handler)) {
             m_supportedCommands.remove(commandName);
-            m_hazelcastCluster.unregisterCommandHandler(commandName,m_nodeId);
+            m_manager.unregisterCommandHandler(commandName, m_nodeId);
             return true;
         }
 

@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.examples.axon.hazelcast.eventhandling;
 
-import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import org.axonframework.domain.EventMessage;
 import org.axonframework.eventhandling.Cluster;
 import org.axonframework.eventhandling.EventBusTerminal;
@@ -26,14 +25,14 @@ import org.axonframework.eventhandling.EventBusTerminal;
  */
 public class HazelcastEventBusTerminal implements EventBusTerminal {
 
-    private final IHazelcastManager m_hazelcastManager;
+    private final HazelcastEventBusManager m_manager;
 
     /**
      *
-     * @param hazelcastManager
+     * @param manager
      */
-    public HazelcastEventBusTerminal(IHazelcastManager hazelcastManager) {
-        m_hazelcastManager = hazelcastManager;
+    public HazelcastEventBusTerminal(HazelcastEventBusManager manager) {
+        m_manager = manager;
     }
 
     @Override

@@ -14,15 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.osgi.hazelcast.cluster;
+package com.github.lburgazzoli.examples.axon.hazelcast.eventhandling;
+
+import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
-public class ClusteredApplicationConstants {
+public class HazelcastEventBusManager {
+    private final static Logger LOGEGR = LoggerFactory.getLogger(HazelcastEventBusManager.class);
 
-    public static final String CLUSTER_REGISTRY  = "cluster.registry";
-    public static final String CLUSTER_LOCK      = "cluster.lock";
-    public static final String NODE_ID           = "node.id";
-    public static final String NODE_HEARTBEAT    = "node.heartbeat";
+    private final IHazelcastManager m_hazelcastManager;
+
+    /**
+     * c-tor
+     *
+     * @param hazelcastManager
+     */
+    public HazelcastEventBusManager(IHazelcastManager hazelcastManager) {
+        m_hazelcastManager = hazelcastManager;
+    }
 }
