@@ -45,17 +45,18 @@ public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializ
      * c-tor
      */
     public DataItem() {
-        m_id  = null;
+        m_id = null;
         m_text = null;
     }
 
     /**
      * c-tor
-     *
-     * @param command
      */
     @CommandHandler
     public DataItem(DataItemCreateCommand command) {
+        m_id   = null;
+        m_text = null;
+
         apply(new DataItemCreatedEvent(command.getId(),command.getText()));
     }
 

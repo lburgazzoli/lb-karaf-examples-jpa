@@ -16,11 +16,14 @@
  */
 package com.github.lburgazzoli.examples.axon.hazelcast.eventhandling;
 
+import com.google.common.collect.Lists;
 import org.axonframework.domain.EventMessage;
 import org.axonframework.eventhandling.Cluster;
 import org.axonframework.eventhandling.EventBusTerminal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  *
@@ -30,6 +33,7 @@ public class HazelcastEventBusTerminal implements EventBusTerminal {
 
     private final HazelcastEventBusManager m_manager;
     private String m_topicName;
+    private List<String> m_interestedTopics;
 
     /**
      *
@@ -38,6 +42,7 @@ public class HazelcastEventBusTerminal implements EventBusTerminal {
     public HazelcastEventBusTerminal(HazelcastEventBusManager manager) {
         m_manager = manager;
         m_topicName = "default";
+        m_interestedTopics = Lists.newArrayList();
     }
 
     // *************************************************************************
@@ -61,5 +66,6 @@ public class HazelcastEventBusTerminal implements EventBusTerminal {
 
     @Override
     public void onClusterCreated(Cluster cluster) {
+        LOGEGR.debug("ClusterCreated {}",cluster);
     }
 }

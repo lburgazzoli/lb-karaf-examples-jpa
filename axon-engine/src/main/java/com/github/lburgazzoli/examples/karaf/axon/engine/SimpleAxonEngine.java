@@ -81,6 +81,11 @@ public class SimpleAxonEngine implements IAxonEngine {
      *
      */
     public void init() {
+        LOGGER.debug("CommandBus     : {}",m_commandBus);
+        LOGGER.debug("CommandGateway : {}",m_commandGateway);
+        LOGGER.debug("EventStore     : {}",m_eventStore);
+        LOGGER.debug("EventBus       : {}",m_eventBus);
+        LOGGER.debug("ICacheManager  : {}",m_cacheManager);
     }
 
     /**

@@ -113,14 +113,17 @@ limitations under the License.
         <argument ref="HZ_MANAGER"/>
     </bean>
 
+    <!--
     <bean id    = "AXON_EVT_SERIALIZER"
           class = "com.github.lburgazzoli.examples.axon.serializer.JacksonSerializer">
         <argument ref="AXON_CL"/>
     </bean>
+    -->
 
     <bean id    = "AXON_CMD_BUS_ROLLBACK_CFG"
           class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleRollbackConfiguration">
     </bean>
+
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
@@ -132,12 +135,13 @@ limitations under the License.
     </bean>
     -->
 
-    <bean id    = "AXON_LOCAL_CMD_BUS"
+    <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
         <property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>
         <!--<property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>-->
     </bean>
 
+    <!--
     <bean id    = "AXON_CLUSTER"
           class = "com.github.lburgazzoli.examples.axon.hazelcast.distributed.HazelcastCommandBusManager">
         <argument ref="HZ_MANAGER"/>
@@ -153,9 +157,8 @@ limitations under the License.
     <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.distributed.DistributedCommandBus">
         <argument ref="AXON_CONNECTOR"/>
-        <!--<property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>-->
-        <!--<property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>-->
     </bean>
+    -->
 
     <bean id    = "AXON_CMD_GW"
           class = "com.github.lburgazzoli.examples.axon.helper.AxonCommandGateway">
@@ -213,14 +216,6 @@ limitations under the License.
           class = "org.axonframework.eventhandling.SimpleEventBus">
     </bean>
 
-    <!--
-    <bean id    = "AXON_CMD_BUS"
-          class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleDisruptorCommandBus">
-        <argument ref="AXON_EVT_STORE"/>
-        <argument ref="AXON_EVT_BUS"/>
-    </bean>
-    -->
-
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
@@ -253,7 +248,6 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <!--
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="axon/list-repos">
             <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListRepositoriesCommand">
@@ -281,6 +275,5 @@ limitations under the License.
             </action>
         </command>
     </command-bundle>
-    -->
 
 </blueprint>
