@@ -111,11 +111,15 @@ public class HazelcastEventStore implements IHazelcastEventStore {
 
         if(hdes != null) {
             // Workaround for HZ serialization issues
-            ClassLoader classLoader =
-                Utils.swapContextClassLoader(m_hazelcastManager.getClassloader());
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            DomainEventStream des = null;
 
-            DomainEventStream des = hdes.getEventStream();
-            Utils.swapContextClassLoader(classLoader);
+            try {
+                Thread.currentThread().setContextClassLoader(m_hazelcastManager.getClassloader());
+                des = hdes.getEventStream();
+            } finally {
+                Thread.currentThread().setContextClassLoader(cl);
+            }
 
             LOGGER.debug("readEvents: type={}, nbStoredEvents={}",type,hdes.getStorageSize());
 

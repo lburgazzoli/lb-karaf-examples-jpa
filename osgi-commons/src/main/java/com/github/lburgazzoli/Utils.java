@@ -50,38 +50,4 @@ public class Utils {
         Collection<? extends T> collection,Class<T> type) {
         return (Collection<T>) collection;
     }
-
-    /**
-     *
-     * @param classLoader
-     * @return
-     */
-    public static ClassLoader swapContextClassLoader(ClassLoader classLoader) {
-        ClassLoader oldClassLoader =  Thread.currentThread().getContextClassLoader();
-
-        if(classLoader != null) {
-            Thread.currentThread().setContextClassLoader(classLoader);
-        }
-
-        return oldClassLoader;
-    }
-
-    /**
-     *
-     * @param fmt
-     * @param args
-     * @return
-     */
-    public static Logger getLogger(String fmt,Object... args) {
-        return LoggerFactory.getLogger(String.format(fmt, args));
-    }
-
-    /**
-     *
-     * @param type
-     * @return
-     */
-    public static <T> Logger getLogger(Class<T> type) {
-        return LoggerFactory.getLogger(type);
-    }
 }

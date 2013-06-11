@@ -98,13 +98,14 @@ public class HazelcastCache implements Cache {
 
     @Override
     public Object get(Object key) {
-        ClassLoader cl = null;
-        Object obj = null;
+        ClassLoader cl  = Thread.currentThread().getContextClassLoader();
+        Object      obj = null;
+
         try {
-            cl = Utils.swapContextClassLoader(m_classLoader);
+            Thread.currentThread().setContextClassLoader(m_classLoader);
             obj = m_cache.get(key);
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return obj;
@@ -117,13 +118,14 @@ public class HazelcastCache implements Cache {
 
     @Override
     public Object put(Object key, Object value) {
-        ClassLoader cl = null;
-        Object obj = null;
+        ClassLoader cl  = Thread.currentThread().getContextClassLoader();
+        Object      obj = null;
+
         try {
-            cl = Utils.swapContextClassLoader(m_classLoader);
+            Thread.currentThread().setContextClassLoader(m_classLoader);
             obj = m_cache.put(key,value);
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return obj;
@@ -156,13 +158,14 @@ public class HazelcastCache implements Cache {
 
     @Override
     public Object remove(Object key) {
-        ClassLoader cl = null;
-        Object obj = null;
+        ClassLoader cl  = Thread.currentThread().getContextClassLoader();
+        Object      obj = null;
+
         try {
-            cl = Utils.swapContextClassLoader(m_classLoader);
+            Thread.currentThread().setContextClassLoader(m_classLoader);
             obj = m_cache.remove(key);
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return obj;
@@ -170,12 +173,12 @@ public class HazelcastCache implements Cache {
 
     @Override
     public void clear() {
-        ClassLoader cl = null;
+        ClassLoader cl  = Thread.currentThread().getContextClassLoader();
         try {
-            cl = Utils.swapContextClassLoader(m_classLoader);
+            Thread.currentThread().setContextClassLoader(m_classLoader);
             m_cache.clear();
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
     }
 

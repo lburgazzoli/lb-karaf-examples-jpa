@@ -151,14 +151,14 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     @Override
     public <K,V> IMap<K,V> getMap(String name) {
-        ClassLoader cl = null;
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         IMap<K,V> rv = null;
 
         try {
-            cl = Utils.swapContextClassLoader(getClassloader());
+            Thread.currentThread().setContextClassLoader(getClassloader());
             rv = m_instance.getMap(getItemName(name));
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return  rv;
@@ -166,14 +166,14 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     @Override
     public <K,V> MultiMap<K,V> getMultiMap(String name) {
-        ClassLoader cl = null;
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         MultiMap<K,V> rv = null;
 
         try {
-            cl = Utils.swapContextClassLoader(getClassloader());
+            Thread.currentThread().setContextClassLoader(getClassloader());
             rv = m_instance.getMultiMap(getItemName(name));
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return  rv;
@@ -181,28 +181,28 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     @Override
     public <T> IList<T> getList(String name) {
-        ClassLoader cl = null;
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         IList<T> rv = null;
 
         try {
-            cl = Utils.swapContextClassLoader(getClassloader());
+            Thread.currentThread().setContextClassLoader(getClassloader());
             rv = m_instance.getList(getItemName(name));
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return  rv;
     }
 
     public <T> IQueue<T> getQueue(String name) {
-        ClassLoader cl = null;
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         IQueue<T> rv = null;
 
         try {
-            cl = Utils.swapContextClassLoader(getClassloader());
+            Thread.currentThread().setContextClassLoader(getClassloader());
             rv = m_instance.getQueue(getItemName(name));
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return  rv;
@@ -210,14 +210,14 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     @Override
     public ILock getLock(String name) {
-        ClassLoader cl = null;
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         ILock rv = null;
 
         try {
-            cl = Utils.swapContextClassLoader(getClassloader());
+            Thread.currentThread().setContextClassLoader(getClassloader());
             rv = m_instance.getLock(getItemName(name));
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return  rv;
@@ -225,14 +225,14 @@ public class HazelcastManager extends BundleContextAware implements IHazelcastMa
 
     @Override
     public <T> ITopic<T> getTopic(String name) {
-        ClassLoader cl = null;
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         ITopic<T> rv = null;
 
         try {
-            cl = Utils.swapContextClassLoader(getClassloader());
+            Thread.currentThread().setContextClassLoader(getClassloader());
             rv = m_instance.getTopic(getItemName(name));
         } finally {
-            Utils.swapContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
         }
 
         return  rv;

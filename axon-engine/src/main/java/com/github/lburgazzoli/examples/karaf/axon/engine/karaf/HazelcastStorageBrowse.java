@@ -43,15 +43,14 @@ public class HazelcastStorageBrowse extends AbstractTabularCommand<IHazelcastEve
 
     @Override
     public void doExecute(IHazelcastEventStore storage,ShellTable table) throws Exception {
-
-
         HazelcastDomainEventStore eventStore = storage.getDomainEventStore(storageId);
         if(eventStore != null) {
 
-            ClassLoader cl =
-                Utils.swapContextClassLoader(eventStore.getClassLoader());
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
 
             try {
+                Thread.currentThread().setContextClassLoader(eventStore.getClassLoader());
+
                 for(DomainEventMessage data : eventStore.getStorage()) {
                     table.addRow(
                         data.getTimestamp(),
@@ -59,7 +58,7 @@ public class HazelcastStorageBrowse extends AbstractTabularCommand<IHazelcastEve
                         data.getPayload().toString());
                 }
             } finally {
-                Utils.swapContextClassLoader(cl);
+                Thread.currentThread().setContextClassLoader(cl);
             }
         }
     }
