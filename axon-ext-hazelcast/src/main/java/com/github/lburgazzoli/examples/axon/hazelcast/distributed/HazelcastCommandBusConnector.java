@@ -34,7 +34,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  */
 public class HazelcastCommandBusConnector implements CommandBusConnector {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(HazelcastCommandBusConnector.class);
 
     private final HazelcastCommandBusManager m_manager;

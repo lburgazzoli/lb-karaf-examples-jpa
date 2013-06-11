@@ -16,6 +16,9 @@
  */
 package com.github.lburgazzoli;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collection;
 
 /**
@@ -61,5 +64,24 @@ public class Utils {
         }
 
         return oldClassLoader;
+    }
+
+    /**
+     *
+     * @param fmt
+     * @param args
+     * @return
+     */
+    public static Logger getLogger(String fmt,Object... args) {
+        return LoggerFactory.getLogger(String.format(fmt, args));
+    }
+
+    /**
+     *
+     * @param type
+     * @return
+     */
+    public static <T> Logger getLogger(Class<T> type) {
+        return LoggerFactory.getLogger(type);
     }
 }

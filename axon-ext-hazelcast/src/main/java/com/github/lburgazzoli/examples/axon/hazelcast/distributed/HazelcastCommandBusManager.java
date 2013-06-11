@@ -16,6 +16,7 @@
  */
 package com.github.lburgazzoli.examples.axon.hazelcast.distributed;
 
+import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import com.hazelcast.core.MultiMap;
 import org.apache.commons.lang3.StringUtils;
@@ -58,6 +59,14 @@ public class HazelcastCommandBusManager {
     // *************************************************************************
     //
     // *************************************************************************
+
+    /**
+     *
+     * @return
+     */
+    public IHazelcastManager getManager() {
+        return m_hazelcastManager;
+    }
 
     /**
      *

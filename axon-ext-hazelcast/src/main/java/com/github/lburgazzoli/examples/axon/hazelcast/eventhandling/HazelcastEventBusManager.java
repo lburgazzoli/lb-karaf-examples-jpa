@@ -17,6 +17,8 @@
 package com.github.lburgazzoli.examples.axon.hazelcast.eventhandling;
 
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
+import org.apache.commons.lang3.StringUtils;
+import org.axonframework.domain.EventMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,5 +37,31 @@ public class HazelcastEventBusManager {
      */
     public HazelcastEventBusManager(IHazelcastManager hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    /**
+     *
+     * @return
+     */
+    public IHazelcastManager getManager() {
+        return m_hazelcastManager;
+    }
+
+    /**
+     *
+     * @param event
+     * @return
+     */
+    public void publish(String topicName,EventMessage event) {
+        String tn = event.getPayloadType().getName();
+        if(StringUtils.isNotBlank(topicName)) {
+            tn = topicName + ":" + tn;
+        }
+
+        m_hazelcastManager.getTopic(tn).publish(event);
     }
 }

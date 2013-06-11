@@ -19,13 +19,17 @@ package com.github.lburgazzoli.examples.axon.hazelcast.eventhandling;
 import org.axonframework.domain.EventMessage;
 import org.axonframework.eventhandling.Cluster;
 import org.axonframework.eventhandling.EventBusTerminal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
 public class HazelcastEventBusTerminal implements EventBusTerminal {
+    private final static Logger LOGEGR = LoggerFactory.getLogger(HazelcastEventBusTerminal.class);
 
     private final HazelcastEventBusManager m_manager;
+    private String m_topicName;
 
     /**
      *
@@ -33,10 +37,26 @@ public class HazelcastEventBusTerminal implements EventBusTerminal {
      */
     public HazelcastEventBusTerminal(HazelcastEventBusManager manager) {
         m_manager = manager;
+        m_topicName = "default";
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    /**
+     *
+     * @param topicName
+     */
+    public void setTopicName(String topicName) {
+        m_topicName = topicName;
     }
 
     @Override
     public void publish(EventMessage... events) {
+        for(EventMessage event : events) {
+            m_manager.publish(m_topicName,event);
+        }
     }
 
     @Override
