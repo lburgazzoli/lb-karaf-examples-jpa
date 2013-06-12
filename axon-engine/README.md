@@ -41,11 +41,12 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.1
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
     install -s mvn:de.undercouch/bson4jackson/2.2.0
-    install -s wrap:mvn:org.axonframework/axon-core/2.0.2
     install -s wrap:mvn:net.sf.jsr107cache/jsr107cache/1.1
-
     install -s mvn:com.hazelcast/hazelcast-all/2.6
+    install -s mvn:org.axonframework/axon-core/2.0.3-SNAPSHOT
+    install -s mvn:org.axonframework/axon-distributed-commandbus/2.0.3-SNAPSHOT
 
+    #install -s wrap:mvn:org.axonframework/axon-core/2.0.2
     #install -s mvn:org.apache.openjpa/openjpa/2.2.2
     #install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final
     #install -s mvn:org.jboss.logging/jboss-logging/3.1.3.GA

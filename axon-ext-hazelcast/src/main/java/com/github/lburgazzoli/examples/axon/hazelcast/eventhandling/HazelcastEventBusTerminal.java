@@ -60,12 +60,13 @@ public class HazelcastEventBusTerminal implements EventBusTerminal {
     @Override
     public void publish(EventMessage... events) {
         for(EventMessage event : events) {
-            m_manager.publish(m_topicName,event);
+            //m_manager.publish(m_topicName,event);
+            LOGEGR.debug("Publish {}/{}",m_topicName,event);
         }
     }
 
     @Override
     public void onClusterCreated(Cluster cluster) {
-        LOGEGR.debug("ClusterCreated {}",cluster);
+        LOGEGR.debug("Cluster Created {}",cluster);
     }
 }

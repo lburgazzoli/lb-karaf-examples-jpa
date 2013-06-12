@@ -32,6 +32,8 @@ limitations under the License.
                          value = "axon-commons,axon-engine"/>
             <cm:property name  = "hz.config"
                          value = "./etc/com.github.lburgazzoli.karaf.axon.engine.hazelcast.xml"/>
+            <cm:property name  = "hz.prefix"
+                         value = "axon"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -79,6 +81,7 @@ limitations under the License.
           scope          = "singleton">
         <argument ref = "blueprintBundleContext"/>
         <argument ref = "HZ_CONFIG"/>
+        <property name="itemPrefix" value="${hz.prefix}"/>
     </bean>
 
     <service ref="HZ_MANAGER">
@@ -212,8 +215,19 @@ limitations under the License.
         <argument ref="HZ_MANAGER"/>
     </bean>
 
+    <bean id    = "AXON_HZ_EVT_BUS_MGR"
+          class = "com.github.lburgazzoli.examples.axon.hazelcast.eventhandling.HazelcastEventBusManager">
+        <argument ref="HZ_MANAGER"/>
+    </bean>
+
+    <bean id    = "AXON_HZ_EVT_BUS_TER"
+          class = "com.github.lburgazzoli.examples.axon.hazelcast.eventhandling.HazelcastEventBusTerminal">
+        <argument ref="AXON_HZ_EVT_BUS_MGR"/>
+    </bean>
+
     <bean id    = "AXON_EVT_BUS"
-          class = "org.axonframework.eventhandling.SimpleEventBus">
+          class = "org.axonframework.eventhandling.ClusteringEventBus">
+        <argument ref="AXON_HZ_EVT_BUS_TER"/>
     </bean>
 
     <!-- ******************************************************************* -->
