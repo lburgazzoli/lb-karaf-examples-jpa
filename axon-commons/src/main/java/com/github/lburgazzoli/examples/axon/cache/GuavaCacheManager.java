@@ -20,6 +20,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Maps;
 import net.sf.jsr107cache.Cache;
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -27,6 +29,8 @@ import java.util.Map;
  *
  */
 public class GuavaCacheManager implements ICacheManager {
+    public static final Logger LOGGER = LoggerFactory.getLogger(GuavaCacheManager.class);
+
     private Map<Class<?>,GuavaCache> m_caches;
 
     /**
@@ -39,7 +43,7 @@ public class GuavaCacheManager implements ICacheManager {
     @Override
     public Cache getCache(Class<? extends EventSourcedAggregateRoot> aggregateType) {
         GuavaCache cache = m_caches.get(aggregateType);
-        if(cache != null) {
+        if(cache == null) {
             cache = new GuavaCache(CacheBuilder.newBuilder().build());
             m_caches.put(aggregateType,cache);
         }

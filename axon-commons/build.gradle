@@ -17,8 +17,8 @@ dependencies {
     compile project(':osgi-commons')
     compile project(':osgi-hazelcast')
     compile 'org.ow2.asm:asm:4.1'
-    compile 'org.axonframework:axon-core:2.0.2'
-    compile 'org.axonframework:axon-distributed-commandbus:2.0.2'
+    compile 'org.axonframework:axon-core:2.0.3-SNAPSHOT'
+    compile 'org.axonframework:axon-distributed-commandbus:2.0.3-SNAPSHOT'
     compile 'com.eaio.uuid:uuid:3.2'
     compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
     compile 'com.thoughtworks.xstream:xstream:1.4.3'

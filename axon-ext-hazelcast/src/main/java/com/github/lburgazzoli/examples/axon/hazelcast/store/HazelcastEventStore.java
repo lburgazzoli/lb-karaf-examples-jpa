@@ -16,8 +16,6 @@
  */
 package com.github.lburgazzoli.examples.axon.hazelcast.store;
 
-import com.github.lburgazzoli.Utils;
-import com.github.lburgazzoli.examples.axon.serializer.JacksonObjectMapper;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import com.google.common.collect.Maps;
 import org.axonframework.domain.DomainEventMessage;
@@ -37,7 +35,6 @@ public class HazelcastEventStore implements IHazelcastEventStore {
 
     private final IHazelcastManager m_hazelcastManager;
     private final Map<String,HazelcastDomainEventStore> m_domainEventStore;
-    private final JacksonObjectMapper m_objectMapper;
 
     /**
      * c-tor
@@ -47,7 +44,6 @@ public class HazelcastEventStore implements IHazelcastEventStore {
     public HazelcastEventStore(IHazelcastManager hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
         m_domainEventStore = Maps.newHashMap();
-        m_objectMapper = new JacksonObjectMapper();
     }
 
     // *************************************************************************

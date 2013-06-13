@@ -29,6 +29,8 @@ subprojects {
         maven { url 'https://repository.atlassian.com/maven2' }
         maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
         maven { url 'https://github.com/s7/mvnrepo/raw/master' }
+
+        mavenLocal()
     }
 
     dependencies {
@@ -44,7 +46,7 @@ subprojects {
         compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'
         compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.0'
-        compile 'com.hazelcast:hazelcast-client:2.6'
+        compile 'com.hazelcast:hazelcast-all:2.6'
         compile 'com.googlecode.json-simple:json-simple:1.1.1'
         compile 'org.mongodb:mongo-java-driver:2.11.1'
         compile 'com.esotericsoftware.kryo:kryo:2.21'

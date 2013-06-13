@@ -26,7 +26,6 @@ import org.axonframework.eventsourcing.GenericAggregateFactory;
  *
  */
 public class AxonCachingEventSourcingRepository<T extends EventSourcedAggregateRoot> extends CachingEventSourcingRepository<T> {
-
     /**
      * c-tor
      *

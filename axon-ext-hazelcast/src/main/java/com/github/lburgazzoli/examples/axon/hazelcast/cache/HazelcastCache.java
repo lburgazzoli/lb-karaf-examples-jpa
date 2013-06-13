@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.examples.axon.hazelcast.cache;
 
-import com.github.lburgazzoli.Utils;
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager;
 import com.google.common.collect.Sets;
 import com.hazelcast.core.IMap;
@@ -25,6 +24,7 @@ import net.sf.jsr107cache.CacheEntry;
 import net.sf.jsr107cache.CacheException;
 import net.sf.jsr107cache.CacheListener;
 import net.sf.jsr107cache.CacheStatistics;
+import org.axonframework.domain.AggregateRoot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,6 +104,13 @@ public class HazelcastCache implements Cache {
         try {
             Thread.currentThread().setContextClassLoader(m_classLoader);
             obj = m_cache.get(key);
+
+            if(obj instanceof AggregateRoot) {
+                AggregateRoot ar = (AggregateRoot)obj;
+                LOGGER.debug("Cache.get : id={}, version={}",
+                    ar.getIdentifier(),ar.getVersion());
+            }
+
         } finally {
             Thread.currentThread().setContextClassLoader(cl);
         }
@@ -123,6 +130,12 @@ public class HazelcastCache implements Cache {
 
         try {
             Thread.currentThread().setContextClassLoader(m_classLoader);
+            if(value instanceof AggregateRoot) {
+                AggregateRoot ar = (AggregateRoot)value;
+                LOGGER.debug("Cache.put : id={}, version={}",
+                    ar.getIdentifier(),ar.getVersion());
+            }
+
             obj = m_cache.put(key,value);
         } finally {
             Thread.currentThread().setContextClassLoader(cl);

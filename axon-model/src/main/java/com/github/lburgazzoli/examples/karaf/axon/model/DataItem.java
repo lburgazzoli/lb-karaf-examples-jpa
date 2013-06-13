@@ -45,7 +45,7 @@ public class DataItem extends AbstractAnnotatedAggregateRoot implements Serializ
      * c-tor
      */
     public DataItem() {
-        m_id = null;
+        m_id   = null;
         m_text = null;
     }
 
