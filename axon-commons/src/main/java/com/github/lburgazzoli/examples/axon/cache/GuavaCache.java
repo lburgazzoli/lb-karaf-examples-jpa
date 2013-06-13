@@ -21,6 +21,9 @@ import net.sf.jsr107cache.CacheEntry;
 import net.sf.jsr107cache.CacheException;
 import net.sf.jsr107cache.CacheListener;
 import net.sf.jsr107cache.CacheStatistics;
+import org.axonframework.domain.AggregateRoot;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Map;
@@ -30,6 +33,7 @@ import java.util.Set;
  *
  */
 public class GuavaCache implements Cache {
+    private final static Logger LOGGER = LoggerFactory.getLogger(GuavaCache.class);
 
     private final com.google.common.cache.Cache<Object,Object> m_cache;
 
@@ -83,7 +87,16 @@ public class GuavaCache implements Cache {
 
     @Override
     public Object get(Object key) {
-        return m_cache.getIfPresent(key);
+        Object value =  m_cache.getIfPresent(key);
+        if(value != null) {
+            if(value instanceof AggregateRoot) {
+                AggregateRoot ar = (AggregateRoot)value;
+                LOGGER.debug("Cache.get : id={}, version={}",
+                    ar.getIdentifier(),ar.getVersion());
+            }
+        }
+
+        return value;
     }
 
     @Override
@@ -109,6 +122,13 @@ public class GuavaCache implements Cache {
     @Override
     public Object put(Object key, Object value) {
         Object old = m_cache.getIfPresent(key);
+
+        if(value instanceof AggregateRoot) {
+            AggregateRoot ar = (AggregateRoot)value;
+            LOGGER.debug("Cache.put : id={}, version={}",
+                ar.getIdentifier(),ar.getVersion());
+        }
+
         m_cache.put(key,value);
 
         return old;
