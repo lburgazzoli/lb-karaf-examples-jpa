@@ -16,7 +16,6 @@ project.ext {
         'javassist.util.proxy;resolution:=optional',
         'net.sf.jsr107cache;resolution:=optional',
         'org.xmlpull.v1;resolution:=optional',
-        'com.hazelcast.config',
         'org.springframework.transaction;resolution:=optional',
         'org.springframework.transaction.jta;resolution:=optional',
         'com.lmax.disruptor;resolution:=optional',

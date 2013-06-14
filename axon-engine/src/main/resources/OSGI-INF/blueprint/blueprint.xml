@@ -30,21 +30,8 @@ limitations under the License.
                          value = "./data/axon/eventstore"/>
             <cm:property name  = "classpath.bundles"
                          value = "axon-commons,axon-engine"/>
-            <cm:property name  = "hz.config"
-                         value = "./etc/com.github.lburgazzoli.karaf.axon.engine.hazelcast.xml"/>
-            <cm:property name  = "hz.prefix"
-                         value = "axon"/>
         </cm:default-properties>
     </cm:property-placeholder>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <!--
-    <reference id        = "osgiJtaTransactionManager"
-               interface = "javax.transaction.TransactionManager"/>
-    -->
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
@@ -67,106 +54,12 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id    = "HZ_CONFIG"
-          class = "com.github.lburgazzoli.osgi.hazelcast.HazelcastConfig"
-          scope = "singleton">
-        <argument value = "${hz.config}"/>
-        <argument ref   = "AXON_CL"/>
-    </bean>
-
-    <bean id             = "HZ_MANAGER"
-          class          = "com.github.lburgazzoli.osgi.hazelcast.HazelcastManager"
-          init-method    = "init"
-          destroy-method = "destroy"
-          scope          = "singleton">
-        <argument ref = "blueprintBundleContext"/>
-        <argument ref = "HZ_CONFIG"/>
-        <property name="itemPrefix" value="${hz.prefix}"/>
-    </bean>
-
-    <service ref="HZ_MANAGER">
-        <interfaces>
-            <value>com.github.lburgazzoli.osgi.hazelcast.IHazelcastManager</value>
-        </interfaces>
-        <service-properties>
-            <entry key   = "osgi.jndi.service.name"
-                   value = "hz-manager"/>
-        </service-properties>
-    </service>
-
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <!--
-    <bean id    = "AXON_EVT_SERIALIZER"
-          class = "org.axonframework.serializer.xml.XStreamSerializer">
-        <argument>
-            <bean class = "com.thoughtworks.xstream.XStream">
-                <property name="classLoader" ref="AXON_CL"/>
-            </bean>
-        </argument>
-    </bean>
-    -->
-
-    <!--
-    <bean id    = "AXON_CACHE_MANAGER"
-          class = "com.github.lburgazzoli.examples.axon.hazelcast.cache.HazelcastCacheManager">
-        <argument ref="HZ_MANAGER"/>
-    </bean>
-
-    <bean id    = "AXON_CACHE_MANAGER"
-          class = "com.github.lburgazzoli.examples.axon.cache.GuavaCacheManager">
-    </bean>
-    -->
-
-    <!--
-    <bean id    = "AXON_EVT_SERIALIZER"
-          class = "com.github.lburgazzoli.examples.axon.serializer.JacksonSerializer">
-        <argument ref="AXON_CL"/>
-    </bean>
-    -->
-
-    <bean id    = "AXON_CMD_BUS_ROLLBACK_CFG"
-          class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleRollbackConfiguration">
-    </bean>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <!--
-    <bean id    = "AXON_CMD_BUS_TX_MANAGER"
-          class = "com.github.lburgazzoli.examples.axon.helper.AxonJtaTransactionManager">
-        <argument ref="osgiJtaTransactionManager"/>
-    </bean>
-    -->
-
     <bean id    = "AXON_CMD_BUS"
           class = "org.axonframework.commandhandling.SimpleCommandBus">
-        <property name="rollbackConfiguration" ref="AXON_CMD_BUS_ROLLBACK_CFG"/>
-        <!--<property name="transactionManager"    ref="AXON_CMD_BUS_TX_MANAGER"/>-->
+        <property name="rollbackConfiguration">
+            <bean class = "com.github.lburgazzoli.examples.karaf.axon.engine.SimpleRollbackConfiguration"/>
+        </property>
     </bean>
-
-    <!--
-    <bean id    = "AXON_CLUSTER"
-          class = "com.github.lburgazzoli.examples.axon.hazelcast.distributed.HazelcastCommandBusManager">
-        <argument ref="HZ_MANAGER"/>
-    </bean>
-
-    <bean id    = "AXON_CONNECTOR"
-          class = "com.github.lburgazzoli.examples.axon.hazelcast.distributed.HazelcastCommandBusConnector">
-        <argument ref="AXON_CLUSTER"/>
-        <argument ref="AXON_LOCAL_CMD_BUS"/>
-    </bean>
-
-
-    <bean id    = "AXON_CMD_BUS"
-          class = "org.axonframework.commandhandling.distributed.DistributedCommandBus">
-        <argument ref="AXON_CONNECTOR"/>
-    </bean>
-    -->
 
     <bean id    = "AXON_CMD_GW"
           class = "com.github.lburgazzoli.examples.axon.helper.AxonCommandGateway">
@@ -177,62 +70,30 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <!--
-    <bean id    = "AXON_JPA_EMP"
-          class = "org.axonframework.common.jpa.ContainerManagedEntityManagerProvider">
-        <jpa:context property="entityManager" unitname="AXON_PU"/>
-    </bean>
-
-    <bean id    = "AXON_JPA_EVT_SERIALIZER"
-          class = "org.axonframework.serializer.xml.XStreamSerializer">
-    </bean>
-
     <bean id    = "AXON_EVT_STORE"
-          class = "org.axonframework.eventstore.jpa.JpaEventStore">
-        <argument ref="AXON_JPA_EMP"/>
-        <argument ref="AXON_JPA_EVT_SERIALIZER"/>
-    </bean>
-    -->
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <!--
-    <bean id    = "AXON_EVT_STORE_FS_RESOLVER"
-          class = "org.axonframework.eventstore.fs.SimpleEventFileResolver">
+          class = "org.axonframework.eventstore.fs.FileSystemEventStore">
         <argument>
-            <bean class="java.io.File">
-                <argument value="${event.store.path}"/>
+            <bean class = "org.axonframework.serializer.xml.XStreamSerializer">
+                <argument>
+                    <bean class = "com.thoughtworks.xstream.XStream">
+                        <property name="classLoader" ref="AXON_CL"/>
+                    </bean>
+                </argument>
+            </bean>
+        </argument>
+        <argument>
+            <bean class = "org.axonframework.eventstore.fs.SimpleEventFileResolver">
+                <argument>
+                    <bean class="java.io.File">
+                        <argument value="${event.store.path}"/>
+                    </bean>
+                </argument>
             </bean>
         </argument>
     </bean>
 
-    <bean id    = "AXON_EVT_STORE"
-          class = "org.axonframework.eventstore.fs.FileSystemEventStore">
-        <argument ref="AXON_EVT_SERIALIZER"/>
-        <argument ref="AXON_EVT_STORE_FS_RESOLVER"/>
-    </bean>
-    -->
-
-    <bean id    = "AXON_EVT_STORE"
-          class = "com.github.lburgazzoli.examples.axon.hazelcast.store.HazelcastEventStore">
-        <argument ref="HZ_MANAGER"/>
-    </bean>
-
-    <bean id    = "AXON_HZ_EVT_BUS_MGR"
-          class = "com.github.lburgazzoli.examples.axon.hazelcast.eventhandling.HazelcastEventBusManager">
-        <argument ref="HZ_MANAGER"/>
-    </bean>
-
-    <bean id    = "AXON_HZ_EVT_BUS_TER"
-          class = "com.github.lburgazzoli.examples.axon.hazelcast.eventhandling.HazelcastEventBusTerminal">
-        <argument ref="AXON_HZ_EVT_BUS_MGR"/>
-    </bean>
-
     <bean id    = "AXON_EVT_BUS"
-          class = "org.axonframework.eventhandling.ClusteringEventBus">
-        <argument ref="AXON_HZ_EVT_BUS_TER"/>
+          class = "org.axonframework.eventhandling.SimplEventBus">
     </bean>
 
     <!-- ******************************************************************* -->
@@ -249,11 +110,6 @@ limitations under the License.
         <property name="eventStore"     ref="AXON_EVT_STORE"/>
         <property name="cacheManager">
             <bean class = "com.github.lburgazzoli.examples.axon.cache.GuavaCacheManager"/>
-            <!--
-            <bean class="com.github.lburgazzoli.examples.axon.hazelcast.cache.HazelcastCacheManager">
-                <argument ref="HZ_MANAGER"/>
-            </bean>
-            -->
         </property>
     </bean>
 
@@ -288,16 +144,6 @@ limitations under the License.
         <command name="axon/list-loadedclasses-for-bundle">
             <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.ListLoadedClassesForBundle">
                 <property name="service" ref="AXON_CL"/>
-            </action>
-        </command>
-        <command name="axon/hz-storage-info">
-            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.HazelcastStorageInfo">
-                <property name="service" ref="AXON_EVT_STORE"/>
-            </action>
-        </command>
-        <command name="axon/hz-storage-browse">
-            <action class="com.github.lburgazzoli.examples.karaf.axon.engine.karaf.HazelcastStorageBrowse">
-                <property name="service" ref="AXON_EVT_STORE"/>
             </action>
         </command>
     </command-bundle>
