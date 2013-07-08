@@ -42,6 +42,7 @@ limitations under the License.
     <!-- JTA                                                                 -->
     <!-- ******************************************************************* -->
 
+    <!--
     <persistence-unit name="DATAPU_BATOO_JTA" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
@@ -51,5 +52,6 @@ limitations under the License.
             <property name="org.batoo.jpa.ddl" value="DROP"/>
         </properties>
     </persistence-unit>
+    -->
 
 </persistence>

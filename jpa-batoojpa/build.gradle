@@ -14,7 +14,7 @@ project.ext {
 
 dependencies {
     compile project(':jpa-commons')
-    compile 'org.batoo.jpa:batoo-jpa:2.0.1.0-RTM'
+    compile 'org.batoo.jpa:batoo-jpa:2.0.1.1'
 }
 
 jar {

@@ -40,7 +40,6 @@ dependencies {
     compile project(':osgi-commons')
     compile project(':osgi-hazelcast')
     compile project(':axon-commons')
-    compile project(':axon-ext-hazelcast')
 }
 
 jar {
