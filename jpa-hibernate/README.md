@@ -33,6 +33,7 @@ gradle clean install
     install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final
     install -s mvn:org.hibernate/hibernate-core/4.2.2.Final
     install -s mvn:org.hibernate/hibernate-entitymanager/4.2.2.Final
+    install -s mvn:org.hibernate/hibernate-envers/4.2.2.Final
     install mvn:org.hibernate/hibernate-osgi/4.2.2.Final
 ```
 
