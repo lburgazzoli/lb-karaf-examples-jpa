@@ -17,8 +17,8 @@ dependencies {
     compile project(':jpa-kundera-adapter')
 
     compile 'org.mongodb:mongo-java-driver:2.11.1'
-    compile 'com.impetus.core:kundera-core:2.5'
-    compile 'com.impetus.client:kundera-mongo:2.5'
+    compile 'com.impetus.core:kundera-core:2.6'
+    compile 'com.impetus.client:kundera-mongo:2.6'
 }
 
 jar {

@@ -19,16 +19,14 @@ subprojects {
         maven { url 'http://repo2.maven.org/maven2' }
         maven { url 'http://repo.springsource.org/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/release' }
+        maven { url 'http://repository.springsource.com/maven/bundles/external' }
         maven { url 'http://download.eclipse.org/rt/eclipselink/maven.repo' }
         maven { url 'http://repository.jboss.org/nexus/content/repositories/releases' }
         maven { url 'http://repository.jboss.org/nexus/content/groups/public/' }
         maven { url 'http://snapshots.jboss.org/maven2/' }
         maven { url 'http://download.oracle.com/maven' }
         maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-        maven { url 'http://mvn.riptano.com/content/repositories/public' }
-        maven { url 'https://repository.atlassian.com/maven2' }
         maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
-        maven { url 'https://github.com/s7/mvnrepo/raw/master' }
 
         mavenLocal()
     }
