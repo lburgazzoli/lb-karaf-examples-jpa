@@ -25,7 +25,7 @@ limitations under the License.
     <!-- RESOURCE_LOCAL                                                      -->
     <!-- ******************************************************************* -->
 
-    <persistence-unit name="OPENJPA_PU_NON_JTA" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="DATA_OPENJPA" transaction-type="RESOURCE_LOCAL">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
         <class>com.github.lburgazzoli.examples.karaf.jpa.openjpa.data.Item</class>
@@ -44,7 +44,7 @@ limitations under the License.
     <!-- JTA                                                                 -->
     <!-- ******************************************************************* -->
 
-    <persistence-unit name="OPENJPA_PU_JTA" transaction-type="JTA">
+    <persistence-unit name="DATA_OPENJPA_JTA" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
         <class>com.github.lburgazzoli.examples.karaf.jpa.openjpa.data.Item</class>

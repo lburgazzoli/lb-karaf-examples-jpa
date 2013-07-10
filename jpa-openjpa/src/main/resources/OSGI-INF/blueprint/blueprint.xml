@@ -27,7 +27,7 @@ limitations under the License.
 
     <bean id="app_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.data.ApplicationManagedDataService">
-        <jpa:unit unitname="OPENJPA_PU_NON_JTA" property="entityManagerFactory"/>
+        <jpa:unit unitname="DATA_OPENJPA" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
@@ -44,7 +44,7 @@ limitations under the License.
 
     <bean id="con_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.openjpa.data.ContainerManagedDataService">
-        <jpa:context unitname="OPENJPA_PU_JTA" property="entityManager"/>
+        <jpa:context unitname="DATA_OPENJPA_JTA" property="entityManager"/>
         <tx:transaction method="*" value="Required"/>
     </bean>
 

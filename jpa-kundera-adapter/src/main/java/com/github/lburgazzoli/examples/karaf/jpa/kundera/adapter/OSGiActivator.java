@@ -25,10 +25,18 @@ import java.util.Hashtable;
 /**
  *
  */
-public class Activator  implements BundleActivator {
+public class OSGiActivator implements BundleActivator {
 
-    private static BundleContext context = null;
-    private static ServiceRegistration serviceReg = null;
+    private BundleContext context;
+    private ServiceRegistration serviceReg;
+
+    /**
+     * c-tor
+     */
+    public OSGiActivator() {
+        context = null;
+        serviceReg = null;
+    }
 
     @Override
     public void start(BundleContext context) throws Exception {
@@ -37,16 +45,16 @@ public class Activator  implements BundleActivator {
         Hashtable<String,String> props = new Hashtable<String, String>();
         props.put(
             "javax.persistence.provider",
-            "com.impetus.kundera.KunderaPersistence");
+            com.impetus.kundera.KunderaPersistence.class.getName());
         props.put(
-            "javax.persistence.spi.PersistenceProvider",
-            "com.impetus.kundera.KunderaPersistence");
+            javax.persistence.spi.PersistenceProvider.class.getName(),
+            com.impetus.kundera.KunderaPersistence.class.getName());
         props.put(
             "javax.persistence.PersistenceProvider",
-            "com.impetus.kundera.KunderaPersistence");
+            com.impetus.kundera.KunderaPersistence.class.getName());
 
         serviceReg = context.registerService(
-            "javax.persistence.spi.PersistenceProvider",
+            javax.persistence.spi.PersistenceProvider.class.getName(),
             new com.impetus.kundera.KunderaPersistence(),
             props);
     }

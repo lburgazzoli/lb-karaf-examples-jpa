@@ -19,5 +19,7 @@ jar {
     manifest {
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
+
+        attributes['Bundle-Activator'] = 'com.github.lburgazzoli.examples.karaf.jpa.kundera.adapter.OSGiActivator'
     }
 }

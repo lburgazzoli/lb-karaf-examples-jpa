@@ -35,7 +35,7 @@ jar {
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
         
-        attributes['JPA-PersistenceUnits'  ] = 'DATAPU'
+        attributes['JPA-PersistenceUnits'  ] = 'DATA_OPENJPA,DATA_OPENJPA_JTA'
         attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
     }
 }
