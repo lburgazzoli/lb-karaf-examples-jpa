@@ -28,8 +28,7 @@ jar {
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
-        attributes['Bundle-Activator'      ] = 'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.Activator'
-        attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
-        attributes['Require-Bundle'        ] = requireBundle.join(',')
+        attributes['Bundle-Activator'] = 'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.OSGiActivator'
+        attributes['Require-Bundle'  ] = requireBundle.join(',')
     }
 }

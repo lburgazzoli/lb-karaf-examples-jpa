@@ -41,6 +41,7 @@ subprojects {
         compile 'com.google.guava:guava:14.0.1'
         compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
         compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1'
+        compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
         compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'
         compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.0'

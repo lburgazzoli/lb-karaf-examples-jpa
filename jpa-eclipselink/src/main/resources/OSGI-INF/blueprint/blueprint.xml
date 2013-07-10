@@ -21,9 +21,13 @@ limitations under the License.
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
+    <!-- ******************************************************************* -->
+    <!-- ApplicationManaged                                                  -->
+    <!-- ******************************************************************* -->
+
     <bean id="app_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.data.ApplicationManagedDataService">
-        <jpa:unit unitname="DATAPU" property="entityManagerFactory"/>
+        <jpa:unit unitname="DATA_ELINK" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
@@ -33,6 +37,15 @@ limitations under the License.
                    value="eclipselink/app_managed_data_service"/>
         </service-properties>
     </service>
+
+    <!-- ******************************************************************* -->
+    <!-- ContainerManaged                                                    -->
+    <!-- ******************************************************************* -->
+
+
+    <!-- ******************************************************************* -->
+    <!-- COMMANDS                                                            -->
+    <!-- ******************************************************************* -->
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="item/eclipselink-am-add">

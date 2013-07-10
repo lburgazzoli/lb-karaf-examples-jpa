@@ -5,6 +5,7 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
+        'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter',
         '*'
     ]
 
@@ -34,7 +35,7 @@ jar {
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
-        attributes['JPA-PersistenceUnits'  ] = 'DATAPU'
+        attributes['JPA-PersistenceUnits'  ] = 'DATA_ELINK'
         attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
         attributes['DynamicImport-Package' ] = eclipseLinkPackages.join(',')
     }

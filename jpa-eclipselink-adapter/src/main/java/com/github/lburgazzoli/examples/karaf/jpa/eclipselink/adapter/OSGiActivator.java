@@ -27,16 +27,18 @@ import java.util.Hashtable;
 /**
  *
  */
-public class Activator implements BundleActivator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Activator.class);
+public class OSGiActivator implements BundleActivator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OSGiActivator.class);
 
-    private static BundleContext context = null;
-    private static ServiceRegistration serviceReg = null;
+    private BundleContext context;
+    private ServiceRegistration serviceReg;
 
     /**
      * c-tor
      */
-    public Activator() {
+    public OSGiActivator() {
+        context = null;
+        serviceReg = null;
     }
 
     @Override
