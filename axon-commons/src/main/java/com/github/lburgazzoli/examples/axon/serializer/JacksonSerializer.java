@@ -18,6 +18,7 @@ package com.github.lburgazzoli.examples.axon.serializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.lburgazzoli.json.JacksonHelper;
 import org.axonframework.serializer.AnnotationRevisionResolver;
 import org.axonframework.serializer.ChainingConverterFactory;
 import org.axonframework.serializer.ContentTypeConverter;
@@ -48,7 +49,7 @@ public class JacksonSerializer implements Serializer {
      * c-tor
      */
     public JacksonSerializer(ClassLoader classLoader) {
-        this(classLoader,new JacksonObjectMapper());
+        this(classLoader, JacksonHelper.DEFAULT_JSON);
     }
 
     /**

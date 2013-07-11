@@ -50,6 +50,10 @@ subprojects {
         compile 'com.googlecode.json-simple:json-simple:1.1.1'
         compile 'org.mongodb:mongo-java-driver:2.11.1'
         compile 'com.esotericsoftware.kryo:kryo:2.21'
+        compile 'com.fasterxml.jackson.core:jackson-core:2.2.1'
+        compile 'com.fasterxml.jackson.core:jackson-databind:2.2.1'
+        compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.1'
+        compile 'de.undercouch:bson4jackson:2.2.0'
     }
 
     //[compileJava, compileTestJava]*.options*.compilerArgs = [

@@ -14,20 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.axon.serializer;
+package com.github.lburgazzoli.serialization;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  *
  */
-public class JacksonObjectMapper extends ObjectMapper {
+public interface ITypeSerializer<T> {
     /**
-     * c-tor
+     *
+     * @return
      */
-    public JacksonObjectMapper() {
-        super.disable(SerializationFeature.INDENT_OUTPUT);
-        super.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    }
+    public Class<T> getType();
+
+    /**
+     *
+     * @param in
+     * @return
+     */
+    public T deserialize(InputStream in) throws Exception;
+
+    /**
+     *
+     * @param out
+     * @param object
+     */
+    public void serialize(OutputStream out, T object) throws Exception;
 }

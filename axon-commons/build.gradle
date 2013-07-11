@@ -30,10 +30,6 @@ dependencies {
     compile 'org.springframework:org.springframework.context:3.2.2.RELEASE'
     compile 'org.springframework:org.springframework.context.support:3.2.2.RELEASE'
     compile 'org.springframework:org.springframework.transaction:3.2.2.RELEASE'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.2.1'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.1'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.1'
-    compile 'de.undercouch:bson4jackson:2.2.0'
     compile 'net.sf.jsr107cache:jsr107cache:1.1'
 }
 
