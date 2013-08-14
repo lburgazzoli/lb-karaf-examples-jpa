@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.osgi.hazelcast;
 
-import com.github.lburgazzoli.serialization.ITypeSerializer;
 import com.hazelcast.config.FileSystemXmlConfig;
 
 import java.io.FileNotFoundException;
@@ -36,21 +35,13 @@ public class HazelcastConfig extends FileSystemXmlConfig {
         super.setClassLoader(classLoader);
     }
 
-    /**
-     *
-     * @param typeSerializer
-     */
+    /*
+
     public void register(ITypeSerializer<?> typeSerializer) {
     }
 
-    /**
-     *
-     * @param typeSerializer
-     */
     public void unregister(ITypeSerializer<?> typeSerializer) {
     }
-
-    /*
       <bean id    = "hz-config"
             class = “com.github.lburgazzoli.osgi.hazelcas.HazelcastConfig”/>
 

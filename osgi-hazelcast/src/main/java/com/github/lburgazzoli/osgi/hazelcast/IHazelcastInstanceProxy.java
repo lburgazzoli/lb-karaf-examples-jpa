@@ -27,7 +27,14 @@ import com.hazelcast.core.MultiMap;
 /**
  *
  */
-public interface IHazelcastManager  {
+public interface IHazelcastInstanceProxy {
+
+    /**
+     *
+     * @return
+     */
+    public boolean hasInstance();
+
     /**
      *
      * @return
