@@ -21,6 +21,7 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.IQueue;
+import com.hazelcast.core.ISet;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.MultiMap;
 import org.osgi.framework.BundleContext;
@@ -78,6 +79,7 @@ public class HazelcastInstanceProxy extends AbstractHazelcastInstance {
         return rv;
     }
 
+
     @Override
     public <T> IList<T> getList(String name) {
         IList<T> rv = null;
@@ -108,10 +110,20 @@ public class HazelcastInstanceProxy extends AbstractHazelcastInstance {
     }
 
     @Override
-    public ILock getLock(String name) {
+    public <T> ISet<T> getSet(String name) {
+        ISet<T> rv = null;
+        if(hasInstance()) {
+            rv = getInstance().getSet(getDistributedObjectName(name));
+        }
+
+        return rv;
+    }
+
+    @Override
+    public ILock getLock(Object name) {
         ILock rv = null;
         if(hasInstance()) {
-            rv = getInstance().getLock(getDistributedObjectName(name));
+            rv = getInstance().getLock(getDistributedObjectName(name.toString()));
         }
 
         return rv;

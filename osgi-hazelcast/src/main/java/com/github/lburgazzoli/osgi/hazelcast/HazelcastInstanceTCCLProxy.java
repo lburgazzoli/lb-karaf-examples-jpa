@@ -21,6 +21,7 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.IQueue;
+import com.hazelcast.core.ISet;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.MultiMap;
 import org.osgi.framework.BundleContext;
@@ -124,6 +125,23 @@ public class HazelcastInstanceTCCLProxy extends AbstractHazelcastInstance {
         return  rv;
     }
 
+    @Override
+    public <T> ISet<T> getSet(String name) {
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        ISet<T> rv = null;
+
+        if(hasInstance()) {
+            try {
+                Thread.currentThread().setContextClassLoader(getClassloader());
+                rv = getInstance().getSet(getDistributedObjectName(name));
+            } finally {
+                Thread.currentThread().setContextClassLoader(cl);
+            }
+        }
+
+        return  rv;
+    }
+
     public <T> IQueue<T> getQueue(String name) {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         IQueue<T> rv = null;
@@ -158,14 +176,14 @@ public class HazelcastInstanceTCCLProxy extends AbstractHazelcastInstance {
     }
 
     @Override
-    public ILock getLock(String name) {
+    public ILock getLock(Object name) {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         ILock rv = null;
 
         if(hasInstance()) {
             try {
                 Thread.currentThread().setContextClassLoader(getClassloader());
-                rv = getInstance().getLock(getDistributedObjectName(name));
+                rv = getInstance().getLock(getDistributedObjectName(name.toString()));
             } finally {
                 Thread.currentThread().setContextClassLoader(cl);
             }

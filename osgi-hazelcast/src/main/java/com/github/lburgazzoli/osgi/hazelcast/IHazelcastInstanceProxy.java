@@ -21,6 +21,7 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.IQueue;
+import com.hazelcast.core.ISet;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.MultiMap;
 
@@ -46,12 +47,6 @@ public interface IHazelcastInstanceProxy {
      * @return
      */
     public ClassLoader getClassloader();
-
-    /**
-     *
-     * @return
-     */
-    public String getId();
 
     /**
      *
@@ -81,6 +76,14 @@ public interface IHazelcastInstanceProxy {
 
     /**
      *
+     * @param setame
+     * @param <T>
+     * @return
+     */
+    public <T> ISet<T> getSet(String setame);
+
+    /**
+     *
      * @param queueName
      * @param <T>
      * @return
@@ -89,16 +92,16 @@ public interface IHazelcastInstanceProxy {
 
     /**
      *
-     * @param lockName
-     * @return
-     */
-    public ILock getLock(String lockName);
-
-    /**
-     *
      * @param topicName
      * @param <E>
      * @return
      */
     public <E> ITopic<E> getTopic(String topicName);
+
+    /**
+     *
+     * @param lockName
+     * @return
+     */
+    public ILock getLock(Object lockName);
 }

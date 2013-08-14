@@ -108,11 +108,6 @@ public abstract class AbstractHazelcastInstance extends BundleContextAware imple
     // *************************************************************************
 
     @Override
-    public String getId() {
-        return hasInstance() ? m_instance.getCluster().getLocalMember().getUuid() : null;
-    }
-
-    @Override
     public HazelcastInstance getInstance() {
         return m_instance;
     }
