@@ -51,8 +51,8 @@ limitations under the License.
         <property name="eligibleBundleIds">
             <list>
                 <value>karaf-examples-osgi-commons</value>
-                <value>karaf-examplesosgi-hazelcast</value>
-                <value>karaf-exampleshz-data</value>
+                <value>karaf-examples-osgi-hazelcast</value>
+                <value>karaf-examples-hz-data</value>
             </list>
         </property>
     </bean>

@@ -22,5 +22,6 @@ include "axon-engine"
 include "axon-model"
 
 include "hz-data"
+include "hz-data-cmd"
 include "hz-service"
 
