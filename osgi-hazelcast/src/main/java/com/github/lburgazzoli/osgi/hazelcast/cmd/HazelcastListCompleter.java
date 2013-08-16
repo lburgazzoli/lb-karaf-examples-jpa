@@ -17,16 +17,22 @@
 package com.github.lburgazzoli.osgi.hazelcast.cmd;
 
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import org.apache.karaf.shell.console.completer.StringsCompleter;
+
+import java.util.List;
 
 /**
  *
  */
-public abstract class AbstractHazelcastCommand extends AbstractServiceCommand<IHazelcastInstanceProvider> {
+public class HazelcastListCompleter extends AbstractHazelcastCompleter {
 
-    /**
-     * c-tor
-     */
-    public AbstractHazelcastCommand() {
+    @Override
+    protected int doComplete(IHazelcastInstanceProvider service, String buffer, int cursor, List<String> candidates) {
+        StringsCompleter delegate = new StringsCompleter();
+        delegate.getStrings().add(HazelcastCommandConstants.LIST_MEMBERS);
+        delegate.getStrings().add(HazelcastCommandConstants.LIST_PARTITIONS);
+        delegate.getStrings().add(HazelcastCommandConstants.LIST_OBJECTS);
+
+        return delegate.complete(buffer, cursor, candidates);
     }
 }

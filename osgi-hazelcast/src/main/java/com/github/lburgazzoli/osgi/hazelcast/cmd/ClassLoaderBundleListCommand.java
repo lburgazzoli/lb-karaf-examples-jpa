@@ -16,17 +16,29 @@
  */
 package com.github.lburgazzoli.osgi.hazelcast.cmd;
 
-import com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider;
+import com.github.lburgazzoli.osgi.OSGiClassLoader;
 import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import org.apache.felix.gogo.commands.Command;
+import org.osgi.framework.Bundle;
 
 /**
  *
  */
-public abstract class AbstractHazelcastCommand extends AbstractServiceCommand<IHazelcastInstanceProvider> {
 
-    /**
-     * c-tor
-     */
-    public AbstractHazelcastCommand() {
+@Command(scope = "hz", name = "cl-bundles", description = "List bundles")
+public class ClassLoaderBundleListCommand extends AbstractServiceCommand<OSGiClassLoader> {
+    @Override
+    protected void doExecute(OSGiClassLoader service) throws Exception {
+        ShellTable table = new ShellTable("ID","Symbolic Name");
+
+        for(Bundle b : service.getBundles()) {
+            table.addRow(
+                b.getBundleId(),
+                b.getSymbolicName()
+            );
+        }
+
+        table.print();
     }
 }

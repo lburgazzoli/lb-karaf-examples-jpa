@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.osgi.hazelcast;
 
-import com.hazelcast.config.Config;
 import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
@@ -31,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class HazelcastInstanceTCCLProxy extends AbstractHazelcastInstance {
+public class HazelcastInstanceTCCLProxy extends AbstractHazelcastInstanceProxy {
 
     private static final Logger LOGGER =
         LoggerFactory.getLogger(HazelcastInstanceTCCLProxy.class);
@@ -42,21 +41,25 @@ public class HazelcastInstanceTCCLProxy extends AbstractHazelcastInstance {
      * c-tor
      *
      * @param bundleContext
-     * @param config
+     * @param instanceProvider
+     * @param objectPrefix
      */
-    public HazelcastInstanceTCCLProxy(BundleContext bundleContext, Config config) {
-        this(bundleContext,config,HazelcastInstanceTCCLProxy.class.getClassLoader());
+    public HazelcastInstanceTCCLProxy(
+        BundleContext bundleContext, IHazelcastInstanceProvider instanceProvider, String objectPrefix) {
+        this(bundleContext,instanceProvider,HazelcastInstanceTCCLProxy.class.getClassLoader(),objectPrefix);
     }
 
     /**
      * c-tor
      *
      * @param bundleContext
-     * @param config
+     * @param instanceProvider
      * @param classLoader
+     * @param objectPrefix
      */
-    public HazelcastInstanceTCCLProxy(BundleContext bundleContext, Config config, ClassLoader classLoader) {
-        super(bundleContext,config);
+    public HazelcastInstanceTCCLProxy(
+        BundleContext bundleContext, IHazelcastInstanceProvider instanceProvider, ClassLoader classLoader, String objectPrefix) {
+        super(bundleContext,instanceProvider,objectPrefix);
 
         m_classLoader = classLoader;
     }

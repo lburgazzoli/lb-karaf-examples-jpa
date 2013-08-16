@@ -5,19 +5,19 @@ import com.hazelcast.config.Config;
 /**
  *
  */
-public class HazelcastLocalConfig extends Config {
+public class HazelcastInMemoryConfig extends Config {
 
     /**
      * c-tor
      */
-    public HazelcastLocalConfig() {
+    public HazelcastInMemoryConfig() {
         this(null);
     }
 
     /**
      * c-tor
      */
-    public HazelcastLocalConfig(ClassLoader classLoader) {
+    public HazelcastInMemoryConfig(ClassLoader classLoader) {
         super.setProperty("hazelcast.logging.type","slf4j");
         super.getNetworkConfig().setPortAutoIncrement(true);
         super.getNetworkConfig().getInterfaces().setEnabled(false);

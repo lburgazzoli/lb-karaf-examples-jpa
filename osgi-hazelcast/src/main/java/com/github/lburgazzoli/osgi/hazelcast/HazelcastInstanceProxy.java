@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.osgi.hazelcast;
 
-import com.hazelcast.config.Config;
 import com.hazelcast.core.IList;
 import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
@@ -31,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class HazelcastInstanceProxy extends AbstractHazelcastInstance {
+public class HazelcastInstanceProxy extends AbstractHazelcastInstanceProxy {
 
     private static final Logger LOGGER =
         LoggerFactory.getLogger(HazelcastInstanceProxy.class);
@@ -40,10 +39,12 @@ public class HazelcastInstanceProxy extends AbstractHazelcastInstance {
      * c-tor
      *
      * @param bundleContext
-     * @param config
+     * @param instanceProvider
+     * @param objectPrefix
      */
-    public HazelcastInstanceProxy(BundleContext bundleContext, Config config) {
-        super(bundleContext,config);
+    public HazelcastInstanceProxy(
+        BundleContext bundleContext, IHazelcastInstanceProvider instanceProvider, String objectPrefix) {
+        super(bundleContext,instanceProvider,objectPrefix);
     }
 
     // *************************************************************************

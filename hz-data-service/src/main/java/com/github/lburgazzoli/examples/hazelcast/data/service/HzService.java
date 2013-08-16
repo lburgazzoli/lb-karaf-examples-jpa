@@ -14,19 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.osgi.hazelcast.cmd;
+package com.github.lburgazzoli.examples.hazelcast.data.service;
 
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
 
 /**
  *
  */
-public abstract class AbstractHazelcastCommand extends AbstractServiceCommand<IHazelcastInstanceProvider> {
+public class HzService {
+    private IHazelcastInstanceProvider m_instanceProvider;
 
     /**
      * c-tor
      */
-    public AbstractHazelcastCommand() {
+    public HzService() {
+    }
+
+    /**
+     *
+     * @param instanceProvider the instance provider
+     */
+    public void setHazelcastInstanceProvider(IHazelcastInstanceProvider instanceProvider) {
+        m_instanceProvider = instanceProvider;
     }
 }

@@ -14,19 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.osgi.hazelcast.cmd;
+package com.github.lburgazzoli.examples.hazelcast.data.cmd;
 
 import com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.osgi.hazelcast.cmd.AbstractHazelcastCompleter;
+import org.apache.karaf.shell.console.completer.StringsCompleter;
+
+import java.util.List;
 
 /**
  *
  */
-public abstract class AbstractHazelcastCommand extends AbstractServiceCommand<IHazelcastInstanceProvider> {
+public class HzDataCompleter extends AbstractHazelcastCompleter {
 
-    /**
-     * c-tor
-     */
-    public AbstractHazelcastCommand() {
+    @Override
+    protected int doComplete(IHazelcastInstanceProvider service, String buffer, int cursor, List<String> candidates) {
+        StringsCompleter delegate = new StringsCompleter();
+        delegate.getStrings().add(HzDataCommand.CMD_PUT);
+        delegate.getStrings().add(HzDataCommand.CMD_GET);
+        delegate.getStrings().add(HzDataCommand.CMD_QUERY);
+
+        return delegate.complete(buffer, cursor, candidates);
     }
 }

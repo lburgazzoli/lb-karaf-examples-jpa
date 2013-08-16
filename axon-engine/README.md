@@ -19,7 +19,7 @@ gradle clean install
     install -s mvn:joda-time/joda-time/2.2
     install -s wrap:mvn:com.eaio.uuid/uuid/3.2
     install -s mvn:com.google.guava/guava/14.0.1
-    install -s mvn:com.googlecode.disruptor/disruptor/2.10.3
+    install -s mvn:com.lmax/disruptor/3.2.0
     install -s mvn:commons-lang/commons-lang/2.6
     install -s mvn:org.apache.commons/commons-lang3/3.1
     install -s mvn:commons-io/commons-io/2.4
@@ -37,14 +37,15 @@ gradle clean install
     install -s mvn:org.springframework/org.springframework.context/3.2.2.RELEASE
     install -s mvn:org.springframework/org.springframework.context.support/3.2.2.RELEASE
     install -s mvn:org.springframework/org.springframework.transaction/3.2.2.RELEASE
-    install -s mvn:com.fasterxml.jackson.core/jackson-core/2.2.1
-    install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.1
-    install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.1
+    install -s mvn:com.fasterxml.jackson.core/jackson-core/2.2.2
+    install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.2
+    install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.2
     install -s mvn:de.undercouch/bson4jackson/2.2.0
     install -s wrap:mvn:net.sf.jsr107cache/jsr107cache/1.1
     install -s mvn:com.hazelcast/hazelcast-all/2.6
     install -s mvn:org.axonframework/axon-core/2.0.3-SNAPSHOT
     install -s mvn:org.axonframework/axon-distributed-commandbus/2.0.3-SNAPSHOT
+    install -s mvn:com.esotericsoftware.kryo/kryo/2.21
 
     #install -s wrap:mvn:org.axonframework/axon-core/2.0.2
     #install -s mvn:org.apache.openjpa/openjpa/2.2.2

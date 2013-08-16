@@ -16,12 +16,17 @@
  */
 package com.github.lburgazzoli.examples.hazelcast.data;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
+
 /**
  *
  */
-public class HzData {
+public class HzData implements Serializable {
 
-    private Object m_payload;
+    private String m_payload;
 
     /**
      * c-tor
@@ -35,15 +40,19 @@ public class HzData {
      *
      * @param payload
      */
-    public HzData(final Object payload) {
+    public HzData(final String payload) {
         m_payload = payload;
     }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
 
     /**
      *
      * @return
      */
-    public Object getPayload() {
+    public String getPayload() {
         return m_payload;
     }
 
@@ -51,7 +60,18 @@ public class HzData {
      *
      * @param payload
      */
-    public void setPayload(Object payload) {
+    public void setPayload(String payload) {
         m_payload = payload;
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+            .append("payload",m_payload)
+            .toString();
     }
 }

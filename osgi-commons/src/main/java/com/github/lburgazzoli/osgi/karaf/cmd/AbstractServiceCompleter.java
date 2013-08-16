@@ -23,7 +23,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class AbstractServiceCompleter <T> implements Completer {
+public abstract class AbstractServiceCompleter<T> implements Completer {
 
     private T m_service;
 
@@ -50,6 +50,7 @@ public abstract class AbstractServiceCompleter <T> implements Completer {
         return m_service;
     }
 
+    @Override
     public int complete(String buffer, int cursor, List<String> candidates) {
         return doComplete(m_service,buffer,cursor,candidates);
     }

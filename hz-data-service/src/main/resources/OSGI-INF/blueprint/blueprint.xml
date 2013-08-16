@@ -22,68 +22,35 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hz.service" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hz.data.service" update-strategy="reload" >
         <cm:default-properties>
-            <!--
-            <cm:property
-                name="hz.config"
-                value="etc/com.github.lburgazzoli.karaf.hz.service,xml"/>
-            -->
         </cm:default-properties>
     </cm:property-placeholder>
 
-
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id    = "OSGI_CLASSLOADER"
-          class = "com.github.lburgazzoli.osgi.OSGiClassLoader">
-    </bean>
+    <reference id        = "HZ_PROVIDER"
+               interface = "com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider"/>
 
-
-    <bean id             = "OSGI_CLASSLOADER_MGR"
-          class          = "com.github.lburgazzoli.osgi.OSGiClassLoaderManager"
-          init-method    = "init"
-          destroy-method = "destroy">
-        <argument ref="blueprintBundleContext"/>
-        <argument ref="OSGI_CLASSLOADER"/>
-        <property name="eligibleBundleIds">
-            <list>
-                <value>karaf-examples-osgi-commons</value>
-                <value>karaf-examples-osgi-hazelcast</value>
-                <value>karaf-examples-hz-data</value>
-            </list>
-        </property>
+    <bean id    = "HZ_DATA_PROXY"
+          class = "com.github.lburgazzoli.osgi.hazelcast.HazelcastInstanceProxy">
+        <argument ref   = "blueprintBundleContext"/>
+        <argument ref   = "HZ_PROVIDER"/>
+        <argument value = "hzService"/>
     </bean>
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id    = "HZ_CONFIG"
-          class = "com.github.lburgazzoli.osgi.hazelcast.HazelcastLocalConfig">
-        <argument ref="OSGI_CLASSLOADER"/>
-    </bean>
-
-    <bean id             = "HZ_ENGINE"
-          class          = "com.github.lburgazzoli.osgi.hazelcast.HazelcastInstanceProxy"
-          init-method    = "init"
-          destroy-method = "destroy">
-        <argument ref="blueprintBundleContext"/>
-        <argument ref="HZ_CONFIG"/>
-    </bean>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <service ref="HZ_ENGINE">
+    <service ref="HZ_DATA_PROXY">
         <interfaces>
             <value>com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProxy</value>
         </interfaces>
         <service-properties>
-            <entry key="osgi.jndi.service.name" value="hz.engine"/>
+            <entry key="osgi.jndi.service.name" value="hz.instance.proxy"/>
         </service-properties>
     </service>
 

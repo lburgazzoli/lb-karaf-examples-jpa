@@ -16,11 +16,15 @@
  */
 package com.github.lburgazzoli.osgi.hazelcast.cmd;
 
-import com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProxy;
+import com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider;
+import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.hazelcast.core.DistributedObject;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.Member;
+import com.hazelcast.core.Partition;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-
-import java.util.List;
 
 /**
  *
@@ -41,14 +45,76 @@ public class HazelcastListCommand extends AbstractHazelcastCommand {
     // *************************************************************************
 
     @Override
-    public Object doExecute() throws Exception {
-        List<IHazelcastInstanceProxy> proxies =
-            getAllServices(IHazelcastInstanceProxy.class,null);
-
-        return null;
+    public void doExecute(IHazelcastInstanceProvider service) throws Exception {
+        if(StringUtils.isNotBlank(arg)) {
+            if(StringUtils.equalsIgnoreCase(HazelcastCommandConstants.LIST_MEMBERS,arg)) {
+                doExecuteMemberList(service.getInstance());
+            } else if(StringUtils.equalsIgnoreCase(HazelcastCommandConstants.LIST_OBJECTS,arg)) {
+                doExecuteDistributedObjectList(service.getInstance());
+            } else if(StringUtils.equalsIgnoreCase(HazelcastCommandConstants.LIST_PARTITIONS,arg)) {
+                doExecutePartitionList(service.getInstance());
+            }
+        }
     }
 
     // *************************************************************************
     //
     // *************************************************************************
+
+    /**
+     *
+     * @param instance
+     * @throws Exception
+     */
+    public void doExecuteMemberList(HazelcastInstance instance) throws Exception {
+        ShellTable table = new ShellTable("ID","Host","Port","Local");
+
+        for(Member m : instance.getCluster().getMembers()) {
+            table.addRow(
+                m.getUuid(),
+                m.getInetSocketAddress().getHostName(),
+                m.getInetSocketAddress().getPort(),
+                m.localMember() ? "*" : StringUtils.EMPTY
+            );
+        }
+
+        table.print();
+    }
+
+    /**
+     *
+     * @param instance
+     * @throws Exception
+     */
+    public void doExecuteDistributedObjectList(HazelcastInstance instance) throws Exception {
+        ShellTable table = new ShellTable("ID","Name","Class");
+
+        for(DistributedObject o : instance.getDistributedObjects()) {
+            table.addRow(
+                o.getId(),
+                o.getName(),
+                o.getClass()
+            );
+        }
+
+        table.print();
+    }
+
+    /**
+     *
+     * @param instance
+     * @throws Exception
+     */
+    public void doExecutePartitionList(HazelcastInstance instance) throws Exception {
+        ShellTable table = new ShellTable("ID","Member");
+
+        for(Partition p : instance.getPartitionService().getPartitions()) {
+            table.addRow(
+                p.getPartitionId(),
+                p.getOwner().getUuid()
+            );
+        }
+
+        table.print();
+    }
 }

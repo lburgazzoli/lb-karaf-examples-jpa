@@ -22,7 +22,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hz.data.cmd" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hz.data.service" update-strategy="reload" >
         <cm:default-properties>
         </cm:default-properties>
     </cm:property-placeholder>
@@ -35,28 +35,21 @@ limitations under the License.
                interface = "com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider"/>
 
     <!-- ******************************************************************* -->
-    <!-- COMMANDS                                                            -->
+    <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id    = "HZ_DATA_COMPLETER"
-          class = "com.github.lburgazzoli.examples.hazelcast.data.cmd.HzDataCompleter">
-        <property name="service" ref="HZ_PROVIDER"/>
+    <bean id             = "HZ_DATA_LISTENER"
+          class          = "com.github.lburgazzoli.examples.hazelcast.data.listener.HzDataListener"
+          init-method    ="init"
+          destroy-method ="destroy">
+        <argument ref = "HZ_PROVIDER"/>
     </bean>
 
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="hztest/data">
-            <action class="com.github.lburgazzoli.examples.hazelcast.data.cmd.HzDataCommand">
-                <property name="service" ref="HZ_PROVIDER"/>
-            </action>
-            <completers>
-                <ref component-id="HZ_DATA_COMPLETER"/>
-            </completers>
-        </command>
-        <command name="hztest/broadcast">
-            <action class="com.github.lburgazzoli.examples.hazelcast.data.cmd.HzDataBroadcastCommand">
-                <property name="service" ref="HZ_PROVIDER"/>
-            </action>
-        </command>
-    </command-bundle>
+    <bean id             = "HZ_DATA_QUERY"
+          class          = "com.github.lburgazzoli.examples.hazelcast.data.listener.HzDataContinuousQuery"
+          init-method    ="init"
+          destroy-method ="destroy">
+        <argument ref = "HZ_PROVIDER"/>
+    </bean>
 
 </blueprint>

@@ -14,10 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.hazelcast.service;
+package com.github.lburgazzoli.osgi.hazelcast.cmd;
+
+import com.github.lburgazzoli.osgi.OSGiClassLoader;
+import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCompleter;
+import org.apache.karaf.shell.console.completer.StringsCompleter;
+import org.osgi.framework.Bundle;
+
+import java.util.List;
 
 /**
  *
  */
-public class HzService {
+public class ClassLoaderClassListCompleter extends AbstractServiceCompleter<OSGiClassLoader> {
+    @Override
+    protected int doComplete(OSGiClassLoader service, String buffer, int cursor, List<String> candidates) {
+        StringsCompleter delegate = new StringsCompleter();
+
+        for(Bundle b : service.getBundles()) {
+            delegate.getStrings().add(b.getSymbolicName());
+        }
+
+        return delegate.complete(buffer, cursor, candidates);
+    }
 }
