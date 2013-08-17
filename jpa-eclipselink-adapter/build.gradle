@@ -8,6 +8,7 @@ project.ext {
         "*"
     ]
 
+    /*
     requireBundle = [
         'org.eclipse.persistence.asm',
         'org.eclipse.persistence.antlr',
@@ -15,12 +16,13 @@ project.ext {
         'org.eclipse.persistence.jpa',
         'org.eclipse.persistence.jpa.jpql'
     ]
+    */
 }
 
 dependencies {
-    compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
-    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'
-    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.1'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.2'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.2'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.2'
 }
 
 jar {
@@ -29,6 +31,6 @@ jar {
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
         attributes['Bundle-Activator'] = 'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.OSGiActivator'
-        attributes['Require-Bundle'  ] = requireBundle.join(',')
+        //attributes['Require-Bundle'  ] = requireBundle.join(',')
     }
 }

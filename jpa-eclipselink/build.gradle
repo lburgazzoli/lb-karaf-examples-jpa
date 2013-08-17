@@ -15,19 +15,18 @@ project.ext {
 
     eclipseLinkPackages =  [
         'org.eclipse.persistence.queries',
+        'org.eclipse.persistence.descriptors.changetracking',
+        'org.eclipse.persistence.jpa.jpql.parser',
         'org.eclipse.persistence.internal.weaving',
         'org.eclipse.persistence.internal.descriptors',
         'org.eclipse.persistence.internal.identitymaps',
-        'org.eclipse.persistence.descriptors.changetracking'
+        'org.eclipse.persistence.internal.jpa.rs.metadata.model'
     ]
 }
 
 dependencies {
     compile project(':jpa-commons')
     compile project(':jpa-eclipselink-adapter')
-    compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.1'
-    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.1'
-    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.1'
 }
 
 jar {
@@ -37,7 +36,8 @@ jar {
 
         attributes['JPA-PersistenceUnits'  ] = 'DATA_ELINK'
         attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
-        attributes['DynamicImport-Package' ] = eclipseLinkPackages.join(',')
+        attributes['DynamicImport-Package' ] = '*'   
+        //eclipseLinkPackages.join(',')
     }
 }
 

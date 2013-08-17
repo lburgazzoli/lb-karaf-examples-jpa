@@ -20,7 +20,6 @@ subprojects {
         maven { url 'http://repo.springsource.org/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/external' }
-        maven { url 'http://download.eclipse.org/rt/eclipselink/maven.repo' }
         maven { url 'http://repository.jboss.org/nexus/content/repositories/releases' }
         maven { url 'http://repository.jboss.org/nexus/content/groups/public/' }
         maven { url 'http://snapshots.jboss.org/maven2/' }
