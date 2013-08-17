@@ -32,30 +32,25 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <reference id        = "HZ_PROVIDER"
-               interface = "com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider"/>
+               interface = "com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider"/>
 
     <!-- ******************************************************************* -->
     <!-- COMMANDS                                                            -->
     <!-- ******************************************************************* -->
 
     <bean id    = "HZ_DATA_COMPLETER"
-          class = "com.github.lburgazzoli.examples.hazelcast.data.cmd.HzDataCompleter">
+          class = "com.github.lburgazzoli.examples.karaf.hz.data.cmd.HzDataCompleter">
         <property name="service" ref="HZ_PROVIDER"/>
     </bean>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="hztest/data">
-            <action class="com.github.lburgazzoli.examples.hazelcast.data.cmd.HzDataCommand">
+            <action class="com.github.lburgazzoli.examples.karaf.hz.data.cmd.HzDataCommand">
                 <property name="service" ref="HZ_PROVIDER"/>
             </action>
             <completers>
                 <ref component-id="HZ_DATA_COMPLETER"/>
             </completers>
-        </command>
-        <command name="hztest/broadcast">
-            <action class="com.github.lburgazzoli.examples.hazelcast.data.cmd.HzDataBroadcastCommand">
-                <property name="service" ref="HZ_PROVIDER"/>
-            </action>
         </command>
     </command-bundle>
 

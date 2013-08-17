@@ -1,6 +1,5 @@
 
 include "osgi-commons"
-include "osgi-hazelcast"
 
 include "jpa-utils"
 include "jpa-commons"
@@ -21,8 +20,9 @@ include "axon-commons"
 include "axon-engine"
 include "axon-model"
 
+include "hz-service"
 include "hz-data"
 include "hz-data-cmd"
 include "hz-data-listener"
-include "hz-data-service"
+
 

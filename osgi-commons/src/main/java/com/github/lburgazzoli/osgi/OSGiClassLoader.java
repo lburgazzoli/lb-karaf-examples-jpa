@@ -146,7 +146,7 @@ public class OSGiClassLoader extends ClassLoader {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public Class findClass(String name) throws ClassNotFoundException {
+    protected Class findClass(String name) throws ClassNotFoundException {
         Class<?> clazz = m_classes.get(name);
         if(clazz == null) {
             for(Map.Entry<Long,Bundle> entry : m_bundles.entrySet()) {

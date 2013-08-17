@@ -22,7 +22,7 @@ limitations under the License.
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hz.data.service" update-strategy="reload" >
+    <cm:property-placeholder persistent-id="com.github.lburgazzoli.karaf.hz.data.listener" update-strategy="reload" >
         <cm:default-properties>
         </cm:default-properties>
     </cm:property-placeholder>
@@ -32,21 +32,21 @@ limitations under the License.
     <!-- ******************************************************************* -->
 
     <reference id        = "HZ_PROVIDER"
-               interface = "com.github.lburgazzoli.osgi.hazelcast.IHazelcastInstanceProvider"/>
+               interface = "com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider"/>
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
     <bean id             = "HZ_DATA_LISTENER"
-          class          = "com.github.lburgazzoli.examples.hazelcast.data.listener.HzDataListener"
+          class          = "com.github.lburgazzoli.examples.karaf.hz.data.listener.HzDataListener"
           init-method    ="init"
           destroy-method ="destroy">
         <argument ref = "HZ_PROVIDER"/>
     </bean>
 
     <bean id             = "HZ_DATA_QUERY"
-          class          = "com.github.lburgazzoli.examples.hazelcast.data.listener.HzDataContinuousQuery"
+          class          = "com.github.lburgazzoli.examples.karaf.hz.data.listener.HzDataContinuousQuery"
           init-method    ="init"
           destroy-method ="destroy">
         <argument ref = "HZ_PROVIDER"/>

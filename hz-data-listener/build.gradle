@@ -11,7 +11,7 @@ project.ext {
 
 dependencies {
     compile project(':osgi-commons')
-    compile project(':osgi-hazelcast')
+    compile project(':hz-service')
     compile project(':hz-data')
 }
 

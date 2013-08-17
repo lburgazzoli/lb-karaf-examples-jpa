@@ -121,7 +121,7 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
      */
     public boolean isBundleEligible(Bundle bundle) {
         for(String bundleId : m_bundleIds) {
-            if(StringUtils.equalsIgnoreCase(bundleId,bundle.getSymbolicName())) {
+            if(bundle.getSymbolicName().matches(bundleId)) {
                 return true;
             }
         }

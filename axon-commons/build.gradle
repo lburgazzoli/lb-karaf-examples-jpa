@@ -15,7 +15,7 @@ project.ext {
 
 dependencies {
     compile project(':osgi-commons')
-    compile project(':osgi-hazelcast')
+    compile project(':hz-service')
     compile 'org.ow2.asm:asm:4.1'
     compile 'org.axonframework:axon-core:2.0.2'
     compile 'org.axonframework:axon-distributed-commandbus:2.0.2'
