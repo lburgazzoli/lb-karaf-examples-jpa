@@ -42,7 +42,7 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.2
     install -s mvn:de.undercouch/bson4jackson/2.2.0
     install -s wrap:mvn:net.sf.jsr107cache/jsr107cache/1.1
-    install -s mvn:com.hazelcast/hazelcast-all/2.6
+    install -s mvn:com.hazelcast/hazelcast/3.0
     install -s mvn:org.axonframework/axon-core/2.0.3-SNAPSHOT
     install -s mvn:org.axonframework/axon-distributed-commandbus/2.0.3-SNAPSHOT
     install -s mvn:com.esotericsoftware.kryo/kryo/2.21
@@ -58,7 +58,7 @@ gradle clean install
     #install -s mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0
 
     install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-commons/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-hazelcast/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-hz-service/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-commons/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-ext-hazelcast/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-engine/1.0.0.SNAPSHOT

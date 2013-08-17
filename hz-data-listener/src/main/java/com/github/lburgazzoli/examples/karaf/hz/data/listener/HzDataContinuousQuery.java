@@ -34,7 +34,7 @@ public class HzDataContinuousQuery implements EntryListener<String,HzData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(HzDataContinuousQuery.class);
 
     private final IHazelcastInstanceProvider m_instanceProvider;
-    private String m_key;
+    private String m_queryKey;
     private IMap<String,HzData> m_map;
 
     /**
@@ -42,7 +42,7 @@ public class HzDataContinuousQuery implements EntryListener<String,HzData> {
      */
     public HzDataContinuousQuery(IHazelcastInstanceProvider instanceProvider) {
         m_instanceProvider = instanceProvider;
-        m_key = null;
+        m_queryKey = null;
     }
 
     // *************************************************************************
@@ -53,16 +53,16 @@ public class HzDataContinuousQuery implements EntryListener<String,HzData> {
      *
      */
     public void init() {
-        m_map = m_instanceProvider.getInstance().getMap("hztest:map");
-        m_key = m_map.addEntryListener(this,new SqlPredicate("payload like 'x%'"),null,true);
+        m_map      = m_instanceProvider.getInstance().getMap("hztest:map");
+        m_queryKey = m_map.addEntryListener(this,new SqlPredicate("payload like 'x%'"),null,true);
     }
 
     /**
      *
      */
     public void destroy() {
-        if((m_map != null) && StringUtils.isNotBlank(m_key)) {
-            m_map.removeEntryListener(m_key);
+        if((m_map != null) && StringUtils.isNotBlank(m_queryKey)) {
+            m_map.removeEntryListener(m_queryKey);
         }
     }
 

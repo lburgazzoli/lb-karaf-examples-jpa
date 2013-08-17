@@ -55,7 +55,7 @@ public class HzDataCommand extends AbstractHazelcastCommand {
     String type = null;
 
     @Argument(
-        index       = 0,
+        index       = 1,
         name        = "action",
         description = "The action",
         required    = true,
@@ -63,7 +63,7 @@ public class HzDataCommand extends AbstractHazelcastCommand {
     String action = null;
 
     @Argument(
-        index       = 1,
+        index       = 2,
         name        = "args",
         description = "The key",
         required    = true,
