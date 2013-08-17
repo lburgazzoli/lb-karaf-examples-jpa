@@ -16,62 +16,39 @@
  */
 package com.github.lburgazzoli.examples.karaf.jpa.eclipselink.data;
 
-import com.google.common.collect.Lists;
 import com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.Collection;
 
 /**
  *
  */
-public class ApplicationManagedDataService implements IDataService<Item> {
-    private EntityManagerFactory emf;
+public class ContainerManagedDataService implements IDataService<Item> {
+    private EntityManager em;
 
     /**
      * c-tor
      */
-    public ApplicationManagedDataService() {
-        this.emf = null;
+    public ContainerManagedDataService() {
+        this.em = null;
     }
 
     /**
-     * @param emf the EntityManagerFactory
+     * @param em the EntityManager
      */
-    public void setEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
     }
 
     @Override
     public Collection<Item> getAll() {
-        EntityManager    em  = emf.createEntityManager();
-        Collection<Item> ret = Lists.newArrayList();
-
-        try {
-            ret = em.createQuery("select i from Item i", Item.class).getResultList();
-        } finally {
-            em.close();
-        }
-
-        return ret;
+        return em.createQuery("select i from Item i", Item.class).getResultList();
     }
 
     @Override
     public void add(Item item) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(item);
-            em.getTransaction().commit();
-        } catch(Exception e) {
-            if(em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-
-            System.out.println("Exception: " + e.getMessage());
-        } finally {
-            em.close();
-        }
+        em.persist(item);
+        em.flush();
     }
 }

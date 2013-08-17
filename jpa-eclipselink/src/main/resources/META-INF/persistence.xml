@@ -41,19 +41,13 @@ limitations under the License.
             <property name="eclipselink.logging.thread"                     value="true"/>
             <property name="eclipselink.logging.exceptions"                 value="true"/>
             <property name="eclipselink.session.include.descriptor.queries" value="true"/>
+            <property name="eclipselink.weaving"                            value="true"/>
+            <property name="eclipselink.ddl-generation"                     value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
 
             <property
-                name ="eclipselink.logging.logger"
-                value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
-            <!--
-            <property
-                name ="eclipselink.session-event-services"
-                value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionEventListener"/>
-            -->
-
-            <property name="eclipselink.weaving"                    value="true"/>
-            <property name="eclipselink.ddl-generation"             value="create-tables"/>
-            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+                name  = "eclipselink.logging.logger"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
 
         </properties>
     </persistence-unit>
@@ -62,7 +56,6 @@ limitations under the License.
     <!-- JTA                                                                 -->
     <!-- ******************************************************************* -->
 
-    <!--
     <persistence-unit name="DATA_ELINK_JTA" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
@@ -77,20 +70,18 @@ limitations under the License.
             <property name="eclipselink.logging.thread"                     value="true"/>
             <property name="eclipselink.logging.exceptions"                 value="true"/>
             <property name="eclipselink.session.include.descriptor.queries" value="true"/>
+            <property name="eclipselink.weaving"                            value="true"/>
+            <property name="eclipselink.ddl-generation"                     value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
 
             <property
-                    name="eclipselink.target-server"
-                    value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.OSGiServerPlatform"/>
+                name  = "eclipselink.target-server"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.OSGiServerPlatform"/>
             <property
-                    name ="eclipselink.logging.logger"
-                    value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
-
-            <property name="eclipselink.weaving"                    value="true"/>
-            <property name="eclipselink.ddl-generation"             value="create-tables"/>
-            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+                name  = "eclipselink.logging.logger"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
 
         </properties>
     </persistence-unit>
-    -->
 
 </persistence>
