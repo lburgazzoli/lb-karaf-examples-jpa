@@ -22,19 +22,19 @@ import org.eclipse.persistence.sessions.DatabaseSession;
 /**
  *
  */
-public class OSGiServerPlatform extends ServerPlatformBase {
+public class EclipseLinkOSGiServerPlatform extends ServerPlatformBase {
 
     /**
      * c-tor
      *
      * @param databaseSession
      */
-    public OSGiServerPlatform(DatabaseSession databaseSession) {
+    public EclipseLinkOSGiServerPlatform(DatabaseSession databaseSession) {
         super(databaseSession);
     }
 
     @Override
     public Class getExternalTransactionControllerClass() {
-        return OSGiTransactionController.class;
+        return EclipseLinkOSGiTransactionController.class;
     }
 }

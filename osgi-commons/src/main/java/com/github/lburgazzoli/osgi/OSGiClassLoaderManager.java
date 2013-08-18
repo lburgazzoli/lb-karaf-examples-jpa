@@ -66,8 +66,7 @@ public class OSGiClassLoaderManager implements IOSGiLifeCycle, BundleListener {
     public void setEligibleBundleIds(String bundleIds) {
         m_bundleIds.clear();
         for(String bundleId : StringUtils.split(bundleIds,",")) {
-            if(m_bundleIds.add(bundleId)) {
-            }
+            m_bundleIds.add(bundleId);
         }
     }
 

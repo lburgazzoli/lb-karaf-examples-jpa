@@ -16,34 +16,41 @@
  */
 package com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter;
 
+import com.github.lburgazzoli.osgi.OSGiClassLoader;
+import com.github.lburgazzoli.osgi.OSGiClassLoaderManager;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Hashtable;
 
 /**
  *
  */
-public class OSGiActivator implements BundleActivator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OSGiActivator.class);
+public class EclipseLinkOSGiActivator implements BundleActivator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EclipseLinkOSGiActivator.class);
 
-    private BundleContext context;
-    private ServiceRegistration serviceReg;
+    private BundleContext m_context;
+    private ServiceRegistration m_serviceReg;
+    private final OSGiClassLoader m_cl;
+    private final OSGiClassLoaderManager m_clm;
 
     /**
      * c-tor
      */
-    public OSGiActivator() {
-        context = null;
-        serviceReg = null;
+    public EclipseLinkOSGiActivator() {
+        m_context    = null;
+        m_serviceReg = null;
+        m_cl         = null;
+        m_clm        = null;
     }
 
     @Override
     public void start(BundleContext context) throws Exception {
-        this.context = context;
+        m_context = context;
 
         Hashtable<String,String> props = new Hashtable<String, String>();
         props.put(
@@ -56,19 +63,19 @@ public class OSGiActivator implements BundleActivator {
             "javax.persistence.PersistenceProvider",
             org.eclipse.persistence.jpa.PersistenceProvider.class.getName());
 
-        serviceReg = context.registerService(
+        m_serviceReg = context.registerService(
             javax.persistence.spi.PersistenceProvider.class.getName(),
-            new org.eclipse.persistence.jpa.PersistenceProvider(),
+            new EclipseLinkOSGiPersistenceProvider(),
             props);
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        if (this.serviceReg != null) {
-            this.serviceReg.unregister();
-            this.serviceReg = null;
+        if (m_serviceReg != null) {
+            m_serviceReg.unregister();
+            m_serviceReg = null;
         }
 
-        this.context = null;
+        m_context = null;
     }
 }

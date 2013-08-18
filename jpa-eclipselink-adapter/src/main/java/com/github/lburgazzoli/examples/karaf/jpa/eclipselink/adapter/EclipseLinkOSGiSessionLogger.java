@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.jpa.eclipselink;
+package com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  *
  */
-public class EclipseLinkSessionLogger extends AbstractSessionLog implements SessionLog
+public class EclipseLinkOSGiSessionLogger extends AbstractSessionLog implements SessionLog
 {
     private static final Logger LOGGER  = LoggerFactory.getLogger("ECLIPSELINK");
     private static final Map<String,Logger> LOGGERS = Maps.newHashMap();
@@ -37,7 +37,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
     /**
      * c-tor
      */
-    public EclipseLinkSessionLogger() {
+    public EclipseLinkOSGiSessionLogger() {
         this(1);
     }
 
@@ -46,7 +46,7 @@ public class EclipseLinkSessionLogger extends AbstractSessionLog implements Sess
      *
      * @param level
      */
-    public EclipseLinkSessionLogger(int level) {
+    public EclipseLinkOSGiSessionLogger(int level) {
         setLevel(1);
     }
 

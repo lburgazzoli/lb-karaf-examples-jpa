@@ -5,28 +5,16 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
-        'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter',
         '*'
     ]
 
     bundleExportPackages = [
         "*"
     ]
-
-    eclipseLinkPackages =  [
-        'org.eclipse.persistence.queries',
-        'org.eclipse.persistence.descriptors.changetracking',
-        'org.eclipse.persistence.jpa.jpql.parser',
-        'org.eclipse.persistence.internal.weaving',
-        'org.eclipse.persistence.internal.descriptors',
-        'org.eclipse.persistence.internal.identitymaps',
-        'org.eclipse.persistence.internal.jpa.rs.metadata.model'
-    ]
 }
 
 dependencies {
     compile project(':jpa-commons')
-    compile project(':jpa-eclipselink-adapter')
 }
 
 jar {
@@ -34,10 +22,9 @@ jar {
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
 
-        attributes['JPA-PersistenceUnits'  ] = 'DATA_ELINK'
+        attributes['JPA-PersistenceUnits'  ] = 'DATA_ELINK,DATA_ELINK_JTA'
         attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
-        attributes['DynamicImport-Package' ] = '*'   
-        //eclipseLinkPackages.join(',')
+        attributes['DynamicImport-Package' ] = '*'
     }
 }
 

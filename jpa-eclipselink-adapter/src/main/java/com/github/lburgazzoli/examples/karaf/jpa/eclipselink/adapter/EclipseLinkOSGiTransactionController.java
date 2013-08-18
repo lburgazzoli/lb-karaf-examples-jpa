@@ -27,11 +27,11 @@ import javax.transaction.TransactionManager;
 /**
  *
  */
-public class OSGiTransactionController extends JTATransactionController {
+public class EclipseLinkOSGiTransactionController extends JTATransactionController {
 
     @Override
     protected TransactionManager acquireTransactionManager() throws Exception {
-        Bundle bundle = FrameworkUtil.getBundle(OSGiTransactionController.class);
+        Bundle bundle = FrameworkUtil.getBundle(EclipseLinkOSGiTransactionController.class);
         BundleContext ctx = bundle.getBundleContext();
 
         if (ctx != null) {

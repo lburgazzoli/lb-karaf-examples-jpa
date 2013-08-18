@@ -45,10 +45,11 @@ limitations under the License.
             <property name="eclipselink.ddl-generation"                     value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
 
+            <!--
             <property
                 name  = "eclipselink.logging.logger"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
-
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLoggergger"/>
+            -->
         </properties>
     </persistence-unit>
 
@@ -74,13 +75,16 @@ limitations under the License.
             <property name="eclipselink.ddl-generation"                     value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
 
+            <!--
             <property
                 name  = "eclipselink.target-server"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.OSGiServerPlatform"/>
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiServerPlatform"/>
+            -->
+            <!--
             <property
                 name  = "eclipselink.logging.logger"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.EclipseLinkSessionLogger"/>
-
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLoggergger"/>
+            -->
         </properties>
     </persistence-unit>
 

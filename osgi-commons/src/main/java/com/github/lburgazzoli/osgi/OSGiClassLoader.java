@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,16 +42,46 @@ public class OSGiClassLoader extends ClassLoader {
     private final ConcurrentMap<String,URL> m_resources;
     private final List<ClassLoader> m_classLoaders;
     private final ConcurrentMap<String,Set<Class<?>>> m_class4bundle;
+    private final BundleContext m_bundleContext;
 
     /**
      * c-tor
      */
     public OSGiClassLoader() {
-        m_bundles      = Maps.newConcurrentMap();
-        m_classes      = Maps.newConcurrentMap();
-        m_resources    = Maps.newConcurrentMap();
-        m_classLoaders = Lists.newArrayList();
-        m_class4bundle = Maps.newConcurrentMap();
+        this(null,OSGiClassLoader.class.getClassLoader());
+    }
+
+    /**
+     * c-tor
+     */
+    public OSGiClassLoader(BundleContext bundleContext) {
+        this(bundleContext,bundleContext.getClass().getClassLoader());
+    }
+
+    /**
+     * c-tor
+     *
+     * @param classLoader the delegate class loader
+     */
+    public OSGiClassLoader(ClassLoader classLoader) {
+        this(null,classLoader);
+    }
+
+    /**
+     * c-tor
+     *
+     * @param bundleContext the bundle context
+     * @param classLoader the delegate class loader
+     */
+    public OSGiClassLoader(BundleContext bundleContext,ClassLoader classLoader) {
+        super(classLoader);
+
+        m_bundles       = Maps.newConcurrentMap();
+        m_classes       = Maps.newConcurrentMap();
+        m_resources     = Maps.newConcurrentMap();
+        m_classLoaders  = Lists.newArrayList();
+        m_class4bundle  = Maps.newConcurrentMap();
+        m_bundleContext = bundleContext;
     }
 
     /**
@@ -174,11 +205,19 @@ public class OSGiClassLoader extends ClassLoader {
                 } catch (ClassNotFoundException e) {
                 }
             }
+
+            if(m_bundleContext != null) {
+                clazz = m_bundleContext.getBundle().loadClass(name);
+                if(clazz != null) {
+                    m_classes.put(name, clazz);
+                    return clazz;
+                }
+            }
         } else {
             return clazz;
         }
 
-        throw new ClassNotFoundException(name);
+        return super.findClass(name);
     }
 
     @Override
@@ -203,11 +242,18 @@ public class OSGiClassLoader extends ClassLoader {
                 } catch (Exception e) {
                 }
             }
+
+            if(m_bundleContext != null) {
+                url = m_bundleContext.getBundle().getResource(name);
+                if(url != null) {
+                    m_resources.put(name, url);
+                    return url;
+                }
+            }
         } else {
             return url;
         }
 
-        //TODO: error?
-        return null;
+        return super.getResource(name);
     }
 }
