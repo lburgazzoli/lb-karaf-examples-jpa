@@ -45,6 +45,7 @@ limitations under the License.
     <bean id="con_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.data.ContainerManagedDataService">
         <jpa:context unitname="DATA_ELINK_JTA" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
     </bean>
 
     <service ref="con_managed_data_service"
