@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.github.lburgazzoli.examples.axon.cache;
 
 import net.sf.jsr107cache.Cache;
