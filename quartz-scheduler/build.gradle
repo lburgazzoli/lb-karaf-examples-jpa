@@ -4,6 +4,7 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
+        'org.quartz.impl',
         '*'
     ]
 
@@ -14,8 +15,9 @@ project.ext {
 
 dependencies {
     compile project(':commons-osgi')
-    compile project(':hz-service')
-    compile project(':hz-data')
+    //compile project(':hz-service')
+    compile 'org.quartz-scheduler:quartz:2.2.0'
+    compile 'com.mchange.c3p0:com.springsource.com.mchange.v2.c3p0:0.9.1.2'
 }
 
 jar {
