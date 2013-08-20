@@ -47,11 +47,10 @@
             <property name="eclipselink.ddl-generation"                     value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
 
-            <!--
             <property
                 name  = "eclipselink.logging.logger"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLoggergger"/>
-            -->
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLogger"/>
+
         </properties>
     </persistence-unit>
 
@@ -77,16 +76,13 @@
             <property name="eclipselink.ddl-generation"                     value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
 
-            <!--
+            <property
+                name  = "eclipselink.logging.logger"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLogger"/>
             <property
                 name  = "eclipselink.target-server"
                 value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiServerPlatform"/>
-            -->
-            <!--
-            <property
-                name  = "eclipselink.logging.logger"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLoggergger"/>
-            -->
+
         </properties>
     </persistence-unit>
 

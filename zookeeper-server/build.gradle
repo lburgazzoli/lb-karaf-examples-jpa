@@ -15,7 +15,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':osgi-commons')
+    compile project(':commons-osgi')
     compile 'org.apache.zookeeper:zookeeper:3.4.5'
 }
 

@@ -15,7 +15,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':jpa-commons')
+    compile project(':commons-jpa')
 }
 
 jar {

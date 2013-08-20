@@ -37,7 +37,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':osgi-commons')
+    compile project(':commons-osgi')
     compile project(':hz-service')
     compile project(':axon-commons')
 }

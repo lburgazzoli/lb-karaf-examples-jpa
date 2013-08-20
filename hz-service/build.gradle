@@ -13,7 +13,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':osgi-commons')
+    compile project(':commons-osgi')
 }
 
 jar {

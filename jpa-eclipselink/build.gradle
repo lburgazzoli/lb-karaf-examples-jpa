@@ -5,6 +5,7 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
+        'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter',
         '*'
     ]
 
@@ -14,7 +15,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':jpa-commons')
+    compile project(':commons-jpa')
 }
 
 jar {

@@ -29,4 +29,31 @@
         </cm:default-properties>
     </cm:property-placeholder>
 
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <bean id="ECLIPSELINK_PERSISTENCE_PROVIDER"
+          class="org.eclipse.persistence.jpa.PersistenceProvider">
+    </bean>
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <service ref       = "ECLIPSELINK_PERSISTENCE_PROVIDER"
+             interface = "javax.persistence.spi.PersistenceProvider">
+        <service-properties>
+            <entry key   = "osgi.jndi.service.name"
+                   value = "eclipselink.perrsistence.provider"/>
+            <entry key   = "javax.persistence.provider"
+                   value = "org.eclipse.persistence.jpa.PersistenceProvider"/>
+            <entry key   = "javax.persistence.spi.PersistenceProvider"
+                   value = "org.eclipse.persistence.jpa.PersistenceProvider"/>
+            <entry key   = "javax.persistence.PersistenceProvider"
+                   value = "org.eclipse.persistence.jpa.PersistenceProvider"/>
+        </service-properties>
+    </service>
+
+
 </blueprint>

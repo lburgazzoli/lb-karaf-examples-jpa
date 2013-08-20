@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.jpa.utils.cmd;
+package com.github.lburgazzoli.examples.karaf.jpa.cmd;
+
+import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
 
 /**
  *

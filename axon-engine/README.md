@@ -57,7 +57,7 @@ gradle clean install
     #install -s mvn:org.apache.aries/org.apache.aries.util/1.1.0
     #install -s mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0
 
-    install -s mvn:com.github.lburgazzoli/karaf-examples-osgi-commons/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-commons-osgi/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-hz-service/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-commons/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-axon-ext-hazelcast/1.0.0.SNAPSHOT

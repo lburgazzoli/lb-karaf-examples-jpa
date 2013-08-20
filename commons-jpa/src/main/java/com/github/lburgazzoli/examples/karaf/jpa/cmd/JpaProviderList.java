@@ -14,29 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.jpa.utils.cmd;
+package com.github.lburgazzoli.examples.karaf.jpa.cmd;
 
-import com.github.lburgazzoli.examples.karaf.jpa.utils.Constants;
+import com.github.lburgazzoli.examples.karaf.jpa.JpaConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
 import org.osgi.framework.ServiceReference;
 
-import javax.sql.DataSource;
-
 /**
  *
  */
-@Command(scope = "jpa", name = "datasource-list", description = "List DataSource Providers")
-public class JpaDataSourceList extends AbstractTabularCommand {
+@Command(scope = "jpa", name = "provider-list", description = "List JPA Providers")
+public class JpaProviderList extends AbstractTabularCommand {
 
-    public JpaDataSourceList() {
-        super("BundleID","BundleName","JNDI");
+
+    public JpaProviderList() {
+        super("BundleID","BundleName","PersistenceProvider");
     }
 
     @Override
     public void doExecuteCommand() throws Exception {
-        for(ServiceReference sr : getServiceReferences(DataSource.class)) {
-            String providerClass = (String)sr.getProperty(Constants.JPA_JNDI_DS_SVCP);
+        for(ServiceReference sr : getServiceReferences(JpaConstants.JPA_PP_CLASS)) {
+            String providerClass = (String)sr.getProperty(JpaConstants.JPA_PP_SVCP);
             if(StringUtils.isNotBlank(providerClass)) {
                 addRow(
                     sr.getBundle().getBundleId(),

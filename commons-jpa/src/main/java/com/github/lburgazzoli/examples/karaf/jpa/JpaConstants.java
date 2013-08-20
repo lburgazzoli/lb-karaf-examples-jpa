@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.jpa.utils;
+package com.github.lburgazzoli.examples.karaf.jpa;
 
 /**
  *
  */
-public class Constants {
+public class JpaConstants {
     public static final String JPA_PP_CLASS      = "javax.persistence.spi.PersistenceProvider";
     public static final String JPA_PP_SVCP       = "javax.persistence.provider";
     public static final String JPA_JNDI_DS_SVCP  = "osgi.jndi.service.name";

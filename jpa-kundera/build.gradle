@@ -13,7 +13,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':jpa-commons')
+    compile project(':commons-jpa')
     compile project(':jpa-kundera-adapter')
 
     compile 'org.mongodb:mongo-java-driver:2.11.1'

@@ -13,7 +13,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':jpa-commons')
+    compile project(':commons-jpa')
     compile 'org.batoo.jpa:batoo-jpa:2.0.1.1'
 }
 

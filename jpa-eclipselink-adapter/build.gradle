@@ -7,21 +7,11 @@ project.ext {
     bundleExportPackages = [
         "*"
     ]
-
-    /*
-    requireBundle = [
-        'org.eclipse.persistence.asm',
-        'org.eclipse.persistence.antlr',
-        'org.eclipse.persistence.core',
-        'org.eclipse.persistence.jpa',
-        'org.eclipse.persistence.jpa.jpql'
-    ]
-    */
 }
 
 dependencies {
-    compile project(':osgi-commons')
-    compile project(':jpa-commons')
+    compile project(':commons-osgi')
+    compile project(':commons-jpa')
     compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.4.2'
     compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.4.2'
     compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.4.2'
@@ -31,7 +21,5 @@ jar {
     manifest {
         instruction 'Import-Package' , bundleInportPackages.join(',')
         instruction 'Export-Package' , bundleExportPackages.join(',')
-
-        attributes['Bundle-Activator'] = 'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiActivator'
     }
 }

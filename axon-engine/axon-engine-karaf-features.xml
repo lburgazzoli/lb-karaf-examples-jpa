@@ -59,10 +59,9 @@
 
     <feature name="axon-engine">
         <feature>axon-deps-core</feature>
-        <bundle start="true">mvn:com.github.lburgazzoli/karaf-examples-osgi-commons/1.0.0.SNAPSHOT</bundle>
-        <bundle start="true">mvn:com.github.lburgazzoli/karaf-examples-osgi-hazelcast/1.0.0.SNAPSHOT</bundle>
+        <bundle start="true">mvn:com.github.lburgazzoli/karaf-examples-commons-osgi/1.0.0.SNAPSHOT</bundle>
+        <bundle start="true">mvn:com.github.lburgazzoli/karaf-examples-hz-service/1.0.0.SNAPSHOT</bundle>
         <bundle start="true">mvn:com.github.lburgazzoli/karaf-examples-axon-commons/1.0.0.SNAPSHOT</bundle>
-        <bundle start="true">mvn:com.github.lburgazzoli/karaf-examples-axon-ext-hazelcast/1.0.0.SNAPSHOT</bundle>
         <bundle start="false">mvn:com.github.lburgazzoli/karaf-examples-axon-engine/1.0.0.SNAPSHOT</bundle>
         <bundle start="false">mvn:com.github.lburgazzoli/karaf-examples-axon-model/1.0.0.SNAPSHOT</bundle>
     </feature>

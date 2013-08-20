@@ -1,8 +1,6 @@
 
-include "osgi-commons"
-
-include "jpa-utils"
-include "jpa-commons"
+include "commons-osgi"
+include "commons-jpa"
 
 include "jpa-eclipselink"
 include "jpa-eclipselink-adapter"

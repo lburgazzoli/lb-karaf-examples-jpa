@@ -32,7 +32,7 @@
                 value = "etc/com.github.lburgazzoli.karaf.hz.service.xml"/>
             <cm:property
                 name  = "hz.classloader.bundles"
-                value = "karaf-examples-osgi-commons"/>
+                value = "karaf-examples-commons-osgi"/>
         </cm:default-properties>
     </cm:property-placeholder>
 

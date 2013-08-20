@@ -13,6 +13,7 @@ project.ext {
 }
 
 dependencies {
+    compile project(':commons-osgi')
 }
 
 jar {
@@ -21,4 +22,3 @@ jar {
         instruction 'Export-Package' , bundleExportPackages.join(',')
     }
 }
-
