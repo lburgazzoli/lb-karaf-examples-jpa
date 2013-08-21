@@ -38,6 +38,13 @@
 
     <bean id    = "TASK_SCHEDULER_FACTORY"
           class = "org.quartz.impl.StdSchedulerFactory">
+        <argument>
+            <props>
+                <prop key="org.quartz.scheduler.jmx.export"  >true</prop>
+                <prop key="org.quartz.scheduler.instanceName">k-scheduler</prop>
+                <prop key="org.quartz.threadPool.threadCount">3</prop>
+            </props>
+        </argument>
     </bean>
 
     <bean id             = "TASK_SCHEDULER"
@@ -66,8 +73,18 @@
     <!-- ******************************************************************* -->
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="task/sample-add">
+        <command name="scheduler/sample-add">
             <action class="com.github.lburgazzoli.examples.karaf.quartz.cmd.AddSampleTask">
+                <property name="service" ref="TASK_SCHEDULER"/>
+            </action>
+        </command>
+        <command name="scheduler/scheduler-info">
+            <action class="com.github.lburgazzoli.examples.karaf.quartz.cmd.TaskSchedulerInfoCommand">
+                <property name="service" ref="TASK_SCHEDULER"/>
+            </action>
+        </command>
+        <command name="scheduler/task-list">
+            <action class="com.github.lburgazzoli.examples.karaf.quartz.cmd.TaskListCommand">
                 <property name="service" ref="TASK_SCHEDULER"/>
             </action>
         </command>

@@ -85,7 +85,7 @@ public class TaskScheduler implements ITaskScheduler {
     /**
      *
      */
-    public void init()  {
+    public void init() {
         if(m_schedulerFactory != null) {
             try {
                 m_scheduler = m_schedulerFactory.getScheduler();
@@ -120,6 +120,15 @@ public class TaskScheduler implements ITaskScheduler {
     //
     // *************************************************************************
 
+    /**
+     *
+     * @return
+     */
+    public Scheduler getScheduler()
+    {
+        return m_scheduler;
+    }
+
     @Override
     public void schedule(TaskDefinition definition) throws Exception{
         String scheme = definition.get(TaskConstants.TASK_DEF_URI  );
@@ -142,9 +151,12 @@ public class TaskScheduler implements ITaskScheduler {
                 .withSchedule(CronScheduleBuilder.cronSchedule(cron))
                  .build();
 
-            job.getJobDataMap().put(TaskConstants.DATAMAP_BUNDLE_CONTEXT,m_bundleContext);
+            job.getJobDataMap().put(TaskConstants.TASK_DATA_BUNDLE_CTX,m_bundleContext);
+            job.getJobDataMap().put(TaskConstants.TASK_DATA_TASK_DEF  ,definition);
 
             m_scheduler.scheduleJob(job,trigger);
         }
     }
+
+
 }

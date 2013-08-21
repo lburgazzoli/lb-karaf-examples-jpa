@@ -25,5 +25,6 @@ public class TaskConstants {
     public static final String TASK_DEF_ID    = "task.id";
     public static final String TASK_DEF_GROUP = "task.group";
 
-    public static final String DATAMAP_BUNDLE_CONTEXT = "osgi.bundle.context";
+    public static final String TASK_DATA_BUNDLE_CTX = "osgi.bundle.context";
+    public static final String TASK_DATA_TASK_DEF   = "task.definition";
 }

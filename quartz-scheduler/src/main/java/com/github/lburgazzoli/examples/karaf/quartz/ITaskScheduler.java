@@ -16,6 +16,8 @@
  */
 package com.github.lburgazzoli.examples.karaf.quartz;
 
+import org.quartz.Scheduler;
+
 /**
  *
  */
@@ -25,4 +27,10 @@ public interface ITaskScheduler {
      * @param definition
      */
     public void schedule(TaskDefinition definition) throws Exception;
+
+    /**
+     *
+     * @return
+     */
+    public Scheduler getScheduler();
 }
