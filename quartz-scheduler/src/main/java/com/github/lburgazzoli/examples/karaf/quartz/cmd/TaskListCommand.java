@@ -33,7 +33,7 @@ import org.quartz.impl.matchers.GroupMatcher;
 @Command(
     scope       = "scheduler",
     name        = "task-list",
-    description = "Task list")
+    description = "TaskExecutor list")
 public class TaskListCommand extends AbstractSchedulerCommand {
 
     /**

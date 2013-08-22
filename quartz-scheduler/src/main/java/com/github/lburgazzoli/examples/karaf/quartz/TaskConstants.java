@@ -20,11 +20,13 @@ package com.github.lburgazzoli.examples.karaf.quartz;
  *
  */
 public class TaskConstants {
-    public static final String TASK_DEF_URI   = "task.uri";
-    public static final String TASK_DEF_CRON  = "task.cron";
-    public static final String TASK_DEF_ID    = "task.id";
-    public static final String TASK_DEF_GROUP = "task.group";
+    public static final String TASK_DEF_URI       = "task.uri";
+    public static final String TASK_DEF_CRON      = "task.cron";
+    public static final String TASK_DEF_ID        = "task.id";
+    public static final String TASK_DEF_GROUP     = "task.group";
+    public static final String TASK_DEF_TYPE      = "task.type";
+    public static final String TASK_DEF_TYPE_JMX  = "jmx";
+    public static final String TASK_DEF_TYPE_OSGI = "osgi";
 
-    public static final String TASK_DATA_BUNDLE_CTX = "osgi.bundle.context";
     public static final String TASK_DATA_TASK_DEF   = "task.definition";
 }

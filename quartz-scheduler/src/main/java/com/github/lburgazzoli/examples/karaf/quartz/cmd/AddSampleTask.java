@@ -26,13 +26,18 @@ import java.util.UUID;
 /**
  *
  */
-@Command(scope = "task", name = "sample-add", description = "Add Sample Task")
+@Command(scope = "task", name = "sample-add", description = "Add Sample TaskExecutor")
 public class AddSampleTask extends AbstractSchedulerCommand {
     @Override
     protected void doExecute(ITaskScheduler service) throws Exception {
+
+        String uriStr = String.format("%s://%s/filter?jndi=(osgi.jndi.service.name=test)",
+            TaskConstants.TASK_DEF_TYPE_OSGI,
+            Runnable.class.getName());
+
         TaskDefinition td = new TaskDefinition();
-        td.put(TaskConstants.TASK_DEF_URI  ,"jmx://name");
-        td.put(TaskConstants.TASK_DEF_CRON ,"0 0/1 * 1/1 * ? *");
+        td.put(TaskConstants.TASK_DEF_URI  , uriStr);
+        td.put(TaskConstants.TASK_DEF_CRON , "0 0/1 * 1/1 * ? *");
         td.put(TaskConstants.TASK_DEF_ID   , UUID.randomUUID().toString());
         td.put(TaskConstants.TASK_DEF_GROUP,"samples");
 

@@ -141,7 +141,7 @@ public class TaskScheduler implements ITaskScheduler {
             StringUtils.isNotBlank(tid   ) &&
             StringUtils.isNotBlank(tgrp  ) ) {
 
-            JobDetail job = JobBuilder.newJob(Task.class)
+            JobDetail job = JobBuilder.newJob(TaskExecutor.class)
                 .withIdentity("j-" + tid, tgrp)
                 .build();
 
@@ -151,8 +151,7 @@ public class TaskScheduler implements ITaskScheduler {
                 .withSchedule(CronScheduleBuilder.cronSchedule(cron))
                  .build();
 
-            job.getJobDataMap().put(TaskConstants.TASK_DATA_BUNDLE_CTX,m_bundleContext);
-            job.getJobDataMap().put(TaskConstants.TASK_DATA_TASK_DEF  ,definition);
+            job.getJobDataMap().put(TaskConstants.TASK_DATA_TASK_DEF,definition);
 
             m_scheduler.scheduleJob(job,trigger);
         }
