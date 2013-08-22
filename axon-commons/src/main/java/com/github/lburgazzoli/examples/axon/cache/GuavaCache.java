@@ -71,6 +71,7 @@ public class GuavaCache implements Cache {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void putAll(Map t) {
         m_cache.putAll(t);
     }

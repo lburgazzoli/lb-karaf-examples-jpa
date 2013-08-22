@@ -34,7 +34,7 @@ public class TaskDefinition extends HashMap<String,String> {
      *
      * @param definition
      */
-    public TaskDefinition(Map definition) {
+    public TaskDefinition(Map<String,String> definition) {
         super(definition);
     }
 }

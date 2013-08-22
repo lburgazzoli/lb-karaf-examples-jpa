@@ -21,6 +21,7 @@ import com.github.lburgazzoli.examples.karaf.hz.data.HzData;
 import com.hazelcast.core.EntryEvent;
 import com.hazelcast.core.EntryListener;
 import com.hazelcast.core.IMap;
+import com.hazelcast.query.Predicate;
 import com.hazelcast.query.SqlPredicate;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -52,6 +53,7 @@ public class HzDataContinuousQuery implements EntryListener<String,HzData> {
     /**
      *
      */
+    @SuppressWarnings("unchecked")
     public void init() {
         m_map      = m_instanceProvider.getInstance().getMap("hztest:map");
         m_queryKey = m_map.addEntryListener(this,new SqlPredicate("payload like 'x%'"),null,true);
