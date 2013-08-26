@@ -131,12 +131,12 @@ public class TaskScheduler implements ITaskScheduler {
 
     @Override
     public void schedule(TaskDefinition definition) throws Exception{
-        String scheme = definition.get(TaskConstants.TASK_DEF_URI  );
+        String type   = definition.get(TaskConstants.TASK_DEF_TYPE );
         String cron   = definition.get(TaskConstants.TASK_DEF_CRON );
         String tid    = definition.get(TaskConstants.TASK_DEF_ID   );
         String tgrp   = definition.get(TaskConstants.TASK_DEF_GROUP);
 
-        if( StringUtils.isNotBlank(scheme) &&
+        if( StringUtils.isNotBlank(type  ) &&
             StringUtils.isNotBlank(cron  ) &&
             StringUtils.isNotBlank(tid   ) &&
             StringUtils.isNotBlank(tgrp  ) ) {

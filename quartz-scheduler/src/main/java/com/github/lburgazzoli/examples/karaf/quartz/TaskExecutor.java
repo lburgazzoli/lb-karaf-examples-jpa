@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -29,8 +31,8 @@ import org.quartz.PersistJobDataAfterExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * URI : [scheme:][//authority][path][?query][#fragment]
@@ -52,33 +54,53 @@ public class TaskExecutor implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        Bundle         bundle  = FrameworkUtil.getBundle(TaskExecutor.class);
-        BundleContext  bctx    = bundle.getBundleContext();
-        JobDataMap     map     = context.getJobDetail().getJobDataMap();
-        TaskDefinition taskdef = (TaskDefinition)map.get(TaskConstants.TASK_DATA_TASK_DEF);
-        String         uriStr  = taskdef.get(TaskConstants.TASK_DEF_URI);
+        Bundle         bundle   = FrameworkUtil.getBundle(TaskExecutor.class);
+        BundleContext  bctx     = bundle.getBundleContext();
+        JobDataMap     map      = context.getJobDetail().getJobDataMap();
+        TaskDefinition taskDef  = (TaskDefinition)map.get(TaskConstants.TASK_DATA_TASK_DEF);
+        String         taskType = taskDef.get(TaskConstants.TASK_DEF_TYPE);
 
-        LOGGER.debug("Bundle        : {}",bundle);
-        LOGGER.debug("BundleContext : {}",bctx);
-        LOGGER.debug("URI           : {}",uriStr);
+        if(StringUtils.equals(TaskConstants.TASK_DEF_TYPE_OSGI,taskType)) {
+            String type   = taskDef.get(TaskConstants.TASK_DEF_OSGI_TYPE);
+            String method = taskDef.get(TaskConstants.TASK_DEF_OSGI_METHOD);
+            String filter = taskDef.get(TaskConstants.TASK_DEF_OSGI_FILTER);
 
-        for(String key : map.getKeys()) {
-            LOGGER.debug("JobDataMap     : {} => {}",key,map.get(key));
-        }
+            LOGGER.debug("OSGi Type   <{}>",type);
+            LOGGER.debug("OSGi Method <{}>",method);
+            LOGGER.debug("OSGi Filter <{}>",filter);
 
-        if(StringUtils.isNotBlank(uriStr)) {
-            try {
-                URI uri  = new URI(uriStr);
+            if(StringUtils.isNotBlank(type) && StringUtils.isNotBlank(filter)) {
+                try {
+                    ServiceReference<?>[] refs =
+                        bctx.getServiceReferences(type, filter);
 
-                if(uri != null) {
-                    LOGGER.debug("Scheme    = {}",uri.getScheme());
-                    LOGGER.debug("Authority = {}",uri.getAuthority());
-                    LOGGER.debug("Path      = {}",uri.getPath());
-                    LOGGER.debug("Query     = {}",uri.getQuery());
-                    LOGGER.debug("Fragment  = {}",uri.getFragment());
+                    if(refs != null) {
+                        for(ServiceReference<?> sr : refs) {
+                            try {
+                                Object service = bctx.getService(sr);
+                                Method action  = service.getClass().getMethod(method);
+
+                                if(!action.isAccessible()) {
+                                    action.setAccessible(true);
+                                }
+
+                                action.invoke(service);
+                            } catch (NoSuchMethodException e) {
+                                LOGGER.warn("NoSuchMethodException", e);
+                            } catch (InvocationTargetException e) {
+                                LOGGER.warn("InvocationTargetException", e);
+                            } catch (IllegalAccessException e) {
+                                LOGGER.warn("IllegalAccessException", e);
+                            } finally {
+                                bctx.ungetService(sr);
+                            }
+                        }
+                    } else {
+                        LOGGER.debug("No service found <{}/{}>",type,filter);
+                    }
+                } catch (InvalidSyntaxException e) {
+                    LOGGER.warn("InvalidSyntaxException",e);
                 }
-            } catch(URISyntaxException e) {
-                LOGGER.warn("URISyntaxException",e);
             }
         }
     }

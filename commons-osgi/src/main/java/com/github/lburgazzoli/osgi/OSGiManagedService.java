@@ -112,7 +112,7 @@ public class OSGiManagedService implements IOSGiLifeCycle,ManagedService {
      * @return
      */
     protected ConfigurationAdmin getConfigurationAdmin() {
-        ServiceReference sr = m_bundlContext != null
+        ServiceReference<?> sr = m_bundlContext != null
             ? m_bundlContext.getServiceReference(ConfigurationAdmin.class)
             : null;
 

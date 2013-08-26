@@ -68,12 +68,28 @@
         </service-properties>
     </service>
 
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <bean id="TASK_DEMO"
+          class="com.github.lburgazzoli.examples.karaf.quartz.test.DemoTask"/>
+
+    <service ref       = "TASK_DEMO"
+             interface = "java.lang.Runnable">
+        <service-properties>
+            <entry key   = "osgi.jndi.service.name"
+                   value = "task.demo"/>
+        </service-properties>
+    </service>
+
     <!-- ******************************************************************* -->
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="scheduler/sample-add">
+        <command name="scheduler/add-sample-task">
             <action class="com.github.lburgazzoli.examples.karaf.quartz.cmd.AddSampleTask">
                 <property name="service" ref="TASK_SCHEDULER"/>
             </action>

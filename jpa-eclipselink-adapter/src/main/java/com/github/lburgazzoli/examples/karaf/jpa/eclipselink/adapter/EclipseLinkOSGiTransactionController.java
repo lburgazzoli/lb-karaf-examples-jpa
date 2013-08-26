@@ -35,7 +35,7 @@ public class EclipseLinkOSGiTransactionController extends JTATransactionControll
         BundleContext ctx = bundle.getBundleContext();
 
         if (ctx != null) {
-            ServiceReference ref = ctx.getServiceReference(TransactionManager.class.getName());
+            ServiceReference<?> ref = ctx.getServiceReference(TransactionManager.class.getName());
 
             if (ref != null) {
                 TransactionManager manager = (TransactionManager) ctx.getService(ref);
