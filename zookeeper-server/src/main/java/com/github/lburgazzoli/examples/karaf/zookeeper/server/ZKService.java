@@ -16,9 +16,9 @@
  */
 package com.github.lburgazzoli.examples.karaf.zookeeper.server;
 
-import com.github.lburgazzoli.osgi.OSGiManagedService;
 import com.github.lburgazzoli.examples.karaf.zookeeper.server.impl.ZooKeeperClusteredServer;
 import com.github.lburgazzoli.examples.karaf.zookeeper.server.impl.ZooKeeperStandaloneServer;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractManagedService;
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
 
 import java.util.Properties;
@@ -26,7 +26,7 @@ import java.util.Properties;
 /**
  *
  */
-public class ZKService extends OSGiManagedService implements IZKService {
+public class ZKService extends AbstractManagedService implements IZKService {
 
     private IZKServer m_server;
 

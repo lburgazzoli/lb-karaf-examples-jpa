@@ -20,7 +20,7 @@ import com.github.lburgazzoli.examples.axon.IAxonEngine;
 import com.github.lburgazzoli.examples.axon.IAxonModelService;
 import com.github.lburgazzoli.examples.karaf.axon.model.events.DataItemCreatedEvent;
 import com.github.lburgazzoli.examples.karaf.axon.model.events.DataItemUpdatedEvent;
-import com.github.lburgazzoli.osgi.IOSGiLifeCycle;
+import com.github.lburgazzoli.karaf.common.ILifeCycle;
 import org.axonframework.common.Subscribable;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class DataItemService implements IAxonModelService,IOSGiLifeCycle {
+public class DataItemService implements IAxonModelService, ILifeCycle {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataItemService.class);
 
 

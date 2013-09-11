@@ -18,7 +18,7 @@ package com.github.lburgazzoli.examples.axon.serializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.lburgazzoli.json.JacksonHelper;
+import com.github.lburgazzoli.karaf.common.json.JacksonHelper;
 import org.axonframework.serializer.AnnotationRevisionResolver;
 import org.axonframework.serializer.ChainingConverterFactory;
 import org.axonframework.serializer.ContentTypeConverter;

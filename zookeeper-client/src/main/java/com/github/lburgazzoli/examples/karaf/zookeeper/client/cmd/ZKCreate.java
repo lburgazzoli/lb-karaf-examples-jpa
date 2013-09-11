@@ -17,7 +17,7 @@
 package com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd;
 
 import com.github.lburgazzoli.examples.karaf.zookeeper.client.IZKClient;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 
@@ -34,7 +34,7 @@ public class ZKCreate extends AbstractServiceCommand<IZKClient> {
     String data;
 
     @Override
-    protected void doExecute(IZKClient service) throws Exception {
-        service.create(path,data);
+    protected void execute() throws Exception {
+        getService().create(path, data);
     }
 }

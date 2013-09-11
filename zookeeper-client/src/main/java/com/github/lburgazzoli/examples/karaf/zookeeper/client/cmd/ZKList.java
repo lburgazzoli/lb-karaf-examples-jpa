@@ -17,7 +17,7 @@
 package com.github.lburgazzoli.examples.karaf.zookeeper.client.cmd;
 
 import com.github.lburgazzoli.examples.karaf.zookeeper.client.IZKClient;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 
@@ -31,8 +31,8 @@ public class ZKList extends AbstractServiceCommand<IZKClient> {
     String path;
 
     @Override
-    protected void doExecute(IZKClient service) throws Exception {
-        for(String item : service.list(path)) {
+    protected void execute() throws Exception {
+        for(String item : getService().list(path)) {
             System.out.println("> " + item);
         }
     }

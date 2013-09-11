@@ -32,7 +32,7 @@ import java.util.UUID;
     description = "Add Sample Task")
 public class AddSampleTask extends AbstractSchedulerCommand {
     @Override
-    protected void doExecute(ITaskScheduler service) throws Exception {
+    protected void execute() throws Exception {
         TaskDefinition td = new TaskDefinition();
         td.put(TaskConstants.TASK_DEF_TYPE        , TaskConstants.TASK_DEF_TYPE_OSGI);
         td.put(TaskConstants.TASK_DEF_OSGI_TYPE   , Runnable.class.getName());

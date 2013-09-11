@@ -16,9 +16,9 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.cmd;
 
-import com.github.lburgazzoli.osgi.OSGiClassLoader;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
-import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.github.lburgazzoli.karaf.common.CombinedClassLoader;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import org.apache.felix.gogo.commands.Command;
 import org.osgi.framework.Bundle;
 
@@ -27,12 +27,12 @@ import org.osgi.framework.Bundle;
  */
 
 @Command(scope = "hz", name = "cl-bundles", description = "List bundles")
-public class ClassLoaderBundleListCommand extends AbstractServiceCommand<OSGiClassLoader> {
+public class ClassLoaderBundleListCommand extends AbstractServiceCommand<CombinedClassLoader> {
     @Override
-    protected void doExecute(OSGiClassLoader service) throws Exception {
+    protected void execute() throws Exception {
         ShellTable table = new ShellTable("ID","Symbolic Name");
 
-        for(Bundle b : service.getBundles()) {
+        for(Bundle b : getService().getBundles()) {
             table.addRow(
                 b.getBundleId(),
                 b.getSymbolicName()

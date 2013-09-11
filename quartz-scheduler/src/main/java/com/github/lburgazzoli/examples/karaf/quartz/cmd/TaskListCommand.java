@@ -16,8 +16,7 @@
  */
 package com.github.lburgazzoli.examples.karaf.quartz.cmd;
 
-import com.github.lburgazzoli.examples.karaf.quartz.ITaskScheduler;
-import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
 import org.quartz.CronTrigger;
@@ -47,8 +46,8 @@ public class TaskListCommand extends AbstractSchedulerCommand {
     // ************************************************************************
 
     @Override
-    protected void doExecute(ITaskScheduler service) throws Exception {
-        Scheduler  scheduler = service.getScheduler();
+    protected void execute() throws Exception {
+        Scheduler  scheduler = getService().getScheduler();
         ShellTable table     = new ShellTable("Job","Trigger","Expression","NextFireTime");
 
         for(String group : scheduler.getJobGroupNames()) {

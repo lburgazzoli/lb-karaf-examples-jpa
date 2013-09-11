@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.cmd;
 
-import com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider;
 import org.apache.karaf.shell.console.completer.StringsCompleter;
 
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
 public class HazelcastListCompleter extends AbstractHazelcastCompleter {
 
     @Override
-    protected int doComplete(IHazelcastInstanceProvider service, String buffer, int cursor, List<String> candidates) {
+    public int complete(String buffer, int cursor, List<String> candidates) {
         StringsCompleter delegate = new StringsCompleter();
         delegate.getStrings().add(HazelcastCommandConstants.LIST_MEMBERS);
         delegate.getStrings().add(HazelcastCommandConstants.LIST_PARTITIONS);

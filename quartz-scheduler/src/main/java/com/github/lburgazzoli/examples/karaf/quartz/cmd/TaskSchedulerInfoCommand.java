@@ -16,8 +16,7 @@
  */
 package com.github.lburgazzoli.examples.karaf.quartz.cmd;
 
-import com.github.lburgazzoli.examples.karaf.quartz.ITaskScheduler;
-import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import org.apache.felix.gogo.commands.Command;
 import org.quartz.SchedulerMetaData;
 
@@ -40,9 +39,9 @@ public class TaskSchedulerInfoCommand extends AbstractSchedulerCommand {
     // ************************************************************************
 
     @Override
-    protected void doExecute(ITaskScheduler service) throws Exception {
+    protected void execute() throws Exception {
         ShellTable        table = new ShellTable("Key","Val");
-        SchedulerMetaData meta  = service.getScheduler().getMetaData();
+        SchedulerMetaData meta  = getService().getScheduler().getMetaData();
 
         table.addRow("Name"        ,meta.getSchedulerName());
         table.addRow("Version"     ,meta.getVersion());

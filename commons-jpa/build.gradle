@@ -12,10 +12,6 @@ project.ext {
     ]
 }
 
-dependencies {
-
-}
-
 jar {
     manifest {
         instruction 'Import-Package' , bundleInportPackages.join(',')

@@ -17,8 +17,8 @@
 package com.github.lburgazzoli.examples.karaf.axon.engine.karaf;
 
 import com.github.lburgazzoli.examples.axon.IAxonEngine;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractTabularCommand;
-import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import org.apache.felix.gogo.commands.Command;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 
@@ -27,19 +27,22 @@ import org.axonframework.eventsourcing.EventSourcingRepository;
  *
  */
 @Command(scope = "axon", name = "list-repos", description = "List repositories")
-public class ListRepositoriesCommand extends AbstractTabularCommand<IAxonEngine> {
+public class ListRepositoriesCommand extends AbstractServiceCommand<IAxonEngine> {
     /**
      * c-tor
      */
     public ListRepositoriesCommand() {
-        super("AGGREGATE_TYPE","REPO_CLASS");
-        super.setMxColSize(64);
     }
 
     @Override
-    public void doExecute(IAxonEngine engine,ShellTable table) throws Exception {
-        for(EventSourcingRepository<?> repository : engine.getRepositories()) {
+    public void execute() throws Exception {
+        ShellTable table = new ShellTable("AGGREGATE_TYPE","REPO_CLASS");
+        table.setMxColSize(64);
+
+        for(EventSourcingRepository<?> repository : getService().getRepositories()) {
             table.addRow(repository.getTypeIdentifier(),repository.getClass().getName());
         }
+
+        table.print();
     }
 }

@@ -45,14 +45,14 @@ public class HazelcastListCommand extends AbstractHazelcastCommand {
     // *************************************************************************
 
     @Override
-    public void doExecute(IHazelcastInstanceProvider service) throws Exception {
+    public void execute() throws Exception {
         if(StringUtils.isNotBlank(arg)) {
             if(StringUtils.equalsIgnoreCase(HazelcastCommandConstants.LIST_MEMBERS,arg)) {
-                doExecuteMemberList(service.getInstance());
+                doExecuteMemberList(getService().getInstance());
             } else if(StringUtils.equalsIgnoreCase(HazelcastCommandConstants.LIST_OBJECTS,arg)) {
-                doExecuteDistributedObjectList(service.getInstance());
+                doExecuteDistributedObjectList(getService().getInstance());
             } else if(StringUtils.equalsIgnoreCase(HazelcastCommandConstants.LIST_PARTITIONS,arg)) {
-                doExecutePartitionList(service.getInstance());
+                doExecutePartitionList(getService().getInstance());
             }
         }
     }

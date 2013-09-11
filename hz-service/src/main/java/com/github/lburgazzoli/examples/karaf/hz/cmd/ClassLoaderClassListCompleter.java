@@ -16,8 +16,8 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.cmd;
 
-import com.github.lburgazzoli.osgi.OSGiClassLoader;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCompleter;
+import com.github.lburgazzoli.karaf.common.CombinedClassLoader;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCompleter;
 import org.apache.karaf.shell.console.completer.StringsCompleter;
 import org.osgi.framework.Bundle;
 
@@ -26,12 +26,12 @@ import java.util.List;
 /**
  *
  */
-public class ClassLoaderClassListCompleter extends AbstractServiceCompleter<OSGiClassLoader> {
+public class ClassLoaderClassListCompleter extends AbstractServiceCompleter<CombinedClassLoader> {
     @Override
-    protected int doComplete(OSGiClassLoader service, String buffer, int cursor, List<String> candidates) {
+    public int complete(String buffer, int cursor, List<String> candidates) {
         StringsCompleter delegate = new StringsCompleter();
 
-        for(Bundle b : service.getBundles()) {
+        for(Bundle b : getService().getBundles()) {
             delegate.getStrings().add(b.getSymbolicName());
         }
 

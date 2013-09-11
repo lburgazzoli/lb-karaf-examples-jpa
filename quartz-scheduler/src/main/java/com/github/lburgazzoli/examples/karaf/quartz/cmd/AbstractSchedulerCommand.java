@@ -17,7 +17,7 @@
 package com.github.lburgazzoli.examples.karaf.quartz.cmd;
 
 import com.github.lburgazzoli.examples.karaf.quartz.ITaskScheduler;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
 
 /**
  *

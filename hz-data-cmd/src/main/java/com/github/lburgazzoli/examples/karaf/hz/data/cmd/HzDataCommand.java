@@ -75,18 +75,18 @@ public class HzDataCommand extends AbstractHazelcastCommand {
     // *************************************************************************
 
     @Override
-    public void doExecute(IHazelcastInstanceProvider service) throws Exception {
+    public void execute() throws Exception {
         if(StringUtils.equalsIgnoreCase(TYPE_MAP,type)) {
             if(StringUtils.equalsIgnoreCase(CMD_PUT,action)) {
-                doExecuteMapPut(service.getInstance());
+                doExecuteMapPut(getService().getInstance());
             } else if(StringUtils.equalsIgnoreCase(CMD_GET,action)) {
-                doExecuteMapGet(service.getInstance());
+                doExecuteMapGet(getService().getInstance());
             } else if(StringUtils.equalsIgnoreCase(CMD_QUERY,action)) {
-                doExecuteMapQuery(service.getInstance());
+                doExecuteMapQuery(getService().getInstance());
             }
         } else if(StringUtils.equalsIgnoreCase(TYPE_EVT,type)) {
             if(StringUtils.equalsIgnoreCase(CMD_SEND,action)) {
-                doExecuteEvtSend(service.getInstance());
+                doExecuteEvtSend(getService().getInstance());
             }
         }
     }

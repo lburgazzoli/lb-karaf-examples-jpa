@@ -19,7 +19,7 @@ package com.github.lburgazzoli.examples.karaf.axon.model.karaf;
 import com.github.lburgazzoli.examples.axon.IAxonEngine;
 import com.github.lburgazzoli.examples.axon.helper.CommandCallbackAdapter;
 import com.github.lburgazzoli.examples.karaf.axon.model.commands.DataItemCreateCommand;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -40,12 +40,12 @@ public class KDataItemCreateCommand extends AbstractServiceCommand<IAxonEngine> 
 
 
     @Override
-    public void doExecute(IAxonEngine engine) throws Exception {
-        engine.send(new DataItemCreateCommand(id,text),new CommandCallbackAdapter<Object>() {
+    public void execute() throws Exception {
+        getService().send(new DataItemCreateCommand(id, text), new CommandCallbackAdapter<Object>() {
             @Override
             public void onFailure(Throwable cause) {
-                LOGGER.debug("onFailure => <{}> ",cause.getClass().getName());
-                LOGGER.debug("onFailure",cause);
+                LOGGER.debug("onFailure => <{}> ", cause.getClass().getName());
+                LOGGER.debug("onFailure", cause);
             }
         });
     }

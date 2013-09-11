@@ -28,7 +28,7 @@ import java.util.List;
 public class HzDataCompleter extends AbstractHazelcastCompleter {
 
     @Override
-    protected int doComplete(IHazelcastInstanceProvider service, String buffer, int cursor, List<String> candidates) {
+    public int complete(String buffer, int cursor, List<String> candidates) {
         StringsCompleter delegate = new StringsCompleter();
         delegate.getStrings().add(HzDataCommand.TYPE_MAP);
         delegate.getStrings().add(HzDataCommand.TYPE_EVT);

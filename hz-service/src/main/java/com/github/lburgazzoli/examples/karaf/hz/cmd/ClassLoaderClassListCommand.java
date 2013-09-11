@@ -16,9 +16,9 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.cmd;
 
-import com.github.lburgazzoli.osgi.OSGiClassLoader;
-import com.github.lburgazzoli.osgi.karaf.cmd.AbstractServiceCommand;
-import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.github.lburgazzoli.karaf.common.CombinedClassLoader;
+import com.github.lburgazzoli.karaf.common.cmd.AbstractServiceCommand;
+import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -28,7 +28,7 @@ import org.osgi.framework.Bundle;
  *
  */
 @Command(scope = "hz", name = "cl-classes", description = "List classes")
-public class ClassLoaderClassListCommand extends AbstractServiceCommand<OSGiClassLoader> {
+public class ClassLoaderClassListCommand extends AbstractServiceCommand<CombinedClassLoader> {
 
     @Argument(
         index       = 0,
@@ -39,16 +39,16 @@ public class ClassLoaderClassListCommand extends AbstractServiceCommand<OSGiClas
     String symbolicName = null;
 
     @Override
-    protected void doExecute(OSGiClassLoader service) throws Exception {
+    protected void execute() throws Exception {
         ShellTable table = new ShellTable("Class","Bundle ID","Bundle Symbolic Name");
 
         if(StringUtils.isNotBlank(symbolicName)) {
-            for(Class<?> type : service.getClassesForBundle(symbolicName)) {
+            for(Class<?> type : getService().getClassesForBundle(symbolicName)) {
                 table.addRow(type.getName(),"",symbolicName);
             }
         } else {
-            for(Bundle b : service.getBundles()) {
-                for(Class<?> type : service.getClassesForBundle(b)) {
+            for(Bundle b : getService().getBundles()) {
+                for(Class<?> type : getService().getClassesForBundle(b)) {
                     table.addRow(type.getName(),b.getBundleId(),b.getSymbolicName());
                 }
             }
