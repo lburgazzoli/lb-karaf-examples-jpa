@@ -13,7 +13,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':commons-osgi')
+
     compile project(':hz-service')
     compile project(':hz-data')
 }

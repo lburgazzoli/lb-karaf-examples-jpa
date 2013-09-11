@@ -14,7 +14,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':commons-osgi')
+
     compile project(':axon-commons')
     compile project(':axon-engine')
 }

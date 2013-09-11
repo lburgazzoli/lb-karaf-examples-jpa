@@ -1,5 +1,4 @@
 
-include "commons-osgi"
 include "commons-jpa"
 
 include "jpa-eclipselink"

@@ -3,26 +3,11 @@
 //
 // *****************************************************************************
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.5.0'
-    }
-}
-
-// *****************************************************************************
-//
-// *****************************************************************************
-
 subprojects {
 
     apply plugin: 'java'
     apply plugin: 'osgi'
     apply plugin: 'maven'
-    apply plugin: 'license'
 
     version      = '1.0.0.SNAPSHOT'
     group        = 'com.github.lburgazzoli'
@@ -45,6 +30,9 @@ subprojects {
     }
 
     dependencies {
+
+        compile 'com.github.lburgazzoli:lb-karaf-common:1.0.0.SNAPSHOT'
+
         compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.2'
 
@@ -99,14 +87,6 @@ subprojects {
 
         manifest.classesDir = new File("$buildDir/classes/main")
         manifest.classpath  = project.runtimeClasspath
-    }
-
-    license {
-        ext.year = Calendar.getInstance().get(Calendar.YEAR)
-        ext.name = 'lb'
-
-        header rootProject.file('codequality/HEADER')
-        strictCheck true
     }
 }
 

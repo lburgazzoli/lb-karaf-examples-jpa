@@ -17,7 +17,7 @@
 package com.github.lburgazzoli.examples.karaf.hz.cmd;
 
 import com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider;
-import com.github.lburgazzoli.osgi.karaf.cmd.ShellTable;
+import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import com.hazelcast.core.DistributedObject;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.Member;

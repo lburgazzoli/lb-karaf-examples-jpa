@@ -16,7 +16,7 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz;
 
-import com.github.lburgazzoli.osgi.BundleContextAware;
+import com.github.lburgazzoli.karaf.common.BundleContextAware;
 import com.hazelcast.core.HazelcastInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.osgi.framework.BundleContext;
