@@ -19,19 +19,20 @@ subprojects {
         maven { url 'http://repo.springsource.org/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/external' }
-        //maven { url 'http://repository.jboss.org/nexus/content/repositories/releases' }
-        //maven { url 'http://repository.jboss.org/nexus/content/groups/public/' }
-        //maven { url 'http://snapshots.jboss.org/maven2/' }
+        maven { url 'http://repository.jboss.org/nexus/content/repositories/releases' }
+        maven { url 'http://repository.jboss.org/nexus/content/groups/public/' }
         maven { url 'http://download.oracle.com/maven' }
         maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
-
+        //maven { url 'http://snapshots.jboss.org/maven2/' }
+        
         mavenLocal()
     }
 
     dependencies {
 
-        compile 'com.github.lburgazzoli:lb-karaf-common:1.0.0.SNAPSHOT'
+        compile 'com.github.lburgazzoli:lb-karaf-common:1.0.0-SNAPSHOT'
 
         compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.2'
