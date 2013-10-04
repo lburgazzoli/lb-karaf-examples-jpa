@@ -29,7 +29,7 @@ subprojects {
         mavenLocal()
 
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-        maven { url "http://repository.apache.org/content/groups/snapshots-group" }
+        //maven { url "http://repository.apache.org/content/groups/snapshots-group" }
     }
 
     dependencies {

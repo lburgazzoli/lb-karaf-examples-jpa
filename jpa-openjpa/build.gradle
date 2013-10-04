@@ -14,8 +14,8 @@ project.ext {
 
 dependencies {
     compile project(':commons-jpa')
-    //compile 'org.apache.openjpa:openjpa:2.2.2'
-    compile 'org.apache.openjpa:openjpa:2.3.0-SNAPSHOT'
+    compile 'org.apache.openjpa:openjpa:2.2.2'
+    //compile 'org.apache.openjpa:openjpa:2.3.0-SNAPSHOT'
 }
 
 task enhance << {
