@@ -25,7 +25,7 @@ Install bundles:
     install -s mvn:com.google.guava/guava/14.0.1
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/1.4_3
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1
-    install -s mvn:org.apache.openjpa/openjpa/2.2.2
+    install -s mvn:org.apache.openjpa/openjpa/2.3.0-SNAPSHOT
 
 Install the example bundle:
     cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
