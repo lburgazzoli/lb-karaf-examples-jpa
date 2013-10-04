@@ -9,7 +9,7 @@ subprojects {
     apply plugin: 'osgi'
     apply plugin: 'maven'
 
-    version      = '1.0.0-SNAPSHOT'
+    version      = '1.0.0.SNAPSHOT'
     group        = 'com.github.lburgazzoli'
     ext.prefix   = 'karaf-examples'
 
@@ -33,7 +33,7 @@ subprojects {
 
     dependencies {
 
-        compile 'com.github.lburgazzoli:lb-karaf-common:1.0.0-SNAPSHOT'
+        compile 'com.github.lburgazzoli:lb-karaf-common:1.0.0.SNAPSHOT'
 
         compile 'org.apache.felix:org.apache.felix.configadmin:1.6.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:2.3.2'
@@ -49,6 +49,7 @@ subprojects {
         compile 'org.osgi:org.osgi.core:4.3.1'
         compile 'org.osgi:org.osgi.compendium:4.3.1'
         compile 'com.google.guava:guava:15.0'
+        //compile 'com.google.guava:guava:14.0.1'
         compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
         compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1'
         compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'

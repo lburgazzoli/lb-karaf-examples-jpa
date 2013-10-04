@@ -4,6 +4,8 @@ project.ext {
         'org.apache.felix.service.command',
         'org.apache.felix.gogo.commands',
         'org.apache.karaf.shell.console',
+        'org.batoo.jpa.core.impl.instance',
+        'org.batoo.jpa.core.impl.manager',
         '*'
     ]
 
@@ -14,7 +16,8 @@ project.ext {
 
 dependencies {
     compile project(':commons-jpa')
-    compile 'org.batoo.jpa:batoo-jpa:2.0.1.1'
+    //compile 'org.batoo.jpa:batoo-jpa:2.0.1.2'
+    compile 'org.batoo.jpa:batoo-jpa:2.0.1.3-SNAPSHOT'
 }
 
 jar {
@@ -24,7 +27,6 @@ jar {
 
         attributes['JPA-PersistenceUnits'  ] = 'DATAPU_BATOO'
         attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
-        attributes['DynamicImport-Package' ] = 'org.batoo.*'
     }
 }
 
