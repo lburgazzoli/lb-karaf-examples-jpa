@@ -18,19 +18,19 @@ gradle clean install
   - Install bundles:
 
 ```
-    install -s mvn:org.hsqldb/hsqldb/2.2.9
-    install -s mvn:com.fasterxml/classmate/0.8.0
+    install -s mvn:org.hsqldb/hsqldb/2.3.0
+    install -s mvn:com.fasterxml/classmate/0.9.0
     install -s mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5
     install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1
-    install -s mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA
+    install -s mvn:org.javassist/javassist/3.18.1-GA
     install -s mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final
     install -s wrap:mvn:org.jboss/jandex/1.1.0.Final
     install -s mvn:org.jboss.logging/jboss-logging/3.1.3.GA
 
-    install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2.Final
+    install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final
     install -s mvn:org.hibernate/hibernate-core/4.2.2.Final
     install -s mvn:org.hibernate/hibernate-entitymanager/4.2.2.Final
     install -s mvn:org.hibernate/hibernate-envers/4.2.2.Final
