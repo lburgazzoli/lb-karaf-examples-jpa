@@ -19,12 +19,9 @@ subprojects {
         maven { url 'http://repo.springsource.org/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/external' }
-        //maven { url 'http://repository.jboss.org/nexus/content/repositories/releases' }
-        //maven { url 'http://repository.jboss.org/nexus/content/groups/public/' }
         maven { url 'http://download.oracle.com/maven' }
         maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-        maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
-        //maven { url 'http://snapshots.jboss.org/maven2/' }
+        maven { url 'http://mvn.riptano.com/content/repositories/public' }
         
         mavenLocal()
 
@@ -50,20 +47,10 @@ subprojects {
         compile 'org.osgi:org.osgi.core:4.3.1'
         compile 'org.osgi:org.osgi.compendium:4.3.1'
         compile 'com.google.guava:guava:15.0'
-        //compile 'com.google.guava:guava:14.0.1'
         compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
         compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1'
         compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
         compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'
-        compile 'com.hazelcast:hazelcast:3.0.2'
-        compile 'com.lmax:disruptor:3.2.0'
-        compile 'com.googlecode.json-simple:json-simple:1.1.1'
-        compile 'org.mongodb:mongo-java-driver:2.11.1'
-        compile 'com.esotericsoftware.kryo:kryo:2.21'
-        compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-        compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
-        compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.3'
-        compile 'de.undercouch:bson4jackson:2.2.0'
 
         testCompile 'org.ops4j.pax.exam:pax-exam-container-native:3.0'
         testCompile 'org.ops4j.pax.exam:pax-exam-junit4:3.0'
@@ -99,6 +86,6 @@ subprojects {
 // *****************************************************************************
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.7'
+    gradleVersion = '1.8'
 }
 

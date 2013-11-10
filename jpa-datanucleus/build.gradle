@@ -15,11 +15,10 @@ project.ext {
 dependencies {
     compile project(':commons-jpa')
     compile 'javax.jdo:jdo-api:3.0.1'
-    compile 'org.datanucleus:datanucleus-core:3.2.2'
-    compile 'org.datanucleus:datanucleus-rdbms:3.2.2'
-    //compile 'org.datanucleus:datanucleus-mongodb:3.2.2'
-    compile 'org.datanucleus:datanucleus-api-jpa:3.2.2'
-    compile 'org.datanucleus:datanucleus-api-jdo:3.2.2'
+    compile 'org.datanucleus:datanucleus-core:3.2.3'
+    compile 'org.datanucleus:datanucleus-rdbms:3.2.3'
+    compile 'org.datanucleus:datanucleus-api-jpa:3.2.3'
+    compile 'org.datanucleus:datanucleus-api-jdo:3.2.3'
 }
 
 task enhance << {

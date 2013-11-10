@@ -6,21 +6,7 @@ include "jpa-eclipselink-adapter"
 include "jpa-openjpa"
 include "jpa-hibernate"
 include "jpa-datanucleus"
-include "jpa-kundera"
-include "jpa-kundera-adapter"
+#include "jpa-kundera"
+#include "jpa-kundera-adapter"
 include "jpa-batoojpa"
-
-include "zookeeper-server"
-include "zookeeper-client"
-
-include "axon-commons"
-include "axon-engine"
-include "axon-model"
-
-include "hz-service"
-include "hz-data"
-include "hz-data-cmd"
-include "hz-data-listener"
-
-include "quartz-scheduler"
 
