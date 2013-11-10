@@ -7,5 +7,5 @@ include "jpa-hibernate"
 include "jpa-datanucleus"
 include "jpa-batoojpa"
 
-//include "jpa-kundera"
-//include "jpa-kundera-adapter"
+include "jpa-kundera"
+include "jpa-kundera-adapter"

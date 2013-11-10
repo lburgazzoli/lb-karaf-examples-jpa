@@ -10,9 +10,9 @@ project.ext {
 }
 
 dependencies {
-    compile 'org.mongodb:mongo-java-driver:2.11.1'
-    compile 'com.impetus.core:kundera-core:2.6'
-    compile 'com.impetus.client:kundera-mongo:2.6'
+    compile 'com.impetus.core:kundera-core:2.7'
+    compile 'com.impetus.client:kundera-mongo:2.7'
+    compile 'org.mongodb:mongo-java-driver:2.11.3'
 }
 
 jar {
