@@ -7,15 +7,8 @@
 -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
-    <manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
-        Bundle-Name: karaf-examples :: jpa-datasource
-        Bundle-SymbolicName: karaf-examples-jpa-datasource
-        Bundle-Version: 1.0.0.SNAPSHOT
-        DynamicImport-Package: *
-    </manifest>
-
     <bean id="data_source_hsql" class="org.hsqldb.jdbc.JDBCDataSource">
-        <property name="url"      value="jdbc:hsqldb:mem:com.github.lburgazzoli.examples.karaf.jpa.commons.data"/>
+        <property name="url"      value="jdbc:hsqldb:mem:karaf.examples.jpa.db"/>
         <property name="user"     value="sa"/>
         <property name="password" value=""/>
     </bean>
