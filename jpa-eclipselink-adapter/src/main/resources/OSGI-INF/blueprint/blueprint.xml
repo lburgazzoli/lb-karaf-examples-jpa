@@ -45,7 +45,7 @@
              interface = "javax.persistence.spi.PersistenceProvider">
         <service-properties>
             <entry key   = "osgi.jndi.service.name"
-                   value = "eclipselink.perrsistence.provider"/>
+                   value = "eclipselink.persistence.provider"/>
             <entry key   = "javax.persistence.provider"
                    value = "org.eclipse.persistence.jpa.PersistenceProvider"/>
             <entry key   = "javax.persistence.spi.PersistenceProvider"
