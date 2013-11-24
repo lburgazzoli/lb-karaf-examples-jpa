@@ -32,9 +32,6 @@ Install bundles:
     install -s mvn:de.undercouch/bson4jackson/2.2.0
     install -s mvn:org.apache.openjpa/openjpa/2.3.0-SNAPSHOT
 
-Install the example bundle:
-    cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
-
     install -s mvn:com.github.lburgazzoli/lb-karaf-common/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-commons-jpa/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-openjpa/1.0.0.SNAPSHOT

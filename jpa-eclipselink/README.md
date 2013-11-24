@@ -27,8 +27,7 @@ gradle clean install
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.core/2.4.2
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.jpa/2.4.2
 
-    cp jpa-common/src/main/resources/OSGI-INF/blueprint//jpa-datasources.xml $KARAF_HOME/deploy
-
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-eclipselink-adapter/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-eclipselink/1.0.0.SNAPSHOT
