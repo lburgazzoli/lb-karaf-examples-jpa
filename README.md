@@ -16,8 +16,3 @@ Modules:
 References:
 - https://github.com/cschneider/Karaf-Tutorial
 - https://github.com/hibernate/hibernate-orm/tree/master/documentation/src/main/docbook/quickstart/tutorials/osgi
-
-
-[![Flattr this git repo](http://api.flattr.com/button/button-static-50x60.png)](https://flattr.com/submit/auto?user_id=lburgazzoli&url=https://github.com/lburgazzoli/lb-karaf-examples-jpa&title=lb-karaf-examples-jpa&language=java&tags=github&category=software) 
-
-
