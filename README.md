@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lburgazzoli/lb-karaf-examples.png?branch=master)](https://travis-ci.org/lburgazzoli/lb-karaf-examples)
+[![Build Status](https://travis-ci.org/lburgazzoli/lb-karaf-examples-jpa.png?branch=master)](https://travis-ci.org/lburgazzoli/lb-karaf-examples-jpa)
 
 
 lb-karaf-examples-jpa
