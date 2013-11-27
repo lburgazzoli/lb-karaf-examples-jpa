@@ -4,6 +4,7 @@ include "jpa-eclipselink"
 include "jpa-eclipselink-adapter"
 include "jpa-openjpa"
 include "jpa-hibernate"
+include "jpa-hibernate-noaries"
 include "jpa-datanucleus"
 include "jpa-batoojpa"
 

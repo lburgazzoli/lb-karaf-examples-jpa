@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+
+    Copyright 2013 lb
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<blueprint default-activation="eager"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
+
+    <!-- ******************************************************************* -->
+    <!--                                                                     -->
+    <!-- ******************************************************************* -->
+
+    <cm:property-placeholder
+        persistent-id   = "com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries"
+        update-strategy = "reload">
+        <cm:default-properties>
+            <cm:property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+            <cm:property name="hibernate.dialect"                 value="org.hibernate.dialect.HSQLDialect"/>
+            <cm:property name="hibernate.connection.url"          value="jdbc:hsqldb:mem:hnoa"/>
+            <cm:property name="hibernate.connection.username"     value="sa"/>
+            <cm:property name="hibernate.connection.password"     value=""/>
+            <cm:property name="hibernate.hbm2ddl.auto"            value="create-drop"/>
+            <cm:property name="hibernate.show_sql"                value="false"/>
+            <cm:property name="hibernate.format_sql"              value="true"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
+    <!-- ******************************************************************* -->
+    <!-- Lookup the persistence unit                                         -->
+    <!-- ******************************************************************* -->
+
+    <reference
+        id        = "jpa_persistence_provider"
+        interface = "javax.persistence.spi.PersistenceProvider"/>
+
+    <!-- ******************************************************************* -->
+    <!-- ApplicationManaged                                                  -->
+    <!-- ******************************************************************* -->
+
+
+    <bean id="app_managed_data_service_noa"
+          class="com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.data.ApplicationManagedDataService"
+          init-method="init"
+          destroy-method="destroy">
+        <property name="persistenceProvider" ref="jpa_persistence_provider"/>
+        <property name="persistenceUnitName" value="DATA_HIBERNATE_NOA"/>
+
+        <!-- you can the use OSGi's ConfiAdmin to configure Hibernate -->
+        <property name="persistenceUnitProperties">
+            <props>
+                <prop key="hibernate.connection.driver_class" value="${hibernate.connection.driver_class}"/>
+                <prop key="hibernate.dialect"                 value="${hibernate.dialect}"/>
+                <prop key="hibernate.connection.url"          value="${hibernate.connection.url}"/>
+                <prop key="hibernate.connection.username"     value="${hibernate.connection.username}"/>
+                <prop key="hibernate.connection.password"     value="${hibernate.connection.password}"/>
+                <prop key="hibernate.hbm2ddl.auto"            value="${hibernate.hbm2ddl.auto}"/>
+                <prop key="hibernate.show_sql"                value="${hibernate.show_sql}"/>
+                <prop key="hibernate.format_sql"              value="${hibernate.format_sql}"/>
+            </props>
+        </property>
+    </bean>
+
+    <service ref="app_managed_data_service_noa"
+             interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
+        <service-properties>
+            <entry key  ="osgi.jndi.service.name"
+                   value="hibernatenoa/app_managed_data_service_noa"/>
+        </service-properties>
+    </service>
+
+    <!-- ******************************************************************* -->
+    <!-- COMMANDS                                                            -->
+    <!-- ******************************************************************* -->
+
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="item/hibernate-noa-am-add">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.cmd.AMItemAddCommand">
+                <property name="dataService" ref="app_managed_data_service_noa"/>
+            </action>
+        </command>
+        <command name="item/hibernate-noa-am-list">
+            <action class="com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.cmd.AMItemListCommand">
+                <property name="dataService" ref="app_managed_data_service_noa"/>
+            </action>
+        </command>
+
+    </command-bundle>
+
+</blueprint>
