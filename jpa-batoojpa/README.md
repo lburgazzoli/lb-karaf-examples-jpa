@@ -1,22 +1,17 @@
-
 - BUILD
 
-gradle clean install
-
+```
+    gradle clean install
+```
 
 - INSTALLATION
 
-  - Install Karaf's enterprise features:
-
+  
 ```
     features:install transaction
     features:install jndi
     features:install jpa
-```
 
-  - Install bundles:
-
-```
     install -s mvn:com.google.guava/guava/15.0
     install -s mvn:commons-dbutils/commons-dbutils/1.5
     install -s mvn:commons-io/commons-io/2.4
@@ -35,18 +30,8 @@ gradle clean install
     install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.2
     install -s mvn:de.undercouch/bson4jackson/2.2.0
 
-
-```
-
-
-  - Install the example bundle:
-
-
-```
-    cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
-
     install -s mvn:com.github.lburgazzoli/lb-karaf-common/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-commons-jpa/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/1.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-batoojpa/1.0.0.SNAPSHOT
 
     stop  ${aries-jpa-bundle}
