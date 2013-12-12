@@ -3,6 +3,25 @@
 //
 // *****************************************************************************
 
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+
+    dependencies {
+        classpath 'com.github.lburgazzoli:gradle-plugin-karaf-features-gen:1.0.0.SNAPSHOT'
+    }
+}
+
+apply plugin: 'karaf-featuresgen'
+
+// *****************************************************************************
+//
+// *****************************************************************************
+
 subprojects {
 
     apply plugin: 'java'
