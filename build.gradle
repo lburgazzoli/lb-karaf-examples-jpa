@@ -100,15 +100,15 @@ subprojects {
         manifest.classpath  = project.runtimeClasspath
     }
 
-	karafFeatures {
-		excludes = [
-			'org.slf4j/.*',		
-			'log4j/.*',		
-			'org.osgi/.*',
-			'org.apache.felix/.*',
-			'org.apache.karaf.shell/.*'
-		]
-	}
+    karafFeatures {
+        excludes = [
+            'org.slf4j/.*',
+            'log4j/.*',	
+            'org.osgi/.*',
+            'org.apache.felix/.*',
+            'org.apache.karaf.shell/.*'
+        ]
+    }
 }
 
 // *****************************************************************************
