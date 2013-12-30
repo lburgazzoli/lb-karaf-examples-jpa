@@ -101,7 +101,9 @@ subprojects {
             'log4j/.*',	
             'org.osgi/.*',
             'org.apache.felix/.*',
-            'org.apache.karaf.shell/.*'
+            'org.apache.karaf.shell/.*',
+            'org.apache.geronimo.specs/geronimo-jta_1.1_spec/.*',
+            'org.apache.geronimo.specs/geronimo-j2ee-management_1.1_spec/.*'
         ]
     }
 }

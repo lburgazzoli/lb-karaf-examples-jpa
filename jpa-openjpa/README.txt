@@ -10,8 +10,9 @@ INSTALLATION
 
 Install Karaf's enterprise features:
 
-    feature:install transaction
     feature:install jndi
+    feature:install transaction
+    feature:install jdbc
     feature:install jpa
 
 Install bundles:
