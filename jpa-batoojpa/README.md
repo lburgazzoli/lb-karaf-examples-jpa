@@ -24,15 +24,10 @@
     install -s wrap:mvn:org.jboss.as/jboss-as-jpa-spi/7.2.0.Final
     install -s mvn:org.hsqldb/hsqldb/2.3.0
     install -s mvn:org.batoo.jpa/batoo-jpa/2.0.1.3-SNAPSHOT
-    install -s mvn:com.esotericsoftware.kryo/kryo/2.21
-    install -s mvn:com.fasterxml.jackson.core/jackson-core/2.2.2
-    install -s mvn:com.fasterxml.jackson.core/jackson-annotations/2.2.2
-    install -s mvn:com.fasterxml.jackson.core/jackson-databind/2.2.2
-    install -s mvn:de.undercouch/bson4jackson/2.2.0
 
-    install -s mvn:com.github.lburgazzoli/lb-karaf-common/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-batoojpa/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-batoojpa/3.0.0.SNAPSHOT
 
     stop  ${aries-jpa-bundle}
     start ${aries-jpa-bundle}

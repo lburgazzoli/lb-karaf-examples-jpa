@@ -31,20 +31,18 @@ gradle clean install
     install -s mvn:org.jboss.logging/jboss-logging/3.1.3.GA
 
     install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final
-    install -s mvn:org.hibernate/hibernate-core/4.2.6.Final
-    install -s mvn:org.hibernate/hibernate-entitymanager/4.2.6.Final
-    install -s mvn:org.hibernate/hibernate-envers/4.2.6.Final
-    install -s mvn:org.hibernate/hibernate-osgi/4.2.6.Final
+    install -s mvn:org.hibernate/hibernate-core/4.2.7.Final
+    install -s mvn:org.hibernate/hibernate-entitymanager/4.2.7.Final
+    install -s mvn:org.hibernate/hibernate-envers/4.2.7.Final
+    install -s mvn:org.hibernate/hibernate-osgi/4.2.7.Final
 ```
 
   - Install the example bundle:
 
 ```
-    cp datasources/jpa-datasources.xml $KARAF_HOME/deploy
-
-    install -s mvn:com.github.lburgazzoli/lb-karaf-common/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-commons-jpa/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate/3.0.0.SNAPSHOT
 
     start ${aries-jpa-container}
 ```

@@ -10,19 +10,18 @@ INSTALLATION
 
 Install Karaf's enterprise features:
 
-    features:install transaction
-    features:install jndi
-    features:install jpa
+    feature:install transaction
+    feature:install jndi
+    feature:install jpa
 
 
 Install bundles:
 
 Install the example bundle:
 
-    install -s mvn:karaf-examples/jpa-utils/1.0.0.SNAPSHOT
-    install -s mvn:karaf-examples/jpa-commons/1.0.0.SNAPSHOT
-    install -s mvn:karaf-examples/jpa-kundera/1.0.0.SNAPSHOT
-
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-kundera/3.0.0.SNAPSHOT
 
 TEST
 --------------------------------------------------------------------------------

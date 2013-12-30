@@ -2,7 +2,7 @@
 project.ext {
     bundleInportPackages = [
         'org.apache.felix.service.command',
-        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.commands',
         'org.apache.karaf.shell.console',
         'org.hsqldb.jdbc',
         'javax.sql',

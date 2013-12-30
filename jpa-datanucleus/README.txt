@@ -25,9 +25,10 @@ Install the example bundle:
     install -s mvn:org.datanucleus/datanucleus-api-jdo/3.2.0-release
     install -s mvn:org.datanucleus/datanucleus-api-jpa/3.2.0-release
 
-    install -s mvn:karaf-examples/jpa-utils/1.0.0.SNAPSHOT
-    install -s mvn:karaf-examples/jpa-commons/1.0.0.SNAPSHOT
-    install -s mvn:karaf-examples/jpa-datanucleus/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-datanucleus/3.0.0.SNAPSHOT
+
 
 TEST
 --------------------------------------------------------------------------------

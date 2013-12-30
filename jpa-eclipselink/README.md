@@ -27,10 +27,10 @@ gradle clean install
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.core/2.4.2
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.jpa/2.4.2
 
-    install -s mvn:com.github.lburgazzoli/lb-karaf-common/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-eclipselink-adapter/1.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-eclipselink/1.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-eclipselink-adapter/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-eclipselink/3.0.0.SNAPSHOT
 ```
 
 - INSTALLATION

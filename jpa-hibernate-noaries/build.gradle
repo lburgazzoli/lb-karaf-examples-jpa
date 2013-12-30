@@ -2,7 +2,7 @@
 project.ext {
     bundleInportPackages = [
         'org.apache.felix.service.command',
-        'org.apache.felix.gogo.commands',
+        'org.apache.karaf.shell.commands',
         'org.apache.karaf.shell.console',
         'javax.persistence',
         'org.hibernate.proxy',
@@ -19,6 +19,11 @@ project.ext {
 
 dependencies {
     compile project(':jpa-common')
+
+    //compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
+    compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
+    compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'
 }
 
 jar {
