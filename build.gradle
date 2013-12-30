@@ -83,11 +83,11 @@ subprojects {
     jar {
         baseName = "${project.prefix}-${project.name}"
 
-        manifest.attributes['Bundle-Description'     ] = "${project.prefix} :: ${project.name}"
-        manifest.attributes['Bundle-Name'            ] = "${project.prefix} :: ${project.name}"
-        manifest.attributes['Bundle-SymbolicName'    ] = "${project.prefix}-${project.name}"
+        manifest.attributes['Bundle-Description'     ] = "lb :: ${project.prefix} :: ${project.name}"
+        manifest.attributes['Bundle-Name'            ] = "lb :: ${project.prefix} :: ${project.name}"
+        manifest.attributes['Bundle-SymbolicName'    ] = "lb-${project.prefix}-${project.name}"
         manifest.attributes['Bundle-Version'         ] = project.version
-        manifest.attributes['Implementation-Title'   ] = "${project.prefix}-${project.name}-${project.version}"
+        manifest.attributes['Implementation-Title'   ] = "lb-${project.prefix}-${project.name}-${project.version}"
         manifest.attributes['Implementation-Version' ] = project.version
         manifest.attributes['Implementation-Vendor'  ] = 'lb'
 
