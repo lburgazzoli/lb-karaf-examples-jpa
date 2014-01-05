@@ -1,17 +1,19 @@
- BUILD
+- BUILD
 
-gradle clean install
+./gradlew clean install
 
 
 - INSTALLATION
 
 ```
-    feature:repo-add file:${SOMEWHERE}/lb-karaf-examples-jpa/jpa-hibernate-noaries/karaf-features.xml
+    feature:repo-add https://raw.github.com/lburgazzoli/lb-karaf-features/master/repo/lb-karaf-common.xml
+    feature:repo-add https://raw.github.com/lburgazzoli/lb-karaf-features/master/repo/hibernate4.xml
 
-    feature:install trasaction
-    feature:install jndi
-    feature:install jdbc
-    feature:install jpa-hibernate-noaries
+    feature:install hibernate43/4.3.0
+    feature:install lb-karaf-common/3.0.0.SNAPSHOT
+
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate-noaries/3.0.0.SNAPSHOT
 ```
 
 - TEST

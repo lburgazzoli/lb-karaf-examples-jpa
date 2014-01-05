@@ -41,13 +41,12 @@ dependencies {
 
     runtime "org.hibernate:hibernate-core:${hibernateVersion}"
     runtime "org.hibernate:hibernate-entitymanager:${hibernateVersion}"
-    runtime "org.hibernate:hibernate-envers:${hibernateVersion}"
+    //runtime "org.hibernate:hibernate-envers:${hibernateVersion}"
     runtime "org.hibernate:hibernate-osgi:${hibernateVersion}"
 
-    compile "org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1"
-    //compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
-    compile "org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1"
-    compile "org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1"
+    compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
+    //compile "org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1"
+    //compile "org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1"
 }
 
 // *****************************************************************************
