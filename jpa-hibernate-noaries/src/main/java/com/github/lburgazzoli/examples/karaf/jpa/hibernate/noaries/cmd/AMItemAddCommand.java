@@ -1,5 +1,4 @@
-/**
- *
+/*
  * Copyright 2013 lb
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,24 +16,27 @@
 package com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.cmd;
 
 import com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.data.Item;
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.commands.Argument;
+import org.apache.karaf.shell.commands.Command;
+
 
 /**
  *
  */
-@Command(scope = "item", name = "hibernate-am-add", description = "Add and item (AM)")
+@Command(
+    scope       = "item",
+    name        = "hibernate-noa-am-add",
+    description = "Add and item (AM)")
 public class AMItemAddCommand extends AbstractItemCommand {
+
     @Argument(index=0,required=true,multiValued=false,name="Name",description="Item Name")
     String name;
 
     @Argument(index=1,required=true,multiValued=false,name="Description",description="Item Description")
     String description;
 
-
     @Override
-    public Object doExecute() throws Exception {
+    public void doExecuteCommand() throws Exception {
         getDataService().add(new Item(name,description));
-        return null;
     }
 }

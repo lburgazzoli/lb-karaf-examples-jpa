@@ -1,5 +1,4 @@
 /*
- *
  * Copyright 2013 lb
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,33 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.cmd;
+package com.github.lburgazzoli.examples.karaf.jpa.commons.cmd;
 
-
-import com.github.lburgazzoli.examples.karaf.jpa.commons.cmd.AbstractDataCommand;
-import com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService;
-import com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.data.Item;
+import org.apache.karaf.shell.console.OsgiCommandSupport;
 
 /**
  *
  */
-public abstract class AbstractItemCommand extends AbstractDataCommand {
-    private IDataService<Item> m_dataService;
+public abstract class AbstractDataCommand extends OsgiCommandSupport {
 
-    /**
-     *
-     * @param dataService
-     */
-    public void setDataService(IDataService<Item> dataService) {
-        m_dataService = dataService;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public IDataService<Item> getDataService() {
-        return m_dataService;
+    @Override
+    public Object doExecute() throws Exception {
+        doExecuteCommand();
+        return null;
     }
 
     /**

@@ -1,5 +1,4 @@
-/**
- *
+/*
  * Copyright 2013 lb
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,20 +16,26 @@
 package com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.cmd;
 
 import com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.data.Item;
-import org.apache.felix.gogo.commands.Command;
+import com.github.lburgazzoli.karaf.common.cmd.CommandShellTable;
+import org.apache.karaf.shell.commands.Command;
+
 
 /**
  *
  */
-@Command(scope = "item", name = "hibernate-am-list", description = "Lists all items (AM)")
+@Command(
+    scope       = "item",
+    name        = "hibernate-noa-am-list",
+    description = "Lists all items (AM)")
 public class AMItemListCommand extends AbstractItemCommand {
 
     @Override
-    public Object doExecute() throws Exception {
+    public void doExecuteCommand() throws Exception {
+        CommandShellTable table = new CommandShellTable("Key","Value");
         for (Item item : getDataService().getAll()) {
-            System.out.println(item.getName() + ", " + item.getDescription());
+            table.row(item.getName(),item.getDescription());
         }
 
-        return null;
+        table.print();
     }
 }
