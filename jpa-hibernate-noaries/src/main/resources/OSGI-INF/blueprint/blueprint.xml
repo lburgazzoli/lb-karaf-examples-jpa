@@ -27,7 +27,7 @@
         persistent-id   = "com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries"
         update-strategy = "reload">
         <cm:default-properties>
-            <cm:property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+            <cm:property name="hibernate.connection.driver_class" value="org.hsqldb.jdbc.JDBCDriver"/>
             <cm:property name="hibernate.dialect"                 value="org.hibernate.dialect.HSQLDialect"/>
             <cm:property name="hibernate.connection.url"          value="jdbc:hsqldb:mem:hnoa"/>
             <cm:property name="hibernate.connection.username"     value="sa"/>
@@ -61,14 +61,16 @@
         <!-- you can the use OSGi's ConfiAdmin to configure Hibernate -->
         <property name="persistenceUnitProperties">
             <props>
-                <prop key="hibernate.connection.driver_class" value="${hibernate.connection.driver_class}"/>
-                <prop key="hibernate.dialect"                 value="${hibernate.dialect}"/>
-                <prop key="hibernate.connection.url"          value="${hibernate.connection.url}"/>
-                <prop key="hibernate.connection.username"     value="${hibernate.connection.username}"/>
-                <prop key="hibernate.connection.password"     value="${hibernate.connection.password}"/>
-                <prop key="hibernate.hbm2ddl.auto"            value="${hibernate.hbm2ddl.auto}"/>
-                <prop key="hibernate.show_sql"                value="${hibernate.show_sql}"/>
-                <prop key="hibernate.format_sql"              value="${hibernate.format_sql}"/>
+                <prop key="hibernate.connection.driver_class"         value="${hibernate.connection.driver_class}"/>
+                <prop key="hibernate.connection.provider_class"       value="com.github.lburgazzoli.examples.karaf.jpa.hibernate.connection.HikariConnectionProvider"/>
+                <prop key="hibernate.dialect"                         value="${hibernate.dialect}"/>
+                <prop key="hibernate.temp.use_jdbc_metadata_defaults" value="true"/>
+                <prop key="hibernate.connection.url"                  value="${hibernate.connection.url}"/>
+                <prop key="hibernate.connection.username"             value="${hibernate.connection.username}"/>
+                <prop key="hibernate.connection.password"             value="${hibernate.connection.password}"/>
+                <prop key="hibernate.hbm2ddl.auto"                    value="${hibernate.hbm2ddl.auto}"/>
+                <prop key="hibernate.show_sql"                        value="${hibernate.show_sql}"/>
+                <prop key="hibernate.format_sql"                      value="${hibernate.format_sql}"/>
             </props>
         </property>
     </bean>
