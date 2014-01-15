@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
-
     Copyright 2013 lb
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,25 +21,20 @@
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
-    <!--
-    <bean id="datanucleus_emf"
-          class="com.github.lburgazzoli.examples.karaf.jpa.datanucleus.DataNucleusEntityManagerFactory"
-          factory-method="createEntityManagerFactory">
-        <argument value="DATA_DATANUCLEUS"/>
-    </bean>
-    -->
-
     <bean id="datanucleus_app_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.datanucleus.data.ApplicationManagedDataService">
-        <jpa:unit unitname="DATA_DATANUCLEUS" property="entityManagerFactory"/>
-        <!--<property name="entityManagerFactory" ref="datanucleus_emf"/>-->
+        <jpa:unit unitname="DATA_DATANUCLEUS" property="entityManagerFactory">
+            <jpa:map>
+                <entry key="datanucleus.autoCreateSchema" value="true"/>
+            </jpa:map>
+        </jpa:unit>
     </bean>
 
     <service ref="datanucleus_app_managed_data_service"
              interface="com.github.lburgazzoli.examples.karaf.jpa.commons.data.IDataService">
         <service-properties>
-            <entry key  ="osgi.jndi.service.name"
-                   value="datanucleus/app_managed_data_service"/>
+            <entry key   = "osgi.jndi.service.name"
+                   value = "datanucleus/app_managed_data_service"/>
         </service-properties>
     </service>
 
