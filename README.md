@@ -10,7 +10,6 @@ Modules:
 - jpa-eclipselink
 - jpa-hibernate
 - jpa-hibernate-noaries
-- jpa-kundera (not working, yet)
 - jpa-openjpa
 
 References:

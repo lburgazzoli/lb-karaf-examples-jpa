@@ -33,18 +33,13 @@ gradle clean install
     install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final
     install -s mvn:org.hibernate/hibernate-core/4.2.7.Final
     install -s mvn:org.hibernate/hibernate-entitymanager/4.2.7.Final
-    install -s mvn:org.hibernate/hibernate-envers/4.2.7.Final
-    install -s mvn:org.hibernate/hibernate-osgi/4.2.7.Final
-```
 
-  - Install the example bundle:
-
-```
     install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate/3.0.0.SNAPSHOT
 
-    start ${aries-jpa-container}
+
+    install -s mvn:org.hibernate/hibernate-osgi/4.2.7.Final
 ```
 
 - TEST
