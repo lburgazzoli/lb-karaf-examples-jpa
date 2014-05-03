@@ -15,14 +15,13 @@ project.ext {
 dependencies {
     compile project(':jpa-common')
 
-
-
     compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
     compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
     compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.commons-collections:3.2.1_3'
     compile 'org.apache.openjpa:openjpa:2.3.0'
 }
 
+/*
 task enhance << {
     ant.taskdef(
         name      : 'openjpaenhancer',
@@ -33,9 +32,10 @@ task enhance << {
     ant.openjpaenhancer(
         classpath : project.runtimeClasspath.asPath)
 }
+*/
 
 jar {
-    it.dependsOn enhance
+    //it.dependsOn enhance
 
     manifest {
         instruction 'Import-Package' , bundleInportPackages.join(',')
