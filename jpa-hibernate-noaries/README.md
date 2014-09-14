@@ -12,7 +12,7 @@
     feature:install lb-karaf-common-deps/3.0.1.SNAPSHOT
     feature:install lb-karaf-hibernate-43/4.3.6
 
-    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.1.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-common/3.0.1.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.1.SNAPSHOT
     install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate-noaries/3.0.1.SNAPSHOT
 ```
