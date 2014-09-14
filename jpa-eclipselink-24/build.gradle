@@ -1,0 +1,35 @@
+
+
+project.ext {
+    bundleInportPackages = [
+        'org.apache.felix.service.command',
+        'org.apache.karaf.shell.commands',
+        'org.apache.karaf.shell.console',
+        'com.github.lburgazzoli.examples.karaf.jpa.eclipselink24.adapter',
+        '*'
+    ]
+
+    bundleExportPackages = [
+        "*"
+    ]
+}
+
+dependencies {
+    compile project(':jpa-common')
+
+
+    compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
+    compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
+}
+
+jar {
+    manifest {
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , bundleExportPackages.join(',')
+
+        attributes['JPA-PersistenceUnits'  ] = 'DATA_ELINK_24,DATA_ELINK_24_JTA'
+        attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
+        attributes['DynamicImport-Package' ] = '*'
+    }
+}
+

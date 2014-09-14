@@ -1,0 +1,29 @@
+
+project.ext {
+    bundleInportPackages = [
+    	'org.eclipse.persistence.jpa',
+    	'javax.persistence.spi',
+        '*'
+    ]
+
+    bundleExportPackages = [
+        "*"
+    ]
+}
+
+dependencies {
+    compile project(':jpa-common')
+
+    compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
+    compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.core:2.5.2'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.5.22'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.5.2'
+}
+
+jar {
+    manifest {
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , bundleExportPackages.join(',')
+    }
+}

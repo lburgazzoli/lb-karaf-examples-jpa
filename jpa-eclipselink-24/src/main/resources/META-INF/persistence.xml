@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+
+    Copyright 2013 lb
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<persistence
+    xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="2.0">
+
+    <!-- ******************************************************************* -->
+    <!-- NON_JTA                                                             -->
+    <!-- ******************************************************************* -->
+
+    <persistence-unit name="DATA_ELINK_24" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
+        <class>com.github.lburgazzoli.examples.karaf.jpa.eclipselink24.data.Item</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="eclipselink.logging.level"                      value="FINEST"/>
+            <property name="eclipselink.logging.level.sql"                  value="FINEST"/>
+            <property name="eclipselink.logging.parameters"                 value="true"/>
+            <property name="eclipselink.logging.timestamp"                  value="true"/>
+            <property name="eclipselink.logging.session"                    value="true"/>
+            <property name="eclipselink.logging.thread"                     value="true"/>
+            <property name="eclipselink.logging.exceptions"                 value="true"/>
+            <property name="eclipselink.session.include.descriptor.queries" value="true"/>
+            <property name="eclipselink.weaving"                            value="true"/>
+            <property name="eclipselink.ddl-generation"                     value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
+
+            <property
+                name  = "eclipselink.logging.logger"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink24.adapter.EclipseLinkOSGiSessionLogger"/>
+
+        </properties>
+    </persistence-unit>
+
+    <!-- ******************************************************************* -->
+    <!-- JTA                                                                 -->
+    <!-- ******************************************************************* -->
+
+    <persistence-unit name="DATA_ELINK_24_JTA" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</jta-data-source>
+        <class>com.github.lburgazzoli.examples.karaf.jpa.eclipselink24.data.Item</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="eclipselink.logging.level"                      value="FINEST"/>
+            <property name="eclipselink.logging.level.sql"                  value="FINEST"/>
+            <property name="eclipselink.logging.parameters"                 value="true"/>
+            <property name="eclipselink.logging.timestamp"                  value="true"/>
+            <property name="eclipselink.logging.session"                    value="true"/>
+            <property name="eclipselink.logging.thread"                     value="true"/>
+            <property name="eclipselink.logging.exceptions"                 value="true"/>
+            <property name="eclipselink.session.include.descriptor.queries" value="true"/>
+            <property name="eclipselink.weaving"                            value="true"/>
+            <property name="eclipselink.ddl-generation"                     value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode"         value="database"/>
+
+            <property
+                name  = "eclipselink.logging.logger"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink24.adapter.EclipseLinkOSGiSessionLogger"/>
+            <property
+                name  = "eclipselink.target-server"
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink24.adapter.EclipseLinkOSGiServerPlatform"/>
+
+        </properties>
+    </persistence-unit>
+
+</persistence>
