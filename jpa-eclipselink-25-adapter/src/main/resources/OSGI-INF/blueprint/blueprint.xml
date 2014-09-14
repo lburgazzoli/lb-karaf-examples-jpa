@@ -33,8 +33,8 @@
     <!--                                                                     -->
     <!-- ******************************************************************* -->
 
-    <bean id="ECLIPSELINK_PERSISTENCE_PROVIDER_25"
-          class="org.eclipse.persistence.jpa.PersistenceProvider">
+    <bean id    = "ECLIPSELINK_PERSISTENCE_PROVIDER_25"
+          class = "org.eclipse.persistence.jpa.PersistenceProvider">
     </bean>
 
     <!-- ******************************************************************* -->
@@ -44,8 +44,12 @@
     <service ref       = "ECLIPSELINK_PERSISTENCE_PROVIDER_25"
              interface = "javax.persistence.spi.PersistenceProvider">
         <service-properties>
+            <entry key   = "org.apache.aries.jpa.proxy.factory"
+                   value = "true"/>
             <entry key   = "osgi.jndi.service.name"
                    value = "eclipselink.persistence.provider"/>
+            <entry key   = "osgi.unit.provider"
+                   value = "org.eclipse.persistence.jpa.PersistenceProvider"/>
             <entry key   = "javax.persistence.provider"
                    value = "org.eclipse.persistence.jpa.PersistenceProvider"/>
             <entry key   = "javax.persistence.spi.PersistenceProvider"
