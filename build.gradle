@@ -12,11 +12,11 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.lburgazzoli:gradle-plugin-karaf-features-gen:1.0.0.SNAPSHOT'
+        //classpath 'com.github.lburgazzoli:gradle-plugin-karaf-features-gen:1.0.0.SNAPSHOT'
     }
 }
 
-apply plugin: 'karaf-featuresgen'
+//apply plugin: 'karaf-featuresgen'
 
 // *****************************************************************************
 //
@@ -28,9 +28,11 @@ subprojects {
     apply plugin: 'osgi'
     apply plugin: 'maven'
 
-    version      = '3.0.1.SNAPSHOT'
-    group        = 'com.github.lburgazzoli'
-    ext.prefix   = 'karaf-examples'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+    version             = '3.0.1.SNAPSHOT'
+    group               = 'com.github.lburgazzoli'
+    ext.prefix          = 'karaf-examples'
 
     repositories {
         maven { url 'http://repo1.maven.org/maven2' }
@@ -96,6 +98,7 @@ subprojects {
         manifest.classpath  = project.runtimeClasspath
     }
 
+    /*
     karafFeatures {
         excludes = [
             'org.slf4j/.*',
@@ -107,6 +110,7 @@ subprojects {
             'org.apache.geronimo.specs/geronimo-j2ee-management_1.1_spec/.*'
         ]
     }
+    */
 }
 
 // *****************************************************************************
@@ -114,6 +118,6 @@ subprojects {
 // *****************************************************************************
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    gradleVersion = '2.1'
 }
 

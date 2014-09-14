@@ -62,7 +62,7 @@
         <property name="persistenceUnitProperties">
             <props>
                 <prop key="hibernate.connection.driver_class"         value="${hibernate.connection.driver_class}"/>
-                <prop key="hibernate.connection.provider_class"       value="com.github.lburgazzoli.examples.karaf.jpa.hibernate.connection.HikariConnectionProvider"/>
+                <prop key="hibernate.connection.provider_class"       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
                 <prop key="hibernate.dialect"                         value="${hibernate.dialect}"/>
                 <prop key="hibernate.temp.use_jdbc_metadata_defaults" value="true"/>
                 <prop key="hibernate.connection.url"                  value="${hibernate.connection.url}"/>
