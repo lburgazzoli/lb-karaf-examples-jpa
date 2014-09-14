@@ -17,6 +17,8 @@
 .idea/
 .gradle/
 
+atlassian-ide-plugin.xml
+
 classes/
 build/
 build-gradle/
