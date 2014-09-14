@@ -6,6 +6,7 @@ project.ext {
         'org.apache.karaf.shell.console',
         'javax.persistence',
         'org.hibernate.proxy',
+        'org.hibernate.hikaricp.internal',
         'javassist.util.proxy',
         'org.hsqldb.jdbc',
         'org.hsqldb',
@@ -23,11 +24,7 @@ project.ext {
 
 dependencies {
     compile project(':jpa-common')
-
     compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
-    //compile "org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1"
-    //compile "org.hibernate:hibernate-core:4.3.0.Final"
-    //compile "com.zaxxer:HikariCP:1.2.2"
 }
 
 // *****************************************************************************
