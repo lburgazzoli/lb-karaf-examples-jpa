@@ -16,20 +16,14 @@ subprojects {
     ext.prefix          = 'karaf-examples'
 
     repositories {
-        maven { url 'http://repo1.maven.org/maven2' }
-        maven { url 'http://repo2.maven.org/maven2' }
-        maven { url 'http://repo.springsource.org/release' }
-        maven { url 'http://repository.springsource.com/maven/bundles/release' }
-        maven { url 'http://repository.springsource.com/maven/bundles/external' }
-        maven { url 'http://download.oracle.com/maven' }
-        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-        maven { url 'http://mvn.riptano.com/content/repositories/public' }
-        maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
-            
+        mavenCentral()
         mavenLocal()
 
+        //maven { url 'http://repository.springsource.com/maven/bundles/release' }
+        //maven { url 'http://repository.springsource.com/maven/bundles/external' }
+        //maven { url 'http://download.oracle.com/maven' }
+            
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-        //maven { url "http://repository.apache.org/content/groups/snapshots-group" }
     }
 
     dependencies {

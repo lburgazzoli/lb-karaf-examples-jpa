@@ -19,10 +19,10 @@ dependencies {
     compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
     compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
     compile 'javax.jdo:jdo-api:3.0.1'
-    compile 'org.datanucleus:datanucleus-core:3.2.3'
-    compile 'org.datanucleus:datanucleus-rdbms:3.2.3'
-    compile 'org.datanucleus:datanucleus-api-jpa:3.2.3'
-    compile 'org.datanucleus:datanucleus-api-jdo:3.2.3'
+    compile 'org.datanucleus:datanucleus-core:3.2.15'
+    compile 'org.datanucleus:datanucleus-rdbms:3.2.12'
+    compile 'org.datanucleus:datanucleus-api-jpa:3.2.6'
+    compile 'org.datanucleus:datanucleus-api-jdo:3.2.8'
 }
 
 task enhance << {
