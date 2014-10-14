@@ -9,9 +9,9 @@ subprojects {
     apply plugin: 'osgi'
     apply plugin: 'maven'
 
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-    version             = '3.0.1.SNAPSHOT'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    version             = '3.0.2.SNAPSHOT'
     group               = 'com.github.lburgazzoli'
     ext.prefix          = 'karaf-examples'
 
@@ -19,15 +19,11 @@ subprojects {
         mavenCentral()
         mavenLocal()
 
-        //maven { url 'http://repository.springsource.com/maven/bundles/release' }
-        //maven { url 'http://repository.springsource.com/maven/bundles/external' }
-        //maven { url 'http://download.oracle.com/maven' }
-            
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 
     dependencies {
-        compile 'com.github.lburgazzoli:lb-karaf-common:3.0.1.SNAPSHOT'
+        compile 'com.github.lburgazzoli:lb-karaf-common:3.0.2.SNAPSHOT'
 
         compile 'org.apache.felix:org.apache.felix.configadmin:1.8.0'
         compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:3.0.1'

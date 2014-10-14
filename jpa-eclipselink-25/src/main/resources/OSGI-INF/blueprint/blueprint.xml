@@ -29,7 +29,7 @@
 
     <bean id="app_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.eclipselink25.data.ApplicationManagedDataService">
-        <jpa:unit unitname="DATA_ELINK" property="entityManagerFactory"/>
+        <jpa:unit unitname="DATA_ELINK_25" property="entityManagerFactory"/>
     </bean>
 
     <service ref="app_managed_data_service"
@@ -46,7 +46,7 @@
 
     <bean id="con_managed_data_service"
           class="com.github.lburgazzoli.examples.karaf.jpa.eclipselink25.data.ContainerManagedDataService">
-        <jpa:context unitname="DATA_ELINK_JTA" property="entityManager"/>
+        <jpa:context unitname="DATA_ELINK_25_JTA" property="entityManager"/>
         <tx:transaction method="*" value="Required"/>
     </bean>
 
