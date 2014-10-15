@@ -11,9 +11,25 @@ subprojects {
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-    version             = '3.0.2.SNAPSHOT'
+    version             = '3.0.2-SNAPSHOT'
     group               = 'com.github.lburgazzoli'
+
     ext.prefix          = 'karaf-examples'
+    ext.osgiVersion     = project.version.replaceAll('-','.')
+    ext.versions        = [
+        slf4j              : '1.7.7',
+        log4j2             : '2.0.2',
+        felixConfigAdmin   : '1.8.0',
+        karaf              : '3.0.2',
+        guava              : '18.0',
+        commonsLang        : '3.3.2',
+        commonsCollections : '4.0',
+        osgi               : '5.0.0',
+        hazelcast          : '3.3',
+        lbHazelcast        : '3.3.0-SNAPSHOT',
+        lbKaraf            : '3.0.2-SNAPSHOT'
+    ]
+
 
     repositories {
         mavenCentral()
@@ -23,20 +39,23 @@ subprojects {
     }
 
     dependencies {
-        compile 'com.github.lburgazzoli:lb-karaf-common:3.0.2.SNAPSHOT'
+        compile "com.github.lburgazzoli:lb-karaf-common:$versions.lbKaraf"
 
-        compile 'org.apache.felix:org.apache.felix.configadmin:1.8.0'
-        compile 'org.apache.karaf.shell:org.apache.karaf.shell.console:3.0.1'
-        compile 'org.apache.karaf.shell:org.apache.karaf.shell.table:3.0.1'
-        compile 'org.apache.commons:commons-lang3:3.1'
-        compile 'commons-beanutils:commons-beanutils:1.8.3'
-        compile 'org.slf4j:slf4j-api:1.7.7'
-        compile 'org.slf4j:slf4j-ext:1.7.7'
-        compile 'org.slf4j:jul-to-slf4j:1.7.7'
-        compile 'org.slf4j:jcl-over-slf4j:1.7.7'
-        compile 'org.slf4j:slf4j-log4j12:1.7.7'
-        compile 'log4j:log4j:1.2.17'
-        compile 'com.google.guava:guava:18.0'
+        compile "org.slf4j:slf4j-api:$versions.slf4j"
+        compile "org.apache.felix:org.apache.felix.configadmin:$versions.felixConfigAdmin"
+        compile "org.apache.karaf.shell:org.apache.karaf.shell.console:$versions.karaf"
+        compile "org.apache.karaf.shell:org.apache.karaf.shell.table:$versions.karaf"
+        compile "org.apache.commons:commons-lang3:$versions.commonsLang"
+        compile "commons-beanutils:commons-beanutils:1.8.3"
+        compile "com.google.guava:guava:$versions.guava"
+
+        runtime "org.slf4j:slf4j-ext:$versions.slf4j"
+        runtime "org.slf4j:jul-to-slf4j:$versions.slf4j"
+
+        runtime "org.apache.logging.log4j:log4j-api:$versions.log4j2"
+        runtime "org.apache.logging.log4j:log4j-core:$versions.log4j2"
+        runtime "org.apache.logging.log4j:log4j-jcl:$versions.log4j2"
+        runtime "org.apache.logging.log4j:log4j-slf4j-impl:$versions.log4j2"
     }
 
     jar {
@@ -45,9 +64,9 @@ subprojects {
         manifest.attributes['Bundle-Description'     ] = "lb :: ${project.prefix} :: ${project.name}"
         manifest.attributes['Bundle-Name'            ] = "lb :: ${project.prefix} :: ${project.name}"
         manifest.attributes['Bundle-SymbolicName'    ] = "lb-${project.prefix}-${project.name}"
-        manifest.attributes['Bundle-Version'         ] = project.version
-        manifest.attributes['Implementation-Title'   ] = "lb-${project.prefix}-${project.name}-${project.version}"
-        manifest.attributes['Implementation-Version' ] = project.version
+        manifest.attributes['Bundle-Version'         ] = osgiVersion
+        manifest.attributes['Implementation-Title'   ] = "lb-${project.prefix}-${project.name}-${osgiVersion}"
+        manifest.attributes['Implementation-Version' ] = osgiVersion
         manifest.attributes['Implementation-Vendor'  ] = 'lb'
 
         manifest.classesDir = new File("$buildDir/classes/main")
