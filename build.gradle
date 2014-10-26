@@ -1,6 +1,6 @@
 
 // *****************************************************************************
-//
+// -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager
 // *****************************************************************************
 
 subprojects {
@@ -18,7 +18,7 @@ subprojects {
     ext.osgiVersion     = project.version.replaceAll('-','.')
     ext.versions        = [
         slf4j              : '1.7.7',
-        log4j2             : '2.0.2',
+        log4j2             : '2.1',
         felixConfigAdmin   : '1.8.0',
         karaf              : '3.0.2',
         guava              : '18.0',
@@ -50,11 +50,11 @@ subprojects {
         compile "com.google.guava:guava:$versions.guava"
 
         runtime "org.slf4j:slf4j-ext:$versions.slf4j"
-        runtime "org.slf4j:jul-to-slf4j:$versions.slf4j"
 
         runtime "org.apache.logging.log4j:log4j-api:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-core:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-jcl:$versions.log4j2"
+        runtime "org.apache.logging.log4j:log4j-jul:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-slf4j-impl:$versions.log4j2"
     }
 
