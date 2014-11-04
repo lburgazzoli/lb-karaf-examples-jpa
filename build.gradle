@@ -42,6 +42,8 @@ subprojects {
         compile "com.github.lburgazzoli:lb-karaf-common:$versions.lbKaraf"
 
         compile "org.slf4j:slf4j-api:$versions.slf4j"
+        compile "org.slf4j:slf4j-ext:$versions.slf4j"
+
         compile "org.apache.felix:org.apache.felix.configadmin:$versions.felixConfigAdmin"
         compile "org.apache.karaf.shell:org.apache.karaf.shell.console:$versions.karaf"
         compile "org.apache.karaf.shell:org.apache.karaf.shell.table:$versions.karaf"
@@ -49,7 +51,6 @@ subprojects {
         compile "commons-beanutils:commons-beanutils:1.8.3"
         compile "com.google.guava:guava:$versions.guava"
 
-        runtime "org.slf4j:slf4j-ext:$versions.slf4j"
 
         runtime "org.apache.logging.log4j:log4j-api:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-core:$versions.log4j2"
