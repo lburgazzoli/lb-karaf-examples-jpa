@@ -17,13 +17,18 @@ gradle clean install
 ```
     features:install transaction
     features:install jndi
-    features:install jpa
+    
+    # install JPA 2.1 support
+    install -s mvn:org.eclipse.persistence/javax.persistence/2.1.0</bundle>
+    install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/1.0.2
+    install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.blueprint.aries/1.0.4
+    install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/1.0.2
+    install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.container.context/1.0.4
 
     install -s mvn:org.hsqldb/hsqldb/2.3.1
     install -s mvn:org.apache.commons/commons-lang3/3.3.2
     install -s mvn:com.google.guava/guava/18.0
     
-    install -s mvn:org.eclipse.persistence/javax.persistence/2.1.0
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.asm/2.5.2
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/2.5.2
     install -s mvn:org.eclipse.persistence/org.eclipse.persistence.jpa.jpql/2.5.2
