@@ -10,3 +10,7 @@ include "jpa-hibernate-noaries"
 include "jpa-datanucleus"
 include "jpa-batoojpa"
 
+
+rootProject.children.each { 
+    it.name = "lb-karaf-examples-" + it.name 
+}

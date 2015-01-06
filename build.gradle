@@ -3,33 +3,49 @@
 // -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager
 // *****************************************************************************
 
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
+    }
+}
+
+// *****************************************************************************
+// 
+// *****************************************************************************
+
 subprojects {
 
     apply plugin: 'java'
     apply plugin: 'osgi'
     apply plugin: 'maven'
+    apply plugin: 'com.github.ben-manes.versions'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     version             = '3.0.2-SNAPSHOT'
     group               = 'com.github.lburgazzoli'
 
-    ext.prefix          = 'karaf-examples'
+    ext.gradleVersion   = '2.2.1'
     ext.osgiVersion     = project.version.replaceAll('-','.')
     ext.versions        = [
-        slf4j              : '1.7.7',
+        slf4j              : '1.7.9',
         log4j2             : '2.1',
         felixConfigAdmin   : '1.8.0',
         karaf              : '3.0.2',
         guava              : '18.0',
         commonsLang        : '3.3.2',
         commonsCollections : '4.0',
+        commonsBeanUtils   : '1.9.2',
         osgi               : '5.0.0',
-        hazelcast          : '3.3',
-        lbHazelcast        : '3.3.0-SNAPSHOT',
+        hazelcast          : '3.4',
+        lbHazelcast        : '3.4.0-SNAPSHOT',
         lbKaraf            : '3.0.2-SNAPSHOT'
     ]
-
 
     repositories {
         mavenCentral()
@@ -41,32 +57,31 @@ subprojects {
     dependencies {
         compile "com.github.lburgazzoli:lb-karaf-common:$versions.lbKaraf"
 
-        compile "org.slf4j:slf4j-api:$versions.slf4j"
-        compile "org.slf4j:slf4j-ext:$versions.slf4j"
-
-        compile "org.apache.felix:org.apache.felix.configadmin:$versions.felixConfigAdmin"
-        compile "org.apache.karaf.shell:org.apache.karaf.shell.console:$versions.karaf"
-        compile "org.apache.karaf.shell:org.apache.karaf.shell.table:$versions.karaf"
-        compile "org.apache.commons:commons-lang3:$versions.commonsLang"
-        compile "commons-beanutils:commons-beanutils:1.8.3"
-        compile "com.google.guava:guava:$versions.guava"
-
+        compile("org.slf4j:slf4j-api:$versions.slf4j") { transitive = false }
+        compile("org.slf4j:slf4j-ext:$versions.slf4j") { transitive = false }
 
         runtime "org.apache.logging.log4j:log4j-api:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-core:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-jcl:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-jul:$versions.log4j2"
         runtime "org.apache.logging.log4j:log4j-slf4j-impl:$versions.log4j2"
+
+        compile "org.apache.felix:org.apache.felix.configadmin:$versions.felixConfigAdmin"
+        compile "org.apache.karaf.shell:org.apache.karaf.shell.console:$versions.karaf"
+        compile "org.apache.karaf.shell:org.apache.karaf.shell.table:$versions.karaf"
+        compile "org.apache.commons:commons-lang3:$versions.commonsLang"
+        compile "commons-beanutils:commons-beanutils:$versions.commonsBeanUtils"
+        compile "com.google.guava:guava:$versions.guava"
     }
 
     jar {
-        baseName = "lb-${project.prefix}-${project.name}"
+        baseName = "${project.name}"
 
-        manifest.attributes['Bundle-Description'     ] = "lb :: ${project.prefix} :: ${project.name}"
-        manifest.attributes['Bundle-Name'            ] = "lb :: ${project.prefix} :: ${project.name}"
-        manifest.attributes['Bundle-SymbolicName'    ] = "lb-${project.prefix}-${project.name}"
+        manifest.attributes['Bundle-Description'     ] = "${project.name}"
+        manifest.attributes['Bundle-Name'            ] = "${project.name}"
+        manifest.attributes['Bundle-SymbolicName'    ] = "${project.group}-${project.name}"
         manifest.attributes['Bundle-Version'         ] = osgiVersion
-        manifest.attributes['Implementation-Title'   ] = "lb-${project.prefix}-${project.name}-${osgiVersion}"
+        manifest.attributes['Implementation-Title'   ] = "${project.group}-${project.name}-${osgiVersion}"
         manifest.attributes['Implementation-Version' ] = osgiVersion
         manifest.attributes['Implementation-Vendor'  ] = 'lb'
 
@@ -80,6 +95,6 @@ subprojects {
 // *****************************************************************************
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
+    gradleVersion = "$gradleVersion"
 }
 

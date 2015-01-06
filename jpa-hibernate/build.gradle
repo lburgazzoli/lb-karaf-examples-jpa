@@ -15,7 +15,7 @@ project.ext {
 }
 
 dependencies {
-    compile project(':jpa-common')
+    compile project(':lb-karaf-examples-jpa-common')
 
     compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
     compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'

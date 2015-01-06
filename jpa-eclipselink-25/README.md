@@ -15,11 +15,11 @@ gradle clean install
 - INSTALLATION
 
 ```
-    features:install transaction
-    features:install jndi
+    feature:install transaction
+    feature:install jndi
     
     # install JPA 2.1 support
-    install -s mvn:org.eclipse.persistence/javax.persistence/2.1.0</bundle>
+    install -s mvn:org.eclipse.persistence/javax.persistence/2.1.0
     install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/1.0.2
     install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.blueprint.aries/1.0.4
     install -s mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/1.0.2
@@ -41,7 +41,7 @@ gradle clean install
     install -s mvn:com.github.lburgazzoli/lb-karaf-examples-jpa-eclipselink-25/3.0.2-SNAPSHOT
 ```
 
-- INSTALLATION
+- TEST
 
 ```
     item:eclipselink-am-add name1 descr1
