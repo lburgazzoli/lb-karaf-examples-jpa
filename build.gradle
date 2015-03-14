@@ -9,8 +9,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.8'
     }
 }
 
@@ -27,24 +26,22 @@ subprojects {
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-    version             = '3.0.2-SNAPSHOT'
+    version             = '3.0.3-SNAPSHOT'
     group               = 'com.github.lburgazzoli'
 
-    ext.gradleVersion   = '2.2.1'
+    ext.gradleVersion   = '2.3'
     ext.osgiVersion     = project.version.replaceAll('-','.')
     ext.versions        = [
-        slf4j              : '1.7.9',
-        log4j2             : '2.1',
-        felixConfigAdmin   : '1.8.0',
-        karaf              : '3.0.2',
+        slf4j              : '1.7.10',
+        log4j2             : '2.2',
+        felixConfigAdmin   : '1.8.2',
+        karaf              : '3.0.3',
         guava              : '18.0',
         commonsLang        : '3.3.2',
         commonsCollections : '4.0',
         commonsBeanUtils   : '1.9.2',
         osgi               : '5.0.0',
-        hazelcast          : '3.4',
-        lbHazelcast        : '3.4.0-SNAPSHOT',
-        lbKaraf            : '3.0.2-SNAPSHOT'
+        lbKaraf            : '3.0.3-SNAPSHOT'
     ]
 
     repositories {
@@ -84,9 +81,14 @@ subprojects {
         manifest.attributes['Implementation-Title'   ] = "${project.group}-${project.name}-${osgiVersion}"
         manifest.attributes['Implementation-Version' ] = osgiVersion
         manifest.attributes['Implementation-Vendor'  ] = 'lb'
+    }
+    
+    // *************************************************************************
+    //
+    // *************************************************************************
 
-        manifest.classesDir = new File("$buildDir/classes/main")
-        manifest.classpath  = project.runtimeClasspath
+    dependencyUpdates {
+        revision = 'release'
     }
 }
 

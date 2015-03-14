@@ -2,7 +2,7 @@
 <!--
 
 
-    Copyright 2013 lb
+    Copyright 2013 Luca Burgazzoli (lburgazzoli)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@
 
             <property
                 name  = "eclipselink.logging.logger"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink25.adapter.EclipseLinkOSGiSessionLogger"/>
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink26.adapter.EclipseLinkOSGiSessionLogger"/>
 
         </properties>
     </persistence-unit>
@@ -75,10 +75,10 @@
 
             <property
                 name  = "eclipselink.logging.logger"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink25.adapter.EclipseLinkOSGiSessionLogger"/>
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink26.adapter.EclipseLinkOSGiSessionLogger"/>
             <property
                 name  = "eclipselink.target-server"
-                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink25.adapter.EclipseLinkOSGiServerPlatform"/>
+                value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink26.adapter.EclipseLinkOSGiServerPlatform"/>
 
         </properties>
     </persistence-unit>

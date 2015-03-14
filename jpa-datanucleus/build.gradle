@@ -24,7 +24,7 @@ dependencies {
     compile 'org.datanucleus:datanucleus-api-jpa:3.2.6'
     compile 'org.datanucleus:datanucleus-api-jdo:3.2.8'
 }
-
+/*
 task enhance << {
     ant.taskdef( 
         name      : 'datanucleusenhancer',
@@ -41,9 +41,10 @@ task enhance << {
         }
     }
 }
+*/
 
 jar {
-    it.dependsOn enhance
+    //it.dependsOn enhance
 
     manifest {
         instruction 'Import-Package' , bundleInportPackages.join(',')
