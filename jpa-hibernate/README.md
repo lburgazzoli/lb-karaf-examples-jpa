@@ -1,45 +1,24 @@
- BUILD
+- BUILD
 
-gradle clean install
+./gradlew clean install
 
 
 - INSTALLATION
-
-  - Install Karaf's enterprise features:
 
 ```
     features:install transaction
     features:install jndi
     features:install jpa
-```
 
+    feature:repo-add https://raw.github.com/lburgazzoli/lb-karaf/master/karaf-features/lb-karaf-common-deps.xml
+    feature:repo-add https://raw.github.com/lburgazzoli/lb-karaf/master/karaf-features/lb-karaf-jpa-hibernate-4.xml
 
+    feature:install lb-karaf-common-deps/3.0.3.SNAPSHOT
+    feature:install lb-karaf-hibernate-42/4.2.7
 
-  - Install bundles:
-
-```
-    install -s mvn:org.hsqldb/hsqldb/2.3.0
-    install -s mvn:com.fasterxml/classmate/0.9.0
-    install -s mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0
-    install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5
-    install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2
-    install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5
-    install -s mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1
-    install -s mvn:org.javassist/javassist/3.18.1-GA
-    install -s mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final
-    install -s wrap:mvn:org.jboss/jandex/1.1.0.Final
-    install -s mvn:org.jboss.logging/jboss-logging/3.1.3.GA
-
-    install -s mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final
-    install -s mvn:org.hibernate/hibernate-core/4.2.7.Final
-    install -s mvn:org.hibernate/hibernate-entitymanager/4.2.7.Final
-
-    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.0.SNAPSHOT
-    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate/3.0.0.SNAPSHOT
-
-
-    install -s mvn:org.hibernate/hibernate-osgi/4.2.7.Final
+    install -s mvn:com.github.lburgazzoli/lb-karaf-common/3.0.3.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-common/3.0.3.SNAPSHOT
+    install -s mvn:com.github.lburgazzoli/karaf-examples-jpa-hibernate/3.0.3.SNAPSHOT
 ```
 
 - TEST
