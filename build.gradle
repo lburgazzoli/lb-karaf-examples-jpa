@@ -5,11 +5,15 @@
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         jcenter()
+
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
     dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.8'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.9'
+        classpath 'com.github.lburgazzoli:lb-karaf-features-gen:1.0.1-SNAPSHOT'
     }
 }
 
@@ -32,21 +36,22 @@ subprojects {
     ext.gradleVersion   = '2.3'
     ext.osgiVersion     = project.version.replaceAll('-','.')
     ext.versions        = [
-        slf4j              : '1.7.10',
-        log4j2             : '2.2',
-        felixConfigAdmin   : '1.8.2',
+        slf4j              : '1.7.12',
+        log4j2             : '2.3',
+        felixConfigAdmin   : '1.8.4',
         karaf              : '3.0.3',
         guava              : '18.0',
-        commonsLang        : '3.3.2',
+        commonsLang        : '3.4',
         commonsCollections : '4.0',
         commonsBeanUtils   : '1.9.2',
         osgi               : '5.0.0',
-        lbKaraf            : '3.0.3-SNAPSHOT'
+        lbKaraf            : '3.0.3-SNAPSHOT',
+        lbKarafFeaturesGen : '1.0.1-SNAPSHOT'
     ]
 
     repositories {
-        mavenCentral()
         mavenLocal()
+        mavenCentral()
 
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }

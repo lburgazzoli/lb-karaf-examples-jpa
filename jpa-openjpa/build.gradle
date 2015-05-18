@@ -1,4 +1,6 @@
 
+apply plugin: 'karaf-featuresgen'
+
 project.ext {
     bundleInportPackages = [
         'org.apache.felix.service.command',
@@ -18,7 +20,7 @@ dependencies {
     compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
     compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
     compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.commons-collections:3.2.1_3'
-    compile 'org.apache.openjpa:openjpa:2.3.0'
+    compile 'org.apache.openjpa:openjpa:2.4.0'
 }
 
 jar {
@@ -28,5 +30,53 @@ jar {
         
         attributes['JPA-PersistenceUnits'  ] = 'DATA_OPENJPA,DATA_OPENJPA_JTA'
         attributes['Meta-Persistence'      ] = 'META-INF/persistence.xml'
+    }
+}
+
+// *****************************************************************************
+//
+// *****************************************************************************
+
+karafFeatures {
+    features {
+        karafExamplesJpaOpenJPA {
+            name = 'karaf-examples-jpa-openjpa'
+            projects = [ project ]
+
+            bundle {
+                match group: 'org.apache.geronimo.specs'
+                include = false
+            }
+
+            bundle {
+                match group: 'org.apache.logging.log4j'
+                include = false
+            }
+
+            bundle {
+                match group: 'org.slf4j'
+                include = false
+            }
+
+            bundle {
+                match group: 'org.osgi'
+                include = false
+            }
+
+            bundle {
+                match group: 'org.apache.karaf.jaas'
+                include = false
+            }
+
+            bundle {
+                match group: 'org.apache.karaf.shell'
+                include = false
+            }
+
+            bundle {
+                match group: 'org.apache.felix'
+                include = false
+            }
+        }
     }
 }
