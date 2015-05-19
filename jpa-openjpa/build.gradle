@@ -41,7 +41,7 @@ karafFeatures {
     features {
         karafExamplesJpaOpenJPA {
             name = 'karaf-examples-jpa-openjpa'
-            projects = [ project ]
+            //projects = [ project ]
 
             bundle {
                 match group: 'org.apache.geronimo.specs'
