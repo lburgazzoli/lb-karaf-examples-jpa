@@ -1,5 +1,5 @@
 
-apply plugin: 'karaf-featuresgen'
+apply plugin: 'com.github.lburgazzoli.karaf.features'
 
 project.ext {
     bundleInportPackages = [
