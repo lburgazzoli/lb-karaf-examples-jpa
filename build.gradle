@@ -13,7 +13,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.9'
-        classpath 'com.github.lburgazzoli:gradle-karaf-features-plugin:2.0.0-SNAPSHOT'
+        classpath 'com.github.lburgazzoli:gradle-karaf-features-plugin:2.0.1-SNAPSHOT'
     }
 }
 
@@ -46,7 +46,7 @@ subprojects {
         commonsBeanUtils   : '1.9.2',
         osgi               : '5.0.0',
         lbKaraf            : '3.0.3-SNAPSHOT',
-        lbKarafFeaturesGen : '1.0.1-SNAPSHOT'
+        lbKarafFeaturesGen : '2.0.1-SNAPSHOT'
     ]
 
     repositories {
