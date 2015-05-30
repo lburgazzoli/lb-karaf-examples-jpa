@@ -13,7 +13,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.9'
-        classpath 'com.github.lburgazzoli:gradle-karaf-features-plugin:2.0.1-SNAPSHOT'
+        classpath 'com.github.lburgazzoli:gradle-karaf-features-plugin:2.0.2-SNAPSHOT'
     }
 }
 

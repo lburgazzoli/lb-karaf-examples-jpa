@@ -12,6 +12,36 @@ project.ext {
     bundleExportPackages = [
         "*"
     ]
+
+    bundleExcludes = [
+        logging : [
+            'org.apache.logging.log4j',
+            'org.slf4j',
+            'commons-logging'
+        ],
+        osgi : [
+            'org.osgi',
+            'org.apache.felix',
+            'org.apache.karaf.jaas',
+            'org.apache.karaf.shell',
+        ],
+        specs : [
+            'org.apache.geronimo.specs:geronimo-jpa_2.0_spec',
+            'org.apache.geronimo.specs:geronimo-jta_1.1_spec',
+            'org.apache.geronimo.specs:geronimo-jms_1.1_spec'
+        ],
+        testing : [
+            'junit'
+        ],
+        openjpaExploded: [
+            'org.apache.openjpa:openjpa-lib',
+            'org.apache.openjpa:openjpa-kernel',
+            'org.apache.openjpa:openjpa-persistence',
+            'org.apache.openjpa:openjpa-jdbc',
+            'org.apache.openjpa:openjpa-persistence-jdbc',
+            'org.apache.openjpa:openjpa-jest'
+        ]
+    ]
 }
 
 dependencies {
@@ -43,39 +73,9 @@ karafFeatures {
             name = 'karaf-examples-jpa-openjpa'
             //projects = [ project ]
 
-            bundle {
-                match group: 'org.apache.geronimo.specs'
-                include = false
-            }
-
-            bundle {
-                match group: 'org.apache.logging.log4j'
-                include = false
-            }
-
-            bundle {
-                match group: 'org.slf4j'
-                include = false
-            }
-
-            bundle {
-                match group: 'org.osgi'
-                include = false
-            }
-
-            bundle {
-                match group: 'org.apache.karaf.jaas'
-                include = false
-            }
-
-            bundle {
-                match group: 'org.apache.karaf.shell'
-                include = false
-            }
-
-            bundle {
-                match group: 'org.apache.felix'
-                include = false
+            bundleExcludes.each { k,v -> bundles(v) {
+                    include = false 
+                }
             }
         }
     }
