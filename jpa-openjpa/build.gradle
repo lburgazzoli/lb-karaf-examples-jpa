@@ -73,8 +73,11 @@ karafFeatures {
             name = 'karaf-examples-jpa-openjpa'
             //projects = [ project ]
 
-            bundleExcludes.each { k,v -> bundles(v) {
-                    include = false 
+            bundleExcludes.values().each { 
+                group -> group.each { 
+                    name -> bundle(name) {       
+                        include = false                  
+                    }
                 }
             }
         }
